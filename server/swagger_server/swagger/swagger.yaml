@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Family Context
+  description: This is the API definition for Family Context
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.1
+servers:
+- url: /
+paths:
+  /person/{personId}:
+    get:
+      summary: Find person by ID
+      description: Returns a single person
+      operationId: get_person_by_id
+      parameters:
+      - name: personId
+        in: path
+        description: ID of person to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sources
+        in: query
+        description: The data source IDs to query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Person'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        400:
+          description: Invalid ID supplied
+          content: {}
+        404:
+          description: Pet not found
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+components:
+  schemas:
+    Person:
+      required:
+      - firstName
+      - id
+      - lastName
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        gender:
+          pattern: '[male|female|other]'
+          type: string
+          description: The person's gender. Leave blank for 'unknown'.
+        ethnicity:
+          type: string
+        address:
+          type: string
+      example:
+        firstName: firstName
+        lastName: lastName
+        address: address
+        gender: gender
+        ethnicity: ethnicity
+        dateOfBirth: 2000-01-23
+        id: id
+      xml:
+        name: Person
+
