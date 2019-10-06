@@ -6,6 +6,7 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.service_map import ServiceMap  # noqa: F401,E501
 import re  # noqa: F401,E501
 from swagger_server import util
 
@@ -15,7 +16,7 @@ class Person(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, ethnicity: str=None, address: str=None):  # noqa: E501
+    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, ethnicity: str=None, address: str=None, service_data: ServiceMap=None):  # noqa: E501
         """Person - a model defined in Swagger
 
         :param id: The id of this Person.  # noqa: E501
@@ -32,6 +33,8 @@ class Person(Model):
         :type ethnicity: str
         :param address: The address of this Person.  # noqa: E501
         :type address: str
+        :param service_data: The service_data of this Person.  # noqa: E501
+        :type service_data: ServiceMap
         """
         self.swagger_types = {
             'id': str,
@@ -40,7 +43,8 @@ class Person(Model):
             'date_of_birth': date,
             'gender': str,
             'ethnicity': str,
-            'address': str
+            'address': str,
+            'service_data': ServiceMap
         }
 
         self.attribute_map = {
@@ -50,7 +54,8 @@ class Person(Model):
             'date_of_birth': 'dateOfBirth',
             'gender': 'gender',
             'ethnicity': 'ethnicity',
-            'address': 'address'
+            'address': 'address',
+            'service_data': 'serviceData'
         }
         self._id = id
         self._first_name = first_name
@@ -59,6 +64,7 @@ class Person(Model):
         self._gender = gender
         self._ethnicity = ethnicity
         self._address = address
+        self._service_data = service_data
 
     @classmethod
     def from_dict(cls, dikt) -> 'Person':
@@ -225,3 +231,24 @@ class Person(Model):
         """
 
         self._address = address
+
+    @property
+    def service_data(self) -> ServiceMap:
+        """Gets the service_data of this Person.
+
+
+        :return: The service_data of this Person.
+        :rtype: ServiceMap
+        """
+        return self._service_data
+
+    @service_data.setter
+    def service_data(self, service_data: ServiceMap):
+        """Sets the service_data of this Person.
+
+
+        :param service_data: The service_data of this Person.
+        :type service_data: ServiceMap
+        """
+
+        self._service_data = service_data

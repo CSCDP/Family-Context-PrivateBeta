@@ -37,9 +37,6 @@ paths:
         200:
           description: successful operation
           content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Person'
             application/json:
               schema:
                 $ref: '#/components/schemas/Person'
@@ -47,7 +44,7 @@ paths:
           description: Invalid ID supplied
           content: {}
         404:
-          description: Pet not found
+          description: Person not found
           content: {}
       x-openapi-router-controller: swagger_server.controllers.default_controller
 components:
@@ -76,14 +73,88 @@ components:
           type: string
         address:
           type: string
+        serviceData:
+          $ref: '#/components/schemas/ServiceMap'
       example:
         firstName: firstName
         lastName: lastName
         address: address
         gender: gender
         ethnicity: ethnicity
+        serviceData:
+          SCHOOL: ""
+          ASC: {}
+          HOUSING: {}
+          POLICE: ""
         dateOfBirth: 2000-01-23
         id: id
-      xml:
-        name: Person
+    ServiceMap:
+      type: object
+      properties:
+        ASC:
+          type: object
+        HOUSING:
+          type: object
+        POLICE:
+          $ref: '#/components/schemas/Police'
+        SCHOOL:
+          $ref: '#/components/schemas/School'
+      example:
+        SCHOOL: ""
+        ASC: {}
+        HOUSING: {}
+        POLICE: ""
+    SourceData:
+      type: object
+      properties:
+        coverageStartDate:
+          type: string
+          format: date
+        coverageEndDate:
+          type: string
+          format: date
+        coverageGeographicArea:
+          type: string
+    Police:
+      allOf:
+      - $ref: '#/components/schemas/SourceData'
+      - type: object
+        properties:
+          serviceInvolvement:
+            type: string
+          policeStation:
+            type: string
+          contactEmail:
+            type: string
+          contactNumber:
+            type: string
+          offences:
+            type: array
+            items:
+              $ref: '#/components/schemas/Offence'
+    School:
+      allOf:
+      - $ref: '#/components/schemas/SourceData'
+      - type: object
+        properties:
+          serviceInvolvement:
+            type: string
+          schoolName:
+            type: string
+          admissionType:
+            type: string
+          contactName:
+            type: string
+          contactNumber:
+            type: string
+    Offence:
+      type: object
+      properties:
+        dateOfOffence:
+          type: string
+          format: date
+        typeOfOffence:
+          type: string
+        natureOfInvolvement:
+          type: string
 
