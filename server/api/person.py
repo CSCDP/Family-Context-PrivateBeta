@@ -7,6 +7,10 @@ import six
 from swagger_server.models.person import Person  
 from swagger_server.models.police import Police  
 from swagger_server.models.offence import Offence  
+from swagger_server.models.housing import Housing  
+from swagger_server.models.school import School  
+from swagger_server.models.adult_social_care import AdultSocialCare  
+
 from swagger_server import util
 
 def parse_csv(filename):
@@ -23,11 +27,12 @@ def parse_csv(filename):
             row_obj = dict()
             for ix, name in enumerate(header):
                 name = inflection.underscore(name.strip())
-                value = row[ix]
+                value = row[ix] if ix < len(row)-1 else None
                 row_obj[name] = value
             rows.append(row_obj)
 
     return rows
+
 
 def read_data():
 
@@ -52,7 +57,39 @@ def read_data():
         police = Offence(**policedata)
         persons[person_id].service_data["POLICE"].offences.append(police)
 
+    data = parse_csv('../data/school.csv')
+    for sectiondata in data:
+        person_id = sectiondata["person_id"]
+        del sectiondata["person_id"]
+        section = School(**sectiondata)
+        persons[person_id].service_data["SCHOOL"] = section
 
+    data = parse_csv('../data/adult_social_care.csv')
+    for sectiondata in data:
+        person_id = sectiondata["person_id"]
+        del sectiondata["person_id"]
+        section = AdultSocialCare(**sectiondata)
+        persons[person_id].service_data["ASC"] = section
+
+    data = parse_csv('../data/housing.csv')
+    for sectiondata in data:
+        person_id = sectiondata["person_id"]
+        del sectiondata["person_id"]
+
+        for prop in [
+                "anti_social_behaviour",
+                "anti_social_behaviour_case_open",
+                "rent_arrears",
+                "rent_arrears_case_open",
+                "notice_seeking_possessions",
+                "notice_seeking_possessions_case_open",
+                "eviction",
+                "eviction_case_open"]:
+            if prop in sectiondata:
+                sectiondata[prop] = sectiondata[prop] == "1"
+
+        section = Housing(**sectiondata)
+        persons[person_id].service_data["HOUSING"] = section
 
     return persons
 

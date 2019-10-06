@@ -74,9 +74,9 @@ components:
       type: object
       properties:
         ASC: 
-          type: object
+          $ref: '#/components/schemas/AdultSocialCare'
         HOUSING: 
-          type: object
+          $ref: '#/components/schemas/Housing'
         POLICE: 
           $ref: '#/components/schemas/Police'
         SCHOOL: 
@@ -127,6 +127,55 @@ components:
               type: string
             contactNumber:
               type: string
+
+    AdultSocialCare:
+      allOf:
+        - $ref: '#/components/schemas/SourceData'
+        - type: object
+          properties:
+            serviceInvolvement:
+              type: string
+            leadPractitionerName:
+              type: string
+            leadPractitionerPhone: 
+              type: string
+            leadPractitionerEmail:
+              type: string
+            startDateOfLastInvolvement:
+              type: string
+              format: date
+            mostRecentRecordedInteractionWithService:
+              type: string
+
+    Housing:
+      allOf:
+        - $ref: '#/components/schemas/SourceData'
+        - type: object
+          properties:
+            serviceInvolvement:
+              type: string
+            leadPractitionerName:
+              type: string
+            leadPractitionerPhone: 
+              type: string
+            leadPractitionerEmail:
+              type: string
+            antiSocialBehaviour:
+              type: boolean
+            antiSocialBehaviourCaseOpen:
+              type: boolean
+            rentArrears:
+              type: boolean
+            rentArrearsCaseOpen:
+              type: boolean
+            noticeSeekingPossessions:
+              type: boolean
+            noticeSeekingPossessionsCaseOpen:
+              type: boolean
+            eviction:
+              type: boolean
+            evictionCaseOpen:
+              type: boolean
 
     Offence:
       type: object

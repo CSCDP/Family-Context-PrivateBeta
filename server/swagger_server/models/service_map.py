@@ -6,6 +6,8 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.adult_social_care import AdultSocialCare  # noqa: F401,E501
+from swagger_server.models.housing import Housing  # noqa: F401,E501
 from swagger_server.models.police import Police  # noqa: F401,E501
 from swagger_server.models.school import School  # noqa: F401,E501
 from swagger_server import util
@@ -16,21 +18,21 @@ class ServiceMap(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, asc: object=None, housing: object=None, police: Police=None, school: School=None):  # noqa: E501
+    def __init__(self, asc: AdultSocialCare=None, housing: Housing=None, police: Police=None, school: School=None):  # noqa: E501
         """ServiceMap - a model defined in Swagger
 
         :param asc: The asc of this ServiceMap.  # noqa: E501
-        :type asc: object
+        :type asc: AdultSocialCare
         :param housing: The housing of this ServiceMap.  # noqa: E501
-        :type housing: object
+        :type housing: Housing
         :param police: The police of this ServiceMap.  # noqa: E501
         :type police: Police
         :param school: The school of this ServiceMap.  # noqa: E501
         :type school: School
         """
         self.swagger_types = {
-            'asc': object,
-            'housing': object,
+            'asc': AdultSocialCare,
+            'housing': Housing,
             'police': Police,
             'school': School
         }
@@ -58,43 +60,43 @@ class ServiceMap(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def asc(self) -> object:
+    def asc(self) -> AdultSocialCare:
         """Gets the asc of this ServiceMap.
 
 
         :return: The asc of this ServiceMap.
-        :rtype: object
+        :rtype: AdultSocialCare
         """
         return self._asc
 
     @asc.setter
-    def asc(self, asc: object):
+    def asc(self, asc: AdultSocialCare):
         """Sets the asc of this ServiceMap.
 
 
         :param asc: The asc of this ServiceMap.
-        :type asc: object
+        :type asc: AdultSocialCare
         """
 
         self._asc = asc
 
     @property
-    def housing(self) -> object:
+    def housing(self) -> Housing:
         """Gets the housing of this ServiceMap.
 
 
         :return: The housing of this ServiceMap.
-        :rtype: object
+        :rtype: Housing
         """
         return self._housing
 
     @housing.setter
-    def housing(self, housing: object):
+    def housing(self, housing: Housing):
         """Sets the housing of this ServiceMap.
 
 
         :param housing: The housing of this ServiceMap.
-        :type housing: object
+        :type housing: Housing
         """
 
         self._housing = housing
