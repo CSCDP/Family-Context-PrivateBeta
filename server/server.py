@@ -2,7 +2,7 @@
 
 import connexion
 import inflection
-
+import os
 import glob
 
 from swagger_server import encoder
@@ -40,7 +40,7 @@ def main():
 
     app.add_api('family-context-api.yaml', arguments={'title': 'Family Context'}, pythonic_params=True, resolver=MyResolver('api'))
 
-    app.run(port=8080)
+    app.run(port=int(os.getenv('PORT', 8080)))
 
 
 if __name__ == '__main__':
