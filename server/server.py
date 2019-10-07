@@ -17,7 +17,6 @@ class MyResolver(RestyResolver):
         :type default_module_name: str
         """
         super().__init__(self)
-        print("INIT")
 
     def resolve_operation_id(self, operation):
         operation_id = inflection.underscore(operation.operation_id)
@@ -37,7 +36,6 @@ def main():
     # Add explicit rules for each file in the static directory
     for f in [f for f in glob.glob("static/**/*.*", recursive=True)]:
         f = f[6:]
-        print(f)
         app.app.add_url_rule(f, f, send_static)
 
     app.add_api('family-context-api.yaml', arguments={'title': 'Family Context'}, pythonic_params=True, resolver=MyResolver('api'))
