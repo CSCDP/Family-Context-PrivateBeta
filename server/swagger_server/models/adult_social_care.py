@@ -7,8 +7,8 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.contact import Contact  # noqa: F401,E501
-from swagger_server.models.service_involvement import ServiceInvolvement  # noqa: F401,E501
 from swagger_server.models.source_data import SourceData  # noqa: F401,E501
+import re  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -17,7 +17,7 @@ class AdultSocialCare(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, contact: Contact=None, service_involvement: ServiceInvolvement=None, start_date_of_last_involvement: date=None, most_recent_recorded_interaction_with_service: str=None):  # noqa: E501
+    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, service_involvement: str=None, contact: Contact=None, start_date_of_last_involvement: date=None, date_of_most_recent_interaction: date=None):  # noqa: E501
         """AdultSocialCare - a model defined in Swagger
 
         :param coverage_start_date: The coverage_start_date of this AdultSocialCare.  # noqa: E501
@@ -26,41 +26,41 @@ class AdultSocialCare(Model):
         :type coverage_end_date: date
         :param coverage_geographic_area: The coverage_geographic_area of this AdultSocialCare.  # noqa: E501
         :type coverage_geographic_area: str
+        :param service_involvement: The service_involvement of this AdultSocialCare.  # noqa: E501
+        :type service_involvement: str
         :param contact: The contact of this AdultSocialCare.  # noqa: E501
         :type contact: Contact
-        :param service_involvement: The service_involvement of this AdultSocialCare.  # noqa: E501
-        :type service_involvement: ServiceInvolvement
         :param start_date_of_last_involvement: The start_date_of_last_involvement of this AdultSocialCare.  # noqa: E501
         :type start_date_of_last_involvement: date
-        :param most_recent_recorded_interaction_with_service: The most_recent_recorded_interaction_with_service of this AdultSocialCare.  # noqa: E501
-        :type most_recent_recorded_interaction_with_service: str
+        :param date_of_most_recent_interaction: The date_of_most_recent_interaction of this AdultSocialCare.  # noqa: E501
+        :type date_of_most_recent_interaction: date
         """
         self.swagger_types = {
             'coverage_start_date': date,
             'coverage_end_date': date,
             'coverage_geographic_area': str,
+            'service_involvement': str,
             'contact': Contact,
-            'service_involvement': ServiceInvolvement,
             'start_date_of_last_involvement': date,
-            'most_recent_recorded_interaction_with_service': str
+            'date_of_most_recent_interaction': date
         }
 
         self.attribute_map = {
             'coverage_start_date': 'coverageStartDate',
             'coverage_end_date': 'coverageEndDate',
             'coverage_geographic_area': 'coverageGeographicArea',
-            'contact': 'contact',
             'service_involvement': 'serviceInvolvement',
+            'contact': 'contact',
             'start_date_of_last_involvement': 'startDateOfLastInvolvement',
-            'most_recent_recorded_interaction_with_service': 'mostRecentRecordedInteractionWithService'
+            'date_of_most_recent_interaction': 'dateOfMostRecentInteraction'
         }
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
         self._coverage_geographic_area = coverage_geographic_area
-        self._contact = contact
         self._service_involvement = service_involvement
+        self._contact = contact
         self._start_date_of_last_involvement = start_date_of_last_involvement
-        self._most_recent_recorded_interaction_with_service = most_recent_recorded_interaction_with_service
+        self._date_of_most_recent_interaction = date_of_most_recent_interaction
 
     @classmethod
     def from_dict(cls, dikt) -> 'AdultSocialCare':
@@ -137,6 +137,27 @@ class AdultSocialCare(Model):
         self._coverage_geographic_area = coverage_geographic_area
 
     @property
+    def service_involvement(self) -> str:
+        """Gets the service_involvement of this AdultSocialCare.
+
+
+        :return: The service_involvement of this AdultSocialCare.
+        :rtype: str
+        """
+        return self._service_involvement
+
+    @service_involvement.setter
+    def service_involvement(self, service_involvement: str):
+        """Sets the service_involvement of this AdultSocialCare.
+
+
+        :param service_involvement: The service_involvement of this AdultSocialCare.
+        :type service_involvement: str
+        """
+
+        self._service_involvement = service_involvement
+
+    @property
     def contact(self) -> Contact:
         """Gets the contact of this AdultSocialCare.
 
@@ -156,27 +177,6 @@ class AdultSocialCare(Model):
         """
 
         self._contact = contact
-
-    @property
-    def service_involvement(self) -> ServiceInvolvement:
-        """Gets the service_involvement of this AdultSocialCare.
-
-
-        :return: The service_involvement of this AdultSocialCare.
-        :rtype: ServiceInvolvement
-        """
-        return self._service_involvement
-
-    @service_involvement.setter
-    def service_involvement(self, service_involvement: ServiceInvolvement):
-        """Sets the service_involvement of this AdultSocialCare.
-
-
-        :param service_involvement: The service_involvement of this AdultSocialCare.
-        :type service_involvement: ServiceInvolvement
-        """
-
-        self._service_involvement = service_involvement
 
     @property
     def start_date_of_last_involvement(self) -> date:
@@ -200,22 +200,22 @@ class AdultSocialCare(Model):
         self._start_date_of_last_involvement = start_date_of_last_involvement
 
     @property
-    def most_recent_recorded_interaction_with_service(self) -> str:
-        """Gets the most_recent_recorded_interaction_with_service of this AdultSocialCare.
+    def date_of_most_recent_interaction(self) -> date:
+        """Gets the date_of_most_recent_interaction of this AdultSocialCare.
 
 
-        :return: The most_recent_recorded_interaction_with_service of this AdultSocialCare.
-        :rtype: str
+        :return: The date_of_most_recent_interaction of this AdultSocialCare.
+        :rtype: date
         """
-        return self._most_recent_recorded_interaction_with_service
+        return self._date_of_most_recent_interaction
 
-    @most_recent_recorded_interaction_with_service.setter
-    def most_recent_recorded_interaction_with_service(self, most_recent_recorded_interaction_with_service: str):
-        """Sets the most_recent_recorded_interaction_with_service of this AdultSocialCare.
+    @date_of_most_recent_interaction.setter
+    def date_of_most_recent_interaction(self, date_of_most_recent_interaction: date):
+        """Sets the date_of_most_recent_interaction of this AdultSocialCare.
 
 
-        :param most_recent_recorded_interaction_with_service: The most_recent_recorded_interaction_with_service of this AdultSocialCare.
-        :type most_recent_recorded_interaction_with_service: str
+        :param date_of_most_recent_interaction: The date_of_most_recent_interaction of this AdultSocialCare.
+        :type date_of_most_recent_interaction: date
         """
 
-        self._most_recent_recorded_interaction_with_service = most_recent_recorded_interaction_with_service
+        self._date_of_most_recent_interaction = date_of_most_recent_interaction

@@ -1,2 +1,2 @@
-personId,coverageStartDate,coverageEndDate,coverageGeographicArea,serviceInvolvement,contactName,contactPhone,contactEmail, startDateOfLastInvolvement, mostRecentRecordedInteractionWithService
-2,1995-01-01,2019-06-30,LA,current,A S Worker,020 7777 7777,sworker@la.uk,2019-04-15,visit
+personId,coverageStartDate,coverageEndDate,coverageGeographicArea,serviceInvolvement,contactName,contactPhone,contactEmail, startDateOfLastInvolvement, dateOfMostRecentInteraction
+2,1995-01-01,2019-06-30,LA,current,A S Worker,020 7777 7777,sworker@la.uk,2019-04-15,2019-05-20

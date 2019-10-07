@@ -10,9 +10,10 @@ const AdultSocialCare = ({ className, serviceData }) => {
     if(!data)return(<></>);
     return (
         <DetailsBlock className={className} data={data} title="Adult Social Care">
-            <Contact contact={data.contact}></Contact>
             <DetailsRow title="Service Involvement">{data.serviceInvolvement}</DetailsRow>
+            <Contact contact={data.contact}></Contact>
             <DetailsRow title="Start of Last Involvement">{data.startDateOfLastInvolvement}</DetailsRow>
+            <DetailsRow title="Most Recent Interaction">{data.dateOfMostRecentInteraction}</DetailsRow>
         </DetailsBlock>
     );
 }

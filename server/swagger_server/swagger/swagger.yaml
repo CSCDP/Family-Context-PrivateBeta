@@ -40,9 +40,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Person'
-        400:
-          description: Invalid ID supplied
-          content: {}
         404:
           description: Person not found
           content: {}
@@ -115,28 +112,32 @@ components:
           format: date
         coverageGeographicArea:
           type: string
-        contact:
-          $ref: '#/components/schemas/Contact'
     Police:
       allOf:
       - $ref: '#/components/schemas/SourceData'
       - type: object
         properties:
           serviceInvolvement:
-            $ref: '#/components/schemas/ServiceInvolvement'
+            pattern: '[yes|no]'
+            type: string
+          contact:
+            $ref: '#/components/schemas/Contact'
           policeStation:
             type: string
           offences:
             type: array
             items:
-              $ref: '#/components/schemas/Offence'
+              $ref: '#/components/schemas/Police_offences'
     School:
       allOf:
       - $ref: '#/components/schemas/SourceData'
       - type: object
         properties:
           serviceInvolvement:
-            $ref: '#/components/schemas/ServiceInvolvement'
+            pattern: '[current|historic]'
+            type: string
+          contact:
+            $ref: '#/components/schemas/Contact'
           schoolName:
             type: string
           admissionType:
@@ -147,45 +148,38 @@ components:
       - type: object
         properties:
           serviceInvolvement:
-            $ref: '#/components/schemas/ServiceInvolvement'
+            pattern: '[current|historic]'
+            type: string
+          contact:
+            $ref: '#/components/schemas/Contact'
           startDateOfLastInvolvement:
             type: string
             format: date
-          mostRecentRecordedInteractionWithService:
+          dateOfMostRecentInteraction:
             type: string
+            format: date
     Housing:
       allOf:
       - $ref: '#/components/schemas/SourceData'
       - type: object
         properties:
           serviceInvolvement:
-            $ref: '#/components/schemas/ServiceInvolvement'
+            pattern: '[current|historic]'
+            type: string
+          contact:
+            $ref: '#/components/schemas/Contact'
           antiSocialBehaviour:
-            type: boolean
-          antiSocialBehaviourCaseOpen:
-            type: boolean
+            pattern: '[open|closed]'
+            type: string
           rentArrears:
-            type: boolean
-          rentArrearsCaseOpen:
-            type: boolean
-          noticeSeekingPossessions:
-            type: boolean
-          noticeSeekingPossessionsCaseOpen:
-            type: boolean
+            pattern: '[open|closed]'
+            type: string
+          noticeSeekingPossession:
+            pattern: '[open|closed]'
+            type: string
           eviction:
-            type: boolean
-          evictionCaseOpen:
-            type: boolean
-    Offence:
-      type: object
-      properties:
-        dateOfOffence:
-          type: string
-          format: date
-        typeOfOffence:
-          type: string
-        natureOfInvolvement:
-          type: string
+            pattern: '[open|closed]'
+            type: string
     Contact:
       type: object
       properties:
@@ -197,7 +191,14 @@ components:
           type: string
         role:
           type: string
-    ServiceInvolvement:
-      pattern: '[current|historic]'
-      type: string
+    Police_offences:
+      type: object
+      properties:
+        dateOfOffence:
+          type: string
+          format: date
+        typeOfOffence:
+          type: string
+        natureOfInvolvement:
+          type: string
 

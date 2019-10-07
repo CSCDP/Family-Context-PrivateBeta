@@ -6,7 +6,7 @@ import six
 
 from swagger_server.models.person import Person  
 from swagger_server.models.police import Police  
-from swagger_server.models.offence import Offence  
+from swagger_server.models.police_offences import PoliceOffences  
 from swagger_server.models.housing import Housing  
 from swagger_server.models.school import School  
 from swagger_server.models.contact import Contact  
@@ -64,7 +64,7 @@ def read_data():
     for policedata in data:
         person_id = policedata["person_id"]
         del policedata["person_id"]
-        police = Offence(**policedata)
+        police = PoliceOffences(**policedata)
         persons[person_id].service_data["POLICE"].offences.append(police)
 
     data = parse_csv('../data/school.csv')
@@ -88,18 +88,6 @@ def read_data():
         person_id = sectiondata["person_id"]
         del sectiondata["person_id"]
         parse_contact(sectiondata)
-
-        for prop in [
-                "anti_social_behaviour",
-                "anti_social_behaviour_case_open",
-                "rent_arrears",
-                "rent_arrears_case_open",
-                "notice_seeking_possessions",
-                "notice_seeking_possessions_case_open",
-                "eviction",
-                "eviction_case_open"]:
-            if prop in sectiondata:
-                sectiondata[prop] = sectiondata[prop] == "1"
 
         section = Housing(**sectiondata)
         persons[person_id].service_data["HOUSING"] = section

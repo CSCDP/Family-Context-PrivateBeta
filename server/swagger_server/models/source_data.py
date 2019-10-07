@@ -6,7 +6,6 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
-from swagger_server.models.contact import Contact  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -15,7 +14,7 @@ class SourceData(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, contact: Contact=None):  # noqa: E501
+    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None):  # noqa: E501
         """SourceData - a model defined in Swagger
 
         :param coverage_start_date: The coverage_start_date of this SourceData.  # noqa: E501
@@ -24,26 +23,21 @@ class SourceData(Model):
         :type coverage_end_date: date
         :param coverage_geographic_area: The coverage_geographic_area of this SourceData.  # noqa: E501
         :type coverage_geographic_area: str
-        :param contact: The contact of this SourceData.  # noqa: E501
-        :type contact: Contact
         """
         self.swagger_types = {
             'coverage_start_date': date,
             'coverage_end_date': date,
-            'coverage_geographic_area': str,
-            'contact': Contact
+            'coverage_geographic_area': str
         }
 
         self.attribute_map = {
             'coverage_start_date': 'coverageStartDate',
             'coverage_end_date': 'coverageEndDate',
-            'coverage_geographic_area': 'coverageGeographicArea',
-            'contact': 'contact'
+            'coverage_geographic_area': 'coverageGeographicArea'
         }
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
         self._coverage_geographic_area = coverage_geographic_area
-        self._contact = contact
 
     @classmethod
     def from_dict(cls, dikt) -> 'SourceData':
@@ -118,24 +112,3 @@ class SourceData(Model):
         """
 
         self._coverage_geographic_area = coverage_geographic_area
-
-    @property
-    def contact(self) -> Contact:
-        """Gets the contact of this SourceData.
-
-
-        :return: The contact of this SourceData.
-        :rtype: Contact
-        """
-        return self._contact
-
-    @contact.setter
-    def contact(self, contact: Contact):
-        """Sets the contact of this SourceData.
-
-
-        :param contact: The contact of this SourceData.
-        :type contact: Contact
-        """
-
-        self._contact = contact

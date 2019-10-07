@@ -1,4 +1,5 @@
 openapi: 3.0.1
+
 info:
   title: Family Context
   description: This is the API definition for Family Context
@@ -6,6 +7,7 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
   version: 0.0.1
+
 paths:
   /person/{personId}:
     get:
@@ -34,12 +36,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Person'
-        400:
-          description: Invalid ID supplied
-          content: {}
         404:
           description: Person not found
           content: {}
+
 components:
   schemas:
 
@@ -93,8 +93,6 @@ components:
           format: date
         coverageGeographicArea:
           type: string
-        contact:
-          $ref: '#/components/schemas/Contact'
 
     Police:
       allOf:
@@ -102,21 +100,34 @@ components:
         - type: object
           properties:
             serviceInvolvement:
-              $ref: '#/components/schemas/ServiceInvolvement'
+              type: string
+              pattern: "[yes|no]"
+            contact:
+              $ref: '#/components/schemas/Contact'
             policeStation:
               type: string
             offences:
               type: array
               items:
-                $ref: '#/components/schemas/Offence'
-
+                  type: object
+                  properties:
+                    dateOfOffence:
+                      type: string
+                      format: date
+                    typeOfOffence:
+                      type: string
+                    natureOfInvolvement:
+                      type: string
     School:
       allOf:
         - $ref: '#/components/schemas/SourceData'
         - type: object
           properties:
             serviceInvolvement:
-              $ref: '#/components/schemas/ServiceInvolvement'
+              type: string
+              pattern: "[current|historic]"
+            contact:
+              $ref: '#/components/schemas/Contact'
             schoolName:
               type: string
             admissionType: 
@@ -128,12 +139,16 @@ components:
         - type: object
           properties:
             serviceInvolvement:
-              $ref: '#/components/schemas/ServiceInvolvement'
+              type: string
+              pattern: "[current|historic]"
+            contact:
+              $ref: '#/components/schemas/Contact'
             startDateOfLastInvolvement:
               type: string
               format: date
-            mostRecentRecordedInteractionWithService:
+            dateOfMostRecentInteraction:
               type: string
+              format: date
 
     Housing:
       allOf:
@@ -141,35 +156,23 @@ components:
         - type: object
           properties:
             serviceInvolvement:
-              $ref: '#/components/schemas/ServiceInvolvement'
+              type: string
+              pattern: "[current|historic]"
+            contact:
+              $ref: '#/components/schemas/Contact'
             antiSocialBehaviour:
-              type: boolean
-            antiSocialBehaviourCaseOpen:
-              type: boolean
+              type: string
+              pattern: "[open|closed]"
             rentArrears:
-              type: boolean
-            rentArrearsCaseOpen:
-              type: boolean
-            noticeSeekingPossessions:
-              type: boolean
-            noticeSeekingPossessionsCaseOpen:
-              type: boolean
+              type: string
+              pattern: "[open|closed]"
+            noticeSeekingPossession:
+              type: string
+              pattern: "[open|closed]"
             eviction:
-              type: boolean
-            evictionCaseOpen:
-              type: boolean
+              type: string
+              pattern: "[open|closed]"
 
-    Offence:
-      type: object
-      properties:
-        dateOfOffence:
-          type: string
-          format: date
-        typeOfOffence:
-          type: string
-        natureOfInvolvement:
-          type: string
-      
     Contact:
       type: object
       properties:
@@ -181,8 +184,3 @@ components:
           type: string
         role:
           type: string
-
-    ServiceInvolvement:
-      type: string
-      pattern: "[current|historic]"
-

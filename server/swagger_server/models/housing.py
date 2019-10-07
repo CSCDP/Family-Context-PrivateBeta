@@ -7,8 +7,8 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.contact import Contact  # noqa: F401,E501
-from swagger_server.models.service_involvement import ServiceInvolvement  # noqa: F401,E501
 from swagger_server.models.source_data import SourceData  # noqa: F401,E501
+import re  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -17,7 +17,7 @@ class Housing(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, contact: Contact=None, service_involvement: ServiceInvolvement=None, anti_social_behaviour: bool=None, anti_social_behaviour_case_open: bool=None, rent_arrears: bool=None, rent_arrears_case_open: bool=None, notice_seeking_possessions: bool=None, notice_seeking_possessions_case_open: bool=None, eviction: bool=None, eviction_case_open: bool=None):  # noqa: E501
+    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, service_involvement: str=None, contact: Contact=None, anti_social_behaviour: str=None, rent_arrears: str=None, notice_seeking_possession: str=None, eviction: str=None):  # noqa: E501
         """Housing - a model defined in Swagger
 
         :param coverage_start_date: The coverage_start_date of this Housing.  # noqa: E501
@@ -26,71 +26,51 @@ class Housing(Model):
         :type coverage_end_date: date
         :param coverage_geographic_area: The coverage_geographic_area of this Housing.  # noqa: E501
         :type coverage_geographic_area: str
+        :param service_involvement: The service_involvement of this Housing.  # noqa: E501
+        :type service_involvement: str
         :param contact: The contact of this Housing.  # noqa: E501
         :type contact: Contact
-        :param service_involvement: The service_involvement of this Housing.  # noqa: E501
-        :type service_involvement: ServiceInvolvement
         :param anti_social_behaviour: The anti_social_behaviour of this Housing.  # noqa: E501
-        :type anti_social_behaviour: bool
-        :param anti_social_behaviour_case_open: The anti_social_behaviour_case_open of this Housing.  # noqa: E501
-        :type anti_social_behaviour_case_open: bool
+        :type anti_social_behaviour: str
         :param rent_arrears: The rent_arrears of this Housing.  # noqa: E501
-        :type rent_arrears: bool
-        :param rent_arrears_case_open: The rent_arrears_case_open of this Housing.  # noqa: E501
-        :type rent_arrears_case_open: bool
-        :param notice_seeking_possessions: The notice_seeking_possessions of this Housing.  # noqa: E501
-        :type notice_seeking_possessions: bool
-        :param notice_seeking_possessions_case_open: The notice_seeking_possessions_case_open of this Housing.  # noqa: E501
-        :type notice_seeking_possessions_case_open: bool
+        :type rent_arrears: str
+        :param notice_seeking_possession: The notice_seeking_possession of this Housing.  # noqa: E501
+        :type notice_seeking_possession: str
         :param eviction: The eviction of this Housing.  # noqa: E501
-        :type eviction: bool
-        :param eviction_case_open: The eviction_case_open of this Housing.  # noqa: E501
-        :type eviction_case_open: bool
+        :type eviction: str
         """
         self.swagger_types = {
             'coverage_start_date': date,
             'coverage_end_date': date,
             'coverage_geographic_area': str,
+            'service_involvement': str,
             'contact': Contact,
-            'service_involvement': ServiceInvolvement,
-            'anti_social_behaviour': bool,
-            'anti_social_behaviour_case_open': bool,
-            'rent_arrears': bool,
-            'rent_arrears_case_open': bool,
-            'notice_seeking_possessions': bool,
-            'notice_seeking_possessions_case_open': bool,
-            'eviction': bool,
-            'eviction_case_open': bool
+            'anti_social_behaviour': str,
+            'rent_arrears': str,
+            'notice_seeking_possession': str,
+            'eviction': str
         }
 
         self.attribute_map = {
             'coverage_start_date': 'coverageStartDate',
             'coverage_end_date': 'coverageEndDate',
             'coverage_geographic_area': 'coverageGeographicArea',
-            'contact': 'contact',
             'service_involvement': 'serviceInvolvement',
+            'contact': 'contact',
             'anti_social_behaviour': 'antiSocialBehaviour',
-            'anti_social_behaviour_case_open': 'antiSocialBehaviourCaseOpen',
             'rent_arrears': 'rentArrears',
-            'rent_arrears_case_open': 'rentArrearsCaseOpen',
-            'notice_seeking_possessions': 'noticeSeekingPossessions',
-            'notice_seeking_possessions_case_open': 'noticeSeekingPossessionsCaseOpen',
-            'eviction': 'eviction',
-            'eviction_case_open': 'evictionCaseOpen'
+            'notice_seeking_possession': 'noticeSeekingPossession',
+            'eviction': 'eviction'
         }
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
         self._coverage_geographic_area = coverage_geographic_area
-        self._contact = contact
         self._service_involvement = service_involvement
+        self._contact = contact
         self._anti_social_behaviour = anti_social_behaviour
-        self._anti_social_behaviour_case_open = anti_social_behaviour_case_open
         self._rent_arrears = rent_arrears
-        self._rent_arrears_case_open = rent_arrears_case_open
-        self._notice_seeking_possessions = notice_seeking_possessions
-        self._notice_seeking_possessions_case_open = notice_seeking_possessions_case_open
+        self._notice_seeking_possession = notice_seeking_possession
         self._eviction = eviction
-        self._eviction_case_open = eviction_case_open
 
     @classmethod
     def from_dict(cls, dikt) -> 'Housing':
@@ -167,6 +147,27 @@ class Housing(Model):
         self._coverage_geographic_area = coverage_geographic_area
 
     @property
+    def service_involvement(self) -> str:
+        """Gets the service_involvement of this Housing.
+
+
+        :return: The service_involvement of this Housing.
+        :rtype: str
+        """
+        return self._service_involvement
+
+    @service_involvement.setter
+    def service_involvement(self, service_involvement: str):
+        """Sets the service_involvement of this Housing.
+
+
+        :param service_involvement: The service_involvement of this Housing.
+        :type service_involvement: str
+        """
+
+        self._service_involvement = service_involvement
+
+    @property
     def contact(self) -> Contact:
         """Gets the contact of this Housing.
 
@@ -188,190 +189,85 @@ class Housing(Model):
         self._contact = contact
 
     @property
-    def service_involvement(self) -> ServiceInvolvement:
-        """Gets the service_involvement of this Housing.
-
-
-        :return: The service_involvement of this Housing.
-        :rtype: ServiceInvolvement
-        """
-        return self._service_involvement
-
-    @service_involvement.setter
-    def service_involvement(self, service_involvement: ServiceInvolvement):
-        """Sets the service_involvement of this Housing.
-
-
-        :param service_involvement: The service_involvement of this Housing.
-        :type service_involvement: ServiceInvolvement
-        """
-
-        self._service_involvement = service_involvement
-
-    @property
-    def anti_social_behaviour(self) -> bool:
+    def anti_social_behaviour(self) -> str:
         """Gets the anti_social_behaviour of this Housing.
 
 
         :return: The anti_social_behaviour of this Housing.
-        :rtype: bool
+        :rtype: str
         """
         return self._anti_social_behaviour
 
     @anti_social_behaviour.setter
-    def anti_social_behaviour(self, anti_social_behaviour: bool):
+    def anti_social_behaviour(self, anti_social_behaviour: str):
         """Sets the anti_social_behaviour of this Housing.
 
 
         :param anti_social_behaviour: The anti_social_behaviour of this Housing.
-        :type anti_social_behaviour: bool
+        :type anti_social_behaviour: str
         """
 
         self._anti_social_behaviour = anti_social_behaviour
 
     @property
-    def anti_social_behaviour_case_open(self) -> bool:
-        """Gets the anti_social_behaviour_case_open of this Housing.
-
-
-        :return: The anti_social_behaviour_case_open of this Housing.
-        :rtype: bool
-        """
-        return self._anti_social_behaviour_case_open
-
-    @anti_social_behaviour_case_open.setter
-    def anti_social_behaviour_case_open(self, anti_social_behaviour_case_open: bool):
-        """Sets the anti_social_behaviour_case_open of this Housing.
-
-
-        :param anti_social_behaviour_case_open: The anti_social_behaviour_case_open of this Housing.
-        :type anti_social_behaviour_case_open: bool
-        """
-
-        self._anti_social_behaviour_case_open = anti_social_behaviour_case_open
-
-    @property
-    def rent_arrears(self) -> bool:
+    def rent_arrears(self) -> str:
         """Gets the rent_arrears of this Housing.
 
 
         :return: The rent_arrears of this Housing.
-        :rtype: bool
+        :rtype: str
         """
         return self._rent_arrears
 
     @rent_arrears.setter
-    def rent_arrears(self, rent_arrears: bool):
+    def rent_arrears(self, rent_arrears: str):
         """Sets the rent_arrears of this Housing.
 
 
         :param rent_arrears: The rent_arrears of this Housing.
-        :type rent_arrears: bool
+        :type rent_arrears: str
         """
 
         self._rent_arrears = rent_arrears
 
     @property
-    def rent_arrears_case_open(self) -> bool:
-        """Gets the rent_arrears_case_open of this Housing.
+    def notice_seeking_possession(self) -> str:
+        """Gets the notice_seeking_possession of this Housing.
 
 
-        :return: The rent_arrears_case_open of this Housing.
-        :rtype: bool
+        :return: The notice_seeking_possession of this Housing.
+        :rtype: str
         """
-        return self._rent_arrears_case_open
+        return self._notice_seeking_possession
 
-    @rent_arrears_case_open.setter
-    def rent_arrears_case_open(self, rent_arrears_case_open: bool):
-        """Sets the rent_arrears_case_open of this Housing.
+    @notice_seeking_possession.setter
+    def notice_seeking_possession(self, notice_seeking_possession: str):
+        """Sets the notice_seeking_possession of this Housing.
 
 
-        :param rent_arrears_case_open: The rent_arrears_case_open of this Housing.
-        :type rent_arrears_case_open: bool
+        :param notice_seeking_possession: The notice_seeking_possession of this Housing.
+        :type notice_seeking_possession: str
         """
 
-        self._rent_arrears_case_open = rent_arrears_case_open
+        self._notice_seeking_possession = notice_seeking_possession
 
     @property
-    def notice_seeking_possessions(self) -> bool:
-        """Gets the notice_seeking_possessions of this Housing.
-
-
-        :return: The notice_seeking_possessions of this Housing.
-        :rtype: bool
-        """
-        return self._notice_seeking_possessions
-
-    @notice_seeking_possessions.setter
-    def notice_seeking_possessions(self, notice_seeking_possessions: bool):
-        """Sets the notice_seeking_possessions of this Housing.
-
-
-        :param notice_seeking_possessions: The notice_seeking_possessions of this Housing.
-        :type notice_seeking_possessions: bool
-        """
-
-        self._notice_seeking_possessions = notice_seeking_possessions
-
-    @property
-    def notice_seeking_possessions_case_open(self) -> bool:
-        """Gets the notice_seeking_possessions_case_open of this Housing.
-
-
-        :return: The notice_seeking_possessions_case_open of this Housing.
-        :rtype: bool
-        """
-        return self._notice_seeking_possessions_case_open
-
-    @notice_seeking_possessions_case_open.setter
-    def notice_seeking_possessions_case_open(self, notice_seeking_possessions_case_open: bool):
-        """Sets the notice_seeking_possessions_case_open of this Housing.
-
-
-        :param notice_seeking_possessions_case_open: The notice_seeking_possessions_case_open of this Housing.
-        :type notice_seeking_possessions_case_open: bool
-        """
-
-        self._notice_seeking_possessions_case_open = notice_seeking_possessions_case_open
-
-    @property
-    def eviction(self) -> bool:
+    def eviction(self) -> str:
         """Gets the eviction of this Housing.
 
 
         :return: The eviction of this Housing.
-        :rtype: bool
+        :rtype: str
         """
         return self._eviction
 
     @eviction.setter
-    def eviction(self, eviction: bool):
+    def eviction(self, eviction: str):
         """Sets the eviction of this Housing.
 
 
         :param eviction: The eviction of this Housing.
-        :type eviction: bool
+        :type eviction: str
         """
 
         self._eviction = eviction
-
-    @property
-    def eviction_case_open(self) -> bool:
-        """Gets the eviction_case_open of this Housing.
-
-
-        :return: The eviction_case_open of this Housing.
-        :rtype: bool
-        """
-        return self._eviction_case_open
-
-    @eviction_case_open.setter
-    def eviction_case_open(self, eviction_case_open: bool):
-        """Sets the eviction_case_open of this Housing.
-
-
-        :param eviction_case_open: The eviction_case_open of this Housing.
-        :type eviction_case_open: bool
-        """
-
-        self._eviction_case_open = eviction_case_open
