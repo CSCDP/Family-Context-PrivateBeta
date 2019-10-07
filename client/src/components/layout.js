@@ -33,12 +33,6 @@ const useStyles = makeStyles(theme => ({
       },
   },
   toolbar: theme.mixins.toolbar,
-  paper: {
-    ...theme.mixins.gutters(),
-    maxWidth: 800,
-    minHeight: 300,
-    margin: "0 auto",
-  },
 }));
 
 const SFLogo = ({ styles }) => {
@@ -65,9 +59,7 @@ const Layout = ({ children }) => {
       </AppBar>
       <main className={classes.layout}>
           <div className={classes.toolbar} />
-          <Paper className={classes.paper}>
-            {children}
-          </Paper>
+          {children}
       </main>
     </div>
   );
