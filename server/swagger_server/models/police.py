@@ -6,7 +6,9 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.contact import Contact  # noqa: F401,E501
 from swagger_server.models.offence import Offence  # noqa: F401,E501
+from swagger_server.models.service_involvement import ServiceInvolvement  # noqa: F401,E501
 from swagger_server.models.source_data import SourceData  # noqa: F401,E501
 from swagger_server import util
 
@@ -16,7 +18,7 @@ class Police(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, service_involvement: str=None, police_station: str=None, contact_email: str=None, contact_number: str=None, offences: List[Offence]=None):  # noqa: E501
+    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, contact: Contact=None, service_involvement: ServiceInvolvement=None, police_station: str=None, offences: List[Offence]=None):  # noqa: E501
         """Police - a model defined in Swagger
 
         :param coverage_start_date: The coverage_start_date of this Police.  # noqa: E501
@@ -25,14 +27,12 @@ class Police(Model):
         :type coverage_end_date: date
         :param coverage_geographic_area: The coverage_geographic_area of this Police.  # noqa: E501
         :type coverage_geographic_area: str
+        :param contact: The contact of this Police.  # noqa: E501
+        :type contact: Contact
         :param service_involvement: The service_involvement of this Police.  # noqa: E501
-        :type service_involvement: str
+        :type service_involvement: ServiceInvolvement
         :param police_station: The police_station of this Police.  # noqa: E501
         :type police_station: str
-        :param contact_email: The contact_email of this Police.  # noqa: E501
-        :type contact_email: str
-        :param contact_number: The contact_number of this Police.  # noqa: E501
-        :type contact_number: str
         :param offences: The offences of this Police.  # noqa: E501
         :type offences: List[Offence]
         """
@@ -40,10 +40,9 @@ class Police(Model):
             'coverage_start_date': date,
             'coverage_end_date': date,
             'coverage_geographic_area': str,
-            'service_involvement': str,
+            'contact': Contact,
+            'service_involvement': ServiceInvolvement,
             'police_station': str,
-            'contact_email': str,
-            'contact_number': str,
             'offences': List[Offence]
         }
 
@@ -51,19 +50,17 @@ class Police(Model):
             'coverage_start_date': 'coverageStartDate',
             'coverage_end_date': 'coverageEndDate',
             'coverage_geographic_area': 'coverageGeographicArea',
+            'contact': 'contact',
             'service_involvement': 'serviceInvolvement',
             'police_station': 'policeStation',
-            'contact_email': 'contactEmail',
-            'contact_number': 'contactNumber',
             'offences': 'offences'
         }
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
         self._coverage_geographic_area = coverage_geographic_area
+        self._contact = contact
         self._service_involvement = service_involvement
         self._police_station = police_station
-        self._contact_email = contact_email
-        self._contact_number = contact_number
         self._offences = offences
 
     @classmethod
@@ -141,22 +138,43 @@ class Police(Model):
         self._coverage_geographic_area = coverage_geographic_area
 
     @property
-    def service_involvement(self) -> str:
+    def contact(self) -> Contact:
+        """Gets the contact of this Police.
+
+
+        :return: The contact of this Police.
+        :rtype: Contact
+        """
+        return self._contact
+
+    @contact.setter
+    def contact(self, contact: Contact):
+        """Sets the contact of this Police.
+
+
+        :param contact: The contact of this Police.
+        :type contact: Contact
+        """
+
+        self._contact = contact
+
+    @property
+    def service_involvement(self) -> ServiceInvolvement:
         """Gets the service_involvement of this Police.
 
 
         :return: The service_involvement of this Police.
-        :rtype: str
+        :rtype: ServiceInvolvement
         """
         return self._service_involvement
 
     @service_involvement.setter
-    def service_involvement(self, service_involvement: str):
+    def service_involvement(self, service_involvement: ServiceInvolvement):
         """Sets the service_involvement of this Police.
 
 
         :param service_involvement: The service_involvement of this Police.
-        :type service_involvement: str
+        :type service_involvement: ServiceInvolvement
         """
 
         self._service_involvement = service_involvement
@@ -181,48 +199,6 @@ class Police(Model):
         """
 
         self._police_station = police_station
-
-    @property
-    def contact_email(self) -> str:
-        """Gets the contact_email of this Police.
-
-
-        :return: The contact_email of this Police.
-        :rtype: str
-        """
-        return self._contact_email
-
-    @contact_email.setter
-    def contact_email(self, contact_email: str):
-        """Sets the contact_email of this Police.
-
-
-        :param contact_email: The contact_email of this Police.
-        :type contact_email: str
-        """
-
-        self._contact_email = contact_email
-
-    @property
-    def contact_number(self) -> str:
-        """Gets the contact_number of this Police.
-
-
-        :return: The contact_number of this Police.
-        :rtype: str
-        """
-        return self._contact_number
-
-    @contact_number.setter
-    def contact_number(self, contact_number: str):
-        """Sets the contact_number of this Police.
-
-
-        :param contact_number: The contact_number of this Police.
-        :type contact_number: str
-        """
-
-        self._contact_number = contact_number
 
     @property
     def offences(self) -> List[Offence]:

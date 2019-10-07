@@ -6,6 +6,8 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.contact import Contact  # noqa: F401,E501
+from swagger_server.models.service_involvement import ServiceInvolvement  # noqa: F401,E501
 from swagger_server.models.source_data import SourceData  # noqa: F401,E501
 from swagger_server import util
 
@@ -15,7 +17,7 @@ class AdultSocialCare(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, service_involvement: str=None, lead_practitioner_name: str=None, lead_practitioner_phone: str=None, lead_practitioner_email: str=None, start_date_of_last_involvement: date=None, most_recent_recorded_interaction_with_service: str=None):  # noqa: E501
+    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, contact: Contact=None, service_involvement: ServiceInvolvement=None, start_date_of_last_involvement: date=None, most_recent_recorded_interaction_with_service: str=None):  # noqa: E501
         """AdultSocialCare - a model defined in Swagger
 
         :param coverage_start_date: The coverage_start_date of this AdultSocialCare.  # noqa: E501
@@ -24,14 +26,10 @@ class AdultSocialCare(Model):
         :type coverage_end_date: date
         :param coverage_geographic_area: The coverage_geographic_area of this AdultSocialCare.  # noqa: E501
         :type coverage_geographic_area: str
+        :param contact: The contact of this AdultSocialCare.  # noqa: E501
+        :type contact: Contact
         :param service_involvement: The service_involvement of this AdultSocialCare.  # noqa: E501
-        :type service_involvement: str
-        :param lead_practitioner_name: The lead_practitioner_name of this AdultSocialCare.  # noqa: E501
-        :type lead_practitioner_name: str
-        :param lead_practitioner_phone: The lead_practitioner_phone of this AdultSocialCare.  # noqa: E501
-        :type lead_practitioner_phone: str
-        :param lead_practitioner_email: The lead_practitioner_email of this AdultSocialCare.  # noqa: E501
-        :type lead_practitioner_email: str
+        :type service_involvement: ServiceInvolvement
         :param start_date_of_last_involvement: The start_date_of_last_involvement of this AdultSocialCare.  # noqa: E501
         :type start_date_of_last_involvement: date
         :param most_recent_recorded_interaction_with_service: The most_recent_recorded_interaction_with_service of this AdultSocialCare.  # noqa: E501
@@ -41,10 +39,8 @@ class AdultSocialCare(Model):
             'coverage_start_date': date,
             'coverage_end_date': date,
             'coverage_geographic_area': str,
-            'service_involvement': str,
-            'lead_practitioner_name': str,
-            'lead_practitioner_phone': str,
-            'lead_practitioner_email': str,
+            'contact': Contact,
+            'service_involvement': ServiceInvolvement,
             'start_date_of_last_involvement': date,
             'most_recent_recorded_interaction_with_service': str
         }
@@ -53,20 +49,16 @@ class AdultSocialCare(Model):
             'coverage_start_date': 'coverageStartDate',
             'coverage_end_date': 'coverageEndDate',
             'coverage_geographic_area': 'coverageGeographicArea',
+            'contact': 'contact',
             'service_involvement': 'serviceInvolvement',
-            'lead_practitioner_name': 'leadPractitionerName',
-            'lead_practitioner_phone': 'leadPractitionerPhone',
-            'lead_practitioner_email': 'leadPractitionerEmail',
             'start_date_of_last_involvement': 'startDateOfLastInvolvement',
             'most_recent_recorded_interaction_with_service': 'mostRecentRecordedInteractionWithService'
         }
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
         self._coverage_geographic_area = coverage_geographic_area
+        self._contact = contact
         self._service_involvement = service_involvement
-        self._lead_practitioner_name = lead_practitioner_name
-        self._lead_practitioner_phone = lead_practitioner_phone
-        self._lead_practitioner_email = lead_practitioner_email
         self._start_date_of_last_involvement = start_date_of_last_involvement
         self._most_recent_recorded_interaction_with_service = most_recent_recorded_interaction_with_service
 
@@ -145,88 +137,46 @@ class AdultSocialCare(Model):
         self._coverage_geographic_area = coverage_geographic_area
 
     @property
-    def service_involvement(self) -> str:
+    def contact(self) -> Contact:
+        """Gets the contact of this AdultSocialCare.
+
+
+        :return: The contact of this AdultSocialCare.
+        :rtype: Contact
+        """
+        return self._contact
+
+    @contact.setter
+    def contact(self, contact: Contact):
+        """Sets the contact of this AdultSocialCare.
+
+
+        :param contact: The contact of this AdultSocialCare.
+        :type contact: Contact
+        """
+
+        self._contact = contact
+
+    @property
+    def service_involvement(self) -> ServiceInvolvement:
         """Gets the service_involvement of this AdultSocialCare.
 
 
         :return: The service_involvement of this AdultSocialCare.
-        :rtype: str
+        :rtype: ServiceInvolvement
         """
         return self._service_involvement
 
     @service_involvement.setter
-    def service_involvement(self, service_involvement: str):
+    def service_involvement(self, service_involvement: ServiceInvolvement):
         """Sets the service_involvement of this AdultSocialCare.
 
 
         :param service_involvement: The service_involvement of this AdultSocialCare.
-        :type service_involvement: str
+        :type service_involvement: ServiceInvolvement
         """
 
         self._service_involvement = service_involvement
-
-    @property
-    def lead_practitioner_name(self) -> str:
-        """Gets the lead_practitioner_name of this AdultSocialCare.
-
-
-        :return: The lead_practitioner_name of this AdultSocialCare.
-        :rtype: str
-        """
-        return self._lead_practitioner_name
-
-    @lead_practitioner_name.setter
-    def lead_practitioner_name(self, lead_practitioner_name: str):
-        """Sets the lead_practitioner_name of this AdultSocialCare.
-
-
-        :param lead_practitioner_name: The lead_practitioner_name of this AdultSocialCare.
-        :type lead_practitioner_name: str
-        """
-
-        self._lead_practitioner_name = lead_practitioner_name
-
-    @property
-    def lead_practitioner_phone(self) -> str:
-        """Gets the lead_practitioner_phone of this AdultSocialCare.
-
-
-        :return: The lead_practitioner_phone of this AdultSocialCare.
-        :rtype: str
-        """
-        return self._lead_practitioner_phone
-
-    @lead_practitioner_phone.setter
-    def lead_practitioner_phone(self, lead_practitioner_phone: str):
-        """Sets the lead_practitioner_phone of this AdultSocialCare.
-
-
-        :param lead_practitioner_phone: The lead_practitioner_phone of this AdultSocialCare.
-        :type lead_practitioner_phone: str
-        """
-
-        self._lead_practitioner_phone = lead_practitioner_phone
-
-    @property
-    def lead_practitioner_email(self) -> str:
-        """Gets the lead_practitioner_email of this AdultSocialCare.
-
-
-        :return: The lead_practitioner_email of this AdultSocialCare.
-        :rtype: str
-        """
-        return self._lead_practitioner_email
-
-    @lead_practitioner_email.setter
-    def lead_practitioner_email(self, lead_practitioner_email: str):
-        """Sets the lead_practitioner_email of this AdultSocialCare.
-
-
-        :param lead_practitioner_email: The lead_practitioner_email of this AdultSocialCare.
-        :type lead_practitioner_email: str
-        """
-
-        self._lead_practitioner_email = lead_practitioner_email
 
     @property
     def start_date_of_last_involvement(self) -> date:

@@ -9,6 +9,7 @@ from swagger_server.models.police import Police
 from swagger_server.models.offence import Offence  
 from swagger_server.models.housing import Housing  
 from swagger_server.models.school import School  
+from swagger_server.models.contact import Contact  
 from swagger_server.models.adult_social_care import AdultSocialCare  
 
 from swagger_server import util
@@ -22,7 +23,6 @@ def parse_csv(filename):
         reader = list(csv.reader(csvfile))
 
         header = reader[0]
-        print(header)
 
         for row in reader[1:]:
             row_obj = dict()
@@ -34,6 +34,14 @@ def parse_csv(filename):
 
     return rows
 
+def parse_contact(row):
+    mapping = dict(name="contact_name", email="contact_email", phone="contact_phone", role="contact_role")
+    newObj = dict()
+    for newKey, oldKey in mapping.items():
+        if oldKey in row:
+            newObj[newKey] = row[oldKey]
+            del row[oldKey]
+    row["contact"] = Contact(**newObj)
 
 def read_data():
 
@@ -48,6 +56,7 @@ def read_data():
     for policedata in data:
         person_id = policedata["person_id"]
         del policedata["person_id"]
+        parse_contact(policedata)
         police = Police(**policedata, offences=[])
         persons[person_id].service_data["POLICE"] = police
 
@@ -62,6 +71,7 @@ def read_data():
     for sectiondata in data:
         person_id = sectiondata["person_id"]
         del sectiondata["person_id"]
+        parse_contact(sectiondata)
         section = School(**sectiondata)
         persons[person_id].service_data["SCHOOL"] = section
 
@@ -69,6 +79,7 @@ def read_data():
     for sectiondata in data:
         person_id = sectiondata["person_id"]
         del sectiondata["person_id"]
+        parse_contact(sectiondata)
         section = AdultSocialCare(**sectiondata)
         persons[person_id].service_data["ASC"] = section
 
@@ -76,6 +87,7 @@ def read_data():
     for sectiondata in data:
         person_id = sectiondata["person_id"]
         del sectiondata["person_id"]
+        parse_contact(sectiondata)
 
         for prop in [
                 "anti_social_behaviour",

@@ -6,6 +6,8 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.contact import Contact  # noqa: F401,E501
+from swagger_server.models.service_involvement import ServiceInvolvement  # noqa: F401,E501
 from swagger_server.models.source_data import SourceData  # noqa: F401,E501
 from swagger_server import util
 
@@ -15,7 +17,7 @@ class Housing(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, service_involvement: str=None, lead_practitioner_name: str=None, lead_practitioner_phone: str=None, lead_practitioner_email: str=None, anti_social_behaviour: bool=None, anti_social_behaviour_case_open: bool=None, rent_arrears: bool=None, rent_arrears_case_open: bool=None, notice_seeking_possessions: bool=None, notice_seeking_possessions_case_open: bool=None, eviction: bool=None, eviction_case_open: bool=None):  # noqa: E501
+    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, contact: Contact=None, service_involvement: ServiceInvolvement=None, anti_social_behaviour: bool=None, anti_social_behaviour_case_open: bool=None, rent_arrears: bool=None, rent_arrears_case_open: bool=None, notice_seeking_possessions: bool=None, notice_seeking_possessions_case_open: bool=None, eviction: bool=None, eviction_case_open: bool=None):  # noqa: E501
         """Housing - a model defined in Swagger
 
         :param coverage_start_date: The coverage_start_date of this Housing.  # noqa: E501
@@ -24,14 +26,10 @@ class Housing(Model):
         :type coverage_end_date: date
         :param coverage_geographic_area: The coverage_geographic_area of this Housing.  # noqa: E501
         :type coverage_geographic_area: str
+        :param contact: The contact of this Housing.  # noqa: E501
+        :type contact: Contact
         :param service_involvement: The service_involvement of this Housing.  # noqa: E501
-        :type service_involvement: str
-        :param lead_practitioner_name: The lead_practitioner_name of this Housing.  # noqa: E501
-        :type lead_practitioner_name: str
-        :param lead_practitioner_phone: The lead_practitioner_phone of this Housing.  # noqa: E501
-        :type lead_practitioner_phone: str
-        :param lead_practitioner_email: The lead_practitioner_email of this Housing.  # noqa: E501
-        :type lead_practitioner_email: str
+        :type service_involvement: ServiceInvolvement
         :param anti_social_behaviour: The anti_social_behaviour of this Housing.  # noqa: E501
         :type anti_social_behaviour: bool
         :param anti_social_behaviour_case_open: The anti_social_behaviour_case_open of this Housing.  # noqa: E501
@@ -53,10 +51,8 @@ class Housing(Model):
             'coverage_start_date': date,
             'coverage_end_date': date,
             'coverage_geographic_area': str,
-            'service_involvement': str,
-            'lead_practitioner_name': str,
-            'lead_practitioner_phone': str,
-            'lead_practitioner_email': str,
+            'contact': Contact,
+            'service_involvement': ServiceInvolvement,
             'anti_social_behaviour': bool,
             'anti_social_behaviour_case_open': bool,
             'rent_arrears': bool,
@@ -71,10 +67,8 @@ class Housing(Model):
             'coverage_start_date': 'coverageStartDate',
             'coverage_end_date': 'coverageEndDate',
             'coverage_geographic_area': 'coverageGeographicArea',
+            'contact': 'contact',
             'service_involvement': 'serviceInvolvement',
-            'lead_practitioner_name': 'leadPractitionerName',
-            'lead_practitioner_phone': 'leadPractitionerPhone',
-            'lead_practitioner_email': 'leadPractitionerEmail',
             'anti_social_behaviour': 'antiSocialBehaviour',
             'anti_social_behaviour_case_open': 'antiSocialBehaviourCaseOpen',
             'rent_arrears': 'rentArrears',
@@ -87,10 +81,8 @@ class Housing(Model):
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
         self._coverage_geographic_area = coverage_geographic_area
+        self._contact = contact
         self._service_involvement = service_involvement
-        self._lead_practitioner_name = lead_practitioner_name
-        self._lead_practitioner_phone = lead_practitioner_phone
-        self._lead_practitioner_email = lead_practitioner_email
         self._anti_social_behaviour = anti_social_behaviour
         self._anti_social_behaviour_case_open = anti_social_behaviour_case_open
         self._rent_arrears = rent_arrears
@@ -175,88 +167,46 @@ class Housing(Model):
         self._coverage_geographic_area = coverage_geographic_area
 
     @property
-    def service_involvement(self) -> str:
+    def contact(self) -> Contact:
+        """Gets the contact of this Housing.
+
+
+        :return: The contact of this Housing.
+        :rtype: Contact
+        """
+        return self._contact
+
+    @contact.setter
+    def contact(self, contact: Contact):
+        """Sets the contact of this Housing.
+
+
+        :param contact: The contact of this Housing.
+        :type contact: Contact
+        """
+
+        self._contact = contact
+
+    @property
+    def service_involvement(self) -> ServiceInvolvement:
         """Gets the service_involvement of this Housing.
 
 
         :return: The service_involvement of this Housing.
-        :rtype: str
+        :rtype: ServiceInvolvement
         """
         return self._service_involvement
 
     @service_involvement.setter
-    def service_involvement(self, service_involvement: str):
+    def service_involvement(self, service_involvement: ServiceInvolvement):
         """Sets the service_involvement of this Housing.
 
 
         :param service_involvement: The service_involvement of this Housing.
-        :type service_involvement: str
+        :type service_involvement: ServiceInvolvement
         """
 
         self._service_involvement = service_involvement
-
-    @property
-    def lead_practitioner_name(self) -> str:
-        """Gets the lead_practitioner_name of this Housing.
-
-
-        :return: The lead_practitioner_name of this Housing.
-        :rtype: str
-        """
-        return self._lead_practitioner_name
-
-    @lead_practitioner_name.setter
-    def lead_practitioner_name(self, lead_practitioner_name: str):
-        """Sets the lead_practitioner_name of this Housing.
-
-
-        :param lead_practitioner_name: The lead_practitioner_name of this Housing.
-        :type lead_practitioner_name: str
-        """
-
-        self._lead_practitioner_name = lead_practitioner_name
-
-    @property
-    def lead_practitioner_phone(self) -> str:
-        """Gets the lead_practitioner_phone of this Housing.
-
-
-        :return: The lead_practitioner_phone of this Housing.
-        :rtype: str
-        """
-        return self._lead_practitioner_phone
-
-    @lead_practitioner_phone.setter
-    def lead_practitioner_phone(self, lead_practitioner_phone: str):
-        """Sets the lead_practitioner_phone of this Housing.
-
-
-        :param lead_practitioner_phone: The lead_practitioner_phone of this Housing.
-        :type lead_practitioner_phone: str
-        """
-
-        self._lead_practitioner_phone = lead_practitioner_phone
-
-    @property
-    def lead_practitioner_email(self) -> str:
-        """Gets the lead_practitioner_email of this Housing.
-
-
-        :return: The lead_practitioner_email of this Housing.
-        :rtype: str
-        """
-        return self._lead_practitioner_email
-
-    @lead_practitioner_email.setter
-    def lead_practitioner_email(self, lead_practitioner_email: str):
-        """Sets the lead_practitioner_email of this Housing.
-
-
-        :param lead_practitioner_email: The lead_practitioner_email of this Housing.
-        :type lead_practitioner_email: str
-        """
-
-        self._lead_practitioner_email = lead_practitioner_email
 
     @property
     def anti_social_behaviour(self) -> bool:

@@ -6,6 +6,8 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.contact import Contact  # noqa: F401,E501
+from swagger_server.models.service_involvement import ServiceInvolvement  # noqa: F401,E501
 from swagger_server.models.source_data import SourceData  # noqa: F401,E501
 from swagger_server import util
 
@@ -15,7 +17,7 @@ class School(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, service_involvement: str=None, school_name: str=None, admission_type: str=None, contact_name: str=None, contact_number: str=None):  # noqa: E501
+    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, contact: Contact=None, service_involvement: ServiceInvolvement=None, school_name: str=None, admission_type: str=None):  # noqa: E501
         """School - a model defined in Swagger
 
         :param coverage_start_date: The coverage_start_date of this School.  # noqa: E501
@@ -24,46 +26,41 @@ class School(Model):
         :type coverage_end_date: date
         :param coverage_geographic_area: The coverage_geographic_area of this School.  # noqa: E501
         :type coverage_geographic_area: str
+        :param contact: The contact of this School.  # noqa: E501
+        :type contact: Contact
         :param service_involvement: The service_involvement of this School.  # noqa: E501
-        :type service_involvement: str
+        :type service_involvement: ServiceInvolvement
         :param school_name: The school_name of this School.  # noqa: E501
         :type school_name: str
         :param admission_type: The admission_type of this School.  # noqa: E501
         :type admission_type: str
-        :param contact_name: The contact_name of this School.  # noqa: E501
-        :type contact_name: str
-        :param contact_number: The contact_number of this School.  # noqa: E501
-        :type contact_number: str
         """
         self.swagger_types = {
             'coverage_start_date': date,
             'coverage_end_date': date,
             'coverage_geographic_area': str,
-            'service_involvement': str,
+            'contact': Contact,
+            'service_involvement': ServiceInvolvement,
             'school_name': str,
-            'admission_type': str,
-            'contact_name': str,
-            'contact_number': str
+            'admission_type': str
         }
 
         self.attribute_map = {
             'coverage_start_date': 'coverageStartDate',
             'coverage_end_date': 'coverageEndDate',
             'coverage_geographic_area': 'coverageGeographicArea',
+            'contact': 'contact',
             'service_involvement': 'serviceInvolvement',
             'school_name': 'schoolName',
-            'admission_type': 'admissionType',
-            'contact_name': 'contactName',
-            'contact_number': 'contactNumber'
+            'admission_type': 'admissionType'
         }
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
         self._coverage_geographic_area = coverage_geographic_area
+        self._contact = contact
         self._service_involvement = service_involvement
         self._school_name = school_name
         self._admission_type = admission_type
-        self._contact_name = contact_name
-        self._contact_number = contact_number
 
     @classmethod
     def from_dict(cls, dikt) -> 'School':
@@ -140,22 +137,43 @@ class School(Model):
         self._coverage_geographic_area = coverage_geographic_area
 
     @property
-    def service_involvement(self) -> str:
+    def contact(self) -> Contact:
+        """Gets the contact of this School.
+
+
+        :return: The contact of this School.
+        :rtype: Contact
+        """
+        return self._contact
+
+    @contact.setter
+    def contact(self, contact: Contact):
+        """Sets the contact of this School.
+
+
+        :param contact: The contact of this School.
+        :type contact: Contact
+        """
+
+        self._contact = contact
+
+    @property
+    def service_involvement(self) -> ServiceInvolvement:
         """Gets the service_involvement of this School.
 
 
         :return: The service_involvement of this School.
-        :rtype: str
+        :rtype: ServiceInvolvement
         """
         return self._service_involvement
 
     @service_involvement.setter
-    def service_involvement(self, service_involvement: str):
+    def service_involvement(self, service_involvement: ServiceInvolvement):
         """Sets the service_involvement of this School.
 
 
         :param service_involvement: The service_involvement of this School.
-        :type service_involvement: str
+        :type service_involvement: ServiceInvolvement
         """
 
         self._service_involvement = service_involvement
@@ -201,45 +219,3 @@ class School(Model):
         """
 
         self._admission_type = admission_type
-
-    @property
-    def contact_name(self) -> str:
-        """Gets the contact_name of this School.
-
-
-        :return: The contact_name of this School.
-        :rtype: str
-        """
-        return self._contact_name
-
-    @contact_name.setter
-    def contact_name(self, contact_name: str):
-        """Sets the contact_name of this School.
-
-
-        :param contact_name: The contact_name of this School.
-        :type contact_name: str
-        """
-
-        self._contact_name = contact_name
-
-    @property
-    def contact_number(self) -> str:
-        """Gets the contact_number of this School.
-
-
-        :return: The contact_number of this School.
-        :rtype: str
-        """
-        return self._contact_number
-
-    @contact_number.setter
-    def contact_number(self, contact_number: str):
-        """Sets the contact_number of this School.
-
-
-        :param contact_number: The contact_number of this School.
-        :type contact_number: str
-        """
-
-        self._contact_number = contact_number

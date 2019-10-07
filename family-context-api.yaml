@@ -93,6 +93,8 @@ components:
           format: date
         coverageGeographicArea:
           type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
 
     Police:
       allOf:
@@ -100,12 +102,8 @@ components:
         - type: object
           properties:
             serviceInvolvement:
-              type: string
+              $ref: '#/components/schemas/ServiceInvolvement'
             policeStation:
-              type: string
-            contactEmail:
-              type: string
-            contactNumber:
               type: string
             offences:
               type: array
@@ -118,14 +116,10 @@ components:
         - type: object
           properties:
             serviceInvolvement:
-              type: string
+              $ref: '#/components/schemas/ServiceInvolvement'
             schoolName:
               type: string
             admissionType: 
-              type: string
-            contactName:
-              type: string
-            contactNumber:
               type: string
 
     AdultSocialCare:
@@ -134,13 +128,7 @@ components:
         - type: object
           properties:
             serviceInvolvement:
-              type: string
-            leadPractitionerName:
-              type: string
-            leadPractitionerPhone: 
-              type: string
-            leadPractitionerEmail:
-              type: string
+              $ref: '#/components/schemas/ServiceInvolvement'
             startDateOfLastInvolvement:
               type: string
               format: date
@@ -153,13 +141,7 @@ components:
         - type: object
           properties:
             serviceInvolvement:
-              type: string
-            leadPractitionerName:
-              type: string
-            leadPractitionerPhone: 
-              type: string
-            leadPractitionerEmail:
-              type: string
+              $ref: '#/components/schemas/ServiceInvolvement'
             antiSocialBehaviour:
               type: boolean
             antiSocialBehaviourCaseOpen:
@@ -188,3 +170,19 @@ components:
         natureOfInvolvement:
           type: string
       
+    Contact:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone: 
+          type: string
+        role:
+          type: string
+
+    ServiceInvolvement:
+      type: string
+      pattern: "[current|historic]"
+
