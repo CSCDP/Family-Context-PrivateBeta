@@ -97,6 +97,7 @@ const AdultSocialCare = ({ classes, serviceData }) => {
 
 const Police = ({ classes, serviceData }) => {
 	const data = serviceData.POLICE;
+	console.log(data)
 	if (data) {
 		return (
 		  <Paper className={classes.paper}>
@@ -123,14 +124,16 @@ const Police = ({ classes, serviceData }) => {
 		        <TableHead>
 		          <TableRow>
 		            <TableCell>Date of Offence</TableCell>
-		            <TableCell align="right" colSpan={3}>Type of Offence</TableCell>
+		            <TableCell align="right" colSpan={2}>Type of Offence</TableCell>
+		            <TableCell align="right" colSpan={1}>Nature of Involvement</TableCell>
 		          </TableRow>
 		        </TableHead>
 		        <TableBody>
 		          { data.offences.map((offence, ix) => (
 			          <TableRow key={ix}>
 			            <TableCell>{offence.dateOfOffence}</TableCell>
-			            <TableCell align="right" colSpan={3}>{offence.typeOfOffence}</TableCell>
+			            <TableCell align="right" colSpan={2}>{offence.typeOfOffence}</TableCell>
+			            <TableCell align="right" colSpan={1}>{offence.natureOfInvolvement}</TableCell>
 			          </TableRow>		          	
 		          ))}
 		        </TableBody>

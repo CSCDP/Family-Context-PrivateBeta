@@ -1,2 +1,2 @@
 personId,coverageStartDate,coverageEndDate,coverageGeographicArea, serviceInvolvement, policeStation, contactEmail, contactNumber
-1,1990-01-01,2019-10-01,UK,what is this?,Area A,officer@police.uk,999
+1,1990-01-01,2019-10-01,UK,historic,Area A,officer@police.uk,999

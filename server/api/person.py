@@ -22,12 +22,13 @@ def parse_csv(filename):
         reader = list(csv.reader(csvfile))
 
         header = reader[0]
+        print(header)
 
         for row in reader[1:]:
             row_obj = dict()
             for ix, name in enumerate(header):
                 name = inflection.underscore(name.strip())
-                value = row[ix] if ix < len(row)-1 else None
+                value = row[ix] if ix < len(row) else None
                 row_obj[name] = value
             rows.append(row_obj)
 
