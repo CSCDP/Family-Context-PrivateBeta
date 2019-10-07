@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Layout from './components/layout';
+import Person from './components/person';
+import Selector from './components/selector';
 
 function App() {
+  const [personId, setPersonId] = React.useState(1);
+
+  const handleChange = personId => {
+  	setPersonId(personId);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Selector personId={personId} changeHandler={handleChange}/>
+      <Person personId={personId} />
+    </Layout>
   );
 }
 
