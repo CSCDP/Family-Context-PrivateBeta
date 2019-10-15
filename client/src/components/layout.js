@@ -34,15 +34,6 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-const SFLogo = ({ styles }) => {
-  return (<SvgIcon viewBox="0 0 50 20" style={styles}>
-    <g id="logo-socialfinance">
-      <circle id="circle" cx="10" cy="10" r="10"/>
-      <rect x="22" y="1" width="18" height="18" />
-    </g>
-  </SvgIcon>);
-};
-
 const Layout = ({ children }) => {
   const classes = useStyles();
   return (
@@ -50,7 +41,6 @@ const Layout = ({ children }) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <SFLogo styles={{ width: "70px" }} />
           <Typography variant="h6" color="inherit" noWrap>
             Family Context
           </Typography>
