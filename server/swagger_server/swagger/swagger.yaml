@@ -34,13 +34,13 @@ paths:
           items:
             type: string
       responses:
-        200:
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Person'
-        404:
+        "404":
           description: Person not found
           content: {}
       x-openapi-router-controller: swagger_server.controllers.default_controller
