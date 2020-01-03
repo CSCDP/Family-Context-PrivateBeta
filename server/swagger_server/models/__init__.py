@@ -6,6 +6,7 @@ from __future__ import absolute_import
 from swagger_server.models.adult_social_care import AdultSocialCare
 from swagger_server.models.contact import Contact
 from swagger_server.models.housing import Housing
+from swagger_server.models.inline_response200 import InlineResponse200
 from swagger_server.models.person import Person
 from swagger_server.models.police import Police
 from swagger_server.models.police_offences import PoliceOffences

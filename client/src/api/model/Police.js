@@ -26,13 +26,10 @@ export default class Police {
     * Constructs a new <code>Police</code>.
     * @alias module:model/Police
     * @class
-    * @extends module:model/SourceData
     */
 
     constructor() {
-        SourceData.call(this);
-        
-        
+                return this;
     }
 
     /**
@@ -45,9 +42,16 @@ export default class Police {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new Police();
-            
-            SourceData.constructFromObject(data, obj);
-            
+            ApiClient.constructFromObject(data, obj, '');
+                        if (data.hasOwnProperty('coverageStartDate')) {
+                obj['coverageStartDate'] = ApiClient.convertToType(data['coverageStartDate'], 'Date');
+            }
+            if (data.hasOwnProperty('coverageEndDate')) {
+                obj['coverageEndDate'] = ApiClient.convertToType(data['coverageEndDate'], 'Date');
+            }
+            if (data.hasOwnProperty('coverageGeographicArea')) {
+                obj['coverageGeographicArea'] = ApiClient.convertToType(data['coverageGeographicArea'], 'String');
+            }
             if (data.hasOwnProperty('serviceInvolvement')) {
                 obj['serviceInvolvement'] = ApiClient.convertToType(data['serviceInvolvement'], 'String');
             }
@@ -64,6 +68,18 @@ export default class Police {
         return obj;
     }
 
+    /**
+    * @member {Date} coverageStartDate
+    */
+    coverageStartDate = undefined;
+    /**
+    * @member {Date} coverageEndDate
+    */
+    coverageEndDate = undefined;
+    /**
+    * @member {String} coverageGeographicArea
+    */
+    coverageGeographicArea = undefined;
     /**
     * @member {String} serviceInvolvement
     */

@@ -26,9 +26,7 @@ export default class Contact {
     */
 
     constructor() {
-        
-        
-        
+                
     }
 
     /**
@@ -41,9 +39,7 @@ export default class Contact {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new Contact();
-                        
-            
-            if (data.hasOwnProperty('name')) {
+                                    if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
             if (data.hasOwnProperty('email')) {

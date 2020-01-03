@@ -15,15 +15,15 @@ import ApiClient from "../ApiClient";
 import Person from '../model/Person';
 
 /**
-* Default service.
-* @module api/DefaultApi
+* Person service.
+* @module api/PersonApi
 * @version 0.0.1
 */
-export default class DefaultApi {
+export default class PersonApi {
 
     /**
-    * Constructs a new DefaultApi. 
-    * @alias module:api/DefaultApi
+    * Constructs a new PersonApi. 
+    * @alias module:api/PersonApi
     * @class
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
@@ -32,37 +32,27 @@ export default class DefaultApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
-    /**
-     * Callback function to receive the result of the getPersonById operation.
-     * @callback module:api/DefaultApi~getPersonByIdCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Person} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
+
 
     /**
      * Find person by ID
      * Returns a single person
-     * @param {Object} opts Optional parameters
-     * @param {module:api/DefaultApi~getPersonByIdCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Person}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Person} and HTTP response
      */
-    getPersonById(personId, opts, callback) {
-      opts = opts || {};
+    getPersonByIdWithHttpInfo(personId) {
       let postBody = null;
 
       let pathParams = {
         'personId': personId
       };
       let queryParams = {
-        'sources': this.apiClient.buildCollectionParam(opts['sources'], 'multi')
       };
       let headerParams = {
       };
       let formParams = {
       };
 
-      let authNames = [];
+      let authNames = ['cookieAuth'];
       let contentTypes = [];
       let accepts = ['application/json'];
       let returnType = Person;
@@ -70,8 +60,20 @@ export default class DefaultApi {
       return this.apiClient.callApi(
         '/person/{personId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * Find person by ID
+     * Returns a single person
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Person}
+     */
+    getPersonById(personId) {
+      return this.getPersonByIdWithHttpInfo(personId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 }

@@ -9,11 +9,60 @@ info:
   version: 0.0.1
 
 paths:
+  /api/auth/status:
+    get:
+      summary: Get authentication status
+      description: >
+        Checks to see if there is currently an active authentication session. Returns the name of the
+        current credentials if known.
+      operationId: getAuthStatus
+      tags:
+        - auth
+      responses:
+        200:
+          description: authenticated credentials present - details in message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    pattern: "[authenticated]"
+                required:
+                  - status
+        401:
+          description: no authenticated credentials present or credentials not valid for this application
+          content: {}
+
+  /api/auth/login:
+    post:
+      summary: Submit authentication details
+      description: >
+        TODO:
+      security: []
+      operationId: postAuthLogin
+      tags:
+        - auth
+      responses:
+        302:
+          description: authenticated credentials present - details in message
+          content: {}
+        401:
+          description: no authenticated credentials present or credentials not valid for this application
+          content: {}
+
   /person/{personId}:
     get:
       summary: Find person by ID
       description: Returns a single person
       operationId: getPersonById
+      tags:
+        - person
       parameters:
       - name: personId
         in: path
@@ -21,14 +70,6 @@ paths:
         required: true
         schema:
           type: string
-      - name: sources
-        in: query
-        description: The data source IDs to query
-        required: false
-        schema:
-          type: array
-          items:
-            type: string
       responses:
         200:
           description: successful operation
@@ -40,7 +81,16 @@ paths:
           description: Person not found
           content: {}
 
+security:
+  - cookieAuth: []
+
 components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: FCSESSIONID
+
   schemas:
 
     Person:

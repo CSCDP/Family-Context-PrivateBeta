@@ -8,9 +8,51 @@ info:
   version: 0.0.1
 servers:
 - url: /
+security:
+- cookieAuth: []
 paths:
+  /api/auth/status:
+    get:
+      tags:
+      - auth
+      summary: Get authentication status
+      description: |
+        Checks to see if there is currently an active authentication session. Returns the name of the current credentials if known.
+      operationId: get_auth_status
+      responses:
+        "200":
+          description: authenticated credentials present - details in message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "401":
+          description: no authenticated credentials present or credentials not valid
+            for this application
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.auth_controller
+  /api/auth/login:
+    post:
+      tags:
+      - auth
+      summary: Submit authentication details
+      description: |
+        TODO:
+      operationId: post_auth_login
+      responses:
+        "302":
+          description: authenticated credentials present - details in message
+          content: {}
+        "401":
+          description: no authenticated credentials present or credentials not valid
+            for this application
+          content: {}
+      security: []
+      x-openapi-router-controller: swagger_server.controllers.auth_controller
   /person/{personId}:
     get:
+      tags:
+      - person
       summary: Find person by ID
       description: Returns a single person
       operationId: get_person_by_id
@@ -23,16 +65,6 @@ paths:
         explode: false
         schema:
           type: string
-      - name: sources
-        in: query
-        description: The data source IDs to query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: string
       responses:
         "200":
           description: successful operation
@@ -43,7 +75,7 @@ paths:
         "404":
           description: Person not found
           content: {}
-      x-openapi-router-controller: swagger_server.controllers.default_controller
+      x-openapi-router-controller: swagger_server.controllers.person_controller
 components:
   schemas:
     Person:
@@ -191,6 +223,22 @@ components:
           type: string
         role:
           type: string
+    inline_response_200:
+      required:
+      - status
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          pattern: '[authenticated]'
+          type: string
+      example:
+        name: name
+        id: id
+        status: status
     Police_offences:
       type: object
       properties:
@@ -201,4 +249,10 @@ components:
           type: string
         natureOfInvolvement:
           type: string
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      name: FCSESSIONID
+      in: cookie
+      x-apikeyInfoFunc: swagger_server.controllers.authorization_controller.check_cookieAuth
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {Grid, CircularProgress} from "@material-ui/core/";
+import { CircularProgress, Grid } from "@material-ui/core";
 
-import fetch from "cross-fetch";
+import PersonApi from "../api/api/PersonApi";
 
 import PersonDetails from "./personDetails";
+
+const personApi = new PersonApi();
 
 const Spinner = (classes) => {
   return (
@@ -18,10 +20,7 @@ const Person = ({ personId }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(
-        `/person/${personId}`,
-      );
-      const person = await result.json();
+      const person = await personApi.getPersonById(personId);
       setData(person);
     };
     fetchData();

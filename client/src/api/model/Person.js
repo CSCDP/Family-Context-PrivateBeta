@@ -30,9 +30,7 @@ export default class Person {
     */
 
     constructor(id, firstName, lastName) {
-        
-        
-        this['id'] = id;
+                this['id'] = id;
         this['firstName'] = firstName;
         this['lastName'] = lastName;
         
@@ -48,9 +46,7 @@ export default class Person {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new Person();
-                        
-            
-            if (data.hasOwnProperty('id')) {
+                                    if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'String');
             }
             if (data.hasOwnProperty('firstName')) {

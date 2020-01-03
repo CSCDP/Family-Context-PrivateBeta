@@ -1,10 +1,10 @@
-# FamilyContext.DefaultApi
+# FamilyContext.PersonApi
 
 All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getPersonById**](DefaultApi.md#getPersonById) | **GET** /person/{personId} | Find person by ID
+[**getPersonById**](PersonApi.md#getPersonById) | **GET** /person/{personId} | Find person by ID
 
 <a name="getPersonById"></a>
 # **getPersonById**
@@ -25,7 +25,7 @@ cookieAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //cookieAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FamilyContext.DefaultApi();
+let apiInstance = new FamilyContext.PersonApi();
 let personId = "personId_example"; // String | ID of person to return
 
 apiInstance.getPersonById(personId).then((data) => {

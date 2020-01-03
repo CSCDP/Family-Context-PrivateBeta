@@ -29,7 +29,7 @@ const PersonDetails = ({ person }) => {
       <>
         <DetailsBlock className={classes.paper} data={person} title="Subject">
             <DetailsRow title="Name">{person.firstName} {person.lastName}</DetailsRow>
-            <DetailsRow title="DOB">{person.dateOfBirth}</DetailsRow>
+            {/*<DetailsRow title="DOB">{person.dateOfBirth}</DetailsRow>*/}
             <DetailsRow title="Gender">{person.gender}</DetailsRow>
             <DetailsRow title="Ethnicity">{person.ethnicity}</DetailsRow>
         </DetailsBlock>

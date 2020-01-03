@@ -30,9 +30,7 @@ export default class ServiceMap {
     */
 
     constructor() {
-        
-        
-        
+                
     }
 
     /**
@@ -45,9 +43,7 @@ export default class ServiceMap {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new ServiceMap();
-                        
-            
-            if (data.hasOwnProperty('ASC')) {
+                                    if (data.hasOwnProperty('ASC')) {
                 obj['ASC'] = AdultSocialCare.constructFromObject(data['ASC']);
             }
             if (data.hasOwnProperty('HOUSING')) {

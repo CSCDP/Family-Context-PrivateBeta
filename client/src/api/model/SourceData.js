@@ -26,9 +26,7 @@ export default class SourceData {
     */
 
     constructor() {
-        
-        
-        
+                
     }
 
     /**
@@ -41,9 +39,7 @@ export default class SourceData {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new SourceData();
-                        
-            
-            if (data.hasOwnProperty('coverageStartDate')) {
+                                    if (data.hasOwnProperty('coverageStartDate')) {
                 obj['coverageStartDate'] = ApiClient.convertToType(data['coverageStartDate'], 'Date');
             }
             if (data.hasOwnProperty('coverageEndDate')) {

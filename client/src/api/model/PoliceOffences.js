@@ -26,9 +26,7 @@ export default class PoliceOffences {
     */
 
     constructor() {
-        
-        
-        
+                
     }
 
     /**
@@ -41,9 +39,7 @@ export default class PoliceOffences {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new PoliceOffences();
-                        
-            
-            if (data.hasOwnProperty('dateOfOffence')) {
+                                    if (data.hasOwnProperty('dateOfOffence')) {
                 obj['dateOfOffence'] = ApiClient.convertToType(data['dateOfOffence'], 'Date');
             }
             if (data.hasOwnProperty('typeOfOffence')) {

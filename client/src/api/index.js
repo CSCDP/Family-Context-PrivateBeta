@@ -15,13 +15,15 @@ import ApiClient from './ApiClient';
 import AdultSocialCare from './model/AdultSocialCare';
 import Contact from './model/Contact';
 import Housing from './model/Housing';
+import InlineResponse200 from './model/InlineResponse200';
 import Person from './model/Person';
 import Police from './model/Police';
 import PoliceOffences from './model/PoliceOffences';
 import School from './model/School';
 import ServiceMap from './model/ServiceMap';
 import SourceData from './model/SourceData';
-import DefaultApi from './api/DefaultApi';
+import AuthApi from './api/AuthApi';
+import PersonApi from './api/PersonApi';
 
 /**
 * This_is_the_API_definition_for_Family_Context.<br>
@@ -80,6 +82,12 @@ export {
     Housing,
 
     /**
+     * The InlineResponse200 model constructor.
+     * @property {module:model/InlineResponse200}
+     */
+    InlineResponse200,
+
+    /**
      * The Person model constructor.
      * @property {module:model/Person}
      */
@@ -116,8 +124,14 @@ export {
     SourceData,
 
     /**
-    * The DefaultApi service constructor.
-    * @property {module:api/DefaultApi}
+    * The AuthApi service constructor.
+    * @property {module:api/AuthApi}
     */
-    DefaultApi
+    AuthApi,
+
+    /**
+    * The PersonApi service constructor.
+    * @property {module:api/PersonApi}
+    */
+    PersonApi
 };

@@ -25,13 +25,10 @@ export default class AdultSocialCare {
     * Constructs a new <code>AdultSocialCare</code>.
     * @alias module:model/AdultSocialCare
     * @class
-    * @extends module:model/SourceData
     */
 
     constructor() {
-        SourceData.call(this);
-        
-        
+                return this;
     }
 
     /**
@@ -44,9 +41,16 @@ export default class AdultSocialCare {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new AdultSocialCare();
-            
-            SourceData.constructFromObject(data, obj);
-            
+            ApiClient.constructFromObject(data, obj, '');
+                        if (data.hasOwnProperty('coverageStartDate')) {
+                obj['coverageStartDate'] = ApiClient.convertToType(data['coverageStartDate'], 'Date');
+            }
+            if (data.hasOwnProperty('coverageEndDate')) {
+                obj['coverageEndDate'] = ApiClient.convertToType(data['coverageEndDate'], 'Date');
+            }
+            if (data.hasOwnProperty('coverageGeographicArea')) {
+                obj['coverageGeographicArea'] = ApiClient.convertToType(data['coverageGeographicArea'], 'String');
+            }
             if (data.hasOwnProperty('serviceInvolvement')) {
                 obj['serviceInvolvement'] = ApiClient.convertToType(data['serviceInvolvement'], 'String');
             }
@@ -63,6 +67,18 @@ export default class AdultSocialCare {
         return obj;
     }
 
+    /**
+    * @member {Date} coverageStartDate
+    */
+    coverageStartDate = undefined;
+    /**
+    * @member {Date} coverageEndDate
+    */
+    coverageEndDate = undefined;
+    /**
+    * @member {String} coverageGeographicArea
+    */
+    coverageGeographicArea = undefined;
     /**
     * @member {String} serviceInvolvement
     */
