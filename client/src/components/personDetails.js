@@ -8,6 +8,8 @@ import Housing from "./person/housing";
 import Police from "./person/police";
 import School from "./person/school";
 
+import { longDateFormat as dateFormat } from "../helpers/formatters"
+
 const useStyles = makeStyles(theme => ({
 
   paper: {
@@ -29,7 +31,7 @@ const PersonDetails = ({ person }) => {
       <>
         <DetailsBlock className={classes.paper} data={person} title="Subject">
             <DetailsRow title="Name">{person.firstName} {person.lastName}</DetailsRow>
-            {/*<DetailsRow title="DOB">{person.dateOfBirth}</DetailsRow>*/}
+            <DetailsRow title="DOB">{dateFormat.format(person.dateOfBirth)}</DetailsRow>
             <DetailsRow title="Gender">{person.gender}</DetailsRow>
             <DetailsRow title="Ethnicity">{person.ethnicity}</DetailsRow>
         </DetailsBlock>

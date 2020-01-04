@@ -4,6 +4,8 @@ import Contact from "./contact";
 import DetailsRow from "./detailsRow";
 import DetailsBlock from "./detailsBlock";
 
+import { shortDateFormat as dateFormat } from "../../helpers/formatters";
+
 const Police = ({ className, serviceData }) => {
     const data = serviceData.POLICE;
     if(!data)return(<></>);
@@ -14,7 +16,7 @@ const Police = ({ className, serviceData }) => {
             <Contact contact={data.contact}></Contact>
             { data.offences.map((offence, ix) => (
                 <DetailsRow key={ix} title={ix===0?"Involvement":""}>
-                    {offence.dateOfOffence}
+                    {dateFormat.format(offence.dateOfOffence)}
                     {" - "}{offence.natureOfInvolvement}
                     {" - "}{offence.typeOfOffence}
                 </DetailsRow>

@@ -3,6 +3,7 @@ import React from "react";
 import Contact from "./contact";
 import DetailsRow from "./detailsRow";
 import DetailsBlock from "./detailsBlock";
+import { longDateFormat as dateFormat } from "../../helpers/formatters";
 
 
 const AdultSocialCare = ({ className, serviceData }) => {
@@ -12,8 +13,8 @@ const AdultSocialCare = ({ className, serviceData }) => {
         <DetailsBlock className={className} data={data} title="Adult Social Care">
             <DetailsRow title="Service Involvement">{data.serviceInvolvement}</DetailsRow>
             <Contact contact={data.contact}></Contact>
-            <DetailsRow title="Start of Last Involvement">{data.startDateOfLastInvolvement}</DetailsRow>
-            <DetailsRow title="Most Recent Interaction">{data.dateOfMostRecentInteraction}</DetailsRow>
+            <DetailsRow title="Start of Last Involvement">{dateFormat.format(data.startDateOfLastInvolvement)}</DetailsRow>
+            <DetailsRow title="Most Recent Interaction">{dateFormat.format(data.dateOfMostRecentInteraction)}</DetailsRow>
         </DetailsBlock>
     );
 }
