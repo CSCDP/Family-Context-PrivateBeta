@@ -24,9 +24,12 @@ const Search = () => {
         <Layout>
             <div className={classes.root}>
 
-                <Typography variant="h5">Find Service Involvement</Typography>
-
-                <Grid container spacing={1} alignItems="stretch" direction="row-reverse">
+                <Grid container spacing={2} alignItems="stretch" direction="row-reverse">
+                    <Grid item md={12} sm={12} xs={12}>
+                        <Paper className={classes.paper}>
+                            <Typography variant="h5">Find Service Involvement</Typography>
+                        </Paper>
+                    </Grid>
                     <Grid item md={6} sm={6} xs={12}>
                         <Paper className={classes.paper}>
                             <SearchIDForm />
