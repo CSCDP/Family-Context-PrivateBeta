@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom"
 import { Button, Typography, TextField } from "@material-ui/core/";
 
 export default function Form() {
     const [caseID, setCaseID] = useState();
-    const [password, setPassword] = useState();
+    let history = useHistory();
 
     const onFormSubmit = async event => {
         event.preventDefault();
-        // onSubmit(email, password);
+        history.push(`/person/${caseID}`)
     };
 
     return (

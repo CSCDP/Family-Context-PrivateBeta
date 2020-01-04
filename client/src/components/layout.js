@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Family Context
+            <Link to="/" className={classes.headerLink}>Family Context</Link>
           </Typography>
         </Toolbar>
       </AppBar>

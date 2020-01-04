@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import { CircularProgress, Grid } from "@material-ui/core";
-
+import Layout from "./layout"
 import PersonApi from "../api/api/PersonApi";
-
 import PersonDetails from "./personDetails";
 
 const personApi = new PersonApi();
@@ -15,7 +15,9 @@ const Spinner = (classes) => {
   );
 }
 
-const Person = ({ personId }) => {
+const Person = () => {
+  const { personId } = useParams();
+
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -28,9 +30,9 @@ const Person = ({ personId }) => {
 
 
   if (data) {
-    return (<PersonDetails person={data}/>);
+    return (<Layout><PersonDetails person={data}/></Layout>);
   } else {
-    return (<Spinner/>);
+    return (<Layout><Spinner/></Layout>);
   }
 
 }

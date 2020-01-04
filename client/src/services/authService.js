@@ -1,4 +1,4 @@
-import AuthApi from "../api/api/AuthApi"
+import { AuthApi } from "../api"
 
 const api = new AuthApi()
 
