@@ -16,11 +16,15 @@ def get_auth_status():  # noqa: E501
     return 'do some magic!'
 
 
-def post_auth_login():  # noqa: E501
+def post_auth_login(userid=None, password=None):  # noqa: E501
     """Submit authentication details
 
     TODO:  # noqa: E501
 
+    :param userid: 
+    :type userid: str
+    :param password: 
+    :type password: str
 
     :rtype: None
     """

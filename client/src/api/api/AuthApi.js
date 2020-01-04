@@ -81,7 +81,7 @@ export default class AuthApi {
      * TODO: 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    postAuthLoginWithHttpInfo() {
+    postAuthLoginWithHttpInfo(opts) {
       let postBody = null;
 
       let pathParams = {
@@ -91,10 +91,12 @@ export default class AuthApi {
       let headerParams = {
       };
       let formParams = {
+        'userid': opts['userid'],
+        'password': opts['password']
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/x-www-form-urlencoded'];
       let accepts = [];
       let returnType = null;
 
@@ -110,8 +112,8 @@ export default class AuthApi {
      * TODO: 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    postAuthLogin() {
-      return this.postAuthLoginWithHttpInfo()
+    postAuthLogin(opts) {
+      return this.postAuthLoginWithHttpInfo(opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

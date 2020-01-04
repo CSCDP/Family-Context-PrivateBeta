@@ -28,9 +28,13 @@ class TestAuthController(BaseTestCase):
 
         Submit authentication details
         """
+        data = dict(userid='userid_example',
+                    password='password_example')
         response = self.client.open(
             '/api/auth/login',
-            method='POST')
+            method='POST',
+            data=data,
+            content_type='application/x-www-form-urlencoded')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

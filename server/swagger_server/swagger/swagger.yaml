@@ -39,6 +39,11 @@ paths:
       description: |
         TODO:
       operationId: post_auth_login
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/body'
       responses:
         "302":
           description: authenticated credentials present - details in message
@@ -239,6 +244,16 @@ components:
         name: name
         id: id
         status: status
+    body:
+      required:
+      - password
+      - userid
+      type: object
+      properties:
+        userid:
+          type: string
+        password:
+          type: string
     Police_offences:
       type: object
       properties:

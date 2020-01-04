@@ -13,6 +13,7 @@
 
 import ApiClient from './ApiClient';
 import AdultSocialCare from './model/AdultSocialCare';
+import Body from './model/Body';
 import Contact from './model/Contact';
 import Housing from './model/Housing';
 import InlineResponse200 from './model/InlineResponse200';
@@ -68,6 +69,12 @@ export {
      * @property {module:model/AdultSocialCare}
      */
     AdultSocialCare,
+
+    /**
+     * The Body model constructor.
+     * @property {module:model/Body}
+     */
+    Body,
 
     /**
      * The Contact model constructor.

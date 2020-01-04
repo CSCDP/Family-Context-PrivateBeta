@@ -48,6 +48,19 @@ paths:
       operationId: postAuthLogin
       tags:
         - auth
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                userid:
+                  type: string
+                password:
+                  type: string
+              required:
+                - userid
+                - password
       responses:
         302:
           description: authenticated credentials present - details in message

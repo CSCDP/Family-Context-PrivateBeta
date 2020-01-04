@@ -64,6 +64,7 @@ TODO:
 import FamilyContext from 'family_context';
 
 let apiInstance = new FamilyContext.AuthApi();
+
 apiInstance.postAuthLogin().then(() => {
   console.log('API called successfully.');
 }, (error) => {
@@ -73,7 +74,11 @@ apiInstance.postAuthLogin().then(() => {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userid** | **String**|  | [optional] 
+ **password** | **String**|  | [optional] 
 
 ### Return type
 
@@ -85,6 +90,6 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/x-www-form-urlencoded
  - **Accept**: Not defined
 

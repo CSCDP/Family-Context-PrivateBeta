@@ -1,4 +1,3 @@
 
-def check_cookie_auth(**args):
-    print(args)
-    return {"OK","OK"}
+def check_cookie_auth(api_key, required_scopes):
+    return {}
