@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core/";
+import { Paper } from "@material-ui/core/";
 
 import { useDispatch } from 'react-redux'
 
@@ -22,28 +22,12 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 5,
     color: "red"
   },
-  form: {},
-  heroUnit: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(4)
-  },
-  heroContent: {
-    maxWidth: 600,
-    margin: "0 auto",
-    padding: `${theme.spacing(8)} 0 ${theme.spacing(6)}`
-  },
-  layout: {
-    width: "auto",
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3),
-    [theme.breakpoints.up(1100 + theme.spacing(6))]: {
-      width: 1100,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
-  },
-  spinner: {
-    margin: theme.spacing(6)
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    maxWidth: "750px",
+    margin: "auto",
   },
   toolbar: theme.mixins.toolbar,
 }));
@@ -59,14 +43,10 @@ const SendToken = () => {
 
   return (
     <Layout loginPage={true}>
-      <main className={classes.heroContent}>
         <div className={classes.toolbar} />
-        <div className={classes.heroUnit}>
-          <Grid container spacing={4}>
-            <EmailForm classes={classes} onSubmit={onEmailSubmit} />
-          </Grid>
-        </div>
-      </main>
+        <Paper className={classes.paper}>
+          <EmailForm classes={classes} onSubmit={onEmailSubmit} />
+        </Paper>
     </Layout>
   );
 };

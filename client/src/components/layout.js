@@ -17,14 +17,12 @@ const useStyles = makeStyles(theme => ({
     color: "inherit",
     textDecoration: "none"
   },
-  grow: {
-    flexGrow: 1,
-  },
   layout: {
-      width: "auto",
+      flexGrow: 1,
       marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
       [theme.breakpoints.up(1100 + theme.spacing(6))]: {
+          flexGrow: 0,
           width: 1100,
           marginLeft: "auto",
           marginRight: "auto",

@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 
 import rootReducer from "./reducers";
 import App from "./App";
+import Search from "./components/search"
 import Auth from "./components/authentication/auth";
 import * as serviceWorker from "./serviceWorker";
 import {createMuiTheme} from "@material-ui/core/styles";
@@ -35,7 +36,7 @@ ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
             <Auth>
-                <App />
+                <Search />
             </Auth>
         </ThemeProvider>
     </Provider>,

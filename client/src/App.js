@@ -7,8 +7,6 @@ import Selector from './components/selector';
 
 
 function App() {
-
-
   const [personId, setPersonId] = React.useState(1);
 
   const handleChange = personId => {

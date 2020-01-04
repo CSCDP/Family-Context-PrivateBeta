@@ -37,7 +37,6 @@ const EmailForm = ({classes, onSubmit}) => {
                 label="Password"
                 name="password"
                 autoComplete="password"
-                autoFocus
                 value={password}
                 onChange={e => setPassword(e.target.value)}
             />
