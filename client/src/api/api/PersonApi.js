@@ -76,4 +76,52 @@ export default class PersonApi {
         });
     }
 
+
+    /**
+     * Search for a person
+     * Returns a list of individuals matching the criteria
+     * @param {Object} opts Optional parameters
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Person>} and HTTP response
+     */
+    searchPersonWithHttpInfo(firstName, lastName, opts) {
+      opts = opts || {};
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'firstName': firstName,
+        'lastName': lastName,
+        'dateOfBirth': opts['dateOfBirth']
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cookieAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [Person];
+
+      return this.apiClient.callApi(
+        '/api/search/person', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Search for a person
+     * Returns a list of individuals matching the criteria
+     * @param {Object} opts Optional parameters
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Person>}
+     */
+    searchPerson(firstName, lastName, opts) {
+      return this.searchPersonWithHttpInfo(firstName, lastName, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 }

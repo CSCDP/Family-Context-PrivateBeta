@@ -8,7 +8,6 @@ import SearchIDForm from "./searchIDForm"
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginTop: 5,
         flexGrow: 1,
     },
     paper: {

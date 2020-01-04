@@ -77,12 +77,12 @@ paths:
       tags:
         - person
       parameters:
-      - name: personId
-        in: path
-        description: ID of person to return
-        required: true
-        schema:
-          type: string
+        - name: personId
+          in: path
+          description: ID of person to return
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: successful operation
@@ -93,6 +93,39 @@ paths:
         404:
           description: Person not found
           content: {}
+
+  /api/search/person:
+    get:
+      summary: Search for a person
+      description: Returns a list of individuals matching the criteria
+      operationId: searchPerson
+      tags:
+        - person
+      parameters:
+        - name: firstName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: dateOfBirth
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/Person'
 
 security:
   - cookieAuth: []

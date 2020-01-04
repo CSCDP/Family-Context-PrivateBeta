@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Button, Typography, TextField } from "@material-ui/core/";
 
 const EmailForm = ({classes, onSubmit}) => {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const onFormSubmit = async event => {
         event.preventDefault();

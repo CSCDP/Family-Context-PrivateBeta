@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom"
 import { Button, Typography, TextField } from "@material-ui/core/";
 import MaskedInput from 'react-text-mask';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe'
@@ -7,7 +8,6 @@ const autoCorrectedDatePipe = createAutoCorrectedDatePipe('dd/mm/yyyy', {minYear
 
 function TextMaskCustom(props) {
     const { inputRef, ...other } = props;
-    console.log("TEXT MASK", props)
     return (
         <MaskedInput
             {...other}
@@ -25,7 +25,7 @@ function TextMaskCustom(props) {
 
 export default function Form() {
     const [values, setValues] = useState({});
-    const [password, setPassword] = useState();
+    const history = useHistory();
 
     const handleChange = name => event => {
         setValues({
@@ -36,6 +36,7 @@ export default function Form() {
 
     const onFormSubmit = async event => {
         event.preventDefault();
+        history.push("/search/person")
         // onSubmit(email, password);
     };
 

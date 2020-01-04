@@ -17,3 +17,11 @@ export async function checkState() {
         return;
     }
 }
+
+export async function signOut() {
+    delete_cookie("FCSESSIONID")
+}
+
+function delete_cookie( name ) {
+    document.cookie = name + '=; Path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+}

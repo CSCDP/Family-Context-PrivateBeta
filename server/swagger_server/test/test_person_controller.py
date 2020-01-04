@@ -23,6 +23,21 @@ class TestPersonController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
+    def test_search_person(self):
+        """Test case for search_person
+
+        Search for a person
+        """
+        query_string = [('first_name', 'first_name_example'),
+                        ('last_name', 'last_name_example'),
+                        ('date_of_birth', '2013-10-20')]
+        response = self.client.open(
+            '/api/search/person',
+            method='GET',
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
 
 if __name__ == '__main__':
     import unittest

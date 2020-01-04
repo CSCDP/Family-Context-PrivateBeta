@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
   paper: {
     maxWidth: 800,
     margin: "0 auto",
-    marginTop: 25,
   },
   coverage: {
     fontSize: 12,

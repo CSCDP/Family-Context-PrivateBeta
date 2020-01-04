@@ -4,7 +4,7 @@ import { Button, Typography, TextField } from "@material-ui/core/";
 
 export default function Form() {
     const [caseID, setCaseID] = useState();
-    let history = useHistory();
+    const history = useHistory();
 
     const onFormSubmit = async event => {
         event.preventDefault();
