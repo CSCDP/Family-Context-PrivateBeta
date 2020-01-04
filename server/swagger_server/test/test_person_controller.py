@@ -18,7 +18,7 @@ class TestPersonController(BaseTestCase):
         Find person by ID
         """
         response = self.client.open(
-            '/person/{personId}'.format(person_id='person_id_example'),
+            '/api/person/{personId}'.format(person_id='person_id_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

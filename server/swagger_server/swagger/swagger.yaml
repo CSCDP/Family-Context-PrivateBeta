@@ -54,7 +54,7 @@ paths:
           content: {}
       security: []
       x-openapi-router-controller: swagger_server.controllers.auth_controller
-  /person/{personId}:
+  /api/person/{personId}:
     get:
       tags:
       - person

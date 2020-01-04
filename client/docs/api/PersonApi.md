@@ -4,7 +4,7 @@ All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getPersonById**](PersonApi.md#getPersonById) | **GET** /person/{personId} | Find person by ID
+[**getPersonById**](PersonApi.md#getPersonById) | **GET** /api/person/{personId} | Find person by ID
 
 <a name="getPersonById"></a>
 # **getPersonById**

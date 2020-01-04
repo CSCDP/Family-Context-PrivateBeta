@@ -58,7 +58,7 @@ export default class PersonApi {
       let returnType = Person;
 
       return this.apiClient.callApi(
-        '/person/{personId}', 'GET',
+        '/api/person/{personId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );

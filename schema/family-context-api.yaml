@@ -69,7 +69,7 @@ paths:
           description: no authenticated credentials present or credentials not valid for this application
           content: {}
 
-  /person/{personId}:
+  /api/person/{personId}:
     get:
       summary: Find person by ID
       description: Returns a single person
