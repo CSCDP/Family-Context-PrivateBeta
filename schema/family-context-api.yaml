@@ -2,7 +2,10 @@ openapi: 3.0.1
 
 info:
   title: Family Context
-  description: This is the API definition for Family Context
+  description: >
+    This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context.
+    This document is currently undergoing rapid change and should not be used as basis for implementation
+    without discussing with the project team.
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -50,7 +53,7 @@ paths:
         - auth
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               type: object
               properties:
@@ -69,7 +72,30 @@ paths:
           description: no authenticated credentials present or credentials not valid for this application
           content: {}
 
-  /api/person/{personId}:
+  /api/person/search:
+    post:
+      summary: Search for a person
+      description: Returns a list of individuals matching the criteria
+      operationId: searchPerson
+      tags:
+        - person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonQuery'
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+
+  /api/person/details/{personId}:
     get:
       summary: Find person by ID
       description: Returns a single person
@@ -94,29 +120,19 @@ paths:
           description: Person not found
           content: {}
 
-  /api/search/person:
+  /api/person/details/{personId}/service:
     get:
-      summary: Search for a person
-      description: Returns a list of individuals matching the criteria
-      operationId: searchPerson
+      summary: Get a summary of the services a person has interacted with
+      operationId: getPersonServicesById
       tags:
         - person
       parameters:
-        - name: firstName
-          in: query
+        - name: personId
+          in: path
+          description: ID of person to return
           required: true
           schema:
             type: string
-        - name: lastName
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: dateOfBirth
-          in: query
-          schema:
-            type: string
-            format: date
       responses:
         200:
           description: successful operation
@@ -125,7 +141,42 @@ paths:
               schema:
                 type: array
                 items:
-                    $ref: '#/components/schemas/Person'
+                  $ref: '#/components/schemas/ServiceSummary'
+        404:
+          description: Person not found
+          content: {}
+
+  /api/person/details/{personId}/service/{serviceType}:
+    get:
+      summary: Find person by ID
+      description: Returns a single person
+      operationId: getPersonServiceByTypeAndId
+      tags:
+        - person
+      parameters:
+        - name: personId
+          in: path
+          description: ID of person to return
+          required: true
+          schema:
+            type: string
+        - name: serviceType
+          in: path
+          description: Servic type to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDetail'
+        404:
+          description: Person or service not found
+          content: {}
+
 
 security:
   - cookieAuth: []
@@ -159,115 +210,135 @@ components:
           type: string
         address:
           type: string
-        serviceData:
-          $ref: '#/components/schemas/ServiceMap'
       required:
         - id
         - firstName
         - lastName
 
-    ServiceMap:
+    ServiceSummary:
       type: object
       properties:
-        ASC: 
-          $ref: '#/components/schemas/AdultSocialCare'
-        HOUSING: 
-          $ref: '#/components/schemas/Housing'
-        POLICE: 
-          $ref: '#/components/schemas/Police'
-        SCHOOL: 
-          $ref: '#/components/schemas/School'
-
-    SourceData:
-      type: object
-      properties:
+        id:
+          type: string
+        title:
+          type: string
+        lastSynchronised:
+          type: string
+          format: date-time
         coverageStartDate:
           type: string
           format: date
         coverageEndDate:
           type: string
           format: date
-        coverageGeographicArea:
+        recordsAvailable:
+          type: boolean
+
+    ServiceDetail:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/ServiceSummary'
+        schema:
+          type: object
+        data:
+          type: object
+
+    PersonQuery:
+      description: >
+        Used for querying a person.
+        TODO: As long as this the fields are a subset of the Person object this could be the same, however
+        we may want more flexibility around the search criteria, such as min/max values for dob.
+      type: object
+      properties:
+        firstName:
           type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+      required:
+        - firstName
+        - lastName
 
     Police:
-      allOf:
-        - $ref: '#/components/schemas/SourceData'
-        - type: object
-          properties:
-            serviceInvolvement:
-              type: string
-              pattern: "[yes|no]"
-            contact:
-              $ref: '#/components/schemas/Contact'
-            policeStation:
-              type: string
-            offences:
-              type: array
-              items:
-                  type: object
-                  properties:
-                    dateOfOffence:
-                      type: string
-                      format: date
-                    typeOfOffence:
-                      type: string
-                    natureOfInvolvement:
-                      type: string
+      type: object
+      properties:
+        serviceInvolvement:
+          type: string
+          pattern: "[yes|no]"
+        contact:
+          $ref: '#/components/schemas/Contact'
+        policeStation:
+          type: string
+        offences:
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceSummary'
+
+    OffenceSummary:
+      type: object
+      properties:
+        dateOfOffence:
+          type: string
+          format: date
+        typeOfOffence:
+          type: string
+        natureOfInvolvement:
+          type: string
+
     School:
-      allOf:
-        - $ref: '#/components/schemas/SourceData'
-        - type: object
-          properties:
-            serviceInvolvement:
-              type: string
-              pattern: "[current|historic]"
-            contact:
-              $ref: '#/components/schemas/Contact'
-            schoolName:
-              type: string
-            admissionType: 
-              type: string
+      type: object
+      properties:
+        serviceInvolvement:
+          type: string
+          pattern: "[current|historic]"
+        contact:
+          $ref: '#/components/schemas/Contact'
+        schoolName:
+          type: string
+        admissionType:
+          type: string
 
     AdultSocialCare:
-      allOf:
-        - $ref: '#/components/schemas/SourceData'
-        - type: object
-          properties:
-            serviceInvolvement:
-              type: string
-              pattern: "[current|historic]"
-            contact:
-              $ref: '#/components/schemas/Contact'
-            startDateOfLastInvolvement:
-              type: string
-              format: date
-            dateOfMostRecentInteraction:
-              type: string
-              format: date
+      type: object
+      properties:
+        serviceInvolvement:
+          type: string
+          title: Service involvement
+          pattern: "[current|historic]"
+        contact:
+          $ref: '#/components/schemas/Contact'
+        startDateOfLastInvolvement:
+          type: string
+          title: Start of last involvement
+          format: date
+        dateOfMostRecentInteraction:
+          type: string
+          title: Date of most recent interaction
+          format: date
 
     Housing:
-      allOf:
-        - $ref: '#/components/schemas/SourceData'
-        - type: object
-          properties:
-            serviceInvolvement:
-              type: string
-              pattern: "[current|historic]"
-            contact:
-              $ref: '#/components/schemas/Contact'
-            antiSocialBehaviour:
-              type: string
-              pattern: "[open|closed]"
-            rentArrears:
-              type: string
-              pattern: "[open|closed]"
-            noticeSeekingPossession:
-              type: string
-              pattern: "[open|closed]"
-            eviction:
-              type: string
-              pattern: "[open|closed]"
+      type: object
+      properties:
+        serviceInvolvement:
+          type: string
+          pattern: "[current|historic]"
+        contact:
+          $ref: '#/components/schemas/Contact'
+        antiSocialBehaviour:
+          type: string
+          pattern: "[open|closed]"
+        rentArrears:
+          type: string
+          pattern: "[open|closed]"
+        noticeSeekingPossession:
+          type: string
+          pattern: "[open|closed]"
+        eviction:
+          type: string
+          pattern: "[open|closed]"
 
     Contact:
       type: object
@@ -276,7 +347,7 @@ components:
           type: string
         email:
           type: string
-        phone: 
+        phone:
           type: string
         role:
           type: string

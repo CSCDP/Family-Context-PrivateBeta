@@ -1,6 +1,6 @@
 /**
  * Family Context
- * This is the API definition for Family Context
+ * This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context. This document is currently undergoing rapid change and should not be used as basis for implementation without discussing with the project team. 
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -12,6 +12,7 @@
  */
 
 import ApiClient from "../ApiClient";
+import Body from '../model/Body';
 import InlineResponse200 from '../model/InlineResponse200';
 
 /**
@@ -82,7 +83,7 @@ export default class AuthApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     postAuthLoginWithHttpInfo(opts) {
-      let postBody = null;
+      let postBody = opts['body'];
 
       let pathParams = {
       };
@@ -91,12 +92,10 @@ export default class AuthApi {
       let headerParams = {
       };
       let formParams = {
-        'userid': opts['userid'],
-        'password': opts['password']
       };
 
       let authNames = [];
-      let contentTypes = ['application/x-www-form-urlencoded'];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
 

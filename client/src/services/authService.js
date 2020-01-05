@@ -4,7 +4,7 @@ const api = new AuthApi()
 
 export async function authenticate(userid, password) {
     try {
-        return await api.postAuthLogin({userid, password});
+        return await api.postAuthLogin({body:{userid, password}});
     } catch {
         return;
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import {AppBar, Toolbar, Paper, Table, TableBody, Typography} from "@material-ui/core/";
+import {AppBar, Toolbar, Paper, Table, TableBody, Typography} from "@material-ui/core";
 
 import { shortDateFormat as dateFormat } from "../../helpers/formatters";
 

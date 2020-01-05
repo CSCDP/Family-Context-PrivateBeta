@@ -3,10 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import DetailsBlock from "./person/detailsBlock";
 import DetailsRow from "./person/detailsRow";
-import AdultSocialCare from "./person/adultSocialCare";
-import Housing from "./person/housing";
-import Police from "./person/police";
-import School from "./person/school";
+import ServiceSummary from "./person/serviceSummary";
 
 import { longDateFormat as dateFormat } from "../helpers/formatters"
 
@@ -23,7 +20,7 @@ const useStyles = makeStyles(theme => ({
  }));
 
 
-const PersonDetails = ({ person }) => {
+const PersonDetails = ({ person, services }) => {
     const classes = useStyles();
 
     return(
@@ -34,10 +31,11 @@ const PersonDetails = ({ person }) => {
             <DetailsRow title="Gender">{person.gender}</DetailsRow>
             <DetailsRow title="Ethnicity">{person.ethnicity}</DetailsRow>
         </DetailsBlock>
-        <AdultSocialCare className={classes.paper} serviceData={person.serviceData}/>
-        <Housing className={classes.paper} serviceData={person.serviceData}/>
-        <Police className={classes.paper} serviceData={person.serviceData}/>
-        <School className={classes.paper} serviceData={person.serviceData}/>
+
+          { services.map((service, ix) => (
+              <ServiceSummary className={classes.paper} service={service} personId={person.id} key={service.id} />
+          ))}
+
       </>
     );
 

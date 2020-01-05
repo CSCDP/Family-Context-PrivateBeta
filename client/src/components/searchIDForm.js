@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 import { Button, Typography, TextField } from "@material-ui/core/";
 
 export default function Form() {
-    const [caseID, setCaseID] = useState();
+    const [caseID, setCaseID] = useState("");
     const history = useHistory();
 
     const onFormSubmit = async event => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { CircularProgress, Grid } from "@material-ui/core";
 import Layout from "./layout"
-import PersonApi from "../api/api/PersonApi";
+import { PersonApi } from "../api";
 import PersonDetails from "./personDetails";
 
 const personApi = new PersonApi();
@@ -18,19 +18,25 @@ const Spinner = (classes) => {
 const Person = () => {
   const { personId } = useParams();
 
-  const [data, setData] = useState();
+  const [person, setPerson] = useState();
+  const [services, setServices] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPerson = async () => {
       const person = await personApi.getPersonById(personId);
-      setData(person);
+      setPerson(person);
     };
-    fetchData();
+    fetchPerson();
+    const fetchServices = async () => {
+      const services = await personApi.getPersonServicesById(personId)
+      setServices(services);
+    };
+    fetchServices();
   }, [personId]);
 
 
-  if (data) {
-    return (<Layout><PersonDetails person={data}/></Layout>);
+  if (person && services) {
+    return (<Layout><PersonDetails person={person} services={services}/></Layout>);
   } else {
     return (<Layout><Spinner/></Layout>);
   }

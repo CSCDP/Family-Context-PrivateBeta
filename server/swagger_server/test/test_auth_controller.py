@@ -5,6 +5,7 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
+from swagger_server.models.body import Body  # noqa: E501
 from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
 from swagger_server.test import BaseTestCase
 
@@ -28,13 +29,12 @@ class TestAuthController(BaseTestCase):
 
         Submit authentication details
         """
-        data = dict(userid='userid_example',
-                    password='password_example')
+        body = Body()
         response = self.client.open(
             '/api/auth/login',
             method='POST',
-            data=data,
-            content_type='application/x-www-form-urlencoded')
+            data=json.dumps(body),
+            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

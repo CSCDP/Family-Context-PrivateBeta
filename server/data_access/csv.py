@@ -1,75 +1,139 @@
+import copy
 import csv
+import json
 import os
-
 import inflection
+from connexion.spec import OpenAPISpecification
 
-from swagger_server.models import Person, Police, PoliceOffences, School, AdultSocialCare, Housing, Contact
+from swagger_server.models import ServiceSummary, Person, Police, OffenceSummary, School, AdultSocialCare, Housing, \
+    Contact, ServiceDetail
+
+SCHEMA_ROOT = "http://www.sfdl.org.uk/schemas/fc/0.0.1#"
+SCHEMA_LOCAL_PREFIX = "#/components/schemas/"
+SCHEMA = OpenAPISpecification.from_file('../schema/family-context-api.yaml')
+SCHEMA_MAP = {k: v for k, v in SCHEMA.raw["components"]["schemas"].items()}
 
 
 class CsvSampleDataAccess:
 
     def __init__(self, data_dir="../data"):
-        self.__data__ = CsvSampleDataAccess.__read_data__(data_dir)
+        self.__data_dir = os.path.join(os.path.dirname(__file__), data_dir)
+        self.__persons = self.__read_persons()
+        self.__services, self.__schemas = self.__read_services()
+        self.__service_data = dict()
+        for func in [self.__read_service_police,
+                     self.__read_service_school,
+                     self.__read_service_housing,
+                     self.__read_service_asc]:
+            values = func()
+            self.__service_data.update(values)
+
+    def search_persons(self):
+        return list(self.__persons.values())
 
     def get_person_by_id(self, person_id):
-        return self.__data__[person_id]
+        return self.__persons[person_id]
 
-    @staticmethod
-    def __read_data__(data_dir):
+    def get_person_services_by_id(self, person_id):
+        # Make sure person exists
+        person = self.__persons[person_id]
 
-        data = CsvSampleDataAccess.__parse_csv__(data_dir, 'person.csv')
+        services = []
+        # Loop over each service
+        for service_id, service in self.__services.items():
+            service = copy.deepcopy(service)
+            service_data = self.__service_data.get((person_id, service_id))
 
-        persons = dict();
+            service.records_available = True if service_data else False
+            services.append(service)
+
+        return services
+
+    def get_person_service_by_type_and_id(self, person_id, service_id):
+        # Make sure person exists
+        person = self.__persons[person_id]
+        service_schema = self.__schemas[service_id]
+        service_summary = self.__services[service_id]
+        service_data = self.__service_data.get((person_id, service_id))
+
+        details = ServiceDetail()
+        details.summary = service_summary
+        details.schema = service_schema
+        details.data = service_data
+
+        return details
+
+    def __read_persons(self, filename="person.csv"):
+        data = self.__parse_csv(filename)
+        persons = dict()
         for person in data:
             persons[person['id']] = Person(**person)
-            persons[person['id']].service_data = dict()
-
-        data = CsvSampleDataAccess.__parse_csv__(data_dir, 'police.csv')
-        for policedata in data:
-            person_id = policedata["person_id"]
-            del policedata["person_id"]
-            CsvSampleDataAccess.__parse_contact__(policedata)
-            police = Police(**policedata, offences=[])
-            persons[person_id].service_data["POLICE"] = police
-
-        data = CsvSampleDataAccess.__parse_csv__(data_dir, 'police_offence.csv')
-        for policedata in data:
-            person_id = policedata["person_id"]
-            del policedata["person_id"]
-            police = PoliceOffences(**policedata)
-            persons[person_id].service_data["POLICE"].offences.append(police)
-
-        data = CsvSampleDataAccess.__parse_csv__(data_dir, 'school.csv')
-        for sectiondata in data:
-            person_id = sectiondata["person_id"]
-            del sectiondata["person_id"]
-            CsvSampleDataAccess.__parse_contact__(sectiondata)
-            section = School(**sectiondata)
-            persons[person_id].service_data["SCHOOL"] = section
-
-        data = CsvSampleDataAccess.__parse_csv__(data_dir, 'adult_social_care.csv')
-        for sectiondata in data:
-            person_id = sectiondata["person_id"]
-            del sectiondata["person_id"]
-            CsvSampleDataAccess.__parse_contact__(sectiondata)
-            section = AdultSocialCare(**sectiondata)
-            persons[person_id].service_data["ASC"] = section
-
-        data = CsvSampleDataAccess.__parse_csv__(data_dir, 'housing.csv')
-        for sectiondata in data:
-            person_id = sectiondata["person_id"]
-            del sectiondata["person_id"]
-            CsvSampleDataAccess.__parse_contact__(sectiondata)
-
-            section = Housing(**sectiondata)
-            persons[person_id].service_data["HOUSING"] = section
-
         return persons
 
-    @staticmethod
-    def __parse_csv__(data_dir, filename):
-        dirname = os.path.dirname(__file__)
-        filename = os.path.join(dirname, data_dir, filename)
+    def __read_services(self, filename="datasources.csv"):
+        data = self.__parse_csv(filename)
+
+        summaries = dict()
+        schemas = dict()
+
+
+
+        for item in data:
+            id = item["id"]
+            schema_ref = item.pop("schema_ref")
+            schema_data = item.pop("schema_data")
+
+            if schema_ref:
+                schemas[id] = self.__load_schema(schema_ref)
+            else:
+                schemas[id] = json.loads(schema_data)
+
+            summary = ServiceSummary(**item)
+            summaries[id] = summary
+
+        return summaries, schemas
+
+
+
+    def __read_service_police(self, filename="police.csv", offencefilename="police_offence.csv"):
+        service_id = "Police"
+        values = self.__read_data(filename, service_id, Police)
+        data = self.__parse_csv(offencefilename)
+        for item in data:
+            person_id = item["person_id"]
+            del item["person_id"]
+            offence = OffenceSummary(**item)
+
+            police = values[(person_id, service_id)]
+            if not police.offences:
+                police.offences = []
+            police.offences.append(offence)
+
+        return values
+
+    def __read_service_school(self, filename="school.csv"):
+        return self.__read_data(filename, "School", School)
+
+    def __read_service_housing(self, filename="housing.csv"):
+        return self.__read_data(filename, "Housing", Housing)
+
+    def __read_service_asc(self, filename="adult_social_care.csv"):
+        return self.__read_data(filename, "Adult Social Care", AdultSocialCare, "AdultSocialCare")
+
+    def __read_data(self, filename, service_name, service_type, service_id=None):
+        if not service_id:
+            service_id = service_name
+        values = dict()
+        data = self.__parse_csv(filename)
+        for item in data:
+            person_id = item.pop("person_id")
+            CsvSampleDataAccess.__parse_contact(item)
+            item_object = service_type(**item)
+            values[(person_id, service_id)] = item_object
+        return values
+
+    def __parse_csv(self, filename):
+        filename = os.path.join(self.__data_dir, filename)
 
         rows = []
         with open(filename) as csvfile:
@@ -80,19 +144,59 @@ class CsvSampleDataAccess:
             for row in reader[1:]:
                 row_obj = dict()
                 for ix, name in enumerate(header):
-                    name = inflection.underscore(name.strip())
+                    name = name.strip()
+                    name = name.replace(" ", "")
+                    name = inflection.underscore(name)
                     value = row[ix] if ix < len(row) else None
+                    if isinstance(value, str):
+                        value = value.strip()
                     row_obj[name] = value
                 rows.append(row_obj)
 
         return rows
 
     @staticmethod
-    def __parse_contact__(row):
+    def __parse_contact(row, field="contact"):
         mapping = dict(name="contact_name", email="contact_email", phone="contact_phone", role="contact_role")
-        newObj = dict()
-        for newKey, oldKey in mapping.items():
-            if oldKey in row:
-                newObj[newKey] = row[oldKey]
-                del row[oldKey]
-        row["contact"] = Contact(**newObj)
+        new_obj = dict()
+        for new_key, old_key in mapping.items():
+            if old_key in row:
+                new_obj[new_key] = row[old_key]
+                del row[old_key]
+        row[field] = Contact(**new_obj)
+
+    def __load_schema(self, schema_ref):
+        if schema_ref.startswith(SCHEMA_LOCAL_PREFIX):
+            schema_key = schema_ref[len(SCHEMA_LOCAL_PREFIX):]
+        elif schema_ref.startswith(SCHEMA_ROOT):
+            schema_key = schema_ref[len(SCHEMA_ROOT):]
+        else:
+            raise ValueError("Only built-in schema reference supported for now. {} not supported.".format(schema_ref))
+
+        item = SCHEMA_MAP[schema_key]
+        prop_seq = 0
+        properties = item.get("properties")
+        if properties:
+            for p_name, p_value in properties.items():
+                prop_seq += 1
+                p_value["x-item-seq"] = prop_seq
+
+                ref = p_value.get("$ref")
+                if ref:
+                    ref_value = copy.deepcopy(self.__load_schema(ref))
+                    ref_value["x-item-seq"] = prop_seq
+                    properties[p_name] = ref_value
+
+                if p_value.get("type") == "array":
+                    items = p_value["items"]
+                    ref = items.pop("$ref")
+                    if ref:
+                        ref_value = copy.deepcopy(self.__load_schema(ref))
+                        items.update(**ref_value)
+
+            item["x-ref"] = SCHEMA_ROOT + schema_key
+            return item
+
+
+
+

@@ -1,6 +1,6 @@
 /**
  * Family Context
- * This is the API definition for Family Context
+ * This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context. This document is currently undergoing rapid change and should not be used as basis for implementation without discussing with the project team. 
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -13,7 +13,6 @@
 
 import ApiClient from '../ApiClient';
 import Contact from './Contact';
-import SourceData from './SourceData';
 
 /**
 * The AdultSocialCare model module.
@@ -28,7 +27,7 @@ export default class AdultSocialCare {
     */
 
     constructor() {
-                return this;
+                
     }
 
     /**
@@ -41,17 +40,7 @@ export default class AdultSocialCare {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new AdultSocialCare();
-            ApiClient.constructFromObject(data, obj, '');
-                        if (data.hasOwnProperty('coverageStartDate')) {
-                obj['coverageStartDate'] = ApiClient.convertToType(data['coverageStartDate'], 'Date');
-            }
-            if (data.hasOwnProperty('coverageEndDate')) {
-                obj['coverageEndDate'] = ApiClient.convertToType(data['coverageEndDate'], 'Date');
-            }
-            if (data.hasOwnProperty('coverageGeographicArea')) {
-                obj['coverageGeographicArea'] = ApiClient.convertToType(data['coverageGeographicArea'], 'String');
-            }
-            if (data.hasOwnProperty('serviceInvolvement')) {
+                                    if (data.hasOwnProperty('serviceInvolvement')) {
                 obj['serviceInvolvement'] = ApiClient.convertToType(data['serviceInvolvement'], 'String');
             }
             if (data.hasOwnProperty('contact')) {
@@ -67,18 +56,6 @@ export default class AdultSocialCare {
         return obj;
     }
 
-    /**
-    * @member {Date} coverageStartDate
-    */
-    coverageStartDate = undefined;
-    /**
-    * @member {Date} coverageEndDate
-    */
-    coverageEndDate = undefined;
-    /**
-    * @member {String} coverageGeographicArea
-    */
-    coverageGeographicArea = undefined;
     /**
     * @member {String} serviceInvolvement
     */

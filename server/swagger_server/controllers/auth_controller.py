@@ -1,6 +1,7 @@
 import connexion
 import six
 
+from swagger_server.models.body import Body  # noqa: E501
 from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
 from swagger_server import util
 
@@ -16,16 +17,16 @@ def get_auth_status():  # noqa: E501
     return 'do some magic!'
 
 
-def post_auth_login(userid=None, password=None):  # noqa: E501
+def post_auth_login(body=None):  # noqa: E501
     """Submit authentication details
 
     TODO:  # noqa: E501
 
-    :param userid: 
-    :type userid: str
-    :param password: 
-    :type password: str
+    :param body: 
+    :type body: dict | bytes
 
     :rtype: None
     """
+    if connexion.request.is_json:
+        body = Body.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'

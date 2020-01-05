@@ -3,10 +3,7 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 import Layout from "./layout"
 import {makeStyles} from "@material-ui/core/styles";
 
-import SearchDetailForm from "./searchDetailsForm"
-import SearchIDForm from "./searchIDForm"
-import PersonApi from "../api/api/PersonApi";
-import DetailsBlock from "./person/detailsBlock";
+import { PersonApi } from "../api";
 
 import { longDateFormat as dateFormat } from "../helpers/formatters"
 import {Link} from "react-router-dom";
@@ -46,7 +43,7 @@ const Search = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const person = await personApi.searchPerson("","")
+            const person = await personApi.searchPerson({firstName: "", lastName: ""})
             setData(person);
         };
         fetchData();

@@ -1,2 +1,2 @@
-personId,coverageStartDate,coverageEndDate,coverageGeographicArea, serviceInvolvement,schoolName,admissionType,contactName,contactPhone
-1,1990-01-01,2019-10-01,School District A,current,A+ School,Main provision,A Teacher,020 7777 7777
+personId,serviceInvolvement,schoolName,admissionType,contactName,contactPhone
+1,current,A+ School,Main provision,A Teacher,020 7777 7777

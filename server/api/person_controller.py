@@ -1,5 +1,8 @@
+import connexion
+from connexion.spec import OpenAPISpecification
+
 from data_access.csv import CsvSampleDataAccess
-from swagger_server import util
+from swagger_server.models import PersonQuery
 
 data_access = CsvSampleDataAccess()
 
@@ -8,20 +11,25 @@ def get_person_by_id(person_id):
     return data_access.get_person_by_id(person_id)
 
 
-def search_person(first_name, last_name, date_of_birth=None):  # noqa: E501
+def get_person_services_by_id(person_id):
+    return data_access.get_person_services_by_id(person_id)
+
+
+def get_person_service_by_type_and_id(person_id, service_type):
+    return data_access.get_person_service_by_type_and_id(person_id, service_type)
+
+
+def search_person(body):  # noqa: E501
     """Search for a person
 
     Returns a list of individuals matching the criteria # noqa: E501
 
-    :param first_name:
-    :type first_name: str
-    :param last_name:
-    :type last_name: str
-    :param date_of_birth:
-    :type date_of_birth: str
+    :param body:
+    :type body: dict | bytes
 
     :rtype: List[Person]
     """
+    if connexion.request.is_json:
+        body = PersonQuery.from_dict(connexion.request.get_json())  # noqa: E501
+    return data_access.search_persons()
 
-    # date_of_birth = util.deserialize_date(date_of_birth)
-    return list(data_access.__data__.values())

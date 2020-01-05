@@ -1,6 +1,6 @@
 /**
  * Family Context
- * This is the API definition for Family Context
+ * This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context. This document is currently undergoing rapid change and should not be used as basis for implementation without discussing with the project team. 
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -14,14 +14,14 @@
 import ApiClient from '../ApiClient';
 
 /**
-* The PoliceOffences model module.
-* @module model/PoliceOffences
+* The OffenceSummary model module.
+* @module model/OffenceSummary
 * @version 0.0.1
 */
-export default class PoliceOffences {
+export default class OffenceSummary {
     /**
-    * Constructs a new <code>PoliceOffences</code>.
-    * @alias module:model/PoliceOffences
+    * Constructs a new <code>OffenceSummary</code>.
+    * @alias module:model/OffenceSummary
     * @class
     */
 
@@ -30,15 +30,15 @@ export default class PoliceOffences {
     }
 
     /**
-    * Constructs a <code>PoliceOffences</code> from a plain JavaScript object, optionally creating a new instance.
+    * Constructs a <code>OffenceSummary</code> from a plain JavaScript object, optionally creating a new instance.
     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
     * @param {Object} data The plain JavaScript object bearing properties of interest.
-    * @param {module:model/PoliceOffences} obj Optional instance to populate.
-    * @return {module:model/PoliceOffences} The populated <code>PoliceOffences</code> instance.
+    * @param {module:model/OffenceSummary} obj Optional instance to populate.
+    * @return {module:model/OffenceSummary} The populated <code>OffenceSummary</code> instance.
     */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new PoliceOffences();
+            obj = obj || new OffenceSummary();
                                     if (data.hasOwnProperty('dateOfOffence')) {
                 obj['dateOfOffence'] = ApiClient.convertToType(data['dateOfOffence'], 'Date');
             }

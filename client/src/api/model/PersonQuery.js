@@ -14,41 +14,37 @@
 import ApiClient from '../ApiClient';
 
 /**
-* The Person model module.
-* @module model/Person
+* The PersonQuery model module.
+* @module model/PersonQuery
 * @version 0.0.1
 */
-export default class Person {
+export default class PersonQuery {
     /**
-    * Constructs a new <code>Person</code>.
-    * @alias module:model/Person
+    * Constructs a new <code>PersonQuery</code>.
+    * Used for querying a person. TODO: As long as this the fields are a subset of the Person object this could be the same, however we may want more flexibility around the search criteria, such as min/max values for dob. 
+    * @alias module:model/PersonQuery
     * @class
-    * @param id {String} 
     * @param firstName {String} 
     * @param lastName {String} 
     */
 
-    constructor(id, firstName, lastName) {
-                this['id'] = id;
-        this['firstName'] = firstName;
+    constructor(firstName, lastName) {
+                this['firstName'] = firstName;
         this['lastName'] = lastName;
         
     }
 
     /**
-    * Constructs a <code>Person</code> from a plain JavaScript object, optionally creating a new instance.
+    * Constructs a <code>PersonQuery</code> from a plain JavaScript object, optionally creating a new instance.
     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
     * @param {Object} data The plain JavaScript object bearing properties of interest.
-    * @param {module:model/Person} obj Optional instance to populate.
-    * @return {module:model/Person} The populated <code>Person</code> instance.
+    * @param {module:model/PersonQuery} obj Optional instance to populate.
+    * @return {module:model/PersonQuery} The populated <code>PersonQuery</code> instance.
     */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new Person();
-                                    if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'String');
-            }
-            if (data.hasOwnProperty('firstName')) {
+            obj = obj || new PersonQuery();
+                                    if (data.hasOwnProperty('firstName')) {
                 obj['firstName'] = ApiClient.convertToType(data['firstName'], 'String');
             }
             if (data.hasOwnProperty('lastName')) {
@@ -57,23 +53,10 @@ export default class Person {
             if (data.hasOwnProperty('dateOfBirth')) {
                 obj['dateOfBirth'] = ApiClient.convertToType(data['dateOfBirth'], 'Date');
             }
-            if (data.hasOwnProperty('gender')) {
-                obj['gender'] = ApiClient.convertToType(data['gender'], 'String');
-            }
-            if (data.hasOwnProperty('ethnicity')) {
-                obj['ethnicity'] = ApiClient.convertToType(data['ethnicity'], 'String');
-            }
-            if (data.hasOwnProperty('address')) {
-                obj['address'] = ApiClient.convertToType(data['address'], 'String');
-            }
         }
         return obj;
     }
 
-    /**
-    * @member {String} id
-    */
-    id = undefined;
     /**
     * @member {String} firstName
     */
@@ -86,19 +69,6 @@ export default class Person {
     * @member {Date} dateOfBirth
     */
     dateOfBirth = undefined;
-    /**
-    * The person's gender. Leave blank for 'unknown'.
-    * @member {String} gender
-    */
-    gender = undefined;
-    /**
-    * @member {String} ethnicity
-    */
-    ethnicity = undefined;
-    /**
-    * @member {String} address
-    */
-    address = undefined;
 
 
 

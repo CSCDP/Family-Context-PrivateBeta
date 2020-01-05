@@ -2,6 +2,9 @@ import connexion
 import six
 
 from swagger_server.models.person import Person  # noqa: E501
+from swagger_server.models.person_query import PersonQuery  # noqa: E501
+from swagger_server.models.service_detail import ServiceDetail  # noqa: E501
+from swagger_server.models.service_summary import ServiceSummary  # noqa: E501
 from swagger_server import util
 
 
@@ -18,19 +21,44 @@ def get_person_by_id(person_id):  # noqa: E501
     return 'do some magic!'
 
 
-def search_person(first_name, last_name, date_of_birth=None):  # noqa: E501
+def get_person_service_by_type_and_id(person_id, service_type):  # noqa: E501
+    """Find person by ID
+
+    Returns a single person # noqa: E501
+
+    :param person_id: ID of person to return
+    :type person_id: str
+    :param service_type: Servic type to return
+    :type service_type: str
+
+    :rtype: ServiceDetail
+    """
+    return 'do some magic!'
+
+
+def get_person_services_by_id(person_id):  # noqa: E501
+    """Get a summary of the services a person has interacted with
+
+     # noqa: E501
+
+    :param person_id: ID of person to return
+    :type person_id: str
+
+    :rtype: List[ServiceSummary]
+    """
+    return 'do some magic!'
+
+
+def search_person(body):  # noqa: E501
     """Search for a person
 
     Returns a list of individuals matching the criteria # noqa: E501
 
-    :param first_name: 
-    :type first_name: str
-    :param last_name: 
-    :type last_name: str
-    :param date_of_birth: 
-    :type date_of_birth: str
+    :param body: 
+    :type body: dict | bytes
 
     :rtype: List[Person]
     """
-    date_of_birth = util.deserialize_date(date_of_birth)
+    if connexion.request.is_json:
+        body = PersonQuery.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'

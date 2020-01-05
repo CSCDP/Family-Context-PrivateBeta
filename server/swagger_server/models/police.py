@@ -7,8 +7,7 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.contact import Contact  # noqa: F401,E501
-from swagger_server.models.police_offences import PoliceOffences  # noqa: F401,E501
-from swagger_server.models.source_data import SourceData  # noqa: F401,E501
+from swagger_server.models.offence_summary import OffenceSummary  # noqa: F401,E501
 import re  # noqa: F401,E501
 from swagger_server import util
 
@@ -18,15 +17,9 @@ class Police(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, coverage_start_date: date=None, coverage_end_date: date=None, coverage_geographic_area: str=None, service_involvement: str=None, contact: Contact=None, police_station: str=None, offences: List[PoliceOffences]=None):  # noqa: E501
+    def __init__(self, service_involvement: str=None, contact: Contact=None, police_station: str=None, offences: List[OffenceSummary]=None):  # noqa: E501
         """Police - a model defined in Swagger
 
-        :param coverage_start_date: The coverage_start_date of this Police.  # noqa: E501
-        :type coverage_start_date: date
-        :param coverage_end_date: The coverage_end_date of this Police.  # noqa: E501
-        :type coverage_end_date: date
-        :param coverage_geographic_area: The coverage_geographic_area of this Police.  # noqa: E501
-        :type coverage_geographic_area: str
         :param service_involvement: The service_involvement of this Police.  # noqa: E501
         :type service_involvement: str
         :param contact: The contact of this Police.  # noqa: E501
@@ -34,30 +27,21 @@ class Police(Model):
         :param police_station: The police_station of this Police.  # noqa: E501
         :type police_station: str
         :param offences: The offences of this Police.  # noqa: E501
-        :type offences: List[PoliceOffences]
+        :type offences: List[OffenceSummary]
         """
         self.swagger_types = {
-            'coverage_start_date': date,
-            'coverage_end_date': date,
-            'coverage_geographic_area': str,
             'service_involvement': str,
             'contact': Contact,
             'police_station': str,
-            'offences': List[PoliceOffences]
+            'offences': List[OffenceSummary]
         }
 
         self.attribute_map = {
-            'coverage_start_date': 'coverageStartDate',
-            'coverage_end_date': 'coverageEndDate',
-            'coverage_geographic_area': 'coverageGeographicArea',
             'service_involvement': 'serviceInvolvement',
             'contact': 'contact',
             'police_station': 'policeStation',
             'offences': 'offences'
         }
-        self._coverage_start_date = coverage_start_date
-        self._coverage_end_date = coverage_end_date
-        self._coverage_geographic_area = coverage_geographic_area
         self._service_involvement = service_involvement
         self._contact = contact
         self._police_station = police_station
@@ -73,69 +57,6 @@ class Police(Model):
         :rtype: Police
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def coverage_start_date(self) -> date:
-        """Gets the coverage_start_date of this Police.
-
-
-        :return: The coverage_start_date of this Police.
-        :rtype: date
-        """
-        return self._coverage_start_date
-
-    @coverage_start_date.setter
-    def coverage_start_date(self, coverage_start_date: date):
-        """Sets the coverage_start_date of this Police.
-
-
-        :param coverage_start_date: The coverage_start_date of this Police.
-        :type coverage_start_date: date
-        """
-
-        self._coverage_start_date = coverage_start_date
-
-    @property
-    def coverage_end_date(self) -> date:
-        """Gets the coverage_end_date of this Police.
-
-
-        :return: The coverage_end_date of this Police.
-        :rtype: date
-        """
-        return self._coverage_end_date
-
-    @coverage_end_date.setter
-    def coverage_end_date(self, coverage_end_date: date):
-        """Sets the coverage_end_date of this Police.
-
-
-        :param coverage_end_date: The coverage_end_date of this Police.
-        :type coverage_end_date: date
-        """
-
-        self._coverage_end_date = coverage_end_date
-
-    @property
-    def coverage_geographic_area(self) -> str:
-        """Gets the coverage_geographic_area of this Police.
-
-
-        :return: The coverage_geographic_area of this Police.
-        :rtype: str
-        """
-        return self._coverage_geographic_area
-
-    @coverage_geographic_area.setter
-    def coverage_geographic_area(self, coverage_geographic_area: str):
-        """Sets the coverage_geographic_area of this Police.
-
-
-        :param coverage_geographic_area: The coverage_geographic_area of this Police.
-        :type coverage_geographic_area: str
-        """
-
-        self._coverage_geographic_area = coverage_geographic_area
 
     @property
     def service_involvement(self) -> str:
@@ -201,22 +122,22 @@ class Police(Model):
         self._police_station = police_station
 
     @property
-    def offences(self) -> List[PoliceOffences]:
+    def offences(self) -> List[OffenceSummary]:
         """Gets the offences of this Police.
 
 
         :return: The offences of this Police.
-        :rtype: List[PoliceOffences]
+        :rtype: List[OffenceSummary]
         """
         return self._offences
 
     @offences.setter
-    def offences(self, offences: List[PoliceOffences]):
+    def offences(self, offences: List[OffenceSummary]):
         """Sets the offences of this Police.
 
 
         :param offences: The offences of this Police.
-        :type offences: List[PoliceOffences]
+        :type offences: List[OffenceSummary]
         """
 
         self._offences = offences

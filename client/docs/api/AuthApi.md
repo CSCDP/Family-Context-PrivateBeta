@@ -77,8 +77,7 @@ apiInstance.postAuthLogin().then(() => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **String**|  | [optional] 
- **password** | **String**|  | [optional] 
+ **body** | [**Body**](Body.md)|  | [optional] 
 
 ### Return type
 
@@ -90,6 +89,6 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/x-www-form-urlencoded
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 

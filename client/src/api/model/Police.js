@@ -1,6 +1,6 @@
 /**
  * Family Context
- * This is the API definition for Family Context
+ * This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context. This document is currently undergoing rapid change and should not be used as basis for implementation without discussing with the project team. 
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -13,8 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Contact from './Contact';
-import PoliceOffences from './PoliceOffences';
-import SourceData from './SourceData';
+import OffenceSummary from './OffenceSummary';
 
 /**
 * The Police model module.
@@ -29,7 +28,7 @@ export default class Police {
     */
 
     constructor() {
-                return this;
+                
     }
 
     /**
@@ -42,17 +41,7 @@ export default class Police {
     static constructFromObject(data, obj) {
         if (data) {
             obj = obj || new Police();
-            ApiClient.constructFromObject(data, obj, '');
-                        if (data.hasOwnProperty('coverageStartDate')) {
-                obj['coverageStartDate'] = ApiClient.convertToType(data['coverageStartDate'], 'Date');
-            }
-            if (data.hasOwnProperty('coverageEndDate')) {
-                obj['coverageEndDate'] = ApiClient.convertToType(data['coverageEndDate'], 'Date');
-            }
-            if (data.hasOwnProperty('coverageGeographicArea')) {
-                obj['coverageGeographicArea'] = ApiClient.convertToType(data['coverageGeographicArea'], 'String');
-            }
-            if (data.hasOwnProperty('serviceInvolvement')) {
+                                    if (data.hasOwnProperty('serviceInvolvement')) {
                 obj['serviceInvolvement'] = ApiClient.convertToType(data['serviceInvolvement'], 'String');
             }
             if (data.hasOwnProperty('contact')) {
@@ -62,24 +51,12 @@ export default class Police {
                 obj['policeStation'] = ApiClient.convertToType(data['policeStation'], 'String');
             }
             if (data.hasOwnProperty('offences')) {
-                obj['offences'] = ApiClient.convertToType(data['offences'], [PoliceOffences]);
+                obj['offences'] = ApiClient.convertToType(data['offences'], [OffenceSummary]);
             }
         }
         return obj;
     }
 
-    /**
-    * @member {Date} coverageStartDate
-    */
-    coverageStartDate = undefined;
-    /**
-    * @member {Date} coverageEndDate
-    */
-    coverageEndDate = undefined;
-    /**
-    * @member {String} coverageGeographicArea
-    */
-    coverageGeographicArea = undefined;
     /**
     * @member {String} serviceInvolvement
     */
@@ -93,7 +70,7 @@ export default class Police {
     */
     policeStation = undefined;
     /**
-    * @member {Array.<module:model/PoliceOffences>} offences
+    * @member {Array.<module:model/OffenceSummary>} offences
     */
     offences = undefined;
 

@@ -1,6 +1,6 @@
 /**
  * Family Context
- * This is the API definition for Family Context
+ * This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context. This document is currently undergoing rapid change and should not be used as basis for implementation without discussing with the project team. 
  *
  * OpenAPI spec version: 0.0.1
  * 

@@ -44,7 +44,7 @@ def send_static():
 
 
 def main():
-    app = connexion.FlaskApp(__name__, specification_dir='..')
+    app = connexion.FlaskApp(__name__, specification_dir='../schema')
     app.app.json_encoder = encoder.JSONEncoder
 
     @app.route('/')
@@ -56,7 +56,7 @@ def main():
         f = f[6:]
         app.app.add_url_rule(f, f, send_static)
 
-    app.add_api('schema/family-context-api.yaml', arguments={'title': 'Family Context'}, pythonic_params=True, resolver=MyResolver('api'))
+    app.add_api('family-context-api.yaml', arguments={'title': 'Family Context'}, pythonic_params=True, resolver=MyResolver('api'))
 
     app.run(port=int(os.getenv('PORT', 8080)))
 

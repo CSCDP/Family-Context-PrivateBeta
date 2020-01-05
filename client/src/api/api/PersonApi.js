@@ -1,6 +1,6 @@
 /**
  * Family Context
- * This is the API definition for Family Context
+ * This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context. This document is currently undergoing rapid change and should not be used as basis for implementation without discussing with the project team. 
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -13,6 +13,9 @@
 
 import ApiClient from "../ApiClient";
 import Person from '../model/Person';
+import PersonQuery from '../model/PersonQuery';
+import ServiceDetail from '../model/ServiceDetail';
+import ServiceSummary from '../model/ServiceSummary';
 
 /**
 * Person service.
@@ -58,7 +61,7 @@ export default class PersonApi {
       let returnType = Person;
 
       return this.apiClient.callApi(
-        '/api/person/{personId}', 'GET',
+        '/api/person/details/{personId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -78,21 +81,18 @@ export default class PersonApi {
 
 
     /**
-     * Search for a person
-     * Returns a list of individuals matching the criteria
-     * @param {Object} opts Optional parameters
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Person>} and HTTP response
+     * Find person by ID
+     * Returns a single person
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ServiceDetail} and HTTP response
      */
-    searchPersonWithHttpInfo(firstName, lastName, opts) {
-      opts = opts || {};
+    getPersonServiceByTypeAndIdWithHttpInfo(personId, serviceType) {
       let postBody = null;
 
       let pathParams = {
+        'personId': personId,
+        'serviceType': serviceType
       };
       let queryParams = {
-        'firstName': firstName,
-        'lastName': lastName,
-        'dateOfBirth': opts['dateOfBirth']
       };
       let headerParams = {
       };
@@ -102,10 +102,93 @@ export default class PersonApi {
       let authNames = ['cookieAuth'];
       let contentTypes = [];
       let accepts = ['application/json'];
+      let returnType = ServiceDetail;
+
+      return this.apiClient.callApi(
+        '/api/person/details/{personId}/service/{serviceType}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Find person by ID
+     * Returns a single person
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ServiceDetail}
+     */
+    getPersonServiceByTypeAndId(personId, serviceType) {
+      return this.getPersonServiceByTypeAndIdWithHttpInfo(personId, serviceType)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get a summary of the services a person has interacted with
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/ServiceSummary>} and HTTP response
+     */
+    getPersonServicesByIdWithHttpInfo(personId) {
+      let postBody = null;
+
+      let pathParams = {
+        'personId': personId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cookieAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [ServiceSummary];
+
+      return this.apiClient.callApi(
+        '/api/person/details/{personId}/service', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get a summary of the services a person has interacted with
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/ServiceSummary>}
+     */
+    getPersonServicesById(personId) {
+      return this.getPersonServicesByIdWithHttpInfo(personId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Search for a person
+     * Returns a list of individuals matching the criteria
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Person>} and HTTP response
+     */
+    searchPersonWithHttpInfo(body) {
+      let postBody = body;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cookieAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
       let returnType = [Person];
 
       return this.apiClient.callApi(
-        '/api/search/person', 'GET',
+        '/api/person/search', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -114,11 +197,10 @@ export default class PersonApi {
     /**
      * Search for a person
      * Returns a list of individuals matching the criteria
-     * @param {Object} opts Optional parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Person>}
      */
-    searchPerson(firstName, lastName, opts) {
-      return this.searchPersonWithHttpInfo(firstName, lastName, opts)
+    searchPerson(body) {
+      return this.searchPersonWithHttpInfo(body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
