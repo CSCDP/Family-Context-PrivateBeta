@@ -58,7 +58,7 @@ const ServiceSummary = ({ service, personId, className }) => {
                 </Toolbar>
             </AppBar>
             <Grid container className={classes.grid}>
-                <Grid item xs="12">
+                <Grid item xs={12}>
                     <Typography>Information is correct as of {dateTimeFormat.format(service.lastSynchronised)}</Typography>
                     <Typography>Information is synced with XXXXXX for the duration of {
                         longDateFormat.format(service.coverageStartDate)} to {
