@@ -13,21 +13,18 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(1),
     }
 }));
-const getData = (data, path) => {
-    let v = data
-    path.forEach(p => {
-        v = v[p]
+
+const joinStrings = (sep, ...strings) => {
+    console.log("joinStrings", sep, strings)
+    const values = []
+    strings.forEach(s => {
+        if (s) values.push(s)
     })
-    return v
+    return values.join(sep)
 }
 
-/**
- * Make sure properties are rendered in the correct order,
- * then pass to sub-renderer
- * @param data
- * @param schema
- */
-const layoutObject = (data, schema, propName) => {
+
+const LayoutObject = ({data, schema}) => {
     const properties = schema.properties
     const propDefs = []
     for (const prop in properties) {
@@ -41,64 +38,89 @@ const layoutObject = (data, schema, propName) => {
 
     const values = []
     propDefs.forEach(prop => {
-        values.push(...layoutData(data[prop.key], prop, prop.key))
+        values.push(...LayoutData({data: data[prop.key], schema: prop, propName: prop.key}))
     })
     return values
 }
 
-const layoutArray = (data, schema, propName) => {
-    console.log(data, schema, propName)
-
+const LayoutArray = ({data, schema, propName}) => {
     schema = {...schema, ...schema.items}
-    console.log("SCHEMA", schema)
     const values = []
     data.forEach(datum => {
-        values.push(...layoutData(datum, schema, propName))
+        values.push(...LayoutData({data: datum, schema, propName}))
     })
 
     return values
 }
 
-const layoutData = (data, schema, propName) => {
+const RenderStringValue = ({data, schema, propName}) => {
+    const classes = useStyles();
+
+    const value = {}
+    value.key = propName
+    value.title = schema.title ? schema.title : propName
+    value.value = data
+
+    return [(<Grid item xs={4} key={"h-"+value.key} className={classes.head}>{value.title}</Grid>),
+            (<Grid item xs={8} key={value.key} className={classes.item}>{value.value}</Grid>)]
+}
+
+const RenderContact = ({data, schema, propName}) => {
+    const classes = useStyles();
+    const title = schema.title ? schema.title : propName
+    const name = joinStrings(" | ", data.name, data.role)
+    const contact = joinStrings(" | ", data.email, data.phone)
+    return [(
+        <>
+            <Grid item xs={4} className={classes.head}>{title}</Grid>
+            <Grid item xs={8} className={classes.item}>{name} </Grid>
+            <Grid item xs={4} className={classes.head}></Grid>
+            <Grid item xs={8} className={classes.item}>{contact} </Grid>
+        </>
+    )]
+}
+
+const RenderOffenceSummary = ({data, schema, propName}) => {
+    const classes = useStyles();
+    const title = schema.title ? schema.title : propName
+    const name = joinStrings(" - ", data.dateOfOffence, data.natureOfInvolvement, data.typeOfOffence)
+    return [(
+        <>
+            <Grid item xs={4} className={classes.head}>{title}</Grid>
+            <Grid item xs={8} className={classes.item}>{name} </Grid>
+        </>
+    )]
+}
+
+
+const LayoutData = ({data, schema, propName}) => {
     let type = schema.type
     if (type === "string" && schema.format) {
         type = type + "-" + schema.format
     } else if (schema["x-ref"]) {
-        type = "object-" + schema["x-ref"]
+        type = type + "-" + schema["x-ref"]
     }
+
     const values = []
-    if (type.startsWith("object-")) {
-        values.push(...layoutObject(data, schema, propName))
+    if (type.endsWith("#Contact")) {
+        values.push(...RenderContact({data, schema, propName}))
+    } else if (type.endsWith("#OffenceSummary")) {
+        values.push(...RenderOffenceSummary({data, schema, propName}))
+    } else if (type.startsWith("object-")) {
+        values.push(...LayoutObject({data, schema, propName}))
     } else if (type === "array") {
-            values.push(...layoutArray(data, schema, propName))
-    } else {
-        const value = {}
-        value.key = propName
-        value.title = schema.title ? schema.title : propName
-        value.value = data
-        value.type = type
-        values.push(value)
+        values.push(...LayoutArray({data, schema, propName}))
+    } else if (type === "string") {
+        values.push(...RenderStringValue({data, schema, propName}))
     }
     return values
 }
 
 const ServiceDetails = ({ details }) => {
     const classes = useStyles();
-
-    const values = layoutData(details.data, details.schema)
-
     return (
-        <>
-            { values.map(v => (
-                <>
-                    <Grid item xs={4} key={"h-"+v.key} className={classes.head}>{v.title}</Grid>
-                    <Grid item xs={8} key={v.key} className={classes.item}>{v.value}</Grid>
-                </>
-                )) }
-        </>
+        <LayoutData data={details.data} schema={details.schema}/>
     )
-
-
 }
 
 export default  ServiceDetails
