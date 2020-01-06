@@ -1,5 +1,18 @@
 import React, {useEffect, useState} from "react";
+import Grid from "@material-ui/core/Grid";
+import {makeStyles} from "@material-ui/core/styles";
 
+const useStyles = makeStyles(theme => ({
+    head: {
+        fontWeight: "bold",
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+    },
+    item: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+    }
+}));
 const getData = (data, path) => {
     let v = data
     path.forEach(p => {
@@ -39,11 +52,18 @@ const layoutData = (details, schema, prefix) => {
 }
 
 const ServiceDetails = ({ details }) => {
+    const classes = useStyles();
+
     const values = layoutData(details, details.schema, [])
 
     return (
         <>
-            { values.map(v => (<div key={v.key}><b>{v.title}:</b> "{v.value}"   {v.sort} {v.type}</div>)) }
+            { values.map(v => (
+                <>
+                    <Grid item xs="4" key={"h-"+v.key} className={classes.head}>{v.title}</Grid>
+                    <Grid item xs="8" key={v.key} className={classes.item}>{v.value}</Grid>
+                </>
+                )) }
         </>
     )
 
