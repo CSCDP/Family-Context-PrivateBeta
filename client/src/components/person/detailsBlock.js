@@ -1,7 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import {AppBar, Toolbar, Paper, Table, TableBody, Typography} from "@material-ui/core/";
+import {AppBar, Toolbar, Paper, Table, TableBody, Typography} from "@material-ui/core";
+
+import { shortDateFormat as dateFormat } from "../../helpers/formatters";
 
 const useStyles = makeStyles(theme => ({
   coverage: {
@@ -12,7 +14,6 @@ const useStyles = makeStyles(theme => ({
   },  
  }));
 
-
 const DetailsBlock = ({ className, data, children, title }) => {
     const classes = useStyles();
 
@@ -20,10 +21,10 @@ const DetailsBlock = ({ className, data, children, title }) => {
     if (data.coverageStartDate || data.coverageEndDate || data.coverageGeographicArea) {
     	coverage = "Data exists"
     	if (data.coverageStartDate) {
-    		coverage += " from " + data.coverageStartDate;
+    		coverage += " from " + dateFormat.format(data.coverageStartDate);
     	}
     	if (data.coverageEndDate) {
-    		coverage += " to " + data.coverageEndDate;
+    		coverage += " to " + dateFormat.format(data.coverageEndDate);
     	}
     	if (data.coverageGeographicArea) {
     		coverage += " for the " + data.coverageGeographicArea + " area";

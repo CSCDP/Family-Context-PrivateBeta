@@ -1,0 +1,207 @@
+# FamilyContext.PersonApi
+
+All URIs are relative to */*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**getPersonById**](PersonApi.md#getPersonById) | **GET** /api/person/details/{personId} | Find person by ID
+[**getPersonServiceByTypeAndId**](PersonApi.md#getPersonServiceByTypeAndId) | **GET** /api/person/details/{personId}/service/{serviceType} | Find person by ID
+[**getPersonServicesById**](PersonApi.md#getPersonServicesById) | **GET** /api/person/details/{personId}/service | Get a summary of the services a person has interacted with
+[**searchPerson**](PersonApi.md#searchPerson) | **POST** /api/person/search | Search for a person
+
+<a name="getPersonById"></a>
+# **getPersonById**
+> Person getPersonById(personId)
+
+Find person by ID
+
+Returns a single person
+
+### Example
+```javascript
+import FamilyContext from 'family_context';
+let defaultClient = FamilyContext.ApiClient.instance;
+
+// Configure API key authorization: cookieAuth
+let cookieAuth = defaultClient.authentications['cookieAuth'];
+cookieAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//cookieAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FamilyContext.PersonApi();
+let personId = "personId_example"; // String | ID of person to return
+
+apiInstance.getPersonById(personId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **personId** | **String**| ID of person to return | 
+
+### Return type
+
+[**Person**](Person.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getPersonServiceByTypeAndId"></a>
+# **getPersonServiceByTypeAndId**
+> ServiceDetail getPersonServiceByTypeAndId(personId, serviceType)
+
+Find person by ID
+
+Returns a single person
+
+### Example
+```javascript
+import FamilyContext from 'family_context';
+let defaultClient = FamilyContext.ApiClient.instance;
+
+// Configure API key authorization: cookieAuth
+let cookieAuth = defaultClient.authentications['cookieAuth'];
+cookieAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//cookieAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FamilyContext.PersonApi();
+let personId = "personId_example"; // String | ID of person to return
+let serviceType = "serviceType_example"; // String | Servic type to return
+
+apiInstance.getPersonServiceByTypeAndId(personId, serviceType).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **personId** | **String**| ID of person to return | 
+ **serviceType** | **String**| Servic type to return | 
+
+### Return type
+
+[**ServiceDetail**](ServiceDetail.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getPersonServicesById"></a>
+# **getPersonServicesById**
+> [ServiceSummary] getPersonServicesById(personId)
+
+Get a summary of the services a person has interacted with
+
+### Example
+```javascript
+import FamilyContext from 'family_context';
+let defaultClient = FamilyContext.ApiClient.instance;
+
+// Configure API key authorization: cookieAuth
+let cookieAuth = defaultClient.authentications['cookieAuth'];
+cookieAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//cookieAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FamilyContext.PersonApi();
+let personId = "personId_example"; // String | ID of person to return
+
+apiInstance.getPersonServicesById(personId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **personId** | **String**| ID of person to return | 
+
+### Return type
+
+[**[ServiceSummary]**](ServiceSummary.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="searchPerson"></a>
+# **searchPerson**
+> [Person] searchPerson(body)
+
+Search for a person
+
+Returns a list of individuals matching the criteria
+
+### Example
+```javascript
+import FamilyContext from 'family_context';
+let defaultClient = FamilyContext.ApiClient.instance;
+
+// Configure API key authorization: cookieAuth
+let cookieAuth = defaultClient.authentications['cookieAuth'];
+cookieAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//cookieAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FamilyContext.PersonApi();
+let body = new FamilyContext.PersonQuery(); // PersonQuery | 
+
+apiInstance.searchPerson(body).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**PersonQuery**](PersonQuery.md)|  | 
+
+### Return type
+
+[**[Person]**](Person.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+

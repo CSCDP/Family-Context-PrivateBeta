@@ -1,0 +1,5 @@
+Id, Title, Schema Ref, Schema Data, Last Synchronised, Coverage Start Date, Coverage End Date
+AdultSocialCare, Adult Social Care,http://www.sfdl.org.uk/schemas/fc/0.0.1#AdultSocialCare, ,2020-01-06T10:00,2000-01-01,2020-01-06
+Housing, Housing,http://www.sfdl.org.uk/schemas/fc/0.0.1#Housing, ,2020-01-06T10:00,2000-01-01,2020-01-06
+School, School,http://www.sfdl.org.uk/schemas/fc/0.0.1#School, ,2020-01-06T10:00,2000-01-01,2020-01-06
+Police, Police,http://www.sfdl.org.uk/schemas/fc/0.0.1#Police, ,2020-01-06T10:00,2000-01-01,2020-01-06

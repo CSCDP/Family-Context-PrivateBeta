@@ -1,35 +1,44 @@
-import React from 'react';
-import { createMuiTheme } from '@material-ui/core/styles';
+import React from "react";
+
+import thunkMiddleware from "redux-thunk";
+import { createLogger } from "redux-logger";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+
+import {createMuiTheme} from "@material-ui/core/styles";
 import { ThemeProvider } from '@material-ui/styles';
 
-import Layout from './components/layout';
-import Person from './components/person';
-import Selector from './components/selector';
+import rootReducer from "./reducers";
+import Auth from "./components/authentication/auth";
+import Router from "./Router"
 
+const loggerMiddleware = createLogger();
 
+const store = createStore(
+    rootReducer,
+    applyMiddleware(
+        thunkMiddleware, // lets us dispatch() functions
+        loggerMiddleware // neat middleware that logs actions
+    )
+);
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#00675b',
+        },
+    },
+});
 
 function App() {
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#00675b',
-      },
-    },
-  });
-
-  const [personId, setPersonId] = React.useState(1);
-
-  const handleChange = personId => {
-  	setPersonId(personId);
-  }
-
   return (
-    <ThemeProvider theme={theme}>
-      <Layout>
-        <Selector personId={personId} changeHandler={handleChange}/>
-        <Person personId={personId} />
-      </Layout>
-    </ThemeProvider>
+      <Provider store={store}>
+          <ThemeProvider theme={theme}>
+              <Auth>
+                  <Router />
+              </Auth>
+          </ThemeProvider>
+      </Provider>
   );
 }
 

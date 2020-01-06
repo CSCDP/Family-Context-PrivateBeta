@@ -1,16 +1,88 @@
 openapi: 3.0.1
 info:
   title: Family Context
-  description: This is the API definition for Family Context
+  description: |
+    This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context. This document is currently undergoing rapid change and should not be used as basis for implementation without discussing with the project team.
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
   version: 0.0.1
 servers:
 - url: /
+security:
+- cookieAuth: []
 paths:
-  /person/{personId}:
+  /api/auth/status:
     get:
+      tags:
+      - auth
+      summary: Get authentication status
+      description: |
+        Checks to see if there is currently an active authentication session. Returns the name of the current credentials if known.
+      operationId: get_auth_status
+      responses:
+        "200":
+          description: authenticated credentials present - details in message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "401":
+          description: no authenticated credentials present or credentials not valid
+            for this application
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.auth_controller
+  /api/auth/login:
+    post:
+      tags:
+      - auth
+      summary: Submit authentication details
+      description: |
+        TODO:
+      operationId: post_auth_login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body'
+      responses:
+        "302":
+          description: authenticated credentials present - details in message
+          content: {}
+        "401":
+          description: no authenticated credentials present or credentials not valid
+            for this application
+          content: {}
+      security: []
+      x-openapi-router-controller: swagger_server.controllers.auth_controller
+  /api/person/search:
+    post:
+      tags:
+      - person
+      summary: Search for a person
+      description: Returns a list of individuals matching the criteria
+      operationId: search_person
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonQuery'
+        required: true
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+                x-content-type: application/json
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+  /api/person/details/{personId}:
+    get:
+      tags:
+      - person
       summary: Find person by ID
       description: Returns a single person
       operationId: get_person_by_id
@@ -23,27 +95,81 @@ paths:
         explode: false
         schema:
           type: string
-      - name: sources
-        in: query
-        description: The data source IDs to query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: string
       responses:
-        200:
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Person'
-        404:
+        "404":
           description: Person not found
           content: {}
-      x-openapi-router-controller: swagger_server.controllers.default_controller
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+  /api/person/details/{personId}/service:
+    get:
+      tags:
+      - person
+      summary: Get a summary of the services a person has interacted with
+      operationId: get_person_services_by_id
+      parameters:
+      - name: personId
+        in: path
+        description: ID of person to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceSummary'
+                x-content-type: application/json
+        "404":
+          description: Person not found
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+  /api/person/details/{personId}/service/{serviceType}:
+    get:
+      tags:
+      - person
+      summary: Find person by ID
+      description: Returns a single person
+      operationId: get_person_service_by_type_and_id
+      parameters:
+      - name: personId
+        in: path
+        description: ID of person to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: serviceType
+        in: path
+        description: Servic type to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDetail'
+        "404":
+          description: Person or service not found
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.person_controller
 components:
   schemas:
     Person:
@@ -70,116 +196,157 @@ components:
           type: string
         address:
           type: string
-        serviceData:
-          $ref: '#/components/schemas/ServiceMap'
       example:
         firstName: firstName
         lastName: lastName
         address: address
         gender: gender
         ethnicity: ethnicity
-        serviceData:
-          SCHOOL: ""
-          ASC: ""
-          HOUSING: ""
-          POLICE: ""
         dateOfBirth: 2000-01-23
         id: id
-    ServiceMap:
+    ServiceSummary:
       type: object
       properties:
-        ASC:
-          $ref: '#/components/schemas/AdultSocialCare'
-        HOUSING:
-          $ref: '#/components/schemas/Housing'
-        POLICE:
-          $ref: '#/components/schemas/Police'
-        SCHOOL:
-          $ref: '#/components/schemas/School'
-      example:
-        SCHOOL: ""
-        ASC: ""
-        HOUSING: ""
-        POLICE: ""
-    SourceData:
-      type: object
-      properties:
+        id:
+          type: string
+        title:
+          type: string
+        lastSynchronised:
+          type: string
+          format: date-time
         coverageStartDate:
           type: string
           format: date
         coverageEndDate:
           type: string
           format: date
-        coverageGeographicArea:
+        recordsAvailable:
+          type: boolean
+      example:
+        coverageStartDate: 2000-01-23
+        recordsAvailable: true
+        id: id
+        title: title
+        lastSynchronised: 2000-01-23T04:56:07.000+00:00
+        coverageEndDate: 2000-01-23
+    ServiceDetail:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/ServiceSummary'
+        schema:
+          type: object
+        data:
+          type: object
+      example:
+        summary:
+          coverageStartDate: 2000-01-23
+          recordsAvailable: true
+          id: id
+          title: title
+          lastSynchronised: 2000-01-23T04:56:07.000+00:00
+          coverageEndDate: 2000-01-23
+        schema: {}
+        data: {}
+    PersonQuery:
+      required:
+      - firstName
+      - lastName
+      type: object
+      properties:
+        firstName:
           type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+      description: |
+        Used for querying a person. TODO: As long as this the fields are a subset of the Person object this could be the same, however we may want more flexibility around the search criteria, such as min/max values for dob.
     Police:
-      allOf:
-      - $ref: '#/components/schemas/SourceData'
-      - type: object
-        properties:
-          serviceInvolvement:
-            pattern: '[yes|no]'
-            type: string
-          contact:
-            $ref: '#/components/schemas/Contact'
-          policeStation:
-            type: string
-          offences:
-            type: array
-            items:
-              $ref: '#/components/schemas/Police_offences'
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          pattern: '[yes|no]'
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        policeStation:
+          title: Police station
+          type: string
+        offences:
+          title: Recent offence
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceSummary'
+    OffenceSummary:
+      type: object
+      properties:
+        dateOfOffence:
+          type: string
+          format: date
+        typeOfOffence:
+          type: string
+        natureOfInvolvement:
+          type: string
     School:
-      allOf:
-      - $ref: '#/components/schemas/SourceData'
-      - type: object
-        properties:
-          serviceInvolvement:
-            pattern: '[current|historic]'
-            type: string
-          contact:
-            $ref: '#/components/schemas/Contact'
-          schoolName:
-            type: string
-          admissionType:
-            type: string
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          pattern: '[current|historic]'
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        schoolName:
+          title: School
+          type: string
+        admissionType:
+          title: Admission type
+          type: string
     AdultSocialCare:
-      allOf:
-      - $ref: '#/components/schemas/SourceData'
-      - type: object
-        properties:
-          serviceInvolvement:
-            pattern: '[current|historic]'
-            type: string
-          contact:
-            $ref: '#/components/schemas/Contact'
-          startDateOfLastInvolvement:
-            type: string
-            format: date
-          dateOfMostRecentInteraction:
-            type: string
-            format: date
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          pattern: '[current|historic]'
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        startDateOfLastInvolvement:
+          title: Start of last involvement
+          type: string
+          format: date
+        dateOfMostRecentInteraction:
+          title: Date of most recent interaction
+          type: string
+          format: date
     Housing:
-      allOf:
-      - $ref: '#/components/schemas/SourceData'
-      - type: object
-        properties:
-          serviceInvolvement:
-            pattern: '[current|historic]'
-            type: string
-          contact:
-            $ref: '#/components/schemas/Contact'
-          antiSocialBehaviour:
-            pattern: '[open|closed]'
-            type: string
-          rentArrears:
-            pattern: '[open|closed]'
-            type: string
-          noticeSeekingPossession:
-            pattern: '[open|closed]'
-            type: string
-          eviction:
-            pattern: '[open|closed]'
-            type: string
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          pattern: '[current|historic]'
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        antiSocialBehaviour:
+          title: Anti social behaviour
+          pattern: '[open|closed]'
+          type: string
+        rentArrears:
+          title: Rent arrears
+          pattern: '[open|closed]'
+          type: string
+        noticeSeekingPossession:
+          title: Notice seeking possession
+          pattern: '[open|closed]'
+          type: string
+        eviction:
+          title: Eviction
+          pattern: '[open|closed]'
+          type: string
     Contact:
       type: object
       properties:
@@ -191,14 +358,36 @@ components:
           type: string
         role:
           type: string
-    Police_offences:
+    inline_response_200:
+      required:
+      - status
       type: object
       properties:
-        dateOfOffence:
+        id:
           type: string
-          format: date
-        typeOfOffence:
+        name:
           type: string
-        natureOfInvolvement:
+        status:
+          pattern: '[authenticated]'
           type: string
+      example:
+        name: name
+        id: id
+        status: status
+    body:
+      required:
+      - password
+      - userid
+      type: object
+      properties:
+        userid:
+          type: string
+        password:
+          type: string
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      name: FCSESSIONID
+      in: cookie
+      x-apikeyInfoFunc: swagger_server.controllers.authorization_controller.check_cookieAuth
 

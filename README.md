@@ -34,3 +34,12 @@ make
 ```
 
 This also requires Docker.
+
+## Deploy on Heroku
+
+```
+heroku apps:create <appname>
+heroku git:remote --app <appname>
+heroku stack:set container
+git push heroku master
+```
