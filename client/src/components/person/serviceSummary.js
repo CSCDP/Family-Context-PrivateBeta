@@ -45,7 +45,7 @@ const ServiceSummary = ({ service, personId, className }) => {
                 longDateFormat.format(service.coverageStartDate)} to {longDateFormat.format(service.coverageEndDate)}
             </Typography>
             {service.recordsAvailable &&
-                <Button color="primary" variant="outlined" onClick={clickHandler}>Fetch</Button>
+                <Button color="primary" variant="outlined" onClick={clickHandler}>{ details ? "Close" : "Fetch"}</Button>
             }
             { details && (<ServiceDetails details={details}/>)}
         </Paper>
