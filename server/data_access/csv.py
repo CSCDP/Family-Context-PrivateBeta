@@ -185,6 +185,7 @@ class CsvSampleDataAccess:
                 if ref:
                     ref_value = copy.deepcopy(self.__load_schema(ref))
                     ref_value["x-item-seq"] = prop_seq
+                    ref_value.setdefault("title", p_value.get("title"))
                     properties[p_name] = ref_value
 
                 if p_value.get("type") == "array":

@@ -266,13 +266,17 @@ components:
       type: object
       properties:
         serviceInvolvement:
+          title: Service involvement
           type: string
           pattern: "[yes|no]"
         contact:
+          title: Contact
           $ref: '#/components/schemas/Contact'
         policeStation:
+          title: Police station
           type: string
         offences:
+          title: Recent offence
           type: array
           items:
             $ref: '#/components/schemas/OffenceSummary'
@@ -292,51 +296,62 @@ components:
       type: object
       properties:
         serviceInvolvement:
+          title: Service involvement
           type: string
           pattern: "[current|historic]"
         contact:
+          title: Contact
           $ref: '#/components/schemas/Contact'
         schoolName:
+          title: School
           type: string
         admissionType:
+          title: Admission type
           type: string
 
     AdultSocialCare:
       type: object
       properties:
         serviceInvolvement:
-          type: string
           title: Service involvement
+          type: string
           pattern: "[current|historic]"
         contact:
+          title: Contact
           $ref: '#/components/schemas/Contact'
         startDateOfLastInvolvement:
-          type: string
           title: Start of last involvement
+          type: string
           format: date
         dateOfMostRecentInteraction:
-          type: string
           title: Date of most recent interaction
+          type: string
           format: date
 
     Housing:
       type: object
       properties:
         serviceInvolvement:
+          title: Service involvement
           type: string
           pattern: "[current|historic]"
         contact:
+          title: Contact
           $ref: '#/components/schemas/Contact'
         antiSocialBehaviour:
+          title: Anti social behaviour
           type: string
           pattern: "[open|closed]"
         rentArrears:
+          title: Rent arrears
           type: string
           pattern: "[open|closed]"
         noticeSeekingPossession:
+          title: Notice seeking possession
           type: string
           pattern: "[open|closed]"
         eviction:
+          title: Eviction
           type: string
           pattern: "[open|closed]"
 

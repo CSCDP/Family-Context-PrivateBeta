@@ -267,13 +267,16 @@ components:
       type: object
       properties:
         serviceInvolvement:
+          title: Service involvement
           pattern: '[yes|no]'
           type: string
         contact:
           $ref: '#/components/schemas/Contact'
         policeStation:
+          title: Police station
           type: string
         offences:
+          title: Recent offence
           type: array
           items:
             $ref: '#/components/schemas/OffenceSummary'
@@ -291,46 +294,57 @@ components:
       type: object
       properties:
         serviceInvolvement:
+          title: Service involvement
           pattern: '[current|historic]'
           type: string
         contact:
           $ref: '#/components/schemas/Contact'
         schoolName:
+          title: School
           type: string
         admissionType:
+          title: Admission type
           type: string
     AdultSocialCare:
       type: object
       properties:
         serviceInvolvement:
+          title: Service involvement
           pattern: '[current|historic]'
           type: string
         contact:
           $ref: '#/components/schemas/Contact'
         startDateOfLastInvolvement:
+          title: Start of last involvement
           type: string
           format: date
         dateOfMostRecentInteraction:
+          title: Date of most recent interaction
           type: string
           format: date
     Housing:
       type: object
       properties:
         serviceInvolvement:
+          title: Service involvement
           pattern: '[current|historic]'
           type: string
         contact:
           $ref: '#/components/schemas/Contact'
         antiSocialBehaviour:
+          title: Anti social behaviour
           pattern: '[open|closed]'
           type: string
         rentArrears:
+          title: Rent arrears
           pattern: '[open|closed]'
           type: string
         noticeSeekingPossession:
+          title: Notice seeking possession
           pattern: '[open|closed]'
           type: string
         eviction:
+          title: Eviction
           pattern: '[open|closed]'
           type: string
     Contact:
