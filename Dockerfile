@@ -25,8 +25,8 @@ COPY schema /usr/src/schema
 
 COPY --from=builder /app/build /usr/src/app/static
 
-EXPOSE 8080
+ENV PORT 8080
 
-ENTRYPOINT ["gunicorn"]
+EXPOSE $PORT
 
-CMD ["--bind", "0.0.0.0:8080", "--access-logfile=-", "wsgi:app"]
+CMD gunicorn --bind 0.0.0.0:${PORT} --access-logfile=- wsgi:app
