@@ -2,7 +2,8 @@ FROM node:12 AS builder
 WORKDIR /app
 
 COPY client/package.json /app/.
-RUN yarn install
+COPY client/yarn.lock /app/.
+RUN yarn install --frozen-lockfile
 
 COPY client /app
 RUN yarn build
@@ -24,8 +25,8 @@ COPY schema /usr/src/schema
 
 COPY --from=builder /app/build /usr/src/app/static
 
-EXPOSE 8080
+ENV PORT 8080
 
-ENTRYPOINT ["python3"]
+EXPOSE $PORT
 
-CMD ["server.py"]
+CMD gunicorn --bind 0.0.0.0:${PORT} --access-logfile=- wsgi:app
