@@ -52,8 +52,9 @@ for f in [f for f in glob.glob("static/**/*.*", recursive=True)]:
     app.app.add_url_rule(f, f, send_static)
 
 
-@app.route('/')
-def get_default_page():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def get_default_page(path):
     return flask.send_file('static/index.html')
 
 
