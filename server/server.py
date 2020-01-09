@@ -43,23 +43,23 @@ def send_static():
     return flask.send_file("static{}".format(flask.request.path))
 
 
-def main():
-    app = connexion.FlaskApp(__name__, specification_dir='../schema')
-    app.app.json_encoder = encoder.JSONEncoder
+app = connexion.FlaskApp(__name__, specification_dir='../schema')
+app.app.json_encoder = encoder.JSONEncoder
 
-    @app.route('/')
-    def getDefaultPage():
-        return flask.send_file('static/index.html')
+# Add explicit rules for each file in the static directory
+for f in [f for f in glob.glob("static/**/*.*", recursive=True)]:
+    f = f[6:]
+    app.app.add_url_rule(f, f, send_static)
 
-    # Add explicit rules for each file in the static directory
-    for f in [f for f in glob.glob("static/**/*.*", recursive=True)]:
-        f = f[6:]
-        app.app.add_url_rule(f, f, send_static)
 
-    app.add_api('family-context-api.yaml', arguments={'title': 'Family Context'}, pythonic_params=True, resolver=MyResolver('api'))
+@app.route('/')
+def get_default_page():
+    return flask.send_file('static/index.html')
 
-    app.run(port=int(os.getenv('PORT', 8080)))
+
+app.add_api('family-context-api.yaml', arguments={'title': 'Family Context'}, pythonic_params=True,
+            resolver=MyResolver('api'))
 
 
 if __name__ == '__main__':
-    main()
+    app.run(port=int(os.getenv('PORT', 8080)))

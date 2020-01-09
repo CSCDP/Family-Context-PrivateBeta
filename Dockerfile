@@ -27,6 +27,6 @@ COPY --from=builder /app/build /usr/src/app/static
 
 EXPOSE 8080
 
-ENTRYPOINT ["python3"]
+ENTRYPOINT ["gunicorn"]
 
-CMD ["server.py"]
+CMD ["--bind", "0.0.0.0:8080", "--access-logfile=-", "wsgi:app"]
