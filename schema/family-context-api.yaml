@@ -191,6 +191,7 @@ components:
   schemas:
 
     Person:
+      description: this is a person
       type: object
       properties:
         id:
