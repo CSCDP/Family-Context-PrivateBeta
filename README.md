@@ -37,7 +37,7 @@ The data comes from the static data provided in [./server/data/*.csv](./server/d
 
 A slightly out-of-date Message Sequence Chart of the application flow:
 
-![alt text](./docs/msc-api-session.jpg "MSC Application & API Flow")
+![MSC Application & API Flow](./docs/msc-api-session.jpg "MSC Application & API Flow")
 
 
 ## Repository Layout
