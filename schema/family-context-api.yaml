@@ -72,7 +72,7 @@ paths:
           description: no authenticated credentials present or credentials not valid for this application
           content: {}
 
-  /api/person/search:
+  /api/search/person:
     post:
       summary: Search for a person
       description: Returns a list of individuals matching the criteria

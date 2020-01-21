@@ -55,7 +55,7 @@ paths:
           content: {}
       security: []
       x-openapi-router-controller: swagger_server.controllers.auth_controller
-  /api/person/search:
+  /api/search/person:
     post:
       tags:
       - person
@@ -196,6 +196,7 @@ components:
           type: string
         address:
           type: string
+      description: this is a person
       example:
         firstName: firstName
         lastName: lastName

@@ -55,7 +55,7 @@ class TestPersonController(BaseTestCase):
         """
         body = PersonQuery()
         response = self.client.open(
-            '/api/person/search',
+            '/api/search/person',
             method='POST',
             data=json.dumps(body),
             content_type='application/json')

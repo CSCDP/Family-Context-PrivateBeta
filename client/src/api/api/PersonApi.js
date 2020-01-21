@@ -188,7 +188,7 @@ export default class PersonApi {
       let returnType = [Person];
 
       return this.apiClient.callApi(
-        '/api/person/search', 'POST',
+        '/api/search/person', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );

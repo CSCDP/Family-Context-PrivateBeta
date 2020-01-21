@@ -21,6 +21,7 @@ import ApiClient from '../ApiClient';
 export default class Person {
     /**
     * Constructs a new <code>Person</code>.
+    * this is a person
     * @alias module:model/Person
     * @class
     * @param id {String} 
