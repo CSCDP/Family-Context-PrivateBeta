@@ -26,6 +26,19 @@ participants can have an early input into the design. This includes both project
 interested parties. Contributions are welcome. Please contact [kws](https://github.com/kws) for more 
 details until we complete contributor information.
 
+## Application Overview
+
+An up-to-date build of the application is maintained on Heroku: 
+https://family-context-api.herokuapp.com - the application mimics the authentication flow, but
+no password is required to log in. Any string instead of an email will be accepted. 
+
+The data comes from the static data provided in [./server/data/*.csv](./server/data/).
+
+A slightly out-of-date Message Sequence Chart of the application flow:
+
+![alt text](./docs/msc-api-session.jpg "MSC Application & API Flow")
+
+
 ## Repository Layout
 
 The Family Context project aims to support multiple local authorities, with different requirements around
