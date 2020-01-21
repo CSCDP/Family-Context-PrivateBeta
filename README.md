@@ -1,14 +1,60 @@
-# Family Context API
+# Family Context API and Reference Implementation
+
+Family Context is a tool that allows social workers to easily access ​
+service involvement information on relevant individuals ​
+in order to then facilitate conversations with lead practitioners. ​
+
+We want to ensure that social workers always have the information they need so that:​
+- More young people are well looked after by their families and fewer end up in care​
+- Children are protected from harm even when no single service perceives significant risk​
+- Social workers are viewed by all families as people who really understand their circumstances and can support them
+
+This project is a partnership between [Stockport Metropolitan Borough Council](https://www.stockport.gov.uk/), 
+[Leeds City Council](https://www.leeds.gov.uk/), [Social Finance](https://www.socialfinance.org.uk/) 
+and [MHCLG](https://gov.uk/mhclg)’s [Local Digital Collaboration Unit​](https://localdigital.gov.uk/).
+
+The project is funded by MHCLG’s Local Digital Fund and the Christie Foundation – both funders are focused on 
+supporting local authorities to create common solutions to shared problems.
+
+The project supports working in the open, and the project status can be followed on the Local Gov Digital 
+[Pipeline Tool](https://pipeline.localgov.digital/wiki/277). Outputs from 
+[Discovery](https://github.com/CSCDP/Family-Context-Discovery) and 
+[Alpha](https://github.com/CSCDP/Family-Context-Alpha) are available on GitHub.
+
+The purpose of this repository is to co-develop the service API for the tool in the open so that all 
+participants can have an early input into the design. This includes both project partners, and other 
+interested parties. Contributions are welcome. Please contact [kws](https://github.com/kws) for more 
+details until we complete contributor information.
+
+## Repository Layout
+
+The Family Context project aims to support multiple local authorities, with different requirements around
+infrastructure, datasources and reporting tools. The reference application provides a baseline set of functionality
+that children's services departments can either build-upon or use as an input into their own development process. 
+
+The API is designed to follow the recommended user journeys identified in the earlier phases of the project, 
+and implement sensible data and security boundaries.
 
 The Family Context API is documented using [Open](https://swagger.io/docs/specification/about/) API 
-with a reference implementation generated using [Swagger Codegen](https://github.com/swagger-api/swagger-codegen).
+with a reference implementation generated using [Swagger Codegen](https://github.com/swagger-api/swagger-codegen)
+combined with a basic [Flask](https://palletsprojects.com/p/flask/) application. 
+A [React](https://reactjs.org/) sample UI is also provided for reference although this does
+not attempt to match the recommended styles, but only to reproduce the key flows and illustrate API usage.
 
-A React-based sample UI for reference is also provided.
+The reference version for this schema is available in 
+[schema/family-context-api.yaml](./schema/family-context-api.yaml). 
 
+After making changes to this file, it is important to re-generate the server and client stubs. 
+
+### Re-generating server and client stubs
+
+We use Swagger Codegen to implement Python and JavaScript versions of the API. The simplest way to do
+this is to use the dockerised version of Swagger Codegen. Make sure you have Swagger running, then
+run `make clean` followed by `make`. 
 
 ## Build 
 
-The simplest way to build and run the whole sample is using Docker. Simply run
+The simplest way to build and run the entire application is using Docker. Simply run
 
 ```
 $ docker build . -t family-context-api 
@@ -25,17 +71,11 @@ and the reference UI on
 http://localhost:8080
 
 
-## Update stubs
+### Deploying
+ 
+Our reference application is deployed on Heroku to https://family-context-api.herokuapp.com
 
-If you make changes to the schema file, you can regenerate the stubs by running
-
-```
-make
-```
-
-This also requires Docker.
-
-## Deploy on Heroku
+To run your own version of this, make sure you configure Heroku to deploy Docker images. 
 
 ```
 heroku apps:create <appname>
