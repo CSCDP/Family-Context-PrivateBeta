@@ -30,7 +30,8 @@ details until we complete contributor information.
 
 An up-to-date build of the application is maintained on Heroku: 
 https://family-context-api.herokuapp.com - the application mimics the authentication flow, but
-no password is required to log in. Any string instead of an email will be accepted. 
+no password is required to log in. Any string instead of an email will be accepted. The deploy
+also includes an interactive API explorer https://family-context-api.herokuapp.com/ui/
 
 The data comes from the static data provided in [./server/data/*.csv](./server/data/).
 
