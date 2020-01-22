@@ -46,7 +46,7 @@ def send_static():
 
 app = connexion.FlaskApp(__name__, specification_dir='../schema')
 app.app.json_encoder = encoder.JSONEncoder
-CORS(app.app, resources={r"/api/*": {"origins": "*"}})
+CORS(app.app)
 
 
 # Add explicit rules for each file in the static directory
