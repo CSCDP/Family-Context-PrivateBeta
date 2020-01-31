@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**getPersonById**](PersonApi.md#getPersonById) | **GET** /api/person/details/{personId} | Find person by ID
 [**getPersonServiceByTypeAndId**](PersonApi.md#getPersonServiceByTypeAndId) | **GET** /api/person/details/{personId}/service/{serviceType} | Find person by ID
 [**getPersonServicesById**](PersonApi.md#getPersonServicesById) | **GET** /api/person/details/{personId}/service | Get a summary of the services a person has interacted with
-[**searchPerson**](PersonApi.md#searchPerson) | **POST** /api/person/search | Search for a person
+[**searchPerson**](PersonApi.md#searchPerson) | **POST** /api/search/person | Search for a person
 
 <a name="getPersonById"></a>
 # **getPersonById**

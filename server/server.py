@@ -7,6 +7,7 @@ import glob
 
 from swagger_server import encoder
 from connexion.resolver import RestyResolver
+from flask_cors import CORS
 
 import flask
 
@@ -45,6 +46,8 @@ def send_static():
 
 app = connexion.FlaskApp(__name__, specification_dir='../schema')
 app.app.json_encoder = encoder.JSONEncoder
+CORS(app.app)
+
 
 # Add explicit rules for each file in the static directory
 for f in [f for f in glob.glob("static/**/*.*", recursive=True)]:
