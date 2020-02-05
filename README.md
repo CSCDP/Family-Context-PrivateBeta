@@ -33,6 +33,9 @@ https://family-context-api.herokuapp.com - the application mimics the authentica
 no password is required to log in. Any string instead of an email will be accepted. The deploy
 also includes an interactive API explorer https://family-context-api.herokuapp.com/ui/
 
+An Excel export of the API Schema objects cant be found in 
+https://family-context-api.herokuapp.com/family-context-api.xlsx
+
 The data comes from the static data provided in [./server/data/*.csv](./server/data/).
 
 A slightly out-of-date Message Sequence Chart of the application flow:
