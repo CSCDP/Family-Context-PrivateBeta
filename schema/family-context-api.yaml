@@ -194,6 +194,42 @@ paths:
           description: Person or service not found
           content: {}
 
+  /api/person/related/{personId}/:
+    get:
+      summary: Get related individuals
+      description: Returns individuals related to the person
+      operationId: getPersonRelated
+      tags:
+        - person
+      parameters:
+        - name: personId
+          in: path
+          description: ID of person
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonWithRelationship'
+        404:
+          description: Person not found
+        501:
+          description: Related individuals is not supported by this application
+    head:
+      summary: Is related person supported
+      description: >
+        Tests whether the related person API is supported by this implementation. A return value of 200 indicates
+        that the operation is supported. A 501 indicates that it is not supported, and any front-end applications
+        should suppress the functionality.
+      operationId: getPersonRelatedSupported
+      tags:
+        - person
 
 security:
   - cookieAuth: []
@@ -232,6 +268,19 @@ components:
         - id
         - firstName
         - lastName
+
+    PersonWithRelationship:
+      description: A related person - describes the relationship to an individual
+      allOf:
+        - $ref: '#/components/schemas/Person'
+        - type: object
+          properties:
+            relationship:
+              type: string
+              description: A description of the relationship.
+            relationshipToId:
+              type: string
+              description: The ID of the individual this relationship refers to
 
     ServiceSummary:
       type: object

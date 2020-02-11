@@ -20,6 +20,7 @@ import InlineResponse200 from './model/InlineResponse200';
 import OffenceSummary from './model/OffenceSummary';
 import Person from './model/Person';
 import PersonQuery from './model/PersonQuery';
+import PersonWithRelationship from './model/PersonWithRelationship';
 import Police from './model/Police';
 import School from './model/School';
 import ServiceDetail from './model/ServiceDetail';
@@ -112,6 +113,12 @@ export {
      * @property {module:model/PersonQuery}
      */
     PersonQuery,
+
+    /**
+     * The PersonWithRelationship model constructor.
+     * @property {module:model/PersonWithRelationship}
+     */
+    PersonWithRelationship,
 
     /**
      * The Police model constructor.

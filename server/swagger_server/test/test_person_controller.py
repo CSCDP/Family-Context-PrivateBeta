@@ -7,6 +7,7 @@ from six import BytesIO
 
 from swagger_server.models.person import Person  # noqa: E501
 from swagger_server.models.person_query import PersonQuery  # noqa: E501
+from swagger_server.models.person_with_relationship import PersonWithRelationship  # noqa: E501
 from swagger_server.models.service_detail import ServiceDetail  # noqa: E501
 from swagger_server.models.service_summary import ServiceSummary  # noqa: E501
 from swagger_server.test import BaseTestCase
@@ -23,6 +24,28 @@ class TestPersonController(BaseTestCase):
         response = self.client.open(
             '/api/person/details/{personId}'.format(person_id='person_id_example'),
             method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_get_person_related(self):
+        """Test case for get_person_related
+
+        Get related individuals
+        """
+        response = self.client.open(
+            '/api/person/related/{personId}/'.format(person_id='person_id_example'),
+            method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_get_person_related_supported(self):
+        """Test case for get_person_related_supported
+
+        Is related person supported
+        """
+        response = self.client.open(
+            '/api/person/related/{personId}/',
+            method='HEAD')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

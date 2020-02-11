@@ -3,6 +3,7 @@ import six
 
 from swagger_server.models.person import Person  # noqa: E501
 from swagger_server.models.person_query import PersonQuery  # noqa: E501
+from swagger_server.models.person_with_relationship import PersonWithRelationship  # noqa: E501
 from swagger_server.models.service_detail import ServiceDetail  # noqa: E501
 from swagger_server.models.service_summary import ServiceSummary  # noqa: E501
 from swagger_server import util
@@ -17,6 +18,30 @@ def get_person_by_id(person_id):  # noqa: E501
     :type person_id: str
 
     :rtype: Person
+    """
+    return 'do some magic!'
+
+
+def get_person_related(person_id):  # noqa: E501
+    """Get related individuals
+
+    Returns individuals related to the person # noqa: E501
+
+    :param person_id: ID of person
+    :type person_id: str
+
+    :rtype: List[PersonWithRelationship]
+    """
+    return 'do some magic!'
+
+
+def get_person_related_supported():  # noqa: E501
+    """Is related person supported
+
+    Tests whether the related person API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the functionality.  # noqa: E501
+
+
+    :rtype: None
     """
     return 'do some magic!'
 
