@@ -62,3 +62,14 @@ def search_person(body):  # noqa: E501
     if connexion.request.is_json:
         body = PersonQuery.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
+
+
+def search_person_supported():  # noqa: E501
+    """Is person search supported
+
+    Tests whether the person search API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the search functionality.  # noqa: E501
+
+
+    :rtype: None
+    """
+    return 'do some magic!'

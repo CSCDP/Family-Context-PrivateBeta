@@ -94,6 +94,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Person'
+        501:
+          description: Person search is not supported by this application
+    head:
+      summary: Is person search supported
+      description: >
+        Tests whether the person search API is supported by this implementation. A return value of 200 indicates
+        that the operation is supported. A 501 indicates that it is not supported, and any front-end applications
+        should suppress the search functionality.
+      operationId: searchPersonSupported
+      tags:
+        - person
+      responses:
+        200:
+          description: Person search supported
+        501:
+          description: Person search is not supported by this application
+
 
   /api/person/details/{personId}:
     get:

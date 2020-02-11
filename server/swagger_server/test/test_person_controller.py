@@ -62,6 +62,17 @@ class TestPersonController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
+    def test_search_person_supported(self):
+        """Test case for search_person_supported
+
+        Is person search supported
+        """
+        response = self.client.open(
+            '/api/search/person',
+            method='HEAD')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
 
 if __name__ == '__main__':
     import unittest

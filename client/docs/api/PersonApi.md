@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**getPersonServiceByTypeAndId**](PersonApi.md#getPersonServiceByTypeAndId) | **GET** /api/person/details/{personId}/service/{serviceType} | Find person by ID
 [**getPersonServicesById**](PersonApi.md#getPersonServicesById) | **GET** /api/person/details/{personId}/service | Get a summary of the services a person has interacted with
 [**searchPerson**](PersonApi.md#searchPerson) | **POST** /api/search/person | Search for a person
+[**searchPersonSupported**](PersonApi.md#searchPersonSupported) | **HEAD** /api/search/person | Is person search supported
 
 <a name="getPersonById"></a>
 # **getPersonById**
@@ -204,4 +205,48 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+<a name="searchPersonSupported"></a>
+# **searchPersonSupported**
+> searchPersonSupported()
+
+Is person search supported
+
+Tests whether the person search API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the search functionality. 
+
+### Example
+```javascript
+import FamilyContext from 'family_context';
+let defaultClient = FamilyContext.ApiClient.instance;
+
+// Configure API key authorization: cookieAuth
+let cookieAuth = defaultClient.authentications['cookieAuth'];
+cookieAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//cookieAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FamilyContext.PersonApi();
+apiInstance.searchPersonSupported().then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
