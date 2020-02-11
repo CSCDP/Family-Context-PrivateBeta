@@ -25,6 +25,10 @@ COPY schema /usr/src/schema
 
 COPY --from=builder /app/build /usr/src/app/static
 
+RUN python /usr/src/app/swagger_formatter/__init__.py \
+    /usr/src/schema/family-context-api.yaml \
+    /usr/src/app/static/family-context-api.xlsx
+
 ENV PORT 8080
 
 EXPOSE $PORT
