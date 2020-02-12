@@ -22,7 +22,7 @@ class TestPersonController(BaseTestCase):
         Find person by ID
         """
         response = self.client.open(
-            '/api/person/details/{personId}'.format(person_id='person_id_example'),
+            '/api/person/detail/{personId}'.format(person_id='person_id_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -55,7 +55,7 @@ class TestPersonController(BaseTestCase):
         Find person by ID
         """
         response = self.client.open(
-            '/api/person/details/{personId}/service/{serviceType}'.format(person_id='person_id_example', service_type='service_type_example'),
+            '/api/person/detail/{personId}/service/{serviceType}'.format(person_id='person_id_example', service_type='service_type_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -66,7 +66,7 @@ class TestPersonController(BaseTestCase):
         Get a summary of the services a person has interacted with
         """
         response = self.client.open(
-            '/api/person/details/{personId}/service'.format(person_id='person_id_example'),
+            '/api/person/detail/{personId}/service'.format(person_id='person_id_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

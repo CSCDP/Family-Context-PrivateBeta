@@ -94,7 +94,7 @@ paths:
         "501":
           description: Person search is not supported by this application
       x-openapi-router-controller: swagger_server.controllers.person_controller
-  /api/person/details/{personId}:
+  /api/person/detail/{personId}:
     get:
       tags:
       - person
@@ -121,7 +121,7 @@ paths:
           description: Person not found
           content: {}
       x-openapi-router-controller: swagger_server.controllers.person_controller
-  /api/person/details/{personId}/service:
+  /api/person/detail/{personId}/service:
     get:
       tags:
       - person
@@ -150,7 +150,7 @@ paths:
           description: Person not found
           content: {}
       x-openapi-router-controller: swagger_server.controllers.person_controller
-  /api/person/details/{personId}/service/{serviceType}:
+  /api/person/detail/{personId}/service/{serviceType}:
     get:
       tags:
       - person

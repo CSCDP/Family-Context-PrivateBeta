@@ -62,7 +62,7 @@ export default class PersonApi {
       let returnType = Person;
 
       return this.apiClient.callApi(
-        '/api/person/details/{personId}', 'GET',
+        '/api/person/detail/{personId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -192,7 +192,7 @@ export default class PersonApi {
       let returnType = ServiceDetail;
 
       return this.apiClient.callApi(
-        '/api/person/details/{personId}/service/{serviceType}', 'GET',
+        '/api/person/detail/{personId}/service/{serviceType}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -234,7 +234,7 @@ export default class PersonApi {
       let returnType = [ServiceSummary];
 
       return this.apiClient.callApi(
-        '/api/person/details/{personId}/service', 'GET',
+        '/api/person/detail/{personId}/service', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );

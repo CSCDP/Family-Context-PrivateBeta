@@ -112,7 +112,7 @@ paths:
           description: Person search is not supported by this application
 
 
-  /api/person/details/{personId}:
+  /api/person/detail/{personId}:
     get:
       summary: Find person by ID
       description: Returns a single person
@@ -137,7 +137,7 @@ paths:
           description: Person not found
           content: {}
 
-  /api/person/details/{personId}/service:
+  /api/person/detail/{personId}/service:
     get:
       summary: Get a summary of the services a person has interacted with
       operationId: getPersonServicesById
@@ -163,7 +163,7 @@ paths:
           description: Person not found
           content: {}
 
-  /api/person/details/{personId}/service/{serviceType}:
+  /api/person/detail/{personId}/service/{serviceType}:
     get:
       summary: Find person by ID
       description: Returns a single person

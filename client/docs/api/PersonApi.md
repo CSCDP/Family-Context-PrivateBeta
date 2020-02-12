@@ -4,11 +4,11 @@ All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getPersonById**](PersonApi.md#getPersonById) | **GET** /api/person/details/{personId} | Find person by ID
+[**getPersonById**](PersonApi.md#getPersonById) | **GET** /api/person/detail/{personId} | Find person by ID
 [**getPersonRelated**](PersonApi.md#getPersonRelated) | **GET** /api/person/related/{personId}/ | Get related individuals
 [**getPersonRelatedSupported**](PersonApi.md#getPersonRelatedSupported) | **HEAD** /api/person/related/{personId}/ | Is related person supported
-[**getPersonServiceByTypeAndId**](PersonApi.md#getPersonServiceByTypeAndId) | **GET** /api/person/details/{personId}/service/{serviceType} | Find person by ID
-[**getPersonServicesById**](PersonApi.md#getPersonServicesById) | **GET** /api/person/details/{personId}/service | Get a summary of the services a person has interacted with
+[**getPersonServiceByTypeAndId**](PersonApi.md#getPersonServiceByTypeAndId) | **GET** /api/person/detail/{personId}/service/{serviceType} | Find person by ID
+[**getPersonServicesById**](PersonApi.md#getPersonServicesById) | **GET** /api/person/detail/{personId}/service | Get a summary of the services a person has interacted with
 [**searchPerson**](PersonApi.md#searchPerson) | **POST** /api/search/person | Search for a person
 [**searchPersonSupported**](PersonApi.md#searchPersonSupported) | **HEAD** /api/search/person | Is person search supported
 
