@@ -35,11 +35,13 @@ def get_person_related(person_id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_person_related_supported():  # noqa: E501
+def get_person_related_supported(person_id):  # noqa: E501
     """Is related person supported
 
     Tests whether the related person API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the functionality.  # noqa: E501
 
+    :param person_id: ID of person
+    :type person_id: str
 
     :rtype: None
     """

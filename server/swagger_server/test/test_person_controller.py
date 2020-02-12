@@ -44,7 +44,7 @@ class TestPersonController(BaseTestCase):
         Is related person supported
         """
         response = self.client.open(
-            '/api/person/related/{personId}/',
+            '/api/person/related/{personId}/'.format(person_id='person_id_example'),
             method='HEAD')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

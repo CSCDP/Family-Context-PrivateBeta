@@ -21,6 +21,7 @@ import ApiClient from '../ApiClient';
 export default class Contact {
     /**
     * Constructs a new <code>Contact</code>.
+    * Generic object describing the contact information
     * @alias module:model/Contact
     * @class
     */

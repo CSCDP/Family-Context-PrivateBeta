@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 
 <a name="getPersonRelatedSupported"></a>
 # **getPersonRelatedSupported**
-> getPersonRelatedSupported()
+> getPersonRelatedSupported(personId)
 
 Is related person supported
 
@@ -130,7 +130,9 @@ cookieAuth.apiKey = 'YOUR API KEY';
 //cookieAuth.apiKeyPrefix = 'Token';
 
 let apiInstance = new FamilyContext.PersonApi();
-apiInstance.getPersonRelatedSupported().then(() => {
+let personId = "personId_example"; // String | ID of person
+
+apiInstance.getPersonRelatedSupported(personId).then(() => {
   console.log('API called successfully.');
 }, (error) => {
   console.error(error);
@@ -139,7 +141,10 @@ apiInstance.getPersonRelatedSupported().then(() => {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **personId** | **String**| ID of person | 
 
 ### Return type
 

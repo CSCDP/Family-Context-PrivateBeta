@@ -129,10 +129,11 @@ export default class PersonApi {
      * Tests whether the related person API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the functionality. 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    getPersonRelatedSupportedWithHttpInfo() {
+    getPersonRelatedSupportedWithHttpInfo(personId) {
       let postBody = null;
 
       let pathParams = {
+        'personId': personId
       };
       let queryParams = {
       };
@@ -158,8 +159,8 @@ export default class PersonApi {
      * Tests whether the related person API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the functionality. 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
-    getPersonRelatedSupported() {
-      return this.getPersonRelatedSupportedWithHttpInfo()
+    getPersonRelatedSupported(personId) {
+      return this.getPersonRelatedSupportedWithHttpInfo(personId)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
