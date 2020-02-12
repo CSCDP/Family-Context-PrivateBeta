@@ -272,8 +272,6 @@ components:
           type: string
           description: The person's gender. Leave blank for 'unknown'.
           pattern: "[male|female|other]"
-        ethnicity:
-          type: string
         address:
           type: string
       required:

@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **lastName** | **String** |  | 
 **dateOfBirth** | **Date** |  | [optional] 
 **gender** | **String** | The person&#x27;s gender. Leave blank for &#x27;unknown&#x27;. | [optional] 
-**ethnicity** | **String** |  | [optional] 
 **address** | **String** |  | [optional] 
 **relationship** | **String** | A description of the relationship. | [optional] 
 **relationshipToId** | **String** | The ID of the individual this relationship refers to | [optional] 

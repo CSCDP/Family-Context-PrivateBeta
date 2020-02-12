@@ -8,5 +8,4 @@ Name | Type | Description | Notes
 **lastName** | **String** |  | 
 **dateOfBirth** | **Date** |  | [optional] 
 **gender** | **String** | The person&#x27;s gender. Leave blank for &#x27;unknown&#x27;. | [optional] 
-**ethnicity** | **String** |  | [optional] 
 **address** | **String** |  | [optional] 

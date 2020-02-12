@@ -16,7 +16,7 @@ class PersonWithRelationship(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, ethnicity: str=None, address: str=None, relationship: str=None, relationship_to_id: str=None):  # noqa: E501
+    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None, relationship: str=None, relationship_to_id: str=None):  # noqa: E501
         """PersonWithRelationship - a model defined in Swagger
 
         :param id: The id of this PersonWithRelationship.  # noqa: E501
@@ -29,8 +29,6 @@ class PersonWithRelationship(Model):
         :type date_of_birth: date
         :param gender: The gender of this PersonWithRelationship.  # noqa: E501
         :type gender: str
-        :param ethnicity: The ethnicity of this PersonWithRelationship.  # noqa: E501
-        :type ethnicity: str
         :param address: The address of this PersonWithRelationship.  # noqa: E501
         :type address: str
         :param relationship: The relationship of this PersonWithRelationship.  # noqa: E501
@@ -44,7 +42,6 @@ class PersonWithRelationship(Model):
             'last_name': str,
             'date_of_birth': date,
             'gender': str,
-            'ethnicity': str,
             'address': str,
             'relationship': str,
             'relationship_to_id': str
@@ -56,7 +53,6 @@ class PersonWithRelationship(Model):
             'last_name': 'lastName',
             'date_of_birth': 'dateOfBirth',
             'gender': 'gender',
-            'ethnicity': 'ethnicity',
             'address': 'address',
             'relationship': 'relationship',
             'relationship_to_id': 'relationshipToId'
@@ -66,7 +62,6 @@ class PersonWithRelationship(Model):
         self._last_name = last_name
         self._date_of_birth = date_of_birth
         self._gender = gender
-        self._ethnicity = ethnicity
         self._address = address
         self._relationship = relationship
         self._relationship_to_id = relationship_to_id
@@ -194,27 +189,6 @@ class PersonWithRelationship(Model):
         """
 
         self._gender = gender
-
-    @property
-    def ethnicity(self) -> str:
-        """Gets the ethnicity of this PersonWithRelationship.
-
-
-        :return: The ethnicity of this PersonWithRelationship.
-        :rtype: str
-        """
-        return self._ethnicity
-
-    @ethnicity.setter
-    def ethnicity(self, ethnicity: str):
-        """Sets the ethnicity of this PersonWithRelationship.
-
-
-        :param ethnicity: The ethnicity of this PersonWithRelationship.
-        :type ethnicity: str
-        """
-
-        self._ethnicity = ethnicity
 
     @property
     def address(self) -> str:

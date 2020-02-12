@@ -29,7 +29,6 @@ const PersonDetails = ({ person, services }) => {
             <DetailsRow title="Name">{person.firstName} {person.lastName}</DetailsRow>
             <DetailsRow title="DOB">{dateFormat.format(person.dateOfBirth)}</DetailsRow>
             <DetailsRow title="Gender">{person.gender}</DetailsRow>
-            <DetailsRow title="Ethnicity">{person.ethnicity}</DetailsRow>
         </DetailsBlock>
 
           { services.map((service, ix) => (

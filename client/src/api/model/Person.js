@@ -61,9 +61,6 @@ export default class Person {
             if (data.hasOwnProperty('gender')) {
                 obj['gender'] = ApiClient.convertToType(data['gender'], 'String');
             }
-            if (data.hasOwnProperty('ethnicity')) {
-                obj['ethnicity'] = ApiClient.convertToType(data['ethnicity'], 'String');
-            }
             if (data.hasOwnProperty('address')) {
                 obj['address'] = ApiClient.convertToType(data['address'], 'String');
             }
@@ -92,10 +89,6 @@ export default class Person {
     * @member {String} gender
     */
     gender = undefined;
-    /**
-    * @member {String} ethnicity
-    */
-    ethnicity = undefined;
     /**
     * @member {String} address
     */
