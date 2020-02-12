@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
-import {makeStyles} from "@material-ui/core/styles";
+import  {makeStyles } from "@material-ui/core/styles";
 import createFragment from 'react-addons-create-fragment';
 
 const useStyles = makeStyles(theme => ({
@@ -117,7 +117,6 @@ const LayoutData = ({data, schema, propName}) => {
 }
 
 const ServiceDetails = ({ details }) => {
-    const classes = useStyles();
     return (
         <LayoutData data={details.data} schema={details.schema}/>
     )

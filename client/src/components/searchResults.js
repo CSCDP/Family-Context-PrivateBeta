@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Paper, Typography } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import Layout from "./layout"
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -7,7 +7,7 @@ import { PersonApi } from "../api";
 
 import { longDateFormat as dateFormat } from "../helpers/formatters"
 import {Link} from "react-router-dom";
-import {blue, red} from "@material-ui/core/colors";
+import {blue} from "@material-ui/core/colors";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,19 +34,19 @@ const colSpec = {
     "dob": 2,
     "adr": 3,
     "view": 1,
-}
+};
 
 const Search = () => {
-    const classes = useStyles();
+    const classes = useStyles({});
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const person = await personApi.searchPerson({firstName: "", lastName: ""})
+            const person = await personApi.searchPerson({firstName: "", lastName: ""});
             setData(person);
         };
-        fetchData();
+        fetchData().then(() => {});
     }, []);
 
 
@@ -70,7 +70,7 @@ const Search = () => {
                         <Grid item xs={colSpec.view}>
                         </Grid>
                     </Grid>
-                    { data.map((person, ix) => (
+                    { data.map(person => (
                         <Grid key={person.id} container spacing={2} alignItems="stretch" direction="row">
                             <Grid item xs={colSpec.fn}>
                                 {person.firstName}
@@ -94,6 +94,6 @@ const Search = () => {
             </div>
         </Layout>
     )
-}
+};
 
 export default Search

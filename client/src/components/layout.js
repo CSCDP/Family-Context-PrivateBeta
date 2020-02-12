@@ -40,16 +40,16 @@ const useStyles = makeStyles(theme => ({
 
 
 const Layout = ({loginPage, children}) => {
-    const classes = useStyles();
+    const classes = useStyles({});
     const authentication = useSelector(state => state.authentication);
     const dispatch = useDispatch();
 
     const Link = loginPage ? ({children}) => (<>{children}</>) : RouterLink;
 
-    const clickEndSession = async event => {
-        const response = await signOut();
+    const clickEndSession = async () => {
+        await signOut();
         dispatch(checkAuthState());
-    }
+    };
     return (
         <div className={classes.root}>
             <CssBaseline/>
