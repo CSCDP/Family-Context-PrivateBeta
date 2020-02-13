@@ -13,7 +13,7 @@ def parse_openapi(filename):
 
     result_list = []
     for name, definition in schema.items():
-        for prop, prop_def in definition["properties"].items():
+        for prop, prop_def in definition.get("properties", {}).items():
             result = dict(
                 object=name,
                 object_desc=definition.get('description', ''),
