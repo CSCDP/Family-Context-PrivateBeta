@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Link, Route } from 'react-router-dom';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div>
     <Route exact path="/" component={Home} />
@@ -12,7 +12,7 @@ function App() {
   );
 }
 
-function Home(){
+const Home: React.FC = () => {
   return (    <div className="App">
   <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
@@ -28,7 +28,7 @@ function Home(){
 }
 
 
-function Alternate(){
+const Alternate: React.FC = () => {
   return (    
   <div className="App">
   <header className="App-header">
