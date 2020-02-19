@@ -1,7 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Table from './components/Table';
+import TableBody from './components/TableBody';
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
 }
 
 const Home: React.FC = () => {
+  let rowValues: any = [["First name", "Charlie"], ["Last name", "Brooks"], ["Date of Birth", "10/07/2012"], ["Gender", "Male"], ["Address", "17 Lighthorne Road \n Stockport \n SK3 0QD"]];
   return (
     <div className="App">
       <header className="header">
@@ -32,6 +34,9 @@ const Home: React.FC = () => {
           <div className="govuk-grid-row">
 
             <div className="govTableDiv">
+              <Table>
+                <TableBody rowList={rowValues}></TableBody>
+              </Table>
             </div>
           </div>
 
