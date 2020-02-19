@@ -12,33 +12,31 @@ const App: React.FC = () => {
 }
 
 const Home: React.FC = () => {
-  return (<div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-    </p>
-      <Link to="/alternate">
-        Other page
-    </Link>
-    </header>
-  </div>
-  );
-}
-
-
-const Alternate: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Alternate page reached through react router.
-    </p>
-        <Link to="/">
-          Back to home
-    </Link>
+      <header className="header">
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-full">
+            <p className="family-context-header">Family context</p>
+          </div>
+        </div>
       </header>
+
+      <div className="govuk-width-container">
+
+        <main className="govuk-main-wrapper">
+
+          <a href="#" className="govuk-back-link">Back</a>
+          <h1 className="govuk-heading-m">Details of individual</h1>
+
+          <div className="govuk-grid-row">
+
+            <div className="govTableDiv">
+            </div>
+          </div>
+
+        </main>
+      </div>
     </div>
   );
 }
