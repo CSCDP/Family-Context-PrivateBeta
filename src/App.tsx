@@ -7,7 +7,6 @@ const App: React.FC = () => {
   return (
     <Router>
       <Route exact path="/" component={Home} />
-      <Route path="/alternate" component={Alternate} />
     </Router>
   );
 }
