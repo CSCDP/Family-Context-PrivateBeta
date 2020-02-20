@@ -1,24 +1,15 @@
 import React from 'react';
-import Table from '../components/Table';
-import TableBody from '../components/TableBody';
+import BasicDetails from '../components/BasicDetails';
+import PersonDetails from '../models/PersonDetails';
 
-const Home: React.FC = () => {
-    let rowValues: any = [["First name", "Charlie"], ["Last name", "Brooks"], ["Date of Birth", "10/07/2012"], ["Gender", "Male"], ["Address", "17 Lighthorne Road \n Stockport \n SK3 0QD"]];
-    return (
-      <div className="IndividualPage">
-        <a href="#" className="govuk-back-link">Back</a>
-        <h1 className="govuk-heading-m">Details of individual</h1>
-  
-        <div className="govuk-grid-row">
-  
-          <div className="govTableDiv">
-            <Table>
-              <TableBody rowList={rowValues}></TableBody>
-            </Table>
-          </div>
-        </div>
-      </div>
-    );
-  }
+const IndividualPage: React.FC = () => {
+  let person: PersonDetails = {address: "17 Lighthorne Road \n Stockport \n SK3 0QD", dateOfBirth: "10/07/2012", ethnicity: "Jedi", firstName: "Charlie", gender: "Male", id:10, lastName:"Brooks"}
+  return (
+    <div className="IndividualPage">
+      <a href="#" className="govuk-back-link">Back</a>
+      <BasicDetails personDetails={person}></BasicDetails>
+    </div>
+  );
+}
 
-  export default Home;
+export default IndividualPage;

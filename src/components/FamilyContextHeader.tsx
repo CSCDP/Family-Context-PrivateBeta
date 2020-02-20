@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FamilyContextHeader: React.FC<any> = (props: any) => {
+const FamilyContextHeader: React.FC<any> = () => {
     return (
         <header className="header">
         <div className="govuk-grid-row">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Table: React.FC<any> = (props: any) => {
+const Table: React.FC = (props) => {
     return (
         <table className="govuk-table govuk-!-margin-4">
             {props.children}
