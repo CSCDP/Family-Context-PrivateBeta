@@ -14,11 +14,11 @@ const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { perso
                 <div className="govTableDiv">
                     <Table>
                         <TableBody>
-                            <TitleValuePair rowTitle="First name" rowValue={props.personDetails.firstName} />
-                            <TitleValuePair rowTitle="Last name" rowValue={props.personDetails.lastName} />
-                            <TitleValuePair rowTitle="Date of Birth" rowValue={props.personDetails.dateOfBirth} />
-                            <TitleValuePair rowTitle="Gender" rowValue={props.personDetails.gender} />
-                            <TitleValuePair rowTitle="Address" rowValue={props.personDetails.address} />
+                            <TitleValuePair rowTitle="First name" rowValue={props.personDetails.firstName} format=""/>
+                            <TitleValuePair rowTitle="Last name" rowValue={props.personDetails.lastName} format=""/>
+                            <TitleValuePair rowTitle="Date of Birth" rowValue={props.personDetails.dateOfBirth} format=""/>
+                            <TitleValuePair rowTitle="Gender" rowValue={props.personDetails.gender} format=""/>
+                            <TitleValuePair rowTitle="Address" rowValue={props.personDetails.address} format=""/>
                         </TableBody>
                     </Table>
                 </div>

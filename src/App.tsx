@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import SmallAccordion from './components/SmallAccordion';
 import FamilyContextHeader from './components/FamilyContextHeader';
 import IndividualPage from './pages/IndividualPage';
 
@@ -15,8 +14,6 @@ const App: React.FC = () => {
           <Route exact path="/" component={IndividualPage} />
 
         </main>
-
-        <SmallAccordion Title="Titlething"></SmallAccordion>
       </div>
     </Router>
   );
