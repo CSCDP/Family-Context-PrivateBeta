@@ -1,13 +1,11 @@
 import React from 'react';
-import TableRow from './TableRow';
+import TitleValuePair from './TitleValuePair';
 
-const TableBody: React.FC<any> = (props: any) => {
+const TableBody: React.FC<{children: any}> = (props) => {
     return (
         <tbody className="govuk-table__body">
-                {props.rowList.map((rowList: any) => (
-                    <TableRow rowTitle={rowList[0]} rowValue={rowList[1]}></TableRow>
-                ))}
-            </tbody>
+            {props.children}
+        </tbody>
     )
 }
 
