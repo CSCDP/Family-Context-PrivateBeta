@@ -1,46 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import FamilyContextHeader from './components/FamilyContextHeader';
+import IndividualPage from './pages/IndividualPage';
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Route exact path="/" component={Home} />
-      <Route path="/alternate" component={Alternate} />
+      <FamilyContextHeader />
+      <div className="govuk-width-container">
+        <main className="govuk-main-wrapper">
+
+          <Route exact path="/" component={IndividualPage} />
+
+        </main>
+      </div>
     </Router>
-  );
-}
-
-const Home: React.FC = () => {
-  return (<div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-    </p>
-      <Link to="/alternate">
-        Other page
-    </Link>
-    </header>
-  </div>
-  );
-}
-
-
-const Alternate: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Alternate page reached through react router.
-    </p>
-        <Link to="/">
-          Back to home
-    </Link>
-      </header>
-    </div>
   );
 }
 
