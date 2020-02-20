@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface PersonDetails {
     address: string,
     dateOfBirth: string,
