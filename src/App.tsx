@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Table from './components/Table';
 import TableBody from './components/TableBody';
+import SmallAccordion from './components/SmallAccordion';
 
 const App: React.FC = () => {
   return (
@@ -41,6 +42,8 @@ const Home: React.FC = () => {
           </div>
 
         </main>
+
+        <SmallAccordion Title="Titlething"></SmallAccordion>
       </div>
     </div>
   );
