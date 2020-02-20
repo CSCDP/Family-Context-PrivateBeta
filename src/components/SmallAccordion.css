@@ -1,0 +1,8 @@
+.toggle {
+    position: absolute;
+    background-color: white;
+    border: white;
+}
+.span {
+    float: right;
+}
