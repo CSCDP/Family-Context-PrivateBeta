@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import FamilyContextHeader from './components/FamilyContextHeader';
 import IndividualPage from './pages/IndividualPage';
+import PageSpacing from './components/PageSpacing';
 import ApiClient from './clients/ApiClient';
 
 class App extends Component<any, any> {
@@ -38,11 +39,9 @@ class App extends Component<any, any> {
     return (
       <Router>
         <FamilyContextHeader />
-        <div className="govuk-width-container">
-          <main className="govuk-main-wrapper">
+          <PageSpacing>
             {this.getRoutes(this.state.isAuthenticated)}
-          </main>
-        </div>
+          </PageSpacing>
       </Router>
     );
   }
