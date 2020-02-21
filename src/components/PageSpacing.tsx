@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GovSpacing: React.FC = (props) => {
+const PageSpacing: React.FC = (props) => {
     return (
         <div className="govuk-width-container">
             <main className="govuk-main-wrapper">
@@ -10,4 +10,4 @@ const GovSpacing: React.FC = (props) => {
     )
 }
 
-export default GovSpacing;
+export default PageSpacing;
