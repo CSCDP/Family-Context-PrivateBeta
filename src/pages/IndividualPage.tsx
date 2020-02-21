@@ -14,7 +14,7 @@ const IndividualPage: React.SFC = () => {
       <BasicDetails personDetails={person}></BasicDetails>
       <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
         <SmallAccordion title="Adult Social Care" serviceInvolvement={serviceInvolvementDetails} personDetails={person}></SmallAccordion>
-        <SmallAccordion title="Police" serviceInvolvement={serviceInvolvementDetails} personDetails={person}></SmallAccordion>
+        <SmallAccordion title="Police" serviceInvolvement={serviceInvolvementDetails} ></SmallAccordion>
       </div>
       <script>window.GOVUKFrontend.initAll({accordionCommand})</script>
     </div>
