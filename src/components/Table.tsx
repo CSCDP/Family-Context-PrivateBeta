@@ -4,7 +4,7 @@ const Table: React.FC = (props) => {
     return (
         <table className="govuk-table govuk-!-margin-4">
             {props.children}
-        </table> 
+        </table>
     )
 }
 
