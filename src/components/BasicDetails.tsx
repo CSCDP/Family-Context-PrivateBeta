@@ -8,9 +8,7 @@ const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { perso
     return (
         <div>
             <h1 className="govuk-heading-m">Details of individual</h1>
-
             <div className="govuk-grid-row">
-
                 <div className="govTableDiv">
                     <Table>
                         <TableBody>

@@ -1,15 +1,15 @@
 import React from 'react';
 
-const FamilyContextHeader: React.FC<any> = () => {
-    return (
-        <header className="header">
-        <div className="govuk-grid-row">
-          <div className="govuk-grid-column-full">
-            <p className="family-context-header">Family context</p>
-          </div>
+const FamilyContextHeader: React.FC = () => {
+  return (
+    <header className="header">
+      <div className="govuk-grid-row">
+        <div className="govuk-grid-column-full">
+          <p className="family-context-header">Family context</p>
         </div>
-      </header>
-    )
+      </div>
+    </header>
+  )
 }
 
 export default FamilyContextHeader;
