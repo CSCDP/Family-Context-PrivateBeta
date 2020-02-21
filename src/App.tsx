@@ -3,7 +3,6 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import FamilyContextHeader from './components/FamilyContextHeader';
 import IndividualPage from './pages/IndividualPage';
-import SmallAccordion from './components/Accordion';
 
 const App: React.FC = () => {
   let command: any = {scope: document.getElementById("accordions")}
