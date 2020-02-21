@@ -5,14 +5,16 @@ import TableBody from './TableBody';
 import TitleValuePair from './TitleValuePair';
 import AccordionHeader from './AccordionHeader';
 import AccordionSummary from './AccordionSummary';
+import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
 
-const Accordion: React.FC<{ title: string, summary: string, personDetails: PersonDetails }> = (props: { title: string, summary: string, personDetails: PersonDetails }) => {
+const Accordion: React.FC<{ title: string, serviceInvolvement: ServiceInvolvementDetailsSummary, personDetails: PersonDetails }> = (props: { title: string, serviceInvolvement: ServiceInvolvementDetailsSummary, personDetails: PersonDetails }) => {
 
   return (
     <div className="govuk-accordion__section">
       <div className="govuk-accordion__section-header">
         <AccordionHeader title={props.title} />
-        <AccordionSummary summary={props.summary} />
+        
+        <AccordionSummary serviceInvolvement={props.serviceInvolvement} />
       </div>
       <div id="accordion-with-summary-sections-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-with-summary-sections-heading-1">
         <Table>
