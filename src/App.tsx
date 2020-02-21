@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <div className="govuk-width-container">
         <main className="govuk-main-wrapper">
 
-        <IndividualPage />
+          <Route exact path="/" component={IndividualPage} />
 
         </main>
       </div>
