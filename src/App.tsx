@@ -7,11 +7,19 @@ import PageSpacing from './components/PageSpacing';
 import ApiClient from './clients/ApiClient';
 
 class App extends Component<any, any> {
-  private apiClient: ApiClient = new ApiClient("https://localhost:44332")
+  private apiClient: ApiClient;
 
   constructor(props: any){
     super(props);
     this.state = {isAuthenticated: false};
+    console.log(this.state)
+    this.apiClient = new ApiClient("https://localhost:44332", this.updateAuthenticationStatus);
+  }
+
+private updateAuthenticationStatus = (status: boolean) => {
+    if (status !== this.state.isAuthenticated) {
+      this.setState({...this.state, isAuthenticated: status})
+    }
   }
 
   componentDidMount() {
