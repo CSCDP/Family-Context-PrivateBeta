@@ -12,8 +12,7 @@ class App extends Component<any, any> {
   constructor(props: any){
     super(props);
     this.state = {isAuthenticated: false};
-    console.log(this.state)
-    this.apiClient = new ApiClient("https://localhost:44332", this.updateAuthenticationStatus);
+    this.apiClient = new ApiClient(process.env.REACT_APP_API_BASE_URL ?? "", this.updateAuthenticationStatus);
   }
 
 private updateAuthenticationStatus = (status: boolean) => {

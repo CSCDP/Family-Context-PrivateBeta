@@ -18,7 +18,7 @@ class ApiClient {
      * cookies. We use the XMLHttpRequest for logging in to get round this limitation.
      */
     async login(loginDetails: LoginDetails): Promise<boolean> {
-        var loginPath = "/api/auth/login"
+        var loginPath = "/auth/login"
 
         return new Promise((resolve, reject) => {
             var request = new XMLHttpRequest();
@@ -44,7 +44,7 @@ class ApiClient {
     }
 
     async isLoggedIn(): Promise<boolean> {
-        var statusPath = "/api/auth/status"
+        var statusPath = "/auth/status"
         try {   
             var response = await this.getRequest(statusPath)
             return (response.status === 200)
