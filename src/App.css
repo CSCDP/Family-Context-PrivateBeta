@@ -10,3 +10,16 @@
 .family-context-header {
   align-items: center;
 }
+
+.LoginPage {
+  padding-top: 30px;
+}
+
+.LoginPage button {
+  margin-top: 15px;
+  background-color: #1d70b8 
+}
+
+.LoginPage button:hover {
+  background-color: #003078 
+}
