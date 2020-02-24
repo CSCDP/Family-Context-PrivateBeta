@@ -6,7 +6,6 @@ import IndividualPage from './pages/IndividualPage';
 import PageSpacing from './components/PageSpacing';
 
 const App: React.FC = () => {
-  let command: any = {scope: document.getElementById("accordions")}
   return (
     <Router>
       <FamilyContextHeader />

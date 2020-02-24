@@ -1,4 +1,5 @@
 interface ServiceInvolvementDetailsSummary {
+    service: string,
     correctAsOf: string,
     syncedWith: string,
     syncedDuraction: string
