@@ -1,8 +1,8 @@
 import React from 'react';
-import Table from './Table';
-import TableBody from './TableBody';
+import Table from './Table/Table';
+import TableBody from './Table/TableBody';
 import PersonDetails from '../models/PersonDetails';
-import TitleValuePair from './TitleValuePair';
+import TitleValuePair from './Table/TitleValuePair';
 
 const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { personDetails: PersonDetails }) => {
 
