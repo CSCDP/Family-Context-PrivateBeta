@@ -16,7 +16,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
 
   constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
     super(props);
-    this.state = { address: "loading...", ethnicity: "loading...", firstName: "loading...", gender: "loading...", id: -1, lastName: "loading..." }
+    this.state = { address: "loading...", ethnicity: "loading...", firstName: "loading...", gender: "loading...", id: -1, lastName: "loading...", dateOfBirth: "loading..." }
   }
 
 
