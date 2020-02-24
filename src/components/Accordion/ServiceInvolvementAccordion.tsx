@@ -3,12 +3,13 @@ import PersonDetails from '../../models/PersonDetails';
 import AccordionHeader from './AccordionHeader';
 import ServiceInvolvementAccordionSummary from './ServiceInvolvementAccordionSummary';
 import ServiceInvolvementDetailsSummary from '../../models/ServiceInvolvementDetailsSummary';
-import BasicDetails from '../BasicDetails';
 import AccordionSection from './AccordionSection';
 import AccordionSectionHeader from './AccordionSectionHeader';
 import AccordionContent from './AccordionContent';
+import Table from '../Table/Table';
+import TableBody from '../Table/TableBody';
+import TitleValuePair from '../Table/TitleValuePair';
 
-//todo: change personDetails to serviceInvolvementDetailsContent
 const ServiceInvolvementAccordion: React.FC<{ serviceInvolvement: ServiceInvolvementDetailsSummary, serviceDetailsContent?: PersonDetails }> = (props: { serviceInvolvement: ServiceInvolvementDetailsSummary, serviceDetailsContent?: PersonDetails }) => {
 
   function RecordsFound() {
@@ -30,7 +31,15 @@ const ServiceInvolvementAccordion: React.FC<{ serviceInvolvement: ServiceInvolve
   function Content() {
     if (props.serviceDetailsContent) {
       return <AccordionContent>
-        <BasicDetails personDetails={props.serviceDetailsContent}></BasicDetails>
+        <Table>
+          <TableBody>
+            <TitleValuePair rowTitle="First name" rowValue={props.serviceDetailsContent.firstName} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="Last name" rowValue={props.serviceDetailsContent.lastName} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="Date of Birth" rowValue={props.serviceDetailsContent.dateOfBirth} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="Gender" rowValue={props.serviceDetailsContent.gender} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="Address" rowValue={props.serviceDetailsContent.address} format="govuk-!-font-size-14" />
+          </TableBody>
+        </Table>
       </AccordionContent>
     } else {
       return <div></div>
