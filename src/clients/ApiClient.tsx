@@ -2,7 +2,7 @@ import LoginDetails from "../models/LoginDetails";
 
 class ApiClient {
     private baseUrl: string
-    authenticationCallback: (newStatus: boolean) => void
+    private authenticationCallback: (newStatus: boolean) => void
 
     constructor(baseUrl: string, authenticationCallback: (newStatus: boolean) => void) {
         this.baseUrl = baseUrl;
