@@ -29,30 +29,30 @@ const ServiceInvolvementAccordion: React.FC<{ serivceInvolvementDetails: Service
 
   function Content() {
     if (props.serivceInvolvementDetails.serviceInvolvementContent) {
-      return <AccordionContent>
-        <Table>
-          <TableBody>
-            <TitleValuePair rowTitle="First name" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.firstName} format="govuk-!-font-size-14" />
-            <TitleValuePair rowTitle="Last name" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.lastName} format="govuk-!-font-size-14" />
-            <TitleValuePair rowTitle="Date of Birth" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.dateOfBirth} format="govuk-!-font-size-14" />
-            <TitleValuePair rowTitle="Gender" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.gender} format="govuk-!-font-size-14" />
-            <TitleValuePair rowTitle="Address" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.address} format="govuk-!-font-size-14" />
-          </TableBody>
-        </Table>
-      </AccordionContent>
+      return <AccordionSection>
+        <AccordionSectionHeader>
+          <AccordionHeader title={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary.service} recordsFound={RecordsFound()}></AccordionHeader>
+          <ServiceInvolvementAccordionSummary serviceInvolvement={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary} />
+        </AccordionSectionHeader>
+        <AccordionContent>
+          <Table>
+            <TableBody>
+              <TitleValuePair rowTitle="First name" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.firstName} format="govuk-!-font-size-14" />
+              <TitleValuePair rowTitle="Last name" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.lastName} format="govuk-!-font-size-14" />
+              <TitleValuePair rowTitle="Date of Birth" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.dateOfBirth} format="govuk-!-font-size-14" />
+              <TitleValuePair rowTitle="Gender" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.gender} format="govuk-!-font-size-14" />
+              <TitleValuePair rowTitle="Address" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.address} format="govuk-!-font-size-14" />
+            </TableBody>
+          </Table>
+        </AccordionContent>
+      </AccordionSection>
     } else {
       return <div></div>
     }
   }
 
   return (
-    <AccordionSection>
-      <AccordionSectionHeader>
-        <AccordionHeader title={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary.service}  recordsFound={RecordsFound()}></AccordionHeader>
-        <ServiceInvolvementAccordionSummary serviceInvolvement={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary} />
-      </AccordionSectionHeader>
-      <Content />
-    </AccordionSection>
+    <Content />
   )
 }
 
