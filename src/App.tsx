@@ -6,6 +6,7 @@ import LoginPage  from './pages/LoginPage';
 import IndividualPage from './pages/IndividualPage';
 import PageSpacing from './components/PageSpacing';
 import ApiClient from './clients/ApiClient';
+import LoginDetails from './models/LoginDetails';
 
 class App extends Component<any, any> {
   private apiClient: ApiClient;
@@ -34,7 +35,7 @@ private updateAuthenticationStatus = (status: boolean) => {
       )
     } else {
       return (
-        <Route render={(props) => <LoginPage {...props} login={this.apiClient.login.bind(this.apiClient)}/>} />
+        <Route render={(props) => <LoginPage {...props} login={(loginDetails: LoginDetails) => this.apiClient.login(loginDetails)}/>} />
       );
     }
   }
