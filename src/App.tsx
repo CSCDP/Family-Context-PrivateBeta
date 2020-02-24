@@ -29,7 +29,7 @@ private updateAuthenticationStatus = (status: boolean) => {
   getRoutes(isAuthenticated: boolean) {
     if (isAuthenticated) {
       return (
-        <Route exact path="/" component={IndividualPage} />
+        <Route path="/person/:personId" render={(props) => <IndividualPage {...props} client={this.apiClient}/>} />
       )
     } else {
       return (

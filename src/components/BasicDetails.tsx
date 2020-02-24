@@ -5,6 +5,8 @@ import PersonDetails from '../models/PersonDetails';
 import TitleValuePair from './TitleValuePair';
 
 const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { personDetails: PersonDetails }) => {
+
+    let date = new Date(props.personDetails.dateOfBirth ?? "");
     return (
         <div>
             <h1 className="govuk-heading-m">Details of individual</h1>
@@ -14,7 +16,7 @@ const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { perso
                         <TableBody>
                             <TitleValuePair rowTitle="First name" rowValue={props.personDetails.firstName} />
                             <TitleValuePair rowTitle="Last name" rowValue={props.personDetails.lastName} />
-                            <TitleValuePair rowTitle="Date of Birth" rowValue={props.personDetails.dateOfBirth} />
+                            <TitleValuePair rowTitle="Date of Birth" rowValue={date.toLocaleDateString()} />
                             <TitleValuePair rowTitle="Gender" rowValue={props.personDetails.gender} />
                             <TitleValuePair rowTitle="Address" rowValue={props.personDetails.address} />
                         </TableBody>

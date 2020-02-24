@@ -1,6 +1,6 @@
 interface PersonDetails {
     address: string,
-    dateOfBirth: string,
+    dateOfBirth?: Date,
     ethnicity: string,
     firstName: string,
     gender: string,
