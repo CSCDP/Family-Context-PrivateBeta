@@ -9,8 +9,10 @@ type LoginDetails = {
 
 const LoginPage: React.FC<RouteComponentProps> = (props) => {
   let loginDetails: LoginDetails = {username: "", password: ""}
+  let loginAction: () => void = () => {props.history.push('/person')}
+
   return (
-    <form className="LoginPage" onSubmit={(event) => login(event, props, loginDetails)}>
+    <form className="LoginPage" onSubmit={(event) => login(event, loginAction, loginDetails)}>
         <TextInputGroup onChange={(text: string) => loginDetails.username = text} id="username" name="Username"/>
         <PasswordInputGroup onChange={(text: string) => loginDetails.password = text} />
         <button className="govuk-button" data-module="govuk-button">
@@ -20,8 +22,8 @@ const LoginPage: React.FC<RouteComponentProps> = (props) => {
   );
 }
 
-function login(formEvent: React.FormEvent<HTMLFormElement>, props: RouteComponentProps, login: LoginDetails) {
-    props.history.push('/person')
+function login(formEvent: React.FormEvent<HTMLFormElement>, loginAction: () => void, loginDetails: LoginDetails) {
+    loginAction()
     formEvent.preventDefault()
 }
 
