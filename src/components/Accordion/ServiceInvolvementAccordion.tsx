@@ -1,19 +1,18 @@
 import React from 'react';
-import PersonDetails from '../../models/PersonDetails';
 import AccordionHeader from './AccordionHeader';
 import ServiceInvolvementAccordionSummary from './ServiceInvolvementAccordionSummary';
-import ServiceInvolvementDetailsSummary from '../../models/ServiceInvolvementDetailsSummary';
 import AccordionSection from './AccordionSection';
 import AccordionSectionHeader from './AccordionSectionHeader';
 import AccordionContent from './AccordionContent';
 import Table from '../Table/Table';
 import TableBody from '../Table/TableBody';
 import TitleValuePair from '../Table/TitleValuePair';
+import ServiceInvolvementDetails from '../../models/ServiceInvolvementDetails';
 
-const ServiceInvolvementAccordion: React.FC<{ serviceInvolvement: ServiceInvolvementDetailsSummary, serviceDetailsContent?: PersonDetails }> = (props: { serviceInvolvement: ServiceInvolvementDetailsSummary, serviceDetailsContent?: PersonDetails }) => {
+const ServiceInvolvementAccordion: React.FC<{ serivceInvolvementDetails: ServiceInvolvementDetails }> = (props: { serivceInvolvementDetails: ServiceInvolvementDetails }) => {
 
   function RecordsFound() {
-    if (props.serviceDetailsContent) {
+    if (props.serivceInvolvementDetails.serviceInvolvementContent) {
       return true;
     } else {
       return false;
@@ -21,7 +20,7 @@ const ServiceInvolvementAccordion: React.FC<{ serviceInvolvement: ServiceInvolve
   }
 
   function RecordsFoundLabel() {
-    if (props.serviceDetailsContent) {
+    if (props.serivceInvolvementDetails.serviceInvolvementContent) {
       return <div>RECORDS AVAILABLE</div>
     } else {
       return <div>NO RECORDS FOUND</div>
@@ -29,15 +28,15 @@ const ServiceInvolvementAccordion: React.FC<{ serviceInvolvement: ServiceInvolve
   }
 
   function Content() {
-    if (props.serviceDetailsContent) {
+    if (props.serivceInvolvementDetails.serviceInvolvementContent) {
       return <AccordionContent>
         <Table>
           <TableBody>
-            <TitleValuePair rowTitle="First name" rowValue={props.serviceDetailsContent.firstName} format="govuk-!-font-size-14" />
-            <TitleValuePair rowTitle="Last name" rowValue={props.serviceDetailsContent.lastName} format="govuk-!-font-size-14" />
-            <TitleValuePair rowTitle="Date of Birth" rowValue={props.serviceDetailsContent.dateOfBirth} format="govuk-!-font-size-14" />
-            <TitleValuePair rowTitle="Gender" rowValue={props.serviceDetailsContent.gender} format="govuk-!-font-size-14" />
-            <TitleValuePair rowTitle="Address" rowValue={props.serviceDetailsContent.address} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="First name" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.firstName} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="Last name" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.lastName} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="Date of Birth" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.dateOfBirth} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="Gender" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.gender} format="govuk-!-font-size-14" />
+            <TitleValuePair rowTitle="Address" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent.address} format="govuk-!-font-size-14" />
           </TableBody>
         </Table>
       </AccordionContent>
@@ -49,8 +48,8 @@ const ServiceInvolvementAccordion: React.FC<{ serviceInvolvement: ServiceInvolve
   return (
     <AccordionSection>
       <AccordionSectionHeader>
-        <AccordionHeader title={props.serviceInvolvement.service} recordsFound={RecordsFound()}></AccordionHeader>
-        <ServiceInvolvementAccordionSummary serviceInvolvement={props.serviceInvolvement} />
+        <AccordionHeader title={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary.service}  recordsFound={RecordsFound()}></AccordionHeader>
+        <ServiceInvolvementAccordionSummary serviceInvolvement={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary} />
       </AccordionSectionHeader>
       <Content />
     </AccordionSection>

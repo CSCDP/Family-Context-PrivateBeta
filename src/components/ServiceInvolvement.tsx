@@ -1,30 +1,20 @@
 import React from 'react';
 import ServiceInvolvementAccordion from './Accordion/ServiceInvolvementAccordion';
-import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
-import PersonDetails from '../models/PersonDetails';
+import ServiceInvolvementDetails from '../models/ServiceInvolvementDetails';
 
-declare global {
-    interface Window { GOVUKFrontend: any }
-}
-
-interface ServiceInvolvementList {
-    serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, 
-    serviceDetailsContent?: PersonDetails //todo: change this
-}
-
-class ServiceInvolvement extends React.Component<{ serviceInvolvementList: ServiceInvolvementList[] }> {
+class ServiceInvolvement extends React.Component<{ serivceInvolvementDetails: ServiceInvolvementDetails[]}> {
 
     componentDidMount() {
-        var govUkInitCommand = document.getElementById("service-involvements");
-        window.GOVUKFrontend.initAll({ scope: govUkInitCommand });
+        var serviceInvolvementElements = document.getElementById("service-involvements");
+        window.GOVUKFrontend.initAll({ scope: serviceInvolvementElements });
     }
 
     render() {
         return (
             <div id="service-involvements">
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
-                    {this.props.serviceInvolvementList.map(serviceInvolvement => (
-                        <ServiceInvolvementAccordion serviceInvolvement={serviceInvolvement.serviceInvolvementDetailsSummary} serviceDetailsContent={serviceInvolvement.serviceDetailsContent} />
+                    {this.props.serivceInvolvementDetails.map(serviceInvolvement => (
+                        <ServiceInvolvementAccordion serivceInvolvementDetails={serviceInvolvement} />
                     ))}
                 </div>
             </div>
