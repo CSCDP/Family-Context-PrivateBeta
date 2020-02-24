@@ -30,11 +30,11 @@ private updateAuthenticationStatus = (status: boolean) => {
   getRoutes(isAuthenticated: boolean) {
     if (isAuthenticated) {
       return (
-        <Route exact path="/person" component={IndividualPage} />
+        <Route exact path="/" component={IndividualPage} />
       )
     } else {
       return (
-        <Route component={LoginPage} />
+        <Route render={(props) => <LoginPage {...props} login={this.apiClient.login.bind(this.apiClient)}/>} />
       );
     }
   }
