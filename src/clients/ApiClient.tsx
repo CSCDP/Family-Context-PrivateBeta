@@ -1,4 +1,5 @@
 import LoginDetails from "../models/LoginDetails";
+import PersonDetails from "../models/PersonDetails";
 
 class ApiClient {
     private baseUrl: string
@@ -51,6 +52,12 @@ class ApiClient {
         } catch {
             return false
         }
+    }
+
+    async getPerson(personId: string): Promise<PersonDetails> {
+        let personDetailsPath = "/person/details/" + personId;
+        let response = await this.getRequest(personDetailsPath);
+        return response.json() as Promise<PersonDetails>;
     }
 
     async getRequest(relativePath: string): Promise<Response> {
