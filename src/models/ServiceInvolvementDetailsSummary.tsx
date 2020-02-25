@@ -1,8 +1,10 @@
 interface ServiceInvolvementDetailsSummary {
-    service: string,
-    correctAsOf: string,
-    syncedWith: string,
-    syncedDuraction: string
+    title: string,
+    lastSynchronized: string,
+    recordsAvailable: boolean,
+    coverageStartDate: string,
+    coverageEndDate: string,
+    id: number
 }
 
 export default ServiceInvolvementDetailsSummary;
