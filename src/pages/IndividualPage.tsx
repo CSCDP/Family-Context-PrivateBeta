@@ -1,25 +1,41 @@
 import React from 'react';
 import BasicDetails from '../components/BasicDetails';
 import PersonDetails from '../models/PersonDetails';
-import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
-import ServiceInvolvement from '../components/ServiceInvolvement';
-import ServiceInvolvementDetails from '../models/ServiceInvolvementDetails';
 import { RouteComponentProps } from 'react-router-dom';
+import ApiClient from '../clients/ApiClient';
 import BackButton from '../components/BackButton';
-import TitleValuePair from '../models/TitleValuePair';
+import ServiceInvolvement from '../components/ServiceInvolvement';
 
-const IndividualPage: React.FC<RouteComponentProps> = (props) => {
-  let person: PersonDetails = { address: "17 Lighthorne Road \n Stockport \n SK3 0QD", dateOfBirth: "10/07/2012", ethnicity: "Jedi", firstName: "Charlie", gender: "Male", id: 10, lastName: "Brooks" }
-  let serviceInvolvementDetailsSummary2: ServiceInvolvementDetailsSummary = { title:"Police", coverageStartDate: "31/10/2017", coverageEndDate: "04/11/2019", recordsAvailable: true, id: 1, lastSynchronized: "04/11/2019"}
-  let content: TitleValuePair[] = [{title: "Service Involvement", value: "Current"}, {title: "Police Contact", value: "Jason Davies"}, {title: "Lead practitioner contact", value: ""}, {title: "Last offence", value: ""}, {title: "Date of offence", value: ""}, {title: "Type of offence", value: "Domestic abuse"}, {title: "Nature of involvement", value: "Victim"}]
-  let serviceInvolvementDetails: ServiceInvolvementDetails = {serviceInvolvementDetailsSummary: serviceInvolvementDetailsSummary2, serviceInvolvementContent: content}
-  return (
-    <div className="IndividualPage">
-      {BackButton(props)}
-      <BasicDetails personDetails={person}></BasicDetails>
-      <ServiceInvolvement serivceInvolvementDetails={[serviceInvolvementDetails]} />
-    </div>
-  );
+interface PersonParams {
+  personId?: string
+}
+
+class IndividualPage extends React.Component<RouteComponentProps<PersonParams> & { client: ApiClient }, PersonDetails> {
+
+  constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
+    super(props);
+    this.state = { address: "loading...", ethnicity: "loading...", firstName: "loading...", gender: "loading...", id: -1, lastName: "loading...", dateOfBirth: "loading..." }
+  }
+
+
+  componentDidMount() {
+    let personId = this.props.match.params.personId
+    if (personId) {
+      this.props.client.getPerson(personId).then(personDetails => {
+        this.setState(personDetails);
+      });
+    }
+  }
+
+  render() {
+    return (
+      <div className="IndividualPage">
+        <BackButton {...this.props} />
+        <BasicDetails personDetails={this.state}></BasicDetails>
+        <ServiceInvolvement personDetails={this.state} />
+      </div>
+    );
+  }
 }
 
 export default IndividualPage;

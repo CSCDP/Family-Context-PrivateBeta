@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TitleValuePair: React.FC<{rowTitle: string, rowValue: string, format?: string}> = (props: {rowTitle: string, rowValue: string, format?: string}) => {
+const TitleValuePairTableRow: React.FC<{rowTitle: string, rowValue: string, format?: string}> = (props: {rowTitle: string, rowValue: string, format?: string}) => {
     return (
         <tr className="govuk-table__row">
             <td className={`govuk-table__cell ${props.format}`}>{props.rowTitle}</td>
@@ -9,4 +9,4 @@ const TitleValuePair: React.FC<{rowTitle: string, rowValue: string, format?: str
     )
 }
 
-export default TitleValuePair;
+export default TitleValuePairTableRow;

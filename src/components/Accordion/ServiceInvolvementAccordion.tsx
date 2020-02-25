@@ -6,61 +6,50 @@ import AccordionSectionHeader from './AccordionSectionHeader';
 import AccordionContent from './AccordionContent';
 import Table from '../Table/Table';
 import TableBody from '../Table/TableBody';
-import TitleValuePair from '../Table/TitleValuePair';
-import ServiceInvolvementDetails from '../../models/ServiceInvolvementDetails';
-import ServiceInvolvementCardSummary from '../ServiceInvolvementCardSummary';
-import CardHeader from '../CardHeader';
+import TitleValuePairTableRow from '../Table/TitleValuePair';
+import ServiceInvolvementDetailsSummary from '../../models/ServiceInvolvementDetailsSummary';
+import PersonDetails from '../../models/PersonDetails';
+import TitleValuePair from '../../models/TitleValuePair';
 
-const ServiceInvolvementAccordion: React.FC<{ serivceInvolvementDetails: ServiceInvolvementDetails }> = (props: { serivceInvolvementDetails: ServiceInvolvementDetails }) => {
+const ServiceInvolvementAccordion: React.FC<{ personDetails: PersonDetails }> = (props: { personDetails: PersonDetails }) => {
 
-  function RecordsFoundLabel() {
-    if (props.serivceInvolvementDetails.serviceInvolvementContent) {
-      return <div>RECORDS AVAILABLE</div>
+  function Content() {
+    if (props.personDetails.id > 0) {
+      let serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary = { title: "Police", coverageStartDate: "31/10/2017", coverageEndDate: "04/11/2019", recordsAvailable: true, id: 1, lastSynchronized: "04/11/2019" }
+      return <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
+        <AccordionSection>
+          <AccordionSectionHeader>
+            <AccordionHeader title={serviceInvolvementDetailsSummary.title}></AccordionHeader>
+            <ServiceInvolvementAccordionSummary serviceInvolvement={serviceInvolvementDetailsSummary} />
+          </AccordionSectionHeader>
+          <TableContent recordsAvailable={serviceInvolvementDetailsSummary.recordsAvailable} ></TableContent>
+        </AccordionSection>
+      </div>
     } else {
-      return <div>NO RECORDS FOUND</div>
+      return null;
     }
   }
 
-  // function Content() {
-  //   if (true) {
-  //     return <AccordionSection>
-  //       <AccordionSectionHeader>
-  //         <AccordionHeader title={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary.service}></AccordionHeader>
-  //         <ServiceInvolvementAccordionSummary serviceInvolvement={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary} />
-  //       </AccordionSectionHeader>
-  //       <AccordionContent>
-  //         <Table>
-  //           <TableBody>
-  //             <TitleValuePair rowTitle="First name" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent?.firstName ?? ""} format="govuk-!-font-size-14" />
-  //             <TitleValuePair rowTitle="Last name" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent?.lastName ?? ""} format="govuk-!-font-size-14" />
-  //             <TitleValuePair rowTitle="Date of Birth" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent?.dateOfBirth ?? ""} format="govuk-!-font-size-14" />
-  //             <TitleValuePair rowTitle="Gender" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent?.gender ?? ""} format="govuk-!-font-size-14" />
-  //             <TitleValuePair rowTitle="Address" rowValue={props.serivceInvolvementDetails.serviceInvolvementContent?.address ?? ""} format="govuk-!-font-size-14" />
-  //           </TableBody>
-  //         </Table>
-  //       </AccordionContent>
-  //     </AccordionSection>
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  function TableContent(props: { recordsAvailable: boolean; }) {
+    const recordsAvailable = props.recordsAvailable;
+    if (recordsAvailable) {
+      let content: TitleValuePair[] = [{ title: "Service Involvement", value: "Current" }, { title: "Police Contact", value: "Jason Davies" }, { title: "Lead practitioner contact", value: "" }, { title: "Last offence", value: "" }, { title: "Date of offence", value: "" }, { title: "Type of offence", value: "Domestic abuse" }, { title: "Nature of involvement", value: "Victim" }]
+      return <AccordionContent>
+        <Table>
+          <TableBody>
+            {content.map(element => (
+              <TitleValuePairTableRow rowTitle={element.title} rowValue={element.value} format="govuk-!-font-size-14" />
+            ))}
+          </TableBody>
+        </Table>
+      </AccordionContent>
+    } else {
+      return null;
+    }
+  }
 
   return (
-    <AccordionSection>
-        <AccordionSectionHeader>
-          <AccordionHeader title={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary.title}></AccordionHeader>
-          <ServiceInvolvementAccordionSummary serviceInvolvement={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary} />
-        </AccordionSectionHeader>
-        <AccordionContent>
-          <Table>
-            <TableBody>
-              {props.serivceInvolvementDetails.serviceInvolvementContent.map(element => (
-        <TitleValuePair rowTitle={element.title} rowValue={element.value} format="govuk-!-font-size-14" />
-      ))}
-            </TableBody>
-          </Table>
-        </AccordionContent>
-      </AccordionSection>
+    <Content />
   )
 }
 
