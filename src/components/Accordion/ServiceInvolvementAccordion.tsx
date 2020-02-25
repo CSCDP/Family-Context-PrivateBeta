@@ -6,7 +6,7 @@ import AccordionSectionHeader from './AccordionSectionHeader';
 import AccordionContent from './AccordionContent';
 import Table from '../Table/Table';
 import TableBody from '../Table/TableBody';
-import TitleValuePairTableRow from '../Table/TitleValuePair';
+import TitleValuePairTableRow from '../Table/TitleValuePairTableRow';
 import ServiceInvolvementDetailsSummary from '../../models/ServiceInvolvementDetailsSummary';
 import PersonDetails from '../../models/PersonDetails';
 import TitleValuePair from '../../models/TitleValuePair';
