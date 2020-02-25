@@ -2,14 +2,16 @@ import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { TextInputGroup } from "./InputGroups";
 
-const CaseIdSearch: React.FC<RouteComponentProps> = (props) => {
+type CaseIdSearchProps = {
+    search: (caseId: string) => void
+}
+
+const CaseIdSearch: React.FC<CaseIdSearchProps> = (props) => {
     var caseId = "";
 
     var search = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) : void => {
         event.preventDefault();
-        if (caseId != "") {
-            props.history.push(`/person/${caseId}`)
-        }
+        props.search(caseId);
     }
 
     return (

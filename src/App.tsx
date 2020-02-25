@@ -7,7 +7,7 @@ import IndividualPage from './pages/IndividualPage';
 import PageSpacing from './components/PageSpacing';
 import ApiClient from './clients/ApiClient';
 import LoginDetails from './models/LoginDetails';
-import CaseIdSearch from './components/CaseIdSearch';
+import SearchPage from './pages/SearchPage';
 
 class App extends Component<any, any> {
   private apiClient: ApiClient;
@@ -33,7 +33,7 @@ private updateAuthenticationStatus = (status: boolean) => {
     if (isAuthenticated) {
       return (
         <>
-        <Route exact path="/" component={CaseIdSearch} />
+        <Route exact path="/" component={SearchPage} />
         <Route path="/person/:personId" render={(props) => <IndividualPage {...props} client={this.apiClient}/>} />
         </>
       )
