@@ -7,6 +7,7 @@ import IndividualPage from './pages/IndividualPage';
 import PageSpacing from './components/PageSpacing';
 import ApiClient from './clients/ApiClient';
 import LoginDetails from './models/LoginDetails';
+import SearchPage from './pages/SearchPage';
 
 class App extends Component<any, any> {
   private apiClient: ApiClient;
@@ -31,7 +32,10 @@ private updateAuthenticationStatus = (status: boolean) => {
   getRoutes(isAuthenticated: boolean) {
     if (isAuthenticated) {
       return (
+        <>
+        <Route exact path="/" component={SearchPage} />
         <Route path="/person/:personId" render={(props) => <IndividualPage {...props} client={this.apiClient}/>} />
+        </>
       )
     } else {
       return (
@@ -42,7 +46,7 @@ private updateAuthenticationStatus = (status: boolean) => {
 
   render() {
     return (
-      <Router>
+      <Router basename={process.env.REACT_APP_BASE_SUBDIRECTORY}>
         <FamilyContextHeader />
           <PageSpacing>
             {this.getRoutes(this.state.isAuthenticated)}

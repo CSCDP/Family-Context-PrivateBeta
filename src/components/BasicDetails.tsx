@@ -6,13 +6,13 @@ import TitleValuePair from './Table/TitleValuePairTableRow';
 
 const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { personDetails: PersonDetails }) => {
 
-    const formatDateOrString: (maybeDate: Date | string) => string = (maybeDate: Date|string) => {
+    const formatDateOrString: (maybeDate: string | Date) => string = (maybeDate: Date|string) => {
         let date = new Date(maybeDate);
-        if (date.hasOwnProperty("toLocaleDateString")) {
+        if ((date as Date).getDate()) {
             return date.toLocaleDateString();
         }
         else {
-            return props.personDetails.dateOfBirth.toString();
+            return (date as Date).getDate().toString();
         }
     }
 

@@ -6,9 +6,8 @@ import AccordionSectionHeader from './AccordionSectionHeader';
 import AccordionContent from './AccordionContent';
 import ServiceInvolvementDetailsSummary from '../../models/ServiceInvolvementDetailsSummary';
 
-class ServiceInvolvementAccordion extends React.Component<{ serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void }> {
+const ServiceInvolvementAccordion: React.FC<{ serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }> = (props: { serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }) => {
 
-  render() {
     return (
       <AccordionSection>
       <AccordionSectionHeader click={() => this.props.click()}>
@@ -16,11 +15,10 @@ class ServiceInvolvementAccordion extends React.Component<{ serviceInvolvementDe
         <ServiceInvolvementAccordionSummary serviceInvolvement={this.props.serviceInvolvementDetailsSummary} />
       </AccordionSectionHeader>
       <AccordionContent>
-        {this.props.children}
+        {props.children}
       </AccordionContent>
     </AccordionSection>
     )
-  }
 }
 
 export default ServiceInvolvementAccordion;

@@ -1,6 +1,5 @@
 import React from 'react';
 import ServiceInvolvementAccordion from './Accordion/ServiceInvolvementAccordion';
-import PersonDetails from '../models/PersonDetails'
 import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
 import TitleValuePair from '../models/TitleValuePair';
 import Table from './Table/Table';
@@ -20,7 +19,6 @@ class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSumm
         this.state = {
             serviceInvolvementDetailsData: emptyData
         };
-
     }
 
     click(id: string): void {
