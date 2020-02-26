@@ -15,11 +15,17 @@
   padding-top: 30px;
 }
 
+.CaseIdSearch button,
 .LoginPage button {
   margin-top: 15px;
   background-color: #1d70b8 
 }
 
+.CaseIdSearch button:hover,
 .LoginPage button:hover {
   background-color: #003078 
+}
+
+.CaseIdSearch .govuk-form-group {
+  margin-top: 30px;
 }

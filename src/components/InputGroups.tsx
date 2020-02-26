@@ -4,7 +4,7 @@ export const TextInputGroup: React.FC<{onChange: (text: string) => void, name: s
     return(
     <div className="govuk-form-group">
     <label className="govuk-label" htmlFor="one-quarter">
-        {props.name}
+        <b>{props.name}</b>
     </label>
     <input 
         className="govuk-input govuk-!-width-one-quarter" 
@@ -20,7 +20,7 @@ export const PasswordInputGroup: React.FC<{onChange: (text: string) => void}> = 
     return(
         <div className="govuk-form-group">
     <label className="govuk-label" htmlFor="one-quarter">
-        Password
+        <b>Password</b>
     </label>
     <input 
         className="govuk-input govuk-!-width-one-quarter" 
