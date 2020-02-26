@@ -7,49 +7,52 @@ import Table from './Table/Table';
 import TableBody from './Table/TableBody';
 import TitleValuePairTableRow from './Table/TitleValuePairTableRow';
 
-interface dictionary {
-    [id: string] : TitleValuePair[]
-}
-
-class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] }, { serviceInvolvementDetailsData: dictionary }> {
+class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] }, { serviceInvolvementDetailsData: { [id: string]: TitleValuePair[]; } }> {
 
     constructor(props: { serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] }) {
         super(props);
-        this.state = { serviceInvolvementDetailsData: {} };
-        this.props.serviceInvolvementDetailsSummaries.map(sid => {
-            this.setState({ ...this.state.serviceInvolvementDetailsData, sid.id = [] });
+
+        let emptyData: { [id: string]: TitleValuePair[]; }  = {};
+        props.serviceInvolvementDetailsSummaries.forEach(summary => {
+            emptyData[summary.id]=[]
         });
-        
+
+        this.state = {
+            serviceInvolvementDetailsData: emptyData
+        };
+
     }
 
-    click(newOpen: boolean): void {
-        this.setState({ ...this.state, open: newOpen });
+    click(id: string): void {
+        let content: TitleValuePair[] = [{ title: "Service Involvement", value: "Current" }, { title: "Police Contact", value: "Jason Davies" }, { title: "Lead practitioner contact", value: "" }, { title: "Last offence", value: "" }, { title: "Date of offence", value: "" }, { title: "Type of offence", value: "Domestic abuse" }, { title: "Nature of involvement", value: "Victim" }]
+        let newData = { ...this.state.serviceInvolvementDetailsData };
+        newData[id] = content;
+        this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         var serviceInvolvementElements = document.getElementById("service-involvements");
         window.GOVUKFrontend.initAll({ scope: serviceInvolvementElements });
     }
 
     render() {
-            let serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary = { title: "Police", coverageStartDate: "31/10/2017", coverageEndDate: "04/11/2019", recordsAvailable: true, id: "1", lastSynchronized: "04/11/2019" }
-            let content: TitleValuePair[] = [{ title: "Service Involvement", value: "Current" }, { title: "Police Contact", value: "Jason Davies" }, { title: "Lead practitioner contact", value: "" }, { title: "Last offence", value: "" }, { title: "Date of offence", value: "" }, { title: "Type of offence", value: "Domestic abuse" }, { title: "Nature of involvement", value: "Victim" }]
-            return (
-                <div id="service-involvements">
-                    <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
-                    {this.props.serviceInvolvementDetailsSummaries.map(sids=>
-                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={sids} click={() => this.click(!this.state.open)}>
+
+        return (
+            <div id="service-involvements">
+                <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
+                    {this.props.serviceInvolvementDetailsSummaries.map(sids =>
+                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={sids} click={() => this.click(sids.id)}>
                             <Table>
                                 <TableBody>
-                                    {this.state.thing[sids.id] ? content.map(element => (
+                                    {this.state.serviceInvolvementDetailsData[sids.id] ? this.state.serviceInvolvementDetailsData[sids.id].map(element => (
                                         <TitleValuePairTableRow rowTitle={element.title} rowValue={element.value} format="govuk-!-font-size-14" />
                                     )) : null}
                                 </TableBody>
                             </Table>
                         </ServiceInvolvementAccordion>)}
-                    </div>
                 </div>
-            )
+            </div>
+        )
 
     }
 }

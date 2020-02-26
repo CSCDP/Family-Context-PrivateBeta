@@ -5,6 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import ApiClient from '../clients/ApiClient';
 import BackButton from '../components/BackButton';
 import ServiceInvolvement from '../components/ServiceInvolvement';
+import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
 
 interface PersonParams {
   personId?: string
@@ -28,11 +29,12 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
   }
 
   render() {
+    let serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary = { title: "Police", coverageStartDate: "31/10/2017", coverageEndDate: "04/11/2019", recordsAvailable: true, id: "1", lastSynchronized: "04/11/2019" }
     return (
       <div className="IndividualPage">
         <BackButton {...this.props} />
         <BasicDetails personDetails={this.state}></BasicDetails>
-        <ServiceInvolvement personDetails={this.state} />
+        <ServiceInvolvement serviceInvolvementDetailsSummaries={[serviceInvolvementDetailsSummary]} />
       </div>
     );
   }

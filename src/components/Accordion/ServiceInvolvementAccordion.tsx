@@ -11,8 +11,8 @@ class ServiceInvolvementAccordion extends React.Component<{ serviceInvolvementDe
   render() {
     return (
       <AccordionSection>
-      <AccordionSectionHeader>
-        <AccordionHeader title={this.props.serviceInvolvementDetailsSummary.title} click={this.props.click}></AccordionHeader>
+      <AccordionSectionHeader click={() => this.props.click()}>
+        <AccordionHeader title={this.props.serviceInvolvementDetailsSummary.title} ></AccordionHeader>
         <ServiceInvolvementAccordionSummary serviceInvolvement={this.props.serviceInvolvementDetailsSummary} />
       </AccordionSectionHeader>
       <AccordionContent>
