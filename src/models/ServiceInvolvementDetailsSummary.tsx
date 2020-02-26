@@ -4,7 +4,7 @@ interface ServiceInvolvementDetailsSummary {
     recordsAvailable: boolean,
     coverageStartDate: string,
     coverageEndDate: string,
-    id: number
+    id: string
 }
 
 export default ServiceInvolvementDetailsSummary;

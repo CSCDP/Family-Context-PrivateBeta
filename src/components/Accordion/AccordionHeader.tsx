@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AccordionHeader: React.FC<{ title: string }> = (props: { title: string }) => {
+const AccordionHeader: React.FC<{ title: string, click: () => void}> = (props: { title: string, click: () => void}) => {
 
     return (
         <h2 className="govuk-accordion__section-heading">
