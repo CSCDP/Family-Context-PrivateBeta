@@ -5,15 +5,23 @@ import TitleValuePair from '../models/TitleValuePair';
 import Table from './Table/Table';
 import TableBody from './Table/TableBody';
 import TitleValuePairTableRow from './Table/TitleValuePairTableRow';
+import ApiClient from '../clients/ApiClient';
+import { RouteComponentProps } from 'react-router-dom';
+import BasicDetails from './BasicDetails';
+import PersonDetails from '../models/PersonDetails';
 
-class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] }, { serviceInvolvementDetailsData: { [id: string]: TitleValuePair[]; } }> {
+interface PersonParams {
+    personId?: string
+  }
 
-    constructor(props: { serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] }) {
+class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] } & { client: ApiClient }, { serviceInvolvementDetailsData: { [id: string]: PersonDetails | null; } }>  {
+
+    constructor(props: { serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] } & { client: ApiClient }) {
         super(props);
 
-        let emptyData: { [id: string]: TitleValuePair[]; }  = {};
+        let emptyData: { [id: string]: PersonDetails | null; }  = {};
         props.serviceInvolvementDetailsSummaries.forEach(summary => {
-            emptyData[summary.id]=[]
+            emptyData[summary.id]= null
         });
 
         this.state = {
@@ -22,10 +30,12 @@ class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSumm
     }
 
     click(id: string): void {
-        let content: TitleValuePair[] = [{ title: "Service Involvement", value: "Current" }, { title: "Police Contact", value: "Jason Davies" }, { title: "Lead practitioner contact", value: "" }, { title: "Last offence", value: "" }, { title: "Date of offence", value: "" }, { title: "Type of offence", value: "Domestic abuse" }, { title: "Nature of involvement", value: "Victim" }]
-        let newData = { ...this.state.serviceInvolvementDetailsData };
-        newData[id] = content;
-        this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
+        this.props.client.getPerson(id).then(personDetails => {
+            let newData = { ...this.state.serviceInvolvementDetailsData };
+            newData[id] = personDetails;
+            this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
+          });
+
     }
 
     componentDidMount() {
@@ -34,19 +44,12 @@ class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSumm
     }
 
     render() {
-
         return (
             <div id="service-involvements">
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
-                    {this.props.serviceInvolvementDetailsSummaries.map(sids =>
-                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={sids} click={() => this.click(sids.id)}>
-                            <Table>
-                                <TableBody>
-                                    {this.state.serviceInvolvementDetailsData[sids.id] ? this.state.serviceInvolvementDetailsData[sids.id].map(element => (
-                                        <TitleValuePairTableRow rowTitle={element.title} rowValue={element.value} format="govuk-!-font-size-14" />
-                                    )) : null}
-                                </TableBody>
-                            </Table>
+                    {this.props.serviceInvolvementDetailsSummaries.map(summary =>
+                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} click={() => this.click(summary.id)}>
+                            <ServiceInvolvementDisplay person={this.state.serviceInvolvementDetailsData[summary.id]} />
                         </ServiceInvolvementAccordion>)}
                 </div>
             </div>
@@ -54,5 +57,9 @@ class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSumm
 
     }
 }
+
+const ServiceInvolvementDisplay: React.SFC<{person : PersonDetails|null}> = (props : {person : PersonDetails|null}) => {
+    return props.person ? (<BasicDetails personDetails={props.person}></BasicDetails> ): (<div> loading... </div>);
+} 
 
 export default ServiceInvolvement;
