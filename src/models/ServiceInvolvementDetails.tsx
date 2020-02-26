@@ -1,9 +1,10 @@
 import ServiceInvolvementDetailsSummary from "./ServiceInvolvementDetailsSummary";
+import TitleValuePair from "./TitleValuePair";
 import PersonDetails from "./PersonDetails";
 
 interface ServiceInvolvementDetails {
     serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, 
-    serviceInvolvementContent: PersonDetails
+    person?: PersonDetails
 }
 
 export default ServiceInvolvementDetails

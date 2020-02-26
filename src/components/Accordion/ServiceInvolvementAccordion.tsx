@@ -1,25 +1,24 @@
 import React from 'react';
 import AccordionHeader from './AccordionHeader';
 import ServiceInvolvementAccordionSummary from './ServiceInvolvementAccordionSummary';
-import BasicDetails from '../BasicDetails';
 import AccordionSection from './AccordionSection';
 import AccordionSectionHeader from './AccordionSectionHeader';
 import AccordionContent from './AccordionContent';
-import ServiceInvolvementDetails from '../../models/ServiceInvolvementDetails';
+import ServiceInvolvementDetailsSummary from '../../models/ServiceInvolvementDetailsSummary';
 
-const ServiceInvolvementAccordion: React.FC<{ serivceInvolvementDetails: ServiceInvolvementDetails }> = (props: { serivceInvolvementDetails: ServiceInvolvementDetails }) => {
+const ServiceInvolvementAccordion: React.FC<{ serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }> = (props: { serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }) => {
 
-  return (
-    <AccordionSection>
+    return (
+      <AccordionSection>
       <AccordionSectionHeader>
-        <AccordionHeader>{props.serivceInvolvementDetails.serviceInvolvementDetailsSummary.service}</AccordionHeader>
-        <ServiceInvolvementAccordionSummary serviceInvolvement={props.serivceInvolvementDetails.serviceInvolvementDetailsSummary} />
+        <AccordionHeader title={props.serviceInvolvementDetailsSummary.title} click={props.click}></AccordionHeader>
+        <ServiceInvolvementAccordionSummary serviceInvolvement={props.serviceInvolvementDetailsSummary} />
       </AccordionSectionHeader>
       <AccordionContent>
-        <BasicDetails personDetails={props.serivceInvolvementDetails.serviceInvolvementContent}></BasicDetails>
+        {props.children}
       </AccordionContent>
     </AccordionSection>
-  )
+    )
 }
 
 export default ServiceInvolvementAccordion;
