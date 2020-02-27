@@ -3,18 +3,9 @@ import Table from './Table/Table';
 import TableBody from './Table/TableBody';
 import PersonDetails from '../models/PersonDetails';
 import TitleValuePair from './Table/TitleValuePairTableRow';
+import { formatDateOrString } from '../tools/FormattingTools';
 
 const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { personDetails: PersonDetails }) => {
-
-    const formatDateOrString: (maybeDate: string | Date) => string = (maybeDate: Date|string) => {
-        let date = new Date(maybeDate);
-        if ((date as Date).getDate()) {
-            return date.toLocaleDateString();
-        }
-        else {
-            return (date as Date).getDate().toString();
-        }
-    }
 
     return (
         <div>

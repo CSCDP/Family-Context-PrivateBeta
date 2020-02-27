@@ -1,5 +1,6 @@
 import LoginDetails from "../models/LoginDetails";
 import PersonDetails from "../models/PersonDetails";
+import SearchDetails from "../models/SearchDetails";
 
 class ApiClient {
     private baseUrl: string
@@ -58,6 +59,30 @@ class ApiClient {
         let personDetailsPath = "/person/details/" + personId;
         let response = await this.getRequest(personDetailsPath);
         return response.json() as Promise<PersonDetails>;
+    }
+
+    async searchPerson(search: SearchDetails): Promise<PersonDetails[]> {
+        let searchPath = "/search/person";
+        let response = await this.postJsonRequest(searchPath, JSON.stringify(search))
+        return response.json() as Promise<PersonDetails[]>
+    }
+
+    async postJsonRequest(relativePath: string, body: string): Promise<Response> {
+        return fetch(`${this.baseUrl}${relativePath}`, {
+            method: "POST",
+            credentials: 'include',
+            body: body,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response =>
+            {
+                if (response.status === 401)
+                {
+                    this.authenticationCallback(false);
+                }
+                return response;
+        });
     }
 
     async getRequest(relativePath: string): Promise<Response> {
