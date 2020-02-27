@@ -34,7 +34,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
       <div className="IndividualPage">
         <BackButton {...this.props} />
         <BasicDetails personDetails={this.state}></BasicDetails>
-        <ServiceInvolvement serviceInvolvement={ {serviceInvolvementDetailsSummaries:[serviceInvolvementDetailsSummary], client:this.props.client}}/>
+        <ServiceInvolvement summaries={[serviceInvolvementDetailsSummary]} client={this.props.client}/>
       </div>
     );
   }
