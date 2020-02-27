@@ -11,11 +11,19 @@ interface PersonParams {
   personId?: string
 }
 
-class IndividualPage extends React.Component<RouteComponentProps<PersonParams> & { client: ApiClient }, PersonDetails> {
+type IndividualPageProps = {
+  personDetails: PersonDetails,
+  serviceSummaries: ServiceInvolvementDetailsSummary[]
+}
+
+class IndividualPage extends React.Component<RouteComponentProps<PersonParams> & { client: ApiClient }, IndividualPageProps> {
 
   constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
     super(props);
-    this.state = { address: "loading...", ethnicity: "loading...", firstName: "loading...", gender: "loading...", id: -1, lastName: "loading...", dateOfBirth: "loading..." }
+    this.state = {
+      personDetails: { address: "loading...", ethnicity: "loading...", firstName: "loading...", gender: "loading...", id: -1, lastName: "loading...", dateOfBirth: "loading..." },
+      serviceSummaries: []
+    }
   }
 
 
@@ -23,18 +31,21 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
     let personId = this.props.match.params.personId
     if (personId) {
       this.props.client.getPerson(personId).then(personDetails => {
-        this.setState(personDetails);
+        this.setState({...this.state, personDetails});
       });
+
+      this.props.client.getServiceSummaries(personId).then(serviceSummaries => {
+        this.setState({...this.state, serviceSummaries});
+      })
     }
   }
 
   render() {
-    let serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary = { title: "Police", coverageStartDate: "31/10/2017", coverageEndDate: "04/11/2019", recordsAvailable: true, id: "1", lastSynchronized: "04/11/2019" }
     return (
       <div className="IndividualPage">
         <NavigationButtons {...this.props} />
-        <BasicDetails personDetails={this.state}></BasicDetails>
-        <ServiceInvolvement summaries={[serviceInvolvementDetailsSummary]} client={this.props.client}/>
+        <BasicDetails personDetails={this.state.personDetails}></BasicDetails>
+        <ServiceInvolvement summaries={this.state.serviceSummaries} client={this.props.client}/>
       </div>
     );
   }
