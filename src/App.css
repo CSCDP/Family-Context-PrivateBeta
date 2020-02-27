@@ -20,6 +20,14 @@
   float: right;
 }
 
+.NavigationButtons a{
+  margin: 0;
+}
+
+.NavigationButtons {
+  padding-bottom: 30px;
+}
+
 .CaseIdSearch button,
 .LoginPage button {
   margin-top: 15px;
