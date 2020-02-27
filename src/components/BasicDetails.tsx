@@ -12,7 +12,7 @@ const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { perso
             return date.toLocaleDateString();
         }
         else {
-            return (date as Date).getDate().toString();
+            return maybeDate.toString();
         }
     }
 
