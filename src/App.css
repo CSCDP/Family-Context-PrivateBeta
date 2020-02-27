@@ -15,12 +15,18 @@
   padding-top: 30px;
 }
 
+.NavigationButtons button{
+  background-color: #1d70b8;
+  float: right;
+}
+
 .CaseIdSearch button,
 .LoginPage button {
   margin-top: 15px;
   background-color: #1d70b8 
 }
 
+.NavigationButtons button:hover,
 .CaseIdSearch button:hover,
 .LoginPage button:hover {
   background-color: #003078 
