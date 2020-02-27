@@ -5,14 +5,18 @@ import ApiClient from '../clients/ApiClient';
 import BasicDetails from './BasicDetails';
 import PersonDetails from '../models/PersonDetails';
 
+interface serviceInvolvement {
+    serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[],
+    client: ApiClient
+}
 
-class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] } & { client: ApiClient }, { serviceInvolvementDetailsData: { [id: string]: PersonDetails | null; } }>  {
+class ServiceInvolvement extends React.Component<{ serviceInvolvement: serviceInvolvement }, { serviceInvolvementDetailsData: { [id: string]: PersonDetails | null; } }>  {
 
-    constructor(props: { serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] } & { client: ApiClient }) {
+    constructor(props: { serviceInvolvement: serviceInvolvement }) {
         super(props);
 
         let emptyData: { [id: string]: PersonDetails | null; } = {};
-        props.serviceInvolvementDetailsSummaries.forEach(summary => {
+        props.serviceInvolvement.serviceInvolvementDetailsSummaries.forEach(summary => {
             emptyData[summary.id] = null
         });
 
@@ -22,7 +26,7 @@ class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSumm
     }
 
     click(id: string): void {
-        this.props.client.getPerson(id).then(personDetails => {
+        this.props.serviceInvolvement.client.getPerson(id).then(personDetails => {
             let newData = { ...this.state.serviceInvolvementDetailsData };
             newData[id] = personDetails;
             this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
@@ -38,7 +42,7 @@ class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSumm
         return (
             <div id="service-involvements">
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
-                    {this.props.serviceInvolvementDetailsSummaries.map(summary =>
+                    {this.props.serviceInvolvement.serviceInvolvementDetailsSummaries.map(summary =>
                         <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} click={() => this.click(summary.id)}>
                             <ServiceInvolvementDisplay person={this.state.serviceInvolvementDetailsData[summary.id]} />
                         </ServiceInvolvementAccordion>)}
