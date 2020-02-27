@@ -1,38 +1,64 @@
 import React from 'react';
 import ServiceInvolvementAccordion from './Accordion/ServiceInvolvementAccordion';
-import PersonDetails from '../models/PersonDetails'
 import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
-import TitleValuePair from '../models/TitleValuePair';
-import Table from './Table/Table';
-import TableBody from './Table/TableBody';
-import TitleValuePairTableRow from './Table/TitleValuePairTableRow';
+import ApiClient from '../clients/ApiClient';
+import BasicDetails from './BasicDetails';
+import PersonDetails from '../models/PersonDetails';
 
-class ServiceInvolvement extends React.Component<{ personDetails: PersonDetails }> {
+interface ServiceInvolvementProps {
+    summaries: ServiceInvolvementDetailsSummary[],
+    client: ApiClient
+}
 
-    componentDidUpdate() {
+interface ServiceInvolvementState { 
+    serviceInvolvementDetailsData: { [id: string]: PersonDetails | null; } 
+}
+
+class ServiceInvolvement extends React.Component<ServiceInvolvementProps, ServiceInvolvementState>  {
+
+    constructor(props: ServiceInvolvementProps ) {
+        super(props);
+
+        let emptyData: { [id: string]: PersonDetails | null; } = {};
+        props.summaries.forEach(summary => {
+            emptyData[summary.id] = null
+        });
+
+        this.state = {
+            serviceInvolvementDetailsData: emptyData
+        };
+    }
+
+    click(id: string): void {
+        this.props.client.getPerson(id).then(personDetails => {
+            let newData = { ...this.state.serviceInvolvementDetailsData };
+            newData[id] = personDetails;
+            this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
+        });
+    }
+
+    componentDidMount() {
         var serviceInvolvementElements = document.getElementById("service-involvements");
         window.GOVUKFrontend.initAll({ scope: serviceInvolvementElements });
     }
 
     render() {
-        let serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary = { title: "Police", coverageStartDate: "31/10/2017", coverageEndDate: "04/11/2019", recordsAvailable: true, id: "1", lastSynchronized: "04/11/2019" }
-        let content: TitleValuePair[] = [{ title: "Service Involvement", value: "Current" }, { title: "Police Contact", value: "Jason Davies" }, { title: "Lead practitioner contact", value: "" }, { title: "Last offence", value: "" }, { title: "Date of offence", value: "" }, { title: "Type of offence", value: "Domestic abuse" }, { title: "Nature of involvement", value: "Victim" }]
         return (
             <div id="service-involvements">
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
-                    <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={serviceInvolvementDetailsSummary} click={() => { }}>
-                        <Table>
-                            <TableBody>
-                                {content.map(element => (
-                                    <TitleValuePairTableRow rowTitle={element.title} rowValue={element.value} format="govuk-!-font-size-14" />
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </ServiceInvolvementAccordion>
+                    {this.props.summaries.map(summary =>
+                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} click={() => this.click(summary.id)}>
+                            <ServiceInvolvementDisplay person={this.state.serviceInvolvementDetailsData[summary.id]} />
+                        </ServiceInvolvementAccordion>)}
                 </div>
             </div>
         )
+
     }
+}
+
+const ServiceInvolvementDisplay: React.SFC<{ person: PersonDetails | null }> = (props: { person: PersonDetails | null }) => {
+    return props.person ? (<BasicDetails personDetails={props.person}></BasicDetails>) : (<div> loading... </div>);
 }
 
 export default ServiceInvolvement;
