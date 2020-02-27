@@ -1,27 +1,19 @@
 import React from 'react';
 import ServiceInvolvementAccordion from './Accordion/ServiceInvolvementAccordion';
 import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
-import TitleValuePair from '../models/TitleValuePair';
-import Table from './Table/Table';
-import TableBody from './Table/TableBody';
-import TitleValuePairTableRow from './Table/TitleValuePairTableRow';
 import ApiClient from '../clients/ApiClient';
-import { RouteComponentProps } from 'react-router-dom';
 import BasicDetails from './BasicDetails';
 import PersonDetails from '../models/PersonDetails';
 
-interface PersonParams {
-    personId?: string
-  }
 
 class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] } & { client: ApiClient }, { serviceInvolvementDetailsData: { [id: string]: PersonDetails | null; } }>  {
 
     constructor(props: { serviceInvolvementDetailsSummaries: ServiceInvolvementDetailsSummary[] } & { client: ApiClient }) {
         super(props);
 
-        let emptyData: { [id: string]: PersonDetails | null; }  = {};
+        let emptyData: { [id: string]: PersonDetails | null; } = {};
         props.serviceInvolvementDetailsSummaries.forEach(summary => {
-            emptyData[summary.id]= null
+            emptyData[summary.id] = null
         });
 
         this.state = {
@@ -34,8 +26,7 @@ class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSumm
             let newData = { ...this.state.serviceInvolvementDetailsData };
             newData[id] = personDetails;
             this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
-          });
-
+        });
     }
 
     componentDidMount() {
@@ -58,8 +49,8 @@ class ServiceInvolvement extends React.Component<{ serviceInvolvementDetailsSumm
     }
 }
 
-const ServiceInvolvementDisplay: React.SFC<{person : PersonDetails|null}> = (props : {person : PersonDetails|null}) => {
-    return props.person ? (<BasicDetails personDetails={props.person}></BasicDetails> ): (<div> loading... </div>);
-} 
+const ServiceInvolvementDisplay: React.SFC<{ person: PersonDetails | null }> = (props: { person: PersonDetails | null }) => {
+    return props.person ? (<BasicDetails personDetails={props.person}></BasicDetails>) : (<div> loading... </div>);
+}
 
 export default ServiceInvolvement;
