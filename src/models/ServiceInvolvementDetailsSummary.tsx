@@ -1,6 +1,6 @@
 interface ServiceInvolvementDetailsSummary {
     title: string,
-    lastSynchronized: string,
+    lastSynchronised: string,
     recordsAvailable: boolean,
     coverageStartDate: string,
     coverageEndDate: string,

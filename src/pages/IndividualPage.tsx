@@ -29,7 +29,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
   }
 
   render() {
-    let serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary = { title: "Police", coverageStartDate: "31/10/2017", coverageEndDate: "04/11/2019", recordsAvailable: true, id: "1", lastSynchronized: "04/11/2019" }
+    let serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary = { title: "Police", coverageStartDate: "31/10/2017", coverageEndDate: "04/11/2019", recordsAvailable: true, id: "1", lastSynchronised: "04/11/2019" }
     return (
       <div className="IndividualPage">
         <NavigationButtons {...this.props} />
