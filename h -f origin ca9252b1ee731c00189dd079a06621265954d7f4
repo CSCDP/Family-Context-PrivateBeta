@@ -1,0 +1,645 @@
+[33mcommit 840fb13fe4cb7f8ce49550634377e1af581c5311[m[33m ([m[1;36mHEAD -> [m[1;32mservice-details-component[m[33m, [m[1;31morigin/service-details-component[m[33m, [m[1;32mno-records[m[33m)[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 28 12:08:57 2020 +0000
+
+    FAM-45: Add no records available card
+
+[33mcommit ca9252b1ee731c00189dd079a06621265954d7f4[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 28 11:02:39 2020 +0000
+
+    FAM-56: formatting changes
+
+[33mcommit b0852433735fa0d7b53d78f3f6a9b1d5e0262a2b[m
+Merge: c378ccb afadfca
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 28 10:59:52 2020 +0000
+
+    Merge branch 'master' into service-details-component
+
+[33mcommit afadfcac91461b5a1d8485ddde23db267daaeaef[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 008ee60 091d28d
+Author: Louisasa <52922678+Louisasa@users.noreply.github.com>
+Date:   Fri Feb 28 10:55:26 2020 +0000
+
+    Merge pull request #18 from SocialFinanceDigitalLabs/fix-accordions
+    
+    FAM-51: Show accordions once their props are ready
+
+[33mcommit 091d28d719f3896ba8154ff6a48c7fbdc369df49[m[33m ([m[1;31morigin/fix-accordions[m[33m)[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Fri Feb 28 10:53:28 2020 +0000
+
+    FAM-51: Show accordions once their props are ready
+
+[33mcommit c378ccbff812a1f4117f4b9aaff5569cffd5434d[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 28 10:49:38 2020 +0000
+
+    FAM-56: format service detail component better
+
+[33mcommit 008ee60bc88f301faaf490472adea6afc10fea43[m
+Merge: cce1094 21e7bc2
+Author: AEPR <alexander.read@softwire.com>
+Date:   Fri Feb 28 09:55:18 2020 +0000
+
+    Merge pull request #17 from SocialFinanceDigitalLabs/service-summaries-fetch
+    
+    FAM-51: Get service involvement summaries from endpoint
+
+[33mcommit 21e7bc24e29cb55445e5cdc4f4fe5301379925aa[m[33m ([m[1;31morigin/service-summaries-fetch[m[33m, [m[1;32mservice-summaries-fetch[m[33m)[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 28 09:54:09 2020 +0000
+
+    review markups
+
+[33mcommit 2e56739a4f7c1dd486e287ac66091d9c70643ecc[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 28 09:45:02 2020 +0000
+
+    works for all service involvements
+
+[33mcommit 27dee815f1ebc53c61eb5db35cf6c2a66365d626[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Thu Feb 27 15:58:03 2020 +0000
+
+    FAM-51: Get service involvement summaries from endpoint
+
+[33mcommit cce1094aabe7183e675f2a65214013404bcbea82[m
+Merge: 370befe 48c2ac9
+Author: Louisasa <52922678+Louisasa@users.noreply.github.com>
+Date:   Thu Feb 27 11:01:00 2020 +0000
+
+    Merge pull request #14 from SocialFinanceDigitalLabs/add-state-to-accordion
+    
+    FAM-45: Add state to accordion
+
+[33mcommit 48c2ac93e29c3122ebc5c7c20675e223728447f0[m[33m ([m[1;31morigin/add-state-to-accordion[m[33m, [m[1;32madd-state-to-accordion[m[33m)[m
+Merge: 84007d7 370befe
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 27 11:00:44 2020 +0000
+
+    Merge branch 'master' into add-state-to-accordion
+
+[33mcommit 370befef3db39a0606659cc8a0e6ef9251b74d60[m
+Merge: 40aa211 572219d
+Author: AEPR <alexander.read@softwire.com>
+Date:   Thu Feb 27 10:57:13 2020 +0000
+
+    Merge pull request #15 from SocialFinanceDigitalLabs/search-bar
+    
+    FAM-34: Add search button
+
+[33mcommit 572219d9e021e271308a474841e002971a1238b6[m[33m ([m[1;31morigin/search-bar[m[33m, [m[1;32msearch-bar[m[33m)[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 27 10:31:40 2020 +0000
+
+    vertical align back button to the top
+
+[33mcommit 84007d73208346817f2af9225d07ce4f6e354995[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 27 10:14:46 2020 +0000
+
+    Formatting changes
+
+[33mcommit 550fbc9edccceb229e3be06457ac1b9c693b792c[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 27 09:36:43 2020 +0000
+
+    fix individual page
+
+[33mcommit 93c70fac000013fe4a558fa5929c852b514ca0ad[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 27 09:30:47 2020 +0000
+
+    review changes
+
+[33mcommit ca795ccda47ffcdef7982ab3cbcbcd73a647b72d[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 27 09:13:40 2020 +0000
+
+    Add new line to end of files
+
+[33mcommit 43e1ad4e2d3ef0413a4aad3ca3fc4966aa78fa1b[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 27 09:12:40 2020 +0000
+
+    formatting changes
+
+[33mcommit 991b470ebae40d7878536c9a0d3fd1670cd20cc0[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 27 08:49:04 2020 +0000
+
+    Add css to search button
+
+[33mcommit 8d7b19557bfad7079c5662024d6eb58e5de52fae[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 26 15:20:23 2020 +0000
+
+    get data from endpoint
+
+[33mcommit 34f23d33345b373cd310b9edcddc4e71df7466de[m
+Merge: 331b114 40aa211
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 26 14:51:13 2020 +0000
+
+    Merge branch 'master' into add-state-to-accordion
+
+[33mcommit 40aa21171cb89a6fdc89bada464b3133acd9e989[m
+Merge: 3443708 3c5247d
+Author: AEPR <alexander.read@softwire.com>
+Date:   Wed Feb 26 14:38:09 2020 +0000
+
+    Merge pull request #12 from SocialFinanceDigitalLabs/add-no-records-found
+    
+    FAM-45: Update accordion
+
+[33mcommit 331b114f12f078fb243c7a285ef68befb6c0ca35[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 26 14:16:34 2020 +0000
+
+    use state to update accordion content onclick
+
+[33mcommit 3c5247d17d452febd9a8bf1cfb16a52c3d757a17[m[33m ([m[1;31morigin/add-no-records-found[m[33m, [m[1;32madd-no-records-found[m[33m)[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 26 11:39:46 2020 +0000
+
+    review changes
+
+[33mcommit 9774022fe02a4cbae9816c7945698cef6b7baf9d[m
+Merge: bd68b77 3443708
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 26 11:24:28 2020 +0000
+
+    Merge branch 'master' into add-no-records-found
+
+[33mcommit 777fe11e13609ef145939ad8bdbf55bf8ecf4002[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 26 11:24:02 2020 +0000
+
+    work in progress adding state
+
+[33mcommit bd68b77909b7c53a2440ad4ada60f751b95cd808[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 26 10:51:35 2020 +0000
+
+    working in progress, accordion currently works
+
+[33mcommit 3443708102278f013fb1eb8e71c677253d238296[m
+Merge: 8a4fa76 9d68fd0
+Author: Louisasa <52922678+Louisasa@users.noreply.github.com>
+Date:   Tue Feb 25 15:41:51 2020 +0000
+
+    Merge pull request #13 from SocialFinanceDigitalLabs/fix-date-display
+    
+    FAM-49: Fix date display
+
+[33mcommit 9d68fd046b74ea776a32d736d2d2529d7327cf6a[m[33m ([m[1;31morigin/fix-date-display[m[33m)[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Tue Feb 25 15:21:52 2020 +0000
+
+    FAM-49: Fix date display
+
+[33mcommit 57e1978fe48072b0aec06f6760d073e35d67cf99[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Tue Feb 25 15:15:15 2020 +0000
+
+    Revert some unnecessary changes
+
+[33mcommit d9d2181f95d84e026ebe29e9b027475fbf774f76[m
+Merge: ac6b146 61424e3
+Author: Lou <louisa.nash@softwire.com>
+Date:   Tue Feb 25 15:12:03 2020 +0000
+
+    Merge branch 'master' into add-no-records-found and updating accordion
+
+[33mcommit 8a4fa766aaf2037252814d780b4d136cec03b77e[m
+Merge: 61424e3 cc587fc
+Author: AEPR <alexander.read@softwire.com>
+Date:   Tue Feb 25 15:08:13 2020 +0000
+
+    Merge pull request #11 from SocialFinanceDigitalLabs/caseid-search
+    
+    FAM-57: Add Case ID search component
+
+[33mcommit cc587fc22591d1e828c7bc271974f0b19600bf70[m[33m ([m[1;31morigin/caseid-search[m[33m)[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Tue Feb 25 15:03:23 2020 +0000
+
+    FAM-57: Create Search Page and use Case ID Search Component in it
+
+[33mcommit 2fe6844b74b652ef028b8b52d1e3553860fdc996[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Tue Feb 25 12:59:15 2020 +0000
+
+    FAM-57: Add Case ID search component
+
+[33mcommit 61424e3f67960dc193a0dda8964dedf50e45ee21[m
+Merge: 2b70d71 596f133
+Author: Louisasa <52922678+Louisasa@users.noreply.github.com>
+Date:   Tue Feb 25 12:03:49 2020 +0000
+
+    Merge pull request #9 from SocialFinanceDigitalLabs/populate-details-from-endpoint
+    
+    FAM-49: Populate personal details from api
+
+[33mcommit ac6b146d8cc437b4d8406258a8e0afc1993c6b12[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Tue Feb 25 12:00:33 2020 +0000
+
+    Add model to make service involvements more dynamic and start setup for populating from backend
+
+[33mcommit 2b70d71eb5dea7fd73f13072bc988d22ac38a564[m
+Merge: 892e426 a69d712
+Author: Louisasa <52922678+Louisasa@users.noreply.github.com>
+Date:   Tue Feb 25 09:36:31 2020 +0000
+
+    Merge pull request #10 from SocialFinanceDigitalLabs/cleanup-unused
+    
+    FAM-NONE: Remove unused logo
+
+[33mcommit 596f13393bff7fe0cb32324bae5c52262e0d0aab[m[33m ([m[1;31morigin/populate-details-from-endpoint[m[33m)[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Mon Feb 24 17:45:03 2020 +0000
+
+    FAM-49: Show loading for date
+
+[33mcommit 8b76575e99cbb90119a9ae4f33d4fc5e825f3f0a[m
+Merge: 5601c1a 892e426
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Mon Feb 24 17:24:47 2020 +0000
+
+    Merge branch 'master' into populate-details-from-endpoint
+
+[33mcommit 1a451eb999a9522d1ee6fbde4542ed83be6ac3a1[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Mon Feb 24 15:58:17 2020 +0000
+
+    Begin to create no-records component
+
+[33mcommit 78bb38054632671026f3bd4843b2178bd7459cb6[m
+Merge: 3bb4f62 892e426
+Author: Lou <louisa.nash@softwire.com>
+Date:   Mon Feb 24 15:29:35 2020 +0000
+
+    Merge branch 'master' into add-no-records-found
+
+[33mcommit 3bb4f6293edfb8df877f3f74f35d25bd41f237cf[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Mon Feb 24 14:56:22 2020 +0000
+
+    Still working on removing plus sign from accordion
+
+[33mcommit 892e42623facc190eccef27ce4941357fdaa9f71[m
+Merge: 65b3049 3942d6e
+Author: AEPR <alexander.read@softwire.com>
+Date:   Mon Feb 24 14:47:22 2020 +0000
+
+    Merge pull request #4 from SocialFinanceDigitalLabs/add-service-involvement
+    
+    FAM-45: Add service involvement component
+
+[33mcommit 3942d6e082c08b0826478ced8a604f2e1065331c[m
+Merge: 20506ff 65b3049
+Author: AEPR <alexander.read@softwire.com>
+Date:   Mon Feb 24 14:45:54 2020 +0000
+
+    Merge branch 'master' into add-service-involvement
+
+[33mcommit a69d7129dea4b68191f0addd0e2134b42f42cbe5[m[33m ([m[1;31morigin/cleanup-unused[m[33m)[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Mon Feb 24 14:42:17 2020 +0000
+
+    FAM-NONE: Remove unused logo
+
+[33mcommit 65b30491d4a1d17150e3abe3b92a3cd414d56cfa[m
+Merge: f511a51 2632fd4
+Author: AEPR <alexander.read@softwire.com>
+Date:   Mon Feb 24 14:39:13 2020 +0000
+
+    Merge pull request #6 from SocialFinanceDigitalLabs/create-login-page
+    
+    FAM-44: Create login component
+
+[33mcommit 2632fd4835016f81dd4d4c830cf90f2220b71afc[m
+Merge: a01bfe5 adb46a9
+Author: AEPR <alexander.read@softwire.com>
+Date:   Mon Feb 24 14:39:00 2020 +0000
+
+    Merge pull request #8 from SocialFinanceDigitalLabs/login-page-integration
+    
+    FAM-43: Show Login Page to unauthorised users
+
+[33mcommit adb46a976b6d31aa6e4ac2e88fcae770f5dd120c[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Mon Feb 24 14:36:00 2020 +0000
+
+    FAM-43: Remove the use of bind
+
+[33mcommit 20506ff4b22d84009e9f7d51188fdcb8d76c48bb[m[33m ([m[1;31morigin/add-service-involvement[m[33m, [m[1;32madd-service-involvement[m[33m)[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Mon Feb 24 14:09:46 2020 +0000
+
+    Review comments - add serviceInvolvementDetails intereface
+
+[33mcommit f511a51f2ac38eff3b53d449776d0e4871278da3[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Mon Feb 24 12:34:54 2020 +0000
+
+    FAM-NONE: Add configuration for live api
+
+[33mcommit 3809ea4f82152e81f8e917d8a51f5dfd23f56c14[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Mon Feb 24 12:31:42 2020 +0000
+
+    FAM-NONE: Change homepage for hosting
+
+[33mcommit 8716226d94f58b1b64de755549399970f8e616e7[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Mon Feb 24 12:29:54 2020 +0000
+
+    FAM-43: Implement showing of Login Page if not authenticated
+
+[33mcommit 5601c1ae3cdbd6e70f81b79fb6527f41fb7e8313[m[33m ([m[1;32mpopulate-details-from-endpoint[m[33m)[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Mon Feb 24 12:29:11 2020 +0000
+
+    FAM-49: Populate personal details from api
+
+[33mcommit 84be62b626628adc037d768fe4c83f72a4b361d1[m
+Merge: de23ce2 cdca03f
+Author: Lou <louisa.nash@softwire.com>
+Date:   Mon Feb 24 12:19:02 2020 +0000
+
+    Merge branch 'add-service-involvement' into add-no-records-found
+
+[33mcommit 71be41d12e27d843231ead45db0783d9c9b684a9[m
+Merge: a01bfe5 a3c62d8
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Mon Feb 24 12:02:05 2020 +0000
+
+    Merge branch 'master' into login-page-integration
+
+[33mcommit cdca03fb4dd28768f8bf222db8e880ba35b54a13[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Mon Feb 24 11:04:06 2020 +0000
+
+    Review comments, mainly creating accordion components similar to table components
+
+[33mcommit a01bfe56faa88de67cd267ffb63c4236fe58fc33[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Mon Feb 24 10:49:14 2020 +0000
+
+    Refactor LoginPage by only passing relevant method to login function
+
+[33mcommit a3c62d89761ff3e570f4567af5de0250b2ab6c38[m
+Merge: 0dc2da9 267793b
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Mon Feb 24 09:55:52 2020 +0000
+
+    Merge branch 'api-client'
+
+[33mcommit 267793b11c5b1051b30ab2b82179f47d2c269d80[m[33m ([m[1;31morigin/api-client[m[33m)[m
+Merge: 4e28eca b760874
+Author: EthanLMartin <54849575+EthanLMartin@users.noreply.github.com>
+Date:   Mon Feb 24 09:52:27 2020 +0000
+
+    Merge pull request #7 from SocialFinanceDigitalLabs/api-client-markups
+    
+    Api client markups
+
+[33mcommit b760874dd8161ffa4893e82f252cf93985c0bfe7[m[33m ([m[1;31morigin/api-client-markups[m[33m)[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Mon Feb 24 09:33:08 2020 +0000
+
+    FAM-54: Make callback private
+
+[33mcommit 7c64212a8880305ad6bdc34bd3bc5c8b6a3bb6ba[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Sun Feb 23 21:10:42 2020 +0000
+
+    FAM-54: Move base url to configuration
+
+[33mcommit 65647d76fe4917eb93f4546096fce57dff98bc8e[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Sun Feb 23 21:01:00 2020 +0000
+
+    FAM-54: Add authentication callback
+
+[33mcommit e64baa93283c510493f7af3957ef6097f8f5788f[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Fri Feb 21 16:21:16 2020 +0000
+
+    FAM-44: Extract govuk form group components
+
+[33mcommit 33edbcafc51efa0fd23f69bb8fb6336c9dd28e4f[m
+Merge: 02961e3 0dc2da9
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Fri Feb 21 13:38:25 2020 +0000
+
+    Merge branch 'master' into create-login-page
+
+[33mcommit 4e28eca69d4401398778f7f892b2bdfcf8d16159[m
+Merge: ea12203 0dc2da9
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Fri Feb 21 12:23:29 2020 +0000
+
+    Merge branch 'master' into api-client
+
+[33mcommit ea1220390b90e621dbe1269360ae6f43d23208e9[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Fri Feb 21 12:21:43 2020 +0000
+
+    FAM-54: Create Client for Interacting with the backend and prepare login
+
+[33mcommit de23ce2554f1e33849bc7d100ebc0a780310cd96[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 21 12:12:08 2020 +0000
+
+    Plus icon disappears if no records available
+
+[33mcommit e3ae4f2f985d73139dae2f6d050c714fb4a7ffdc[m
+Merge: 18f18de 0dc2da9
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 21 11:34:34 2020 +0000
+
+    Merge branch 'master' into add-service-involvement
+
+[33mcommit 0dc2da9d97986a08c7d11a004b0544d29ed9452f[m
+Merge: 8cfe181 8c13d38
+Author: AEPR <alexander.read@softwire.com>
+Date:   Fri Feb 21 11:33:29 2020 +0000
+
+    Merge pull request #3 from SocialFinanceDigitalLabs/formatting-basic
+    
+    FAM-NONE: Formatting basic individual details
+
+[33mcommit 18f18de041e3e9e97cba046052abf324bce19420[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 21 11:31:05 2020 +0000
+
+    Formatting changes
+
+[33mcommit 1b247bb3ee82f810e4bc519812fe778b2e9f5261[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 21 11:28:29 2020 +0000
+
+    Add service involvement summary
+
+[33mcommit 257421f1cf775e35175e27f77f0f4979f9e9d7f7[m
+Merge: aaa6265 8cfe181
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 21 10:29:04 2020 +0000
+
+    Merge branch 'master' into add-service-involvement
+
+[33mcommit 8c13d38bab3fa33cdb6bc308f2e405587bada55f[m[33m ([m[1;31morigin/formatting-basic[m[33m, [m[1;32mformatting-basic[m[33m)[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 21 10:26:11 2020 +0000
+
+    Rename component
+
+[33mcommit ec0823cecd606a682e170c9d2dc8707efc5082d5[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 21 10:24:57 2020 +0000
+
+    Format current master branch
+
+[33mcommit aaa62654fb9c90f5ba385e36659be7c2ac8daace[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Fri Feb 21 09:54:05 2020 +0000
+
+    Adding govuk style accordion
+
+[33mcommit 8cfe1814a87ad6dc387ad8cf3ad7d50c05e4e3c6[m
+Merge: a15036c f35be71
+Author: AEPR <alexander.read@softwire.com>
+Date:   Fri Feb 21 09:40:30 2020 +0000
+
+    Merge pull request #2 from SocialFinanceDigitalLabs/package-info
+    
+    FAM-NONE: Add markdown file for packages used and their licenses
+
+[33mcommit f35be71e5050409b37cad251b636a0e098267728[m[33m ([m[1;31morigin/package-info[m[33m)[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Fri Feb 21 09:32:28 2020 +0000
+
+    FAM-NONE: Add markdown file for packages used and their licenses
+
+[33mcommit 02961e3870d8f1dc255faed6027e563c841820cd[m[33m ([m[1;31morigin/create-login-page[m[33m)[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Thu Feb 20 17:32:42 2020 +0000
+
+    FAM-44: Make Back button work
+
+[33mcommit 4674d1e182bb9210ff7ea307d0c4bbe40ab590a9[m
+Author: EthanLMartin <Ethan.Martin@Softwire.com>
+Date:   Thu Feb 20 17:31:36 2020 +0000
+
+    FAM-44: Create login component
+
+[33mcommit a15036ccd53018f4bb9a6632616e5c0ba547306f[m
+Merge: fff25b2 fdd32c0
+Author: AEPR <alexander.read@softwire.com>
+Date:   Thu Feb 20 16:32:51 2020 +0000
+
+    Merge pull request #1 from SocialFinanceDigitalLabs/basic-individual-details
+    
+    Basic individual details page
+
+[33mcommit 9ca14cc3a1a583657f58b4971764fe7fd92f1699[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 20 16:27:34 2020 +0000
+
+    Basic own implementation of accordion
+
+[33mcommit fdd32c015983f86f8efd136d92f3ec6737ca3d55[m[33m ([m[1;31morigin/basic-individual-details[m[33m, [m[1;32mbasic-individual-details[m[33m)[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 20 14:47:09 2020 +0000
+
+    Use props.children properly
+
+[33mcommit c5b648e0db5938fda672605b00b53e5ecac8bf63[m
+Merge: 2b83098 b6978bc
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 20 14:45:29 2020 +0000
+
+    Merge branch 'basic-individual-details' into add-service-involvement
+
+[33mcommit b6978bc81c3e89b0c5b778d2b966c25be732dc59[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 20 14:10:38 2020 +0000
+
+    Make review changes including new components and renaming
+
+[33mcommit f4cd9654b99a9cca77231b974cc11dc5e2c740c8[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 20 11:45:32 2020 +0000
+
+    Move into separate components
+
+[33mcommit 2b83098b101d64dc0106b4831592fa972ea50999[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 20 11:10:22 2020 +0000
+
+    Basic implementation of accordion
+
+[33mcommit eadeb0f05bf91e971a60d50a8da6c39b0107c724[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Thu Feb 20 09:02:44 2020 +0000
+
+    Start to add accordion
+
+[33mcommit 3050083e7f81a408a0f7ae488ae2116efd888225[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 19 17:29:11 2020 +0000
+
+    Minor formatting changes
+
+[33mcommit ece9c62063a1c5ea789cc50a3cdb8834f3a178eb[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 19 17:25:03 2020 +0000
+
+    Add govuk template table with dummy values
+
+[33mcommit 4b9a60577ed55e71452c36c84cda052945cfb73d[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 19 17:16:55 2020 +0000
+
+    Format template page
+
+[33mcommit a65548f6fc138b9fc72013edceabd5c105673185[m
+Author: Lou <louisa.nash@softwire.com>
+Date:   Wed Feb 19 17:16:32 2020 +0000
+
+    Enable govuk templates
+
+[33mcommit fff25b2837f91f4609dd62e76903e95590d08de1[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Mon Feb 17 17:19:11 2020 +0000
+
+    Move routing to App
+
+[33mcommit 1ef7c56797e974dd92b6bae64032c329bcec9ef3[m[33m ([m[1;31morigin/Use-Create-React-App[m[33m)[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Sun Feb 16 12:14:44 2020 +0000
+
+    Add typescript types to basic app
+
+[33mcommit b9bb0f4c8eebaaf96c90c9db4041df229cbc180c[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Sun Feb 16 12:09:30 2020 +0000
+
+    Added react router
+
+[33mcommit 0e8a3992da3c90fc5c6429f15f06885f366ca36a[m
+Author: Alexander Read <Alexander.Read@softwire.com>
+Date:   Sun Feb 16 11:56:27 2020 +0000
+
+    Add a SPA using create-react-app
+
+[33mcommit 26de9bc8dd939df98fd728418a8dcc4c5c99faa2[m
+Author: Kaj Siebert <kaj@k-si.com>
+Date:   Wed Feb 12 08:24:08 2020 +0000
+
+    Initial commit
