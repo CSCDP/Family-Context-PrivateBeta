@@ -14,7 +14,7 @@ const AccordionHeader: React.FC<{ title: string}> = (props: { title: string}) =>
             </button>
             <strong className="govuk-tag">
                     RECORDS AVAILABLE
-                </strong>
+            </strong>
             <span className="govuk-accordion__icon" aria-hidden="true" />
         </h2>
     )
