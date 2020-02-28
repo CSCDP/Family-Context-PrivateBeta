@@ -2,30 +2,45 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { TextInputGroup, PasswordInputGroup } from '../components/InputGroups'
 import LoginDetails from '../models/LoginDetails';
+import ApiClient from '../clients/ApiClient';
+import LoginFailedWarning from '../components/LoginFailedWarning';
 
 type LoginFunction = (loginDetails: LoginDetails) => Promise<Boolean>
 
 interface LoginProps extends RouteComponentProps {
-    login: LoginFunction
+  client: ApiClient
 }
 
-const LoginPage: React.FC<LoginProps> = (props) => {
-  let loginDetails: LoginDetails = {userid: "", password: ""}
+interface LoginState extends LoginDetails{
+  loginFailed: boolean
+}
 
-  return (
-    <form className="LoginPage" onSubmit={(event) => tryLogin(event, props.login, loginDetails)}>
-        <TextInputGroup onChange={(text: string) => loginDetails.userid = text} id="username" name="Username"/>
-        <PasswordInputGroup onChange={(text: string) => loginDetails.password = text} />
+class LoginPage extends React.Component<LoginProps, LoginState>  {
+
+  constructor(props: LoginProps) {
+    super(props);
+    this.state = { loginFailed: false, userid: "", password: "" };
+  }
+
+
+  render() {
+    return (
+      <form className="LoginPage" onSubmit={(event) => this.tryLogin(event)}>
+        <TextInputGroup onChange={(text: string) => this.setState({ ...this.state, userid: text })} id="username" name="Username" />
+        <PasswordInputGroup onChange={(text: string) => this.setState({ ...this.state, password: text })} />
+        <LoginFailedWarning loginFailed={this.state.loginFailed} />
         <button className="govuk-button" data-module="govuk-button" >
-            Start session
+          Start session
         </button>
-    </form>
-  );
+      </form>
+    );
+  }
+
+  tryLogin(formEvent: React.FormEvent<HTMLFormElement>): void {
+    formEvent.preventDefault()
+    this.props.client.login(this.state).then((success: boolean) => this.setState({...this.state, loginFailed: !success}));
+  }
 }
 
-function tryLogin(formEvent: React.FormEvent<HTMLFormElement>, login: LoginFunction, loginDetails: LoginDetails) {
-    formEvent.preventDefault()
-    login(loginDetails)
-}
 
 export default LoginPage;
