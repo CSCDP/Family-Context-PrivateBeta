@@ -11,12 +11,12 @@ interface PersonParams {
   personId?: string
 }
 
-type IndividualPageProps = {
+type IndividualPageState = {
   personDetails: PersonDetails,
   serviceSummaries: ServiceInvolvementDetailsSummary[]
 }
 
-class IndividualPage extends React.Component<RouteComponentProps<PersonParams> & { client: ApiClient }, IndividualPageProps> {
+class IndividualPage extends React.Component<RouteComponentProps<PersonParams> & { client: ApiClient }, IndividualPageState> {
 
   constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
     super(props);

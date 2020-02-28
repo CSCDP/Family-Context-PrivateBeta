@@ -8,7 +8,7 @@ export function formatShortDateOrString(maybeDate: string | Date): string {
         return date.toLocaleDateString('en-GB');
     }
     else {
-        return (date as Date).getDate().toString();
+        return maybeDate.toString();
     }
 }
 
@@ -22,6 +22,6 @@ export function formatLongDateOrString(maybeDate: string | Date): string {
         return `${date.toLocaleDateString('en-GB')} at ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
     }
     else {
-        return (date as Date).getDate().toString();
+        return maybeDate.toString();
     }
 }
