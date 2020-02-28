@@ -2,9 +2,9 @@ import React from 'react';
 import ServiceInvolvementAccordion from './Accordion/ServiceInvolvementAccordion';
 import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
 import ApiClient, { RequestResult } from '../clients/ApiClient';
-import ServiceInvolvementDisplay from './ServiceInvolvementContent/ServiceInvolvementDisplay';
 import ServiceDetail from '../models/ServiceDetail';
 import DataContent from './DataContent';
+import ServiceInvolvementDisplay from './ServiceInvolvementContent/serviceinvolvementdisplay';
 
 interface ServiceInvolvementProps {
     summaries: ServiceInvolvementDetailsSummary[],
