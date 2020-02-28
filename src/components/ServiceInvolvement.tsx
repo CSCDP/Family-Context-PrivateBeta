@@ -44,8 +44,8 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     }
 
     render() {
-        //let datathing: ServiceDetail = {data:{"admissionType":"historic","contact":{"email":"thisisanemail@example.com","name":"Mrs Robinson","phone":"07000000000","role":null},"schoolName":"SchoolName","serviceInvolvement":"unknown"},schema:{"properties":{"admissionType":{"title":"Admission type","type":"string","x-item-seq":4},"contact":{"description":"Generic object describing the contact information","properties":{"email":{"type":"string","x-item-seq":2},"name":{"type":"string","x-item-seq":1},"phone":{"type":"string","x-item-seq":3},"role":{"type":"string","x-item-seq":4}},"title":"Contact","type":"object","x-item-seq":2,"x-ref":"http://www.sfdl.org.uk/schemas/fc/0.0.1#Contact"},"schoolName":{"title":"School","type":"string","x-item-seq":3},"serviceInvolvement":{"pattern":"[current|historic|unknown]","title":"Service involvement","type":"string","x-item-seq":1}},"type":"object","x-ref":"http://www.sfdl.org.uk/schemas/fc/0.0.1#School"},summary:{"id":"School","title":"School","recordsAvailable":true,"coverageStartDate":"2000-09-02T00:00:00","coverageEndDate":"2009-07-22T00:00:00","lastSynchronised":"2020-02-26T00:00:00"}};
-        let datathing: ServiceDetail = {
+        //let details: ServiceDetail = {data:{"admissionType":"historic","contact":{"email":"thisisanemail@example.com","name":"Mrs Robinson","phone":"07000000000","role":null},"schoolName":"SchoolName","serviceInvolvement":"unknown"},schema:{"properties":{"admissionType":{"title":"Admission type","type":"string","x-item-seq":4},"contact":{"description":"Generic object describing the contact information","properties":{"email":{"type":"string","x-item-seq":2},"name":{"type":"string","x-item-seq":1},"phone":{"type":"string","x-item-seq":3},"role":{"type":"string","x-item-seq":4}},"title":"Contact","type":"object","x-item-seq":2,"x-ref":"http://www.sfdl.org.uk/schemas/fc/0.0.1#Contact"},"schoolName":{"title":"School","type":"string","x-item-seq":3},"serviceInvolvement":{"pattern":"[current|historic|unknown]","title":"Service involvement","type":"string","x-item-seq":1}},"type":"object","x-ref":"http://www.sfdl.org.uk/schemas/fc/0.0.1#School"},summary:{"id":"School","title":"School","recordsAvailable":true,"coverageStartDate":"2000-09-02T00:00:00","coverageEndDate":"2009-07-22T00:00:00","lastSynchronised":"2020-02-26T00:00:00"}};
+        let details: ServiceDetail = {
             "data": {
               "contact": {
                 "email": "officer@police.uk",
@@ -155,7 +155,7 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
                     {this.props.summaries.map(summary =>
                         <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} key={summary.id} click={() => this.click(summary.id)}>
-                            <ServiceInvolvementDisplay details={datathing} />
+                            <ServiceInvolvementDisplay details={details} />
                         </ServiceInvolvementAccordion>)}
                 </div>
             </div>
