@@ -14,6 +14,7 @@
 import ApiClient from "../ApiClient";
 import Person from '../model/Person';
 import PersonQuery from '../model/PersonQuery';
+import PersonWithRelationship from '../model/PersonWithRelationship';
 import ServiceDetail from '../model/ServiceDetail';
 import ServiceSummary from '../model/ServiceSummary';
 
@@ -61,7 +62,7 @@ export default class PersonApi {
       let returnType = Person;
 
       return this.apiClient.callApi(
-        '/api/person/details/{personId}', 'GET',
+        '/api/person/detail/{personId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -74,6 +75,92 @@ export default class PersonApi {
      */
     getPersonById(personId) {
       return this.getPersonByIdWithHttpInfo(personId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get related individuals
+     * Returns individuals related to the person
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/PersonWithRelationship>} and HTTP response
+     */
+    getPersonRelatedWithHttpInfo(personId) {
+      let postBody = null;
+
+      let pathParams = {
+        'personId': personId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cookieAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [PersonWithRelationship];
+
+      return this.apiClient.callApi(
+        '/api/person/related/{personId}/', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get related individuals
+     * Returns individuals related to the person
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/PersonWithRelationship>}
+     */
+    getPersonRelated(personId) {
+      return this.getPersonRelatedWithHttpInfo(personId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Is related person supported
+     * Tests whether the related person API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the functionality. 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    getPersonRelatedSupportedWithHttpInfo(personId) {
+      let postBody = null;
+
+      let pathParams = {
+        'personId': personId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cookieAuth'];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/api/person/related/{personId}/', 'HEAD',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Is related person supported
+     * Tests whether the related person API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the functionality. 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    getPersonRelatedSupported(personId) {
+      return this.getPersonRelatedSupportedWithHttpInfo(personId)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -105,7 +192,7 @@ export default class PersonApi {
       let returnType = ServiceDetail;
 
       return this.apiClient.callApi(
-        '/api/person/details/{personId}/service/{serviceType}', 'GET',
+        '/api/person/detail/{personId}/service/{serviceType}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -147,7 +234,7 @@ export default class PersonApi {
       let returnType = [ServiceSummary];
 
       return this.apiClient.callApi(
-        '/api/person/details/{personId}/service', 'GET',
+        '/api/person/detail/{personId}/service', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -201,6 +288,48 @@ export default class PersonApi {
      */
     searchPerson(body) {
       return this.searchPersonWithHttpInfo(body)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Is person search supported
+     * Tests whether the person search API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the search functionality. 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    searchPersonSupportedWithHttpInfo() {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cookieAuth'];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/api/search/person', 'HEAD',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Is person search supported
+     * Tests whether the person search API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the search functionality. 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    searchPersonSupported() {
+      return this.searchPersonSupportedWithHttpInfo()
         .then(function(response_and_data) {
           return response_and_data.data;
         });

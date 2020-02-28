@@ -3,7 +3,7 @@ import React from "react";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
+import {Provider, useDispatch} from "react-redux";
 
 import {createMuiTheme} from "@material-ui/core/styles";
 import { ThemeProvider } from '@material-ui/styles';
@@ -11,6 +11,9 @@ import { ThemeProvider } from '@material-ui/styles';
 import rootReducer from "./reducers";
 import Auth from "./components/authentication/auth";
 import Router from "./Router"
+
+import { checkPersonSearch } from "./actions/features";
+
 
 const loggerMiddleware = createLogger();
 
@@ -30,9 +33,16 @@ const theme = createMuiTheme({
     },
 });
 
+function Init() {
+    const dispatch = useDispatch();
+    dispatch(checkPersonSearch());
+    return (<></>);
+}
+
 function App() {
   return (
       <Provider store={store}>
+          <Init/>
           <ThemeProvider theme={theme}>
               <Auth>
                   <Router />

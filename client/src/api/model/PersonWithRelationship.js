@@ -12,17 +12,18 @@
  */
 
 import ApiClient from '../ApiClient';
+import Person from './Person';
 
 /**
-* The Person model module.
-* @module model/Person
+* The PersonWithRelationship model module.
+* @module model/PersonWithRelationship
 * @version 0.0.1
 */
-export default class Person {
+export default class PersonWithRelationship {
     /**
-    * Constructs a new <code>Person</code>.
-    * this is a person
-    * @alias module:model/Person
+    * Constructs a new <code>PersonWithRelationship</code>.
+    * A related person - describes the relationship to an individual
+    * @alias module:model/PersonWithRelationship
     * @class
     * @param id {String} 
     * @param firstName {String} 
@@ -33,20 +34,21 @@ export default class Person {
                 this['id'] = id;
         this['firstName'] = firstName;
         this['lastName'] = lastName;
-        
+        return this;
     }
 
     /**
-    * Constructs a <code>Person</code> from a plain JavaScript object, optionally creating a new instance.
+    * Constructs a <code>PersonWithRelationship</code> from a plain JavaScript object, optionally creating a new instance.
     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
     * @param {Object} data The plain JavaScript object bearing properties of interest.
-    * @param {module:model/Person} obj Optional instance to populate.
-    * @return {module:model/Person} The populated <code>Person</code> instance.
+    * @param {module:model/PersonWithRelationship} obj Optional instance to populate.
+    * @return {module:model/PersonWithRelationship} The populated <code>PersonWithRelationship</code> instance.
     */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new Person();
-                                    if (data.hasOwnProperty('id')) {
+            obj = obj || new PersonWithRelationship();
+            ApiClient.constructFromObject(data, obj, '');
+                        if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'String');
             }
             if (data.hasOwnProperty('firstName')) {
@@ -63,6 +65,12 @@ export default class Person {
             }
             if (data.hasOwnProperty('address')) {
                 obj['address'] = ApiClient.convertToType(data['address'], 'String');
+            }
+            if (data.hasOwnProperty('relationship')) {
+                obj['relationship'] = ApiClient.convertToType(data['relationship'], 'String');
+            }
+            if (data.hasOwnProperty('relationshipToId')) {
+                obj['relationshipToId'] = ApiClient.convertToType(data['relationshipToId'], 'String');
             }
         }
         return obj;
@@ -93,6 +101,16 @@ export default class Person {
     * @member {String} address
     */
     address = undefined;
+    /**
+    * A description of the relationship.
+    * @member {String} relationship
+    */
+    relationship = undefined;
+    /**
+    * The ID of the individual this relationship refers to
+    * @member {String} relationshipToId
+    */
+    relationshipToId = undefined;
 
 
 

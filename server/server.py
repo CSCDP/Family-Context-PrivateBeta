@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import connexion
 import inflection
 import os
@@ -8,6 +7,7 @@ import glob
 from swagger_server import encoder
 from connexion.resolver import RestyResolver
 from flask_cors import CORS
+from flask import session, request
 
 import flask
 
@@ -47,6 +47,7 @@ def send_static():
 app = connexion.FlaskApp(__name__, specification_dir='../schema')
 app.app.json_encoder = encoder.JSONEncoder
 CORS(app.app)
+app.app.secret_key = 'super secret key'
 
 
 # Add explicit rules for each file in the static directory
@@ -59,6 +60,17 @@ for f in [f for f in glob.glob("static/**/*.*", recursive=True)]:
 @app.route('/<path:path>')
 def get_default_page(path):
     return flask.send_file('static/index.html')
+
+
+@app.route('/test/toggle-person-search')
+def toggle_person_search():
+    value = request.args.get('value')
+    if value is not None:
+        session['person_search'] = value.lower() == "true"
+    else:
+        session['person_search'] = not session.get('person_search', False)
+
+    return f"OK {session['person_search']}"
 
 
 app.add_api('family-context-api.yaml', arguments={'title': 'Family Context'}, pythonic_params=True,

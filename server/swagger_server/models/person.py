@@ -15,7 +15,7 @@ class Person(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, ethnicity: str=None, address: str=None):  # noqa: E501
+    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None):  # noqa: E501
         """Person - a model defined in Swagger
 
         :param id: The id of this Person.  # noqa: E501
@@ -28,8 +28,6 @@ class Person(Model):
         :type date_of_birth: date
         :param gender: The gender of this Person.  # noqa: E501
         :type gender: str
-        :param ethnicity: The ethnicity of this Person.  # noqa: E501
-        :type ethnicity: str
         :param address: The address of this Person.  # noqa: E501
         :type address: str
         """
@@ -39,7 +37,6 @@ class Person(Model):
             'last_name': str,
             'date_of_birth': date,
             'gender': str,
-            'ethnicity': str,
             'address': str
         }
 
@@ -49,7 +46,6 @@ class Person(Model):
             'last_name': 'lastName',
             'date_of_birth': 'dateOfBirth',
             'gender': 'gender',
-            'ethnicity': 'ethnicity',
             'address': 'address'
         }
         self._id = id
@@ -57,7 +53,6 @@ class Person(Model):
         self._last_name = last_name
         self._date_of_birth = date_of_birth
         self._gender = gender
-        self._ethnicity = ethnicity
         self._address = address
 
     @classmethod
@@ -183,27 +178,6 @@ class Person(Model):
         """
 
         self._gender = gender
-
-    @property
-    def ethnicity(self) -> str:
-        """Gets the ethnicity of this Person.
-
-
-        :return: The ethnicity of this Person.
-        :rtype: str
-        """
-        return self._ethnicity
-
-    @ethnicity.setter
-    def ethnicity(self, ethnicity: str):
-        """Sets the ethnicity of this Person.
-
-
-        :param ethnicity: The ethnicity of this Person.
-        :type ethnicity: str
-        """
-
-        self._ethnicity = ethnicity
 
     @property
     def address(self) -> str:

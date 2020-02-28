@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
-import {makeStyles} from "@material-ui/core/styles";
+import  {makeStyles } from "@material-ui/core/styles";
+import createFragment from 'react-addons-create-fragment';
 
 const useStyles = makeStyles(theme => ({
     head: {
@@ -15,7 +16,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const joinStrings = (sep, ...strings) => {
-    console.log("joinStrings", sep, strings)
     const values = []
     strings.forEach(s => {
         if (s) values.push(s)
@@ -70,26 +70,26 @@ const RenderContact = ({data, schema, propName}) => {
     const title = schema.title ? schema.title : propName
     const name = joinStrings(" | ", data.name, data.role)
     const contact = joinStrings(" | ", data.email, data.phone)
-    return [(
-        <>
+    return [createFragment({ propName: (
+            <>
             <Grid item xs={4} className={classes.head}>{title}</Grid>
             <Grid item xs={8} className={classes.item}>{name} </Grid>
             <Grid item xs={4} className={classes.head}></Grid>
             <Grid item xs={8} className={classes.item}>{contact} </Grid>
         </>
-    )]
+    )})];
 }
 
 const RenderOffenceSummary = ({data, schema, propName}) => {
     const classes = useStyles();
     const title = schema.title ? schema.title : propName
     const name = joinStrings(" - ", data.dateOfOffence, data.natureOfInvolvement, data.typeOfOffence)
-    return [(
+    return [createFragment({ propName:(
         <>
             <Grid item xs={4} className={classes.head}>{title}</Grid>
             <Grid item xs={8} className={classes.item}>{name} </Grid>
         </>
-    )]
+    )})];
 }
 
 
@@ -117,7 +117,6 @@ const LayoutData = ({data, schema, propName}) => {
 }
 
 const ServiceDetails = ({ details }) => {
-    const classes = useStyles();
     return (
         <LayoutData data={details.data} schema={details.schema}/>
     )

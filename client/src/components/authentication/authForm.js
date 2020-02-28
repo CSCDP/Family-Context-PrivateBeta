@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core/";
 
@@ -37,7 +37,7 @@ const SendToken = () => {
   const dispatch = useDispatch();
 
   const onEmailSubmit = async (email, password) => {
-    const response = await authenticate(email, password);
+    await authenticate(email, password);
     dispatch(checkAuthState());
   }
 
