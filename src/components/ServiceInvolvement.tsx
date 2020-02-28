@@ -154,7 +154,7 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
             <div id="service-involvements">
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
                     {this.props.summaries.map(summary =>
-                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} click={() => this.click(summary.id)}>
+                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} key={summary.id} click={() => this.click(summary.id)}>
                             <ServiceInvolvementDisplay details={datathing} />
                         </ServiceInvolvementAccordion>)}
                 </div>
