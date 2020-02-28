@@ -13,7 +13,7 @@ interface PersonParams {
 
 type IndividualPageState = {
   personDetails: PersonDetails,
-  serviceSummaries: ServiceInvolvementDetailsSummary[]
+  serviceSummaries?: ServiceInvolvementDetailsSummary[]
 }
 
 class IndividualPage extends React.Component<RouteComponentProps<PersonParams> & { client: ApiClient }, IndividualPageState> {
@@ -21,8 +21,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
   constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
     super(props);
     this.state = {
-      personDetails: { address: "loading...", ethnicity: "loading...", firstName: "loading...", gender: "loading...", id: -1, lastName: "loading...", dateOfBirth: "loading..." },
-      serviceSummaries: []
+      personDetails: { address: "loading...", ethnicity: "loading...", firstName: "loading...", gender: "loading...", id: -1, lastName: "loading...", dateOfBirth: "loading..." }
     }
   }
 
@@ -45,7 +44,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
       <div className="IndividualPage">
         <NavigationButtons {...this.props} />
         <BasicDetails personDetails={this.state.personDetails}></BasicDetails>
-        <ServiceInvolvement summaries={this.state.serviceSummaries} client={this.props.client}/>
+        {this.state.serviceSummaries? (<ServiceInvolvement summaries={this.state.serviceSummaries} client={this.props.client}/>) : (<></>)}
       </div>
     );
   }
