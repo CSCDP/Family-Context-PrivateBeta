@@ -7,6 +7,22 @@
   border-bottom: 2px solid blue;
 }
 
+.CardHeader .govuk-heading-m {
+  margin: 0px;
+}
+
+.govuk-accordion__section-heading strong{
+  margin-left: 10px;
+  background-color:	#f3f2f1;
+  color: green;
+}
+
+.govuk-heading-m strong{
+  margin-left: 10px;
+  background-color:	#f3f2f1;
+  color:	#626a6e;
+}
+
 .family-context-header {
   align-items: center;
 }

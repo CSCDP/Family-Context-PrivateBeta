@@ -5,20 +5,33 @@ import AccordionSection from './AccordionSection';
 import AccordionSectionHeader from './AccordionSectionHeader';
 import AccordionContent from './AccordionContent';
 import ServiceInvolvementDetailsSummary from '../../models/ServiceInvolvementDetailsSummary';
+import { formatLongDateOrString, formatShortDateOrString } from '../../tools/FormattingTools';
+import CardHeader from '../CardHeader';
 
 const ServiceInvolvementAccordion: React.SFC<{ serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }> = (props: { serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }) => {
 
+  console.log(props.serviceInvolvementDetailsSummary.recordsAvailable)
+  if (props.serviceInvolvementDetailsSummary.recordsAvailable) {
     return (
       <AccordionSection>
-      <AccordionSectionHeader click={() => props.click()}>
-        <AccordionHeader title={props.serviceInvolvementDetailsSummary.title} ></AccordionHeader>
+        <AccordionSectionHeader click={() => props.click()}>
+          <AccordionHeader title={props.serviceInvolvementDetailsSummary.title} ></AccordionHeader>
+          <ServiceInvolvementAccordionSummary serviceInvolvement={props.serviceInvolvementDetailsSummary} />
+        </AccordionSectionHeader>
+        <AccordionContent>
+          {props.children}
+        </AccordionContent>
+      </AccordionSection>
+    );
+  }
+  else {
+    return (
+      <div className="CardHeader">
+        <CardHeader title={props.serviceInvolvementDetailsSummary.title} ></CardHeader>
         <ServiceInvolvementAccordionSummary serviceInvolvement={props.serviceInvolvementDetailsSummary} />
-      </AccordionSectionHeader>
-      <AccordionContent>
-        {props.children}
-      </AccordionContent>
-    </AccordionSection>
+      </div>
     )
+  }
 }
 
 export default ServiceInvolvementAccordion;
