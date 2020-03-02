@@ -87,11 +87,12 @@ class ApiClient {
     async getServiceDetail(personId: string, serviceId: string): Promise<RequestResult<ServiceDetail>> {
         let serviceDetailsPath = "/person/details/" + personId + "/service/" + serviceId;
         let response = await this.getRequest(serviceDetailsPath);
+        let jsonString = (await response.text()).replace(/x-ref/g, "xRef").replace(/x-item-seq/g, "xItemSeq");
         
         return {
             statusCode: response.status,
             success: response.ok,
-            data: await response.json()
+            data: JSON.parse(jsonString)
         };
     }
 

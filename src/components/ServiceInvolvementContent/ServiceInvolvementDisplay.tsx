@@ -1,64 +1,85 @@
 import React from "react";
 import ServiceDetail from "../../models/ServiceDetail";
-import GetStringData from "./GetStringData";
 import TitleValuePairTableRow from "../Table/TitleValuePairTableRow";
+import Schema, { ObjectSchema, StringSchema, ArraySchema } from "../../models/Schema";
+
+interface DataDictionary { [id: string]: any }
 
 const ServiceInvolvementDisplay: React.SFC<{ details: ServiceDetail }> = (props: { details: ServiceDetail }) => {
+    return <ObjectComponent schema={props.details.schema} data={props.details.data}/>
+}
 
-    let properties = props.details.schema.properties;
+const ObjectComponent: React.FC<{ data: DataDictionary, schema: ObjectSchema, keyId?: string }> = (props: { data: DataDictionary, schema: ObjectSchema, keyId?: string }) => {
+    console.log(props.schema);
     let results: any[] = [];
-    for (let key in properties) {
-        let value = properties[key];
-        results[value["x-item-seq"] - 1] = formatData(key, value, props.details.data);
-    }
-
-    function formatData(key: string, value: { [id: string]: any }, data?: { [id: string]: any }, index?: number) {
-        if (data) {
-            if (value["type"] == "string") {
-                let title = value["title"] ? value["title"] : key;
-                return index == undefined
-                    ? <TitleValuePairTableRow rowTitle={title} rowValue={data[key]} format="govuk-!-font-size-14" />
-                    : <TitleValuePairTableRow rowTitle={title + " " + index} rowValue={data[key]} format="govuk-!-font-size-14" />;
-            } else if (value["type"] == "array") {
-                return formatArrayData(key, value, data);
-            } else if (value["type"] == "object") {
-                return formatObjectData(key, value, data, index);
-            }
+    for (let propertyKey in props.schema.properties) {
+        let property = props.schema.properties[propertyKey];
+        if (property.xItemSeq) {
+            results[property.xItemSeq] = { ...property, propertyKey }
+        } else {
+            if (Object.keys(props.schema.properties).length !== 1) throw "No order attribute for multiple properties in schema";
+            results[0] = { ...property, propertyKey };
         }
     }
+    return (
+        <>
+            <ObjectTitle keyId={props.keyId} title={props.schema.title}/>
+            {results.map(result =>
+                (
+                    <GenericComponent schema={result} data={props.data[result.propertyKey]} keyId={result.propertyKey}/>
+                )
+            )}
+        </>
+    );
+}
+
+const ObjectTitle: React.FC<{keyId?: string, title?: string}> = (props) =>{
+    if (props.title){
+        return <th>{props.title}</th>
+    }
+    if(props.keyId){
+        return <th>{props.keyId}</th>
+    }
+    return null;
+}
+
+const ArrayComponent: React.FC<{ data: any[], schema: ArraySchema, keyId: string }> = (props: { data:  any[], schema: ArraySchema, keyId: string }) => {
+
+    let arrayKeyRoot = props.schema.title ?? props.keyId;
+    let elementArray =props.data.map((dataItem, index) =>
+    (
+        <GenericComponent schema={props.schema.items} data={dataItem} keyId={arrayKeyRoot + index}/>
+    ));
+
+    return <>{elementArray}</>;
+}
 
 
-    function formatArrayData(key: string, value: { [id: string]: any }, data: { [id: string]: any }) {
-        let title = value["title"] ? value["title"] : key;
-        let table = value["items"]["properties"];
-        let results: any[] = [];
-        results[0] = <th>{title}</th>
-        let internalIndex = 1;
-        for (let dataKey in data[key]) {
-            let dataItem = data[key][dataKey];
-            results[internalIndex] = formatSmallTableData(table, dataItem, internalIndex);
-            internalIndex++;
+const StringComponent: React.FC<{ data: string, schema: StringSchema, keyId: string }> = (props: { data: string, schema: StringSchema, keyId: string }) => {
+    let title = props.schema.title ? props.schema.title : props.keyId;
+    return <TitleValuePairTableRow rowTitle={title} rowValue={props.data} format="govuk-!-font-size-14" />
+}
+
+const GenericComponent: React.FC<{ schema: Schema, data: any, keyId: string }> = (props: { schema: Schema, data: any, keyId: string }) => {
+
+    let type = props.schema.type;
+    switch (type) {
+        case "array": {
+            let arraySchema = props.schema as ArraySchema;
+            return <ArrayComponent schema={arraySchema} data={props.data} keyId={props.keyId} />
         }
-        return results;
-    }
-    function formatObjectData(key: string, value: { [id: string]: any }, data: { [id: string]: any }, index?: number) {
-        let title = value["title"] ? value["title"] : key;
-        let table = value["properties"];
-        let results = formatSmallTableData(table, data[key], index);
-        results[0] = <th>{title}</th>
-        return results;
-    }
-
-    function formatSmallTableData(table: { [id: string]: any }, data: { [id: string]: any }, index?: number) {
-        let results: any[] = [];
-        for (let key in table) {
-            let value = table[key];
-            results[value["x-item-seq"]] = formatData(key, value, data, index);
+        case "object": {
+            let objectSchema = props.schema as ObjectSchema;
+            return <ObjectComponent schema={objectSchema} data={props.data} keyId={props.keyId} />
         }
-        return results;
+        case "string": {
+            let stringSchema = props.schema as StringSchema;
+            return <StringComponent schema={stringSchema} data={props.data} keyId={props.keyId} />
+        }
     }
-
-    return results.length > 0 ? <div>{results}</div> : null;
+    return (
+        null
+    );
 }
 
 export default ServiceInvolvementDisplay;
