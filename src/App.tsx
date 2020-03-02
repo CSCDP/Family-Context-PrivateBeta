@@ -42,7 +42,7 @@ private updateAuthenticationStatus = (status: boolean) => {
       )
     } else {
       return (
-        <Route render={(props) => <LoginPage {...props} login={(loginDetails: LoginDetails) => this.apiClient.login(loginDetails)}/>} />
+        <Route render={(props) => <LoginPage {...props} client={this.apiClient}/>} />
       );
     }
   }

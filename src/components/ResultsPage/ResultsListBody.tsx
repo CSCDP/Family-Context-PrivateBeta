@@ -1,7 +1,7 @@
 import React from 'react';
 import PersonDetails from '../../models/PersonDetails';
 import RowValues from '../Table/RowValues';
-import { formatDateOrString, formatShortAddress, formatAgeInYearsFromStringOrDate } from '../../tools/FormattingTools';
+import { formatShortDateOrString, formatShortAddress, formatAgeInYearsFromStringOrDate } from '../../tools/FormattingTools';
 
 type ResultsListBodyProps = {
     person: PersonDetails,
@@ -13,7 +13,7 @@ const ResultsListBody: React.FC<ResultsListBodyProps> = (props) => {
         props.person.id.toString(),
         props.person.firstName,
         props.person.lastName,
-        formatDateOrString(props.person.dateOfBirth),
+        formatShortDateOrString(props.person.dateOfBirth),
         formatAgeInYearsFromStringOrDate(props.person.dateOfBirth),
         formatShortAddress(props.person.address)
     ]

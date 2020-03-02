@@ -1,5 +1,6 @@
 import LoginDetails from "../models/LoginDetails";
 import PersonDetails from "../models/PersonDetails";
+import ServiceInvolvementDetailsSummary from "../models/ServiceInvolvementDetailsSummary";
 import SearchDetails from "../models/SearchDetails";
 
 class ApiClient {
@@ -59,6 +60,12 @@ class ApiClient {
         let personDetailsPath = "/person/details/" + personId;
         let response = await this.getRequest(personDetailsPath);
         return response.json() as Promise<PersonDetails>;
+    }
+
+    async getServiceSummaries(personId: string): Promise<ServiceInvolvementDetailsSummary[]> {
+        let personDetailsPath = "/person/details/" + personId + "/service";
+        let response = await this.getRequest(personDetailsPath);
+        return response.json() as Promise<ServiceInvolvementDetailsSummary[]>;
     }
 
     async searchPerson(search: SearchDetails): Promise<PersonDetails[]> {
