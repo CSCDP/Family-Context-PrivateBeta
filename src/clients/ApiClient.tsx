@@ -57,7 +57,7 @@ class ApiClient {
     }
 
     async getPerson(personId: string): Promise<RequestResult<PersonDetails>> {
-        let personDetailsPath = "/person/details/" + personId;
+        let personDetailsPath = "/person/detail/" + personId;
         let response = await this.getRequest(personDetailsPath);
 
         let result: RequestResult<PersonDetails> = {
@@ -74,7 +74,7 @@ class ApiClient {
     }
 
     async getServiceSummaries(personId: string): Promise<RequestResult<ServiceInvolvementDetailsSummary[]>> {
-        let personDetailsPath = "/person/details/" + personId + "/service";
+        let personDetailsPath = "/person/detail/" + personId + "/service";
         let response = await this.getRequest(personDetailsPath);
         
         return {
