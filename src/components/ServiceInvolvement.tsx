@@ -57,7 +57,7 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     }
 }
 
-const ServiceInvolvementDisplay: React.SFC<{ person: PersonDetails | null }> = (props: { person: PersonDetails | null }) => {
+const ServiceInvolvementDisplay: React.FC<{ person: PersonDetails | null }> = (props: { person: PersonDetails | null }) => {
     return props.person ? (<BasicDetails personDetails={props.person}></BasicDetails>) : (<div> loading... </div>);
 }
 

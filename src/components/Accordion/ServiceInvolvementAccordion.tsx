@@ -7,7 +7,7 @@ import AccordionContent from './AccordionContent';
 import ServiceInvolvementDetailsSummary from '../../models/ServiceInvolvementDetailsSummary';
 import CardHeader from '../CardHeader';
 
-const ServiceInvolvementAccordion: React.SFC<{ serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }> = (props: { serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }) => {
+const ServiceInvolvementAccordion: React.FC<{ serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }> = (props: { serviceInvolvementDetailsSummary: ServiceInvolvementDetailsSummary, click: () => void, children: any }) => {
 
   if (props.serviceInvolvementDetailsSummary.recordsAvailable) {
     return (

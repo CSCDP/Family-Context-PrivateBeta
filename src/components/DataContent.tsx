@@ -8,7 +8,7 @@ interface DataContentProps {
     children: React.ReactNode
 }
 
-const DataContent: React.SFC<DataContentProps> = (props: DataContentProps) => {
+const DataContent: React.FC<DataContentProps> = (props: DataContentProps) => {
     if (!props.result){
         return <>{props.loading}</>;
     }

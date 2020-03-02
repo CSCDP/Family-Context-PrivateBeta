@@ -1,6 +1,7 @@
 import LoginDetails from "../models/LoginDetails";
 import PersonDetails from "../models/PersonDetails";
 import ServiceInvolvementDetailsSummary from "../models/ServiceInvolvementDetailsSummary";
+import SearchDetails from "../models/SearchDetails";
 
 class ApiClient {
     private baseUrl: string
@@ -81,6 +82,35 @@ class ApiClient {
             success: response.ok,
             data: await response.json()
         };
+    }
+
+    async searchPerson(search: SearchDetails): Promise<RequestResult<PersonDetails[]>> {
+        let searchPath = "/search/person";
+        let response = await this.postJsonRequest(searchPath, JSON.stringify(search))
+
+        return {
+            statusCode: response.status,
+            success: response.ok,
+            data: await response.json()
+        }
+    }
+
+    async postJsonRequest(relativePath: string, body: string): Promise<Response> {
+        return fetch(`${this.baseUrl}${relativePath}`, {
+            method: "POST",
+            credentials: 'include',
+            body: body,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response =>
+            {
+                if (response.status === 401)
+                {
+                    this.authenticationCallback(false);
+                }
+                return response;
+        });
     }
 
     async getRequest(relativePath: string): Promise<Response> {
