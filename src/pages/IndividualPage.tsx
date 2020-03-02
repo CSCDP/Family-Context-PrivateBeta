@@ -2,39 +2,37 @@ import React from 'react';
 import BasicDetails from '../components/BasicDetails';
 import PersonDetails from '../models/PersonDetails';
 import { RouteComponentProps } from 'react-router-dom';
-import ApiClient from '../clients/ApiClient';
+import ApiClient, { RequestResult } from '../clients/ApiClient';
 import ServiceInvolvement from '../components/ServiceInvolvement';
 import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
 import NavigationButtons from '../components/NavigationButtons';
+import DataContent from '../components/DataContent';
 
 interface PersonParams {
   personId?: string
 }
 
 type IndividualPageState = {
-  personDetails: PersonDetails,
-  serviceSummaries?: ServiceInvolvementDetailsSummary[]
+  personDetailsResult?: RequestResult<PersonDetails>,
+  serviceSummariesResult?: RequestResult<ServiceInvolvementDetailsSummary[]>
 }
 
 class IndividualPage extends React.Component<RouteComponentProps<PersonParams> & { client: ApiClient }, IndividualPageState> {
 
   constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
     super(props);
-    this.state = {
-      personDetails: { address: "loading...", ethnicity: "loading...", firstName: "loading...", gender: "loading...", id: -1, lastName: "loading...", dateOfBirth: "loading..." }
-    }
+    this.state = {}
   }
 
 
   componentDidMount() {
-    let personId = this.props.match.params.personId
+    let personId = this.props.match.params.personId;
     if (personId) {
-      this.props.client.getPerson(personId).then(personDetails => {
-        this.setState({...this.state, personDetails});
+      this.props.client.getPerson(personId).then(result => {
+        this.setState({...this.state, personDetailsResult: result});
       });
-
-      this.props.client.getServiceSummaries(personId).then(serviceSummaries => {
-        this.setState({...this.state, serviceSummaries});
+      this.props.client.getServiceSummaries(personId).then(result => {
+        this.setState({ ...this.state, serviceSummariesResult: result });
       })
     }
   }
@@ -43,11 +41,32 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
     return (
       <div className="IndividualPage">
         <NavigationButtons {...this.props} />
-        <BasicDetails personDetails={this.state.personDetails}></BasicDetails>
-        {this.state.serviceSummaries? (<ServiceInvolvement summaries={this.state.serviceSummaries} client={this.props.client}/>) : (<></>)}
+        <DataContent result={this.state.personDetailsResult} loading={<PersonLoading />} error={<PersonNotFound />}>
+          <BasicDetails personDetails={this.state.personDetailsResult?.data as PersonDetails}></BasicDetails>
+          <DataContent result={this.state.serviceSummariesResult} error={<div>Error loading service involvements: status code {this.state.serviceSummariesResult?.statusCode}</div>}>
+            <ServiceInvolvement summaries={this.state.serviceSummariesResult?.data as ServiceInvolvementDetailsSummary[]} client={this.props.client} />
+          </DataContent>
+        </DataContent>
       </div>
     );
   }
+}
+
+const PersonLoading: React.SFC = () => {
+  return (
+    <div className="govuk-heading-m">
+      Searching for Service Involvements...
+    </div>
+  );
+}
+
+
+const PersonNotFound: React.SFC = () => {
+  return (
+    <div className="govuk-heading-m">
+      No matches found
+    </div>
+  )
 }
 
 export default IndividualPage;

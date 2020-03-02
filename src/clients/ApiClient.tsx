@@ -56,16 +56,32 @@ class ApiClient {
         }
     }
 
-    async getPerson(personId: string): Promise<PersonDetails> {
+    async getPerson(personId: string): Promise<RequestResult<PersonDetails>> {
         let personDetailsPath = "/person/details/" + personId;
         let response = await this.getRequest(personDetailsPath);
-        return response.json() as Promise<PersonDetails>;
+
+        let result: RequestResult<PersonDetails> = {
+            statusCode: response.status,
+            success: response.ok
+        }
+
+        if(response.ok) {
+            result.data = await response.json();
+        }
+
+        return result;
+
     }
 
-    async getServiceSummaries(personId: string): Promise<ServiceInvolvementDetailsSummary[]> {
+    async getServiceSummaries(personId: string): Promise<RequestResult<ServiceInvolvementDetailsSummary[]>> {
         let personDetailsPath = "/person/details/" + personId + "/service";
         let response = await this.getRequest(personDetailsPath);
-        return response.json() as Promise<ServiceInvolvementDetailsSummary[]>;
+        
+        return {
+            statusCode: response.status,
+            success: response.ok,
+            data: await response.json()
+        };
     }
 
     async searchPerson(search: SearchDetails): Promise<PersonDetails[]> {
@@ -104,6 +120,13 @@ class ApiClient {
                 return response;
             });
     }
+}
+
+export interface RequestResult<T>  {
+    statusCode: number,
+    data?: T,
+    success: boolean,
+    errorMessage?: string
 }
 
 export default ApiClient
