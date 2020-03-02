@@ -52,7 +52,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
   }
 }
 
-const PersonLoading: React.SFC = () => {
+const PersonLoading: React.FC = () => {
   return (
     <div className="govuk-heading-m">
       Searching for Service Involvements...
@@ -61,7 +61,7 @@ const PersonLoading: React.SFC = () => {
 }
 
 
-const PersonNotFound: React.SFC = () => {
+const PersonNotFound: React.FC = () => {
   return (
     <div className="govuk-heading-m">
       No matches found

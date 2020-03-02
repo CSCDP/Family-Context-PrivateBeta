@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import BackButton from "./BackButton";
 import SearchButton from "./SearchButton";
 
-const LoginFailedWarning: React.SFC<{ loginFailed: boolean }> = (props: { loginFailed: boolean }) => {
+const LoginFailedWarning: React.FC<{ loginFailed: boolean }> = (props: { loginFailed: boolean }) => {
     if (props.loginFailed) {
         return (
             <div className="LoginFailureWarning">
