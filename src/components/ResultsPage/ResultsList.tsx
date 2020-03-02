@@ -1,10 +1,9 @@
 import React from "react";
 import PersonDetails from "../../models/PersonDetails";
-import ResultsListRow from "./ResultsListRow";
+import {ResultsListRow, ResultsListHeader} from "./ResultsListRow";
 import TableBody from "../Table/TableBody";
 import Table from "../Table/Table";
 import TableHeader from "../Table/TableHeader";
-import RowValues from '../Table/RowValues';
 
 type ResultsListProps = {
     results: PersonDetails[],
@@ -25,23 +24,6 @@ const ResultsList: React.FC<ResultsListProps> = (props) => {
                 </TableBody>
             </Table>
         </div>
-    )
-}
-
-const ResultsListHeader: React.FC = () => {
-    var values = [
-        "ID",
-        "First name",
-        "Family name",
-        "Date of Birth",
-        "Age",
-        "Address"
-    ]
-
-    var format = new Array(values.length).fill("govuk-table__header")
-
-    return (
-        <RowValues rowValues={values} format={format} />
     )
 }
 

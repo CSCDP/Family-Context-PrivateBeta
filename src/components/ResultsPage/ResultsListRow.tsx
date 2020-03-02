@@ -23,4 +23,21 @@ const ResultsListRow: React.FC<ResultsListRowProps> = (props) => {
     )
 }
 
-export default ResultsListRow;
+const ResultsListHeader: React.FC = () => {
+    var values = [
+        "ID",
+        "First name",
+        "Family name",
+        "Date of Birth",
+        "Age",
+        "Address"
+    ]
+
+    var format = new Array(values.length).fill("govuk-table__header")
+
+    return (
+        <RowValues rowValues={values} format={format} />
+    )
+}
+
+export {ResultsListRow, ResultsListHeader};

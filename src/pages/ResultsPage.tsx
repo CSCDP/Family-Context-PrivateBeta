@@ -14,24 +14,15 @@ interface ResultsPageProps extends RouteComponentProps {
 
 type ResultsPageState = {
     result?: RequestResult<PersonDetails[]>,
-    search: SearchDetails
 }
 
 class ResultsPage extends React.Component<ResultsPageProps, ResultsPageState> {
-    constructor(props: ResultsPageProps) {
-        super(props)
-
-        var searchParams = new URLSearchParams(this.props.location.search)
-        var searchDetails = convertParamsToSearch(searchParams)
-
-        this.state = {search: searchDetails}
-    }
 
     componentDidMount() {
-        this.props.client.searchPerson(this.state.search).then(result => {
+        this.props.client.searchPerson(getSearchDetails(this.props)).then(result => {
             var updatedResult = {...result, success: result.success && result.data != null && result.data.length > 0}
 
-            this.setState({...this.state, result: updatedResult})
+            this.setState({result: updatedResult})
         })
     }
 
@@ -43,9 +34,9 @@ class ResultsPage extends React.Component<ResultsPageProps, ResultsPageState> {
         return (
           <div className="ResultsPage">
             <NavigationButtons {...this.props}/>
-            <DataContent result={this.state.result} loading={<ResultsLoading/>} error={<MatchesNotFound/>}>
-                <ResultsInfo search={this.state.search} matches={this.state.result?.data?.length || 0} />
-                <ResultsList results={this.state.result?.data || []} navigate={(id: number) => this.navigateToPerson(id)}/>
+            <DataContent result={this.state?.result} loading={<ResultsLoading/>} error={<MatchesNotFound/>}>
+                <ResultsInfo search={getSearchDetails(this.props)} matches={this.state?.result?.data?.length || 0} />
+                <ResultsList results={this.state?.result?.data || []} navigate={(id: number) => this.navigateToPerson(id)}/>
             </DataContent>
           </div>
         )
@@ -68,7 +59,9 @@ const MatchesNotFound: React.FC = () => {
     );
 }
 
-function convertParamsToSearch(params: URLSearchParams): SearchDetails {
+function getSearchDetails(props: RouteComponentProps): SearchDetails {
+    var params = new URLSearchParams(props.location.search)
+
     var dateParam = params.get('dateOfBirth')
     var dateOfBirth = (dateParam == null) ? "" : JSON.stringify(new Date(dateParam))
 
