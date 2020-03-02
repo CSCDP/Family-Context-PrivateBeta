@@ -4,7 +4,7 @@ interface PersonDetails {
     ethnicity: string,
     firstName: string,
     gender: string,
-    id: number,
+    id: string,
     lastName: string
 }
 

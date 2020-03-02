@@ -1,17 +1,19 @@
 import React from 'react';
 import ServiceInvolvementAccordion from './Accordion/ServiceInvolvementAccordion';
 import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
-import ApiClient from '../clients/ApiClient';
-import BasicDetails from './BasicDetails';
-import PersonDetails from '../models/PersonDetails';
+import ApiClient, { RequestResult } from '../clients/ApiClient';
+import ServiceInvolvementDisplay from './ServiceInvolvementContent/ServiceInvolvementDisplay';
+import ServiceDetail from '../models/ServiceDetail';
+import DataContent from './DataContent';
 
 interface ServiceInvolvementProps {
     summaries: ServiceInvolvementDetailsSummary[],
-    client: ApiClient
+    client: ApiClient,
+    personId: string
 }
 
 interface ServiceInvolvementState { 
-    serviceInvolvementDetailsData: { [id: string]: PersonDetails | null; } 
+    serviceInvolvementDetailsData: { [id: string]: RequestResult<ServiceDetail> | null; } 
 }
 
 class ServiceInvolvement extends React.Component<ServiceInvolvementProps, ServiceInvolvementState>  {
@@ -19,7 +21,7 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     constructor(props: ServiceInvolvementProps ) {
         super(props);
 
-        let emptyData: { [id: string]: PersonDetails | null; } = {};
+        let emptyData: { [id: string]: RequestResult<ServiceDetail> | null; } = {};
         props.summaries.forEach(summary => {
             emptyData[summary.id] = null
         });
@@ -29,10 +31,10 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
         };
     }
 
-    click(id: string): void {
-        this.props.client.getPerson(id).then(result => {
+    click(serviceId: string): void {
+        this.props.client.getServiceDetail(this.props.personId, serviceId).then(result => {
             let newData = { ...this.state.serviceInvolvementDetailsData };
-            newData[id] = result.success ? result.data as PersonDetails : null;
+            newData[serviceId] = result as RequestResult<ServiceDetail>;
             this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
         });
     }
@@ -48,17 +50,32 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
                     {this.props.summaries.map(summary =>
                         <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} key={summary.id} click={() => this.click(summary.id)}>
-                            <ServiceInvolvementDisplay person={this.state.serviceInvolvementDetailsData[summary.id]} />
+                          <DataContent result={this.state.serviceInvolvementDetailsData[summary.id]} loading={<ServiceDetailsLoading />} error={<ServiceDetailsNotFound />}>
+                            <ServiceInvolvementDisplay details={this.state.serviceInvolvementDetailsData[summary.id]?.data as ServiceDetail} />
+                          </DataContent>
                         </ServiceInvolvementAccordion>)}
                 </div>
             </div>
         )
-
     }
 }
 
-const ServiceInvolvementDisplay: React.SFC<{ person: PersonDetails | null }> = (props: { person: PersonDetails | null }) => {
-    return props.person ? (<BasicDetails personDetails={props.person}></BasicDetails>) : (<div> loading... </div>);
+const ServiceDetailsLoading: React.SFC = () => {
+  return (
+    <div className="govuk-heading-m">
+      Searching for Service Involvement Details...
+    </div>
+  );
 }
+
+
+const ServiceDetailsNotFound: React.SFC = () => {
+  return (
+    <div className="govuk-heading-m">
+      No details found
+    </div>
+  )
+}
+
 
 export default ServiceInvolvement;

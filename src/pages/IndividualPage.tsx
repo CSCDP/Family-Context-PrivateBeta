@@ -44,7 +44,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
         <DataContent result={this.state.personDetailsResult} loading={<PersonLoading />} error={<PersonNotFound />}>
           <BasicDetails personDetails={this.state.personDetailsResult?.data as PersonDetails}></BasicDetails>
           <DataContent result={this.state.serviceSummariesResult} error={<div>Error loading service involvements: status code {this.state.serviceSummariesResult?.statusCode}</div>}>
-            <ServiceInvolvement summaries={this.state.serviceSummariesResult?.data as ServiceInvolvementDetailsSummary[]} client={this.props.client} />
+            <ServiceInvolvement summaries={this.state.serviceSummariesResult?.data as ServiceInvolvementDetailsSummary[]} client={this.props.client} personId={this.state.personDetailsResult?.data?.id as string} />
           </DataContent>
         </DataContent>
       </div>

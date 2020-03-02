@@ -2,7 +2,7 @@ import React from 'react';
 import { RequestResult } from '../clients/ApiClient';
 
 interface DataContentProps {
-    result: RequestResult<{}> | undefined,
+    result: RequestResult<{}> | undefined | null,
     loading?: React.ReactNode,
     error?: React.ReactNode,
     children: React.ReactNode

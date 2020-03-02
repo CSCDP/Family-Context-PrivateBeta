@@ -1,6 +1,7 @@
 import LoginDetails from "../models/LoginDetails";
 import PersonDetails from "../models/PersonDetails";
 import ServiceInvolvementDetailsSummary from "../models/ServiceInvolvementDetailsSummary";
+import ServiceDetail from "../models/ServiceDetail";
 
 class ApiClient {
     private baseUrl: string
@@ -75,6 +76,17 @@ class ApiClient {
     async getServiceSummaries(personId: string): Promise<RequestResult<ServiceInvolvementDetailsSummary[]>> {
         let personDetailsPath = "/person/details/" + personId + "/service";
         let response = await this.getRequest(personDetailsPath);
+        
+        return {
+            statusCode: response.status,
+            success: response.ok,
+            data: await response.json()
+        };
+    }
+
+    async getServiceDetail(personId: string, serviceId: string): Promise<RequestResult<ServiceDetail>> {
+        let serviceDetailsPath = "/person/details/" + personId + "/service/" + serviceId;
+        let response = await this.getRequest(serviceDetailsPath);
         
         return {
             statusCode: response.status,
