@@ -30,9 +30,9 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     }
 
     click(id: string): void {
-        this.props.client.getPerson(id).then(personDetails => {
+        this.props.client.getPerson(id).then(result => {
             let newData = { ...this.state.serviceInvolvementDetailsData };
-            newData[id] = personDetails;
+            newData[id] = result.success ? result.data as PersonDetails : null;
             this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
         });
     }
