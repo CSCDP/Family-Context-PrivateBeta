@@ -36,7 +36,7 @@ private updateAuthenticationStatus = (status: boolean) => {
       return (
         <>
         <Route exact path="/" component={SearchPage} />
-        <Route exact path="/search" render={(props) => <ResultsPage {...props} search={(searchDetails: SearchDetails) => this.apiClient.searchPerson(searchDetails)}/>} />
+        <Route exact path="/search" render={(props) => <ResultsPage {...props} client={this.apiClient}/>} />
         <Route path="/person/:personId" render={(props) => <IndividualPage {...props} client={this.apiClient}/>} />
         </>
       )

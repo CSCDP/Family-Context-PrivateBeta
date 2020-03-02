@@ -41,7 +41,7 @@ export function formatAgeInYearsFromStringOrDate(dateOfBirth: string | Date): st
     } else {
         var birthDate = new Date(dateOfBirth);
 
-        return `${getAgeInYears(birthDate)} Yrs`;
+        return `${getAgeInYears(birthDate)} yrs`;
     }
 }
 
@@ -49,7 +49,7 @@ function getAgeInYears(dateOfBirth: Date): number {
     var dateNow = new Date();
     var years = dateNow.getFullYear() - dateOfBirth.getFullYear()
 
-    var hasBirthdayHappenedThisYear = (dateOfBirth.setFullYear(dateNow.getFullYear()) - Number(dateNow)) > 0
+    var hasBirthdayHappenedThisYear = dateOfBirth.setFullYear(dateNow.getFullYear()) < Number(dateNow)
     years -= hasBirthdayHappenedThisYear ? 0 : 1
 
     return years

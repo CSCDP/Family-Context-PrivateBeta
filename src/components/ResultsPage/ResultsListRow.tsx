@@ -3,12 +3,12 @@ import PersonDetails from '../../models/PersonDetails';
 import RowValues from '../Table/RowValues';
 import { formatShortDateOrString, formatShortAddress, formatAgeInYearsFromStringOrDate } from '../../tools/FormattingTools';
 
-type ResultsListBodyProps = {
+type ResultsListRowProps = {
     person: PersonDetails,
     onClickFunc?: (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void
 }
 
-const ResultsListBody: React.FC<ResultsListBodyProps> = (props) => {
+const ResultsListRow: React.FC<ResultsListRowProps> = (props) => {
     var values = [
         props.person.id.toString(),
         props.person.firstName,
@@ -23,4 +23,4 @@ const ResultsListBody: React.FC<ResultsListBodyProps> = (props) => {
     )
 }
 
-export default ResultsListBody;
+export default ResultsListRow;

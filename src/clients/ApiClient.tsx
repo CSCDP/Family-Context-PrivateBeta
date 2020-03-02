@@ -84,10 +84,15 @@ class ApiClient {
         };
     }
 
-    async searchPerson(search: SearchDetails): Promise<PersonDetails[]> {
+    async searchPerson(search: SearchDetails): Promise<RequestResult<PersonDetails[]>> {
         let searchPath = "/search/person";
         let response = await this.postJsonRequest(searchPath, JSON.stringify(search))
-        return response.json() as Promise<PersonDetails[]>
+
+        return {
+            statusCode: response.status,
+            success: response.ok,
+            data: await response.json()
+        }
     }
 
     async postJsonRequest(relativePath: string, body: string): Promise<Response> {
