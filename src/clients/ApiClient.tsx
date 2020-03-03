@@ -158,6 +158,7 @@ class ApiClient {
                         "x-item-seq": 2
                       }
                     },
+                    "title": "Offence",
                     "type": "object",
                     "x-ref": "http://www.sfdl.org.uk/schemas/fc/0.0.1#OffenceSummary"
                   },

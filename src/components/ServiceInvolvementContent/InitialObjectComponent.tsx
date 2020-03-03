@@ -1,6 +1,5 @@
 import React from 'react'
 import { ObjectSchema } from '../../models/Schema';
-import ObjectComponentTitle from './ObjectComponentTitle';
 import GenericComponent from './GenericComponent';
 
 interface DataDictionary { [id: string]: any }
@@ -19,7 +18,6 @@ const InitialObjectComponent: React.FC<{ data: DataDictionary, schema: ObjectSch
     }
     return (
         <>
-            <ObjectComponentTitle keyId={props.keyId} title={props.schema.title}/>
             {results.map(result =>
                 (
                     <GenericComponent schema={result} data={props.data[result.propertyKey]} keyId={result.propertyKey}/>

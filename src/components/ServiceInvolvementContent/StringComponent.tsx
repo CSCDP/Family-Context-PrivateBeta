@@ -1,21 +1,24 @@
 import React from 'react'
 import { StringSchema } from '../../models/Schema';
+import SummaryListRow from '../SummarryList/SummaryListRow';
+import SummaryListTitle from '../SummarryList/SummaryListTitle';
+import SummaryListValue from '../SummarryList/SummaryListValue';
 
 const StringComponent: React.FC<{ data: string, schema: StringSchema, keyId: string }> = (props: { data: string, schema: StringSchema, keyId: string }) => {
-    
+
     let title = props.schema.title ? props.schema.title : props.keyId;
     let result;
     props.data ? result = props.data : result = null
 
     return (
-        <div className="govuk-summary-list__row">
-            <dt className="govuk-summary-list__key govuk-!-font-size-14">
+        <SummaryListRow>
+            <SummaryListTitle>
                 {title}
-            </dt>
-            <dd className="govuk-summary-list__value govuk-!-font-size-14">
+            </SummaryListTitle>
+            <SummaryListValue>
                 {result}
-            </dd>
-        </div>
+            </SummaryListValue>
+        </SummaryListRow>
     )
 }
 

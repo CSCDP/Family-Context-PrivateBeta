@@ -1,7 +1,9 @@
 import React from 'react'
 import { ObjectSchema } from '../../models/Schema';
-import ObjectComponentTitle from './ObjectComponentTitle';
 import BottomLevelStringComponent from './BottomLevelStringComponent';
+import SummaryListValue from '../SummarryList/SummaryListValue';
+import SummaryListRow from '../SummarryList/SummaryListRow';
+import SummaryListTitle from '../SummarryList/SummaryListTitle';
 
 interface DataDictionary { [id: string]: any }
 
@@ -20,18 +22,17 @@ const ObjectComponent: React.FC<{ data: DataDictionary, schema: ObjectSchema, ke
     let title = props.schema.title ? props.schema.title : props.keyId;
 
     return (
-        <div>
-            <th>{title}</th>
-            <div className="govuk-summary-list__row">
-                <dd className="govuk-summary-list__value govuk-!-font-size-14">
+            <SummaryListRow>
+                <SummaryListTitle>{title} {props.keyId}</SummaryListTitle>
+
+                <SummaryListValue>
                     {results.map(result =>
                         (
                             <BottomLevelStringComponent>{props.data[result.propertyKey]}</BottomLevelStringComponent>
                         )
                     )}
-                </dd>
-            </div>
-        </div>
+                </SummaryListValue>
+            </SummaryListRow>
     );
 }
 

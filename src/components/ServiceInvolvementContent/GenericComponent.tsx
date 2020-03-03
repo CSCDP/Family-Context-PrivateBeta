@@ -3,7 +3,6 @@ import Schema, { ArraySchema, ObjectSchema, StringSchema } from '../../models/Sc
 import ArrayComponent from './ArrayComponent';
 import StringComponent from './StringComponent';
 import ObjectComponent from './ObjectComponent';
-import InitialObjectComponent from './InitialObjectComponent';
 
 const GenericComponent: React.FC<{ schema: Schema, data: any, keyId: string }> = (props: { schema: Schema, data: any, keyId: string }) => {
 
