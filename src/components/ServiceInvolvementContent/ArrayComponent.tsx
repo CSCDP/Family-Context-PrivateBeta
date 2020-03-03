@@ -1,0 +1,19 @@
+import React from 'react'
+import { ArraySchema } from '../../models/Schema';
+import GenericComponent from './GenericComponent';
+
+const ArrayComponent: React.FC<{ data: any[], schema: ArraySchema, keyId: string }> = (props: { data: any[], schema: ArraySchema, keyId: string }) => {
+
+    let arrayKeyRoot = props.schema.title ?? props.keyId;
+    let elementArray = props.data.map((dataItem, index) =>
+        (
+            <GenericComponent schema={props.schema.items} data={dataItem} keyId={""} key={index} arrayIndex={" " + ++index}/>
+        ));
+
+    return <>
+        <h4 className="govuk-heading-s">{arrayKeyRoot}</h4>
+        {elementArray}
+        </>;
+}
+
+export default ArrayComponent;

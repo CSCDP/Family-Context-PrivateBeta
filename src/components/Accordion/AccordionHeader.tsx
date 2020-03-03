@@ -2,7 +2,6 @@ import React from 'react';
 
 const AccordionHeader: React.FC<{ title: string}> = (props: { title: string}) => {
 
-
     return (
         <h2 className="govuk-accordion__section-heading">
             <button type="button" id="accordion-with-summary-sections-heading-1" 

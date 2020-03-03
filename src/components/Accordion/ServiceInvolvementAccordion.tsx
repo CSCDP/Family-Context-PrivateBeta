@@ -12,14 +12,14 @@ const ServiceInvolvementAccordion: React.FC<{ serviceInvolvementDetailsSummary: 
   if (props.serviceInvolvementDetailsSummary.recordsAvailable) {
     return (
       <AccordionSection>
-      <AccordionSectionHeader click={() => props.click()}>
-        <AccordionHeader title={props.serviceInvolvementDetailsSummary.title} ></AccordionHeader>
-        <ServiceInvolvementAccordionSummary serviceInvolvement={props.serviceInvolvementDetailsSummary} />
-      </AccordionSectionHeader>
-      <AccordionContent>
-        {props.children}
-      </AccordionContent>
-    </AccordionSection>
+        <AccordionSectionHeader click={() => props.click()}>
+          <AccordionHeader title={props.serviceInvolvementDetailsSummary.title} ></AccordionHeader>
+          <ServiceInvolvementAccordionSummary serviceInvolvement={props.serviceInvolvementDetailsSummary} />
+        </AccordionSectionHeader>
+        <AccordionContent>
+          {props.children}
+        </AccordionContent>
+      </AccordionSection>
     )
   } else {
     return (

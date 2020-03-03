@@ -60,7 +60,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
             result={this.state.serviceSummariesResult} 
             error={<ErrorMessage errorMessage={"Error loading service involvements"} statusCode={this.state.serviceSummariesResult?.statusCode}/>}
           >
-            <ServiceInvolvement summaries={this.state.serviceSummariesResult?.data as ServiceInvolvementDetailsSummary[]} client={this.props.client} />
+            <ServiceInvolvement summaries={this.state.serviceSummariesResult?.data as ServiceInvolvementDetailsSummary[]} client={this.props.client} personId={this.state.personDetailsResult?.data?.id as string} />
           </DataContent>
           <hr className="govuk-section-break govuk-section-break--xl"/>
           <DataContent 
