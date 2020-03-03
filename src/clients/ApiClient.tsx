@@ -3,6 +3,7 @@ import PersonDetails from "../models/PersonDetails";
 import ServiceInvolvementDetailsSummary from "../models/ServiceInvolvementDetailsSummary";
 import ServiceDetail from "../models/ServiceDetail";
 import SearchDetails from "../models/SearchDetails";
+import PersonRelationshipDetails from "../models/PersonRelationshipDetails";
 
 class ApiClient {
   private baseUrl: string
@@ -199,6 +200,28 @@ class ApiClient {
     };
   }
 
+  async isRelatedIndividualsSupported(personId: string): Promise<RequestResult<boolean>> {
+    let relatedIndividualsPath = "/person/related/" + personId;
+    let response = await this.headRequest(relatedIndividualsPath);
+
+    return {
+        statusCode: response.status,
+        success: response.ok || response.status === 501,
+        data: response.status === 200,
+    }
+}
+
+async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelationshipDetails[]>> {
+    let relatedIndividualsPath = "/person/related/" + personId;
+    let response = await this.headRequest(relatedIndividualsPath);
+
+    return {
+        statusCode: response.status,
+        success: response.ok,
+        data: await response.json()
+    }
+}
+
   async searchPerson(search: SearchDetails): Promise<RequestResult<PersonDetails[]>> {
     let searchPath = "/search/person";
     let response = await this.postJsonRequest(searchPath, JSON.stringify(search))
@@ -236,6 +259,20 @@ class ApiClient {
       return response;
     });
   }
+
+    async headRequest(relativePath: string): Promise<Response> {
+        return fetch(`${this.baseUrl}${relativePath}`, {
+            credentials: 'include',
+            method: 'HEAD'
+        }).then(response =>
+            {
+                if (response.status === 401)
+                {
+                    this.authenticationCallback(false);
+                }
+                return response;
+            });
+    }
 }
 
 export interface RequestResult<T> {
