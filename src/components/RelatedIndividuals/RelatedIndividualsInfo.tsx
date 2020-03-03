@@ -12,7 +12,7 @@ const RelatedIndividualsInfo: React.FC<RelatedIndividualsInfoProps> = (props: Re
         <div className="ResultsInfo">
             <h1 className="govuk-heading-m">Related individuals from CMS</h1>
             <SensitiveInformationWarning />
-            <p className="govuk-body">{props.matches || "No"} individuals are linked to {props.person.firstName || "_"} {props.person.lastName || "_"} in the CMS</p>
+            <p className="govuk-body">{props.matches || "No"} individual{props.matches === 1 ? " is" : "s are"} linked to {props.person.firstName || "_"} {props.person.lastName || "_"} in the CMS</p>
         </div>
     )
 }
