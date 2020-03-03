@@ -7,14 +7,14 @@ import PersonRelationshipDetails from '../../models/PersonRelationshipDetails';
 type RelatedIndividualsProps = {
     person: PersonDetails,
     related: PersonRelationshipDetails[],
-    navigate: (id: number) => void
+    onView: (id: string) => void
 }
 
 const RelatedIndividuals: React.FC<RelatedIndividualsProps> = (props) => {
     return (
         <div className="RelatedIndividuals">
             <RelatedIndividualsInfo person={props.person} matches={props.related.length} />
-            {props.related.length ? <RelatedIndividualsList related={props.related} navigate={props.navigate} /> : <></>}
+            {props.related.length > 0 ? <RelatedIndividualsList related={props.related} onView={props.onView} /> : <></>}
         </div>
     );
 }

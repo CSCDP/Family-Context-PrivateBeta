@@ -7,10 +7,10 @@ import TableHeader from "../Table/TableHeader";
 
 type RelatedIndividualsListProps = {
     related: PersonRelationshipDetails[],
-    navigate: (id: number) => void
+    onView: (id: string) => void
 }
 
-const RelatedIndividualsList: React.FC<RelatedIndividualsListProps> = (props) => {
+const RelatedIndividualsList: React.FC<RelatedIndividualsListProps> = (props: RelatedIndividualsListProps) => {
     return (
         <div className="RelatedIndividualsInfo">
             <Table>
@@ -19,7 +19,7 @@ const RelatedIndividualsList: React.FC<RelatedIndividualsListProps> = (props) =>
                 </TableHeader>
                 <TableBody>
                     {props.related.map(person =>  
-                        <RelatedIndividualsRow relation={person} key={person.id} onClickFunc={(event) => {event.preventDefault(); props.navigate(person.id)}} />
+                        <RelatedIndividualsRow relation={person} key={person.id} onClickFunc={(event) => {event.preventDefault(); props.onView(person.id)}} />
                     )}
                 </TableBody>
             </Table>

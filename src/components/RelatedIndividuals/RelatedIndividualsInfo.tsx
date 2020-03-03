@@ -7,7 +7,7 @@ type RelatedIndividualsInfoProps = {
     matches: number
 }
 
-const RelatedIndividualsInfo: React.FC<RelatedIndividualsInfoProps> = (props) => {
+const RelatedIndividualsInfo: React.FC<RelatedIndividualsInfoProps> = (props: RelatedIndividualsInfoProps) => {
     return (
         <div className="ResultsInfo">
             <h1 className="govuk-heading-m">Related individuals from CMS</h1>

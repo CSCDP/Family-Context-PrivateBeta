@@ -8,7 +8,7 @@ type RelatedIndividualsRowProps = {
     onClickFunc?: (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void
 }
 
-const RelatedIndividualsRow: React.FC<RelatedIndividualsRowProps> = (props) => {
+const RelatedIndividualsRow: React.FC<RelatedIndividualsRowProps> = (props: RelatedIndividualsRowProps) => {
     var values = [
         props.relation.relationship,
         props.relation.id,
@@ -25,7 +25,7 @@ const RelatedIndividualsRow: React.FC<RelatedIndividualsRowProps> = (props) => {
 const RelatedIndividualsHeader: React.FC = () => {
     var values = [
         "Relationship",
-        "Mosaic Case ID",
+        "CMS Case ID",
         "First Name",
         "Family Name",
         "Date of Birth"

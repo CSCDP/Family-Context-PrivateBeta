@@ -56,19 +56,25 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
         <NavigationButtons {...this.props} />
         <DataContent result={this.state.personDetailsResult} loading={<PersonLoading />} error={<PersonNotFound />}>
           <BasicDetails personDetails={this.state.personDetailsResult?.data as PersonDetails}></BasicDetails>
-          <DataContent result={this.state.serviceSummariesResult} error={<div>Error loading service involvements: status code {this.state.serviceSummariesResult?.statusCode}</div>}>
+          <DataContent 
+            result={this.state.serviceSummariesResult} 
+            error={<ErrorMessage errorMessage={"Error loading service involvements"} statusCode={this.state.serviceSummariesResult?.statusCode}/>}
+          >
             <ServiceInvolvement summaries={this.state.serviceSummariesResult?.data as ServiceInvolvementDetailsSummary[]} client={this.props.client} />
           </DataContent>
           <hr className="govuk-section-break govuk-section-break--xl"/>
           <DataContent 
             result={this.state.relatedIndividualsSupportedResult} 
-            error={<div className="govuk-heading-m">Error checking if related individuals are supported: status code {this.state.relatedIndividualsSupportedResult?.statusCode}</div>}
+            error={<ErrorMessage errorMessage={"Error checking if related individuals are supported"} statusCode={this.state.relatedIndividualsSupportedResult?.statusCode}/>}
           >
-            <DataContent result={this.state.relatedIndividualsResult} error={<RelatedIndividualsNotFound/>}>
+            <DataContent 
+              result={this.state.relatedIndividualsResult} 
+              error={<ErrorMessage errorMessage={"An error occured finding related individuals"} statusCode={this.state.relatedIndividualsResult?.statusCode}/>}
+            >
               <RelatedIndividuals 
                 person={this.state.personDetailsResult?.data as PersonDetails} 
                 related={this.state.relatedIndividualsResult?.data as PersonRelationshipDetails[]}
-                navigate={(personId: number) => this.props.history.push(`/person/${personId}`)}
+                onView={(personId: string) => this.props.history.push(`/person/${personId}`)}
               />
             </DataContent>
           </DataContent>
@@ -95,10 +101,12 @@ const PersonNotFound: React.FC = () => {
   )
 }
 
-const RelatedIndividualsNotFound: React.FC = () => {
+type ErrorMessageProps = {statusCode: number | undefined, errorMessage: string}
+
+const ErrorMessage: React.FC<ErrorMessageProps> = (props: ErrorMessageProps) => {
   return (
     <div className="govuk-heading-m">
-      No related individuals found
+      {props.errorMessage}: status code {props.statusCode}
     </div>
   )
 }
