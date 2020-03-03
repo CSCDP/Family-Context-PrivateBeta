@@ -7,7 +7,7 @@ import TableHeader from "../Table/TableHeader";
 
 type ResultsListProps = {
     results: PersonDetails[],
-    navigate: (id: number) => void
+    navigate: (id: string) => void
 }
 
 const ResultsList: React.FC<ResultsListProps> = (props) => {
