@@ -7,7 +7,7 @@ const ArrayComponent: React.FC<{ data: any[], schema: ArraySchema, keyId: string
     let arrayKeyRoot = props.schema.title ?? props.keyId;
     let elementArray = props.data.map((dataItem, index) =>
         (
-            <GenericComponent schema={props.schema.items} data={dataItem} keyId={"" + ++index} />
+            <GenericComponent schema={props.schema.items} data={dataItem} keyId={" " + ++index} key={index}/>
         ));
 
     return <>

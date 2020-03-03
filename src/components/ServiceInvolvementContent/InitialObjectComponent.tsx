@@ -5,7 +5,6 @@ import GenericComponent from './GenericComponent';
 interface DataDictionary { [id: string]: any }
 
 const InitialObjectComponent: React.FC<{ data: DataDictionary, schema: ObjectSchema, keyId?: string }> = (props: { data: DataDictionary, schema: ObjectSchema, keyId?: string }) => {
-    console.log(props.schema);
     let results: any[] = [];
     for (let propertyKey in props.schema.properties) {
         let property = props.schema.properties[propertyKey];
@@ -20,7 +19,7 @@ const InitialObjectComponent: React.FC<{ data: DataDictionary, schema: ObjectSch
         <>
             {results.map(result =>
                 (
-                    <GenericComponent schema={result} data={props.data[result.propertyKey]} keyId={result.propertyKey}/>
+                    <GenericComponent schema={result} data={props.data[result.propertyKey]} keyId={result.propertyKey} key={result.propertyKey}/>
                 )
             )}
         </>

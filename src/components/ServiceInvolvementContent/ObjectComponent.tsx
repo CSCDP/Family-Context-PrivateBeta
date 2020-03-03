@@ -8,7 +8,6 @@ import SummaryListTitle from '../SummarryList/SummaryListTitle';
 interface DataDictionary { [id: string]: any }
 
 const ObjectComponent: React.FC<{ data: DataDictionary, schema: ObjectSchema, keyId?: string }> = (props: { data: DataDictionary, schema: ObjectSchema, keyId?: string }) => {
-    console.log(props.schema);
     let results: any[] = [];
     for (let propertyKey in props.schema.properties) {
         let property = props.schema.properties[propertyKey];
@@ -23,12 +22,12 @@ const ObjectComponent: React.FC<{ data: DataDictionary, schema: ObjectSchema, ke
 
     return (
             <SummaryListRow>
-                <SummaryListTitle>{title} {props.keyId}</SummaryListTitle>
+                <SummaryListTitle>{title}{props.keyId}</SummaryListTitle>
 
                 <SummaryListValue>
                     {results.map(result =>
                         (
-                            <BottomLevelStringComponent>{props.data[result.propertyKey]}</BottomLevelStringComponent>
+                            <BottomLevelStringComponent key={result.propertyKey}>{props.data[result.propertyKey]}</BottomLevelStringComponent>
                         )
                     )}
                 </SummaryListValue>
