@@ -4,27 +4,14 @@ import BottomLevelStringComponent from './BottomLevelStringComponent';
 import SummaryListValue from '../SummarryList/SummaryListValue';
 import SummaryListRow from '../SummarryList/SummaryListRow';
 import SummaryListTitle from '../SummarryList/SummaryListTitle';
+import GetResultsOrder from './GetResultsOrder';
 
 interface DataDictionary { [id: string]: any }
 
 const ObjectComponent: React.FC<{ data: DataDictionary, schema: ObjectSchema, keyId?: string, arrayIndex?: string }> = (props: { data: DataDictionary, schema: ObjectSchema, keyId?: string, arrayIndex?: string }) => {
 
-    let results = getResults();
+    let results = GetResultsOrder(props.schema);
     let title = props.schema.title ? props.schema.title : props.keyId;
-
-    function getResults() {
-        let results: any[] = [];
-        for (let propertyKey in props.schema.properties) {
-            let property = props.schema.properties[propertyKey];
-            if (property.xItemSeq) {
-                results[property.xItemSeq] = { ...property, propertyKey }
-            } else {
-                if (Object.keys(props.schema.properties).length !== 1) throw "No order attribute for multiple properties in schema";
-                results[0] = { ...property, propertyKey };
-            }
-        }
-        return results;
-    }
 
     return (
         <SummaryListRow>
