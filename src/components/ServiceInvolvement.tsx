@@ -4,7 +4,7 @@ import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetail
 import ApiClient, { RequestResult } from '../clients/ApiClient';
 import ServiceDetail from '../models/ServiceDetail';
 import DataContent from './DataContent';
-import ServiceInvolvementDisplay from './ServiceInvolvementContent/serviceinvolvementdisplay';
+import ServiceInvolvementDisplay from './ServiceInvolvementContent/ServiceInvolvementDisplay';
 
 interface ServiceInvolvementProps {
     summaries: ServiceInvolvementDetailsSummary[],

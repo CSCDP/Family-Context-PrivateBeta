@@ -3,18 +3,9 @@ import Table from './Table/Table';
 import TableBody from './Table/TableBody';
 import PersonDetails from '../models/PersonDetails';
 import TitleValuePair from './Table/TitleValuePairTableRow';
+import { formatShortDateOrString } from '../tools/FormattingTools';
 
 const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { personDetails: PersonDetails }) => {
-
-    const formatDateOrString: (maybeDate: string | Date) => string = (maybeDate: Date|string) => {
-        let date = new Date(maybeDate);
-        if ((date as Date).getDate()) {
-            return date.toLocaleDateString();
-        }
-        else {
-            return maybeDate.toString();
-        }
-    }
 
     return (
         <div>
@@ -25,7 +16,7 @@ const BasicDetails: React.FC<{ personDetails: PersonDetails }> = (props: { perso
                         <TableBody>
                             <TitleValuePair rowTitle="First name" rowValue={props.personDetails.firstName} />
                             <TitleValuePair rowTitle="Last name" rowValue={props.personDetails.lastName} />
-                            <TitleValuePair rowTitle="Date of Birth" rowValue={formatDateOrString(props.personDetails.dateOfBirth)} />
+                            <TitleValuePair rowTitle="Date of Birth" rowValue={formatShortDateOrString(props.personDetails.dateOfBirth)} />
                             <TitleValuePair rowTitle="Gender" rowValue={props.personDetails.gender} />
                             <TitleValuePair rowTitle="Address" rowValue={props.personDetails.address} />
                         </TableBody>

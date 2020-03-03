@@ -40,6 +40,10 @@
   align-items: center;
 }
 
+.SensitiveInformationWarning .govuk-warning-text__text{
+  color: #d53880;
+}
+
 .LoginPage {
   padding-top: 30px;
 }
@@ -71,4 +75,8 @@
 
 .CaseIdSearch .govuk-form-group {
   margin-top: 30px;
+}
+
+table {
+  white-space: pre-wrap;
 }
