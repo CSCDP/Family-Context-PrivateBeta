@@ -137,7 +137,6 @@ class ApiClient {
                 "x-item-seq": 4
               }
             },
-            "title": "Contact",
             "type": "object",
             "x-item-seq": 2,
             "x-ref": "http://www.sfdl.org.uk/schemas/fc/0.0.1#Contact"
@@ -191,7 +190,7 @@ class ApiClient {
       }
     }
     let stringy = JSON.stringify(responseObject);
-    let jsonString = (stringy).replace(/x-ref/g, "xRef").replace(/x-item-seq/g, "xItemSeq");
+    let jsonString = (await response.text()).replace(/x-ref/g, "xRef").replace(/x-item-seq/g, "xItemSeq");
 
     return {
       statusCode: response.status,

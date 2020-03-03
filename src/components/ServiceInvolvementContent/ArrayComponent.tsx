@@ -7,11 +7,11 @@ const ArrayComponent: React.FC<{ data: any[], schema: ArraySchema, keyId: string
     let arrayKeyRoot = props.schema.title ?? props.keyId;
     let elementArray = props.data.map((dataItem, index) =>
         (
-            <GenericComponent schema={props.schema.items} data={dataItem} keyId={" " + ++index} key={index}/>
+            <GenericComponent schema={props.schema.items} data={dataItem} keyId={""} key={index} arrayIndex={" " + ++index}/>
         ));
 
     return <>
-        <th>{arrayKeyRoot}</th>
+        <h4 className="govuk-heading-s">{arrayKeyRoot}</h4>
         {elementArray}
         </>;
 }

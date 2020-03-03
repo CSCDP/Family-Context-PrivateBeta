@@ -4,7 +4,7 @@ import ArrayComponent from './ArrayComponent';
 import StringComponent from './StringComponent';
 import ObjectComponent from './ObjectComponent';
 
-const GenericComponent: React.FC<{ schema: Schema, data: any, keyId: string }> = (props: { schema: Schema, data: any, keyId: string }) => {
+const GenericComponent: React.FC<{ schema: Schema, data: any, keyId: string, arrayIndex?: string }> = (props: { schema: Schema, data: any, keyId: string, arrayIndex?: string }) => {
 
     let type = props.schema.type;
     switch (type) {
@@ -14,16 +14,16 @@ const GenericComponent: React.FC<{ schema: Schema, data: any, keyId: string }> =
         }
         case "object": {
             let objectSchema = props.schema as ObjectSchema;
-            return <ObjectComponent schema={objectSchema} data={props.data} keyId={props.keyId} />
+            return <ObjectComponent schema={objectSchema} data={props.data} keyId={props.keyId} arrayIndex={props.arrayIndex} />
         }
         case "string": {
             let stringSchema = props.schema as StringSchema;
             return <StringComponent schema={stringSchema} data={props.data} keyId={props.keyId} />
         }
+        default: {
+            throw "Unknown type used.";
+        }
     }
-    return (
-        null
-    );
 }
 
 export default GenericComponent;

@@ -32,7 +32,7 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     }
 
     click(serviceId: string): void {
-      if (this.state.serviceInvolvementDetailsData[serviceId] == null) {
+      if (this.state.serviceInvolvementDetailsData[serviceId] === null) {
         this.props.client.getServiceDetail(this.props.personId, serviceId).then(result => {
           let newData = { ...this.state.serviceInvolvementDetailsData };
           newData[serviceId] = result as RequestResult<ServiceDetail>;
@@ -62,7 +62,7 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     }
 }
 
-const ServiceDetailsLoading: React.SFC = () => {
+const ServiceDetailsLoading: React.FC = () => {
   return (
     <div className="govuk-heading-m">
       Searching for Service Involvement Details...
@@ -70,14 +70,12 @@ const ServiceDetailsLoading: React.SFC = () => {
   );
 }
 
-
-const ServiceDetailsNotFound: React.SFC = () => {
+const ServiceDetailsNotFound: React.FC = () => {
   return (
     <div className="govuk-heading-m">
       No details found
     </div>
   )
 }
-
 
 export default ServiceInvolvement;

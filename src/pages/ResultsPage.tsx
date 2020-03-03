@@ -26,7 +26,7 @@ class ResultsPage extends React.Component<ResultsPageProps, ResultsPageState> {
         })
     }
 
-    navigateToPerson(id: number) {
+    navigateToPerson(id: string) {
         this.props.history.push(`person/${id}`)
     }
 
@@ -36,7 +36,7 @@ class ResultsPage extends React.Component<ResultsPageProps, ResultsPageState> {
             <NavigationButtons {...this.props}/>
             <DataContent result={this.state?.result} loading={<ResultsLoading/>} error={<MatchesNotFound/>}>
                 <ResultsInfo search={getSearchDetails(this.props)} matches={this.state?.result?.data?.length || 0} />
-                {/* <ResultsList results={this.state?.result?.data || []} navigate={(id: number) => this.navigateToPerson(id)}/> */}
+                <ResultsList results={this.state?.result?.data || []} navigate={(id: string) => this.navigateToPerson(id)}/>
             </DataContent>
           </div>
         )
