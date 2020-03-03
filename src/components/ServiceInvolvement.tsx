@@ -32,11 +32,13 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     }
 
     click(serviceId: string): void {
+      if (this.state.serviceInvolvementDetailsData[serviceId] == null) {
         this.props.client.getServiceDetail(this.props.personId, serviceId).then(result => {
-            let newData = { ...this.state.serviceInvolvementDetailsData };
-            newData[serviceId] = result as RequestResult<ServiceDetail>;
-            this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
+          let newData = { ...this.state.serviceInvolvementDetailsData };
+          newData[serviceId] = result as RequestResult<ServiceDetail>;
+          this.setState({ ...this.state, serviceInvolvementDetailsData: newData });
         });
+      }
     }
 
     componentDidMount() {
