@@ -63,7 +63,7 @@ function getSearchDetails(props: RouteComponentProps): SearchDetails {
     var params = new URLSearchParams(props.location.search)
 
     var dateParam = params.get('dateOfBirth')
-    var dateOfBirth = (dateParam == null) ? "" : JSON.stringify(new Date(dateParam))
+    var dateOfBirth = (dateParam == null) ? "" : dateParam
 
     return {
         firstName: params.get('firstName') || "",

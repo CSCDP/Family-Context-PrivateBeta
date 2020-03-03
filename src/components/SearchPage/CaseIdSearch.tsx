@@ -1,6 +1,6 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { TextInputGroup } from "./InputGroups";
+import { TextInputGroup } from "../InputGroups";
 
 type CaseIdSearchProps = {
     search: (caseId: string) => void
