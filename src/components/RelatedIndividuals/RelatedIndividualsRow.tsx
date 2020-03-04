@@ -24,7 +24,6 @@ const RelatedIndividualsRow: React.FC<RelatedIndividualsRowProps> = (props: Rela
     )
 }
 
-
 const RelatedIndividualsHeader: React.FC = () => {
     var values = [
         "Relationship",
