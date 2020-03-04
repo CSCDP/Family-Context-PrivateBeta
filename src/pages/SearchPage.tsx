@@ -20,15 +20,11 @@ function navigateToCaseId(caseId: string, props: RouteComponentProps) : void {
 }
 
 function navigateToDob(info: {[id: string]: string}, props: RouteComponentProps) : void {
-  if (info["firstName"] != "") {
-    if (info["familyName"] != "") {
-      if (info["dob"] != "") {
-        props.history.push(`search?firstName=${info["firstName"]}&lastName=${info["familyName"]}&dateOfBirth=${info["dob"]}`)
-      } else {
-        props.history.push(`search?firstName=${info["firstName"]}&lastName=${info["familyName"]}`)
-      }
+  if (info["firstName"] != "" && info["familyName"] != "") {
+    if (info["dob"] != "") {
+      props.history.push(`search?firstName=${info["firstName"]}&lastName=${info["familyName"]}&dateOfBirth=${info["dob"]}`)
     } else {
-      props.history.push(`search?firstName=${info["firstName"]}`)
+      props.history.push(`search?firstName=${info["firstName"]}&lastName=${info["familyName"]}`)
     }
   }
 }
