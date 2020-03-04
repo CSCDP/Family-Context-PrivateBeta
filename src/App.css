@@ -62,14 +62,16 @@
 }
 
 .CaseIdSearch button,
-.LoginPage button {
+.LoginPage button, 
+.InfoSearch button {
   margin-top: 15px;
   background-color: #1d70b8 
 }
 
 .NavigationButtons button:hover,
 .CaseIdSearch button:hover,
-.LoginPage button:hover {
+.LoginPage button:hover, 
+.InfoSearch button:hover {
   background-color: #003078 
 }
 
