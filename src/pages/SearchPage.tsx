@@ -12,7 +12,7 @@ const SearchPage: React.FC<RouteComponentProps> = (props) => {
 }
 
 function navigateToCaseId(caseId: string, props: RouteComponentProps) : void {
-    if (caseId != "") {
+    if (caseId !== "") {
         props.history.push(`person/${caseId}`)
     }
 }
