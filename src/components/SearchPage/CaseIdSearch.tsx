@@ -1,5 +1,4 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
 import { TextInputGroup } from "../InputGroups";
 
 type CaseIdSearchProps = {

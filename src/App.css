@@ -94,3 +94,11 @@
 table {
   white-space: pre-wrap;
 }
+
+.ViewButton a {
+  margin-bottom: 0px;
+}
+
+.ViewButton a:hover {
+  background-color: #003078
+}

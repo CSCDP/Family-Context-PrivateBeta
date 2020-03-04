@@ -1,7 +1,7 @@
 import React from 'react';
 
 type RowValuesProps = {
-    rowValues: string[],
+    rowValues: (string | React.ReactNode)[],
     format?: string[],
     onClickFunc?: (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void
 }

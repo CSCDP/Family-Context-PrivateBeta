@@ -6,10 +6,8 @@ import LoginPage  from './pages/LoginPage';
 import IndividualPage from './pages/IndividualPage';
 import PageSpacing from './components/PageSpacing';
 import ApiClient from './clients/ApiClient';
-import LoginDetails from './models/LoginDetails';
 import SearchPage from './pages/SearchPage';
 import ResultsPage from './pages/ResultsPage';
-import SearchDetails from './models/SearchDetails';
 
 class App extends Component<any, any> {
   private apiClient: ApiClient;
@@ -37,7 +35,7 @@ private updateAuthenticationStatus = (status: boolean) => {
         <>
         <Route exact path="/" component={SearchPage} />
         <Route exact path="/search" render={(props) => <ResultsPage {...props} client={this.apiClient}/>} />
-        <Route path="/person/:personId" render={(props) => <IndividualPage {...props} client={this.apiClient}/>} />
+        <Route path="/person/:personId" render={(props) => <IndividualPage {...props} client={this.apiClient} key={props.match.params.personId} />} />
         </>
       )
     } else {

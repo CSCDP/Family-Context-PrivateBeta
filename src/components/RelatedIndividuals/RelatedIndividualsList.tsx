@@ -19,7 +19,7 @@ const RelatedIndividualsList: React.FC<RelatedIndividualsListProps> = (props: Re
                 </TableHeader>
                 <TableBody>
                     {props.related.map(person =>  
-                        <RelatedIndividualsRow relation={person} key={person.id} onClickFunc={(event) => {event.preventDefault(); props.onView(person.id)}} />
+                        <RelatedIndividualsRow relation={person} key={person.id} onView={props.onView} />
                     )}
                 </TableBody>
             </Table>

@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 
 const BackButton: React.FC<RouteComponentProps> = (props) => {
     return (
-        <a href="#" className="govuk-back-link" onClick={(event) => goBack(event, props)}>
+        <a href="/#" className="govuk-back-link" onClick={(event) => goBack(event, props)}>
             Back
         </a>
     )
