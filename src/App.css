@@ -81,8 +81,7 @@
 
 .InfoSearch .column {
   float: left;
-  width: 20%;
-  padding-right: 20px;
+  padding-right: 15px;
 }
 
 .InfoSearch .row {
@@ -91,10 +90,6 @@
   clear: both;
 }
 
-.InfoSearch #Day,
-.InfoSearch #Month {
-  max-width: 50px;
-}
 
 table {
   white-space: pre-wrap;

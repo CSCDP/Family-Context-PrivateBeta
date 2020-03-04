@@ -33,9 +33,10 @@ export const DobInputGroup: React.FC<{onChange: (dob: string) => void}> = (props
             <div className="row">
                 <div className="column" id="Day">
                     <input
-                        className="govuk-input"
+                        className="govuk-input govuk-date-input__input govuk-input--width-2"
                         id="Day" name="Day"
                         type="text"
+                        pattern="[0-9]*" 
                         onChange={event => {
                             day = event.target.value;
                             updateDob();
@@ -44,9 +45,10 @@ export const DobInputGroup: React.FC<{onChange: (dob: string) => void}> = (props
                 </div>
                 <div className="column" id="Month">
                     <input
-                        className="govuk-input"
+                        className="govuk-input govuk-date-input__input govuk-input--width-2"
                         id="Month" name="Month"
                         type="text"
+                        pattern="[0-9]*" 
                         onChange={event => {
                             month = event.target.value;
                             updateDob();
@@ -55,9 +57,10 @@ export const DobInputGroup: React.FC<{onChange: (dob: string) => void}> = (props
                 </div>
                 <div className="column" id="Year">
                     <input
-                        className="govuk-input"
+                        className="govuk-input govuk-date-input__input govuk-input--width-4"
                         id="Year" name="Year"
                         type="text"
+                        pattern="[0-9]*" 
                         onChange={event => {
                             year = event.target.value;
                             updateDob();
