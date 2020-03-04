@@ -2,10 +2,11 @@ import React from 'react';
 import PersonRelationshipDetails from '../../models/PersonRelationshipDetails';
 import RowValues from '../Table/RowValues';
 import { formatShortDateOrString } from '../../tools/FormattingTools';
+import ViewButton from '../ViewButton';
 
 type RelatedIndividualsRowProps = {
     relation: PersonRelationshipDetails,
-    onClickFunc?: (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void
+    onView: (id: string) => void
 }
 
 const RelatedIndividualsRow: React.FC<RelatedIndividualsRowProps> = (props: RelatedIndividualsRowProps) => {
@@ -14,7 +15,8 @@ const RelatedIndividualsRow: React.FC<RelatedIndividualsRowProps> = (props: Rela
         props.relation.id,
         props.relation.firstName,
         props.relation.lastName,
-        formatShortDateOrString(props.relation.dateOfBirth)
+        formatShortDateOrString(props.relation.dateOfBirth),
+        <ViewButton action={() => props.onView(props.relation.id)}/>
     ]
 
     return (
