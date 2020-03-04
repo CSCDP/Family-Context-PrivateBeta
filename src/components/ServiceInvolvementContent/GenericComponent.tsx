@@ -21,7 +21,7 @@ const GenericComponent: React.FC<{ schema: Schema, data: any, keyId: string, arr
             return <StringComponent schema={stringSchema} data={props.data} keyId={props.keyId} />
         }
         default: {
-            throw "Unknown type used.";
+            throw new Error("Unknown type used.");
         }
     }
 }
