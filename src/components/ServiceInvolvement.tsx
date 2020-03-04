@@ -42,8 +42,10 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     }
 
     componentDidMount() {
+      if(this.props.summaries.some(summary => summary.recordsAvailable)) {
         var serviceInvolvementElements = document.getElementById("service-involvements");
         window.GOVUKFrontend.initAll({ scope: serviceInvolvementElements });
+      }
     }
 
     render() {
