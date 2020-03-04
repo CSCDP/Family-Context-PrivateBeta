@@ -33,7 +33,10 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = (props: PaginationBu
     var maxPage = Math.ceil(props.paginationInfo.totalResults / props.paginationInfo.resultsPerPage)
     
     for (let page = props.paginationInfo.pageNumber + 1; page <= Math.min(props.paginationInfo.pageNumber + 2, maxPage); page++) {
-        items.push(<PaginationItem action={() => {props.navigatePage(page)}} label={`Page ${page}`} key={page}>{page}</PaginationItem>)
+        items.push(
+            <PaginationItem action={() => {props.navigatePage(page)}} label={`Page ${page}`} key={page}>
+                {page}
+            </PaginationItem>)
     }
 
     if (props.paginationInfo.pageNumber < maxPage) {
@@ -42,9 +45,9 @@ const PaginationButtons: React.FC<PaginationButtonsProps> = (props: PaginationBu
     }
 
     return (
-        <ul className="pagination">
+        <ol className="pagination">
             {items}
-        </ul>
+        </ol>
     )
 }
 
