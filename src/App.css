@@ -9,7 +9,28 @@
 }
 
 .header {
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid #1d70b8;
+}
+
+.header-contents {
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
+  align-items: center;
+}
+
+.header-contents img {
+  height: 60%;
+}
+
+.header-contents p {
+  margin: 0;
+  margin-left: 5%
+}
+
+.PhaseBanner {
+  white-space: pre-wrap;
+  background-color:#f3f2f1;
 }
 
 .CardHeader .govuk-heading-m {
