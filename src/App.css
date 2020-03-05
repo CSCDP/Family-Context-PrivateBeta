@@ -40,7 +40,8 @@
   align-items: center;
 }
 
-.SensitiveInformationWarning .govuk-warning-text__text{
+.SensitiveInformationWarning .govuk-warning-text__text,
+.NameWarning .govuk-warning-text__text{
   color: #d53880;
 }
 
@@ -89,7 +90,6 @@
   display: table;
   clear: both;
 }
-
 
 table {
   white-space: pre-wrap;

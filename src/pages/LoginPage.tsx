@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { PasswordInputGroup, UsernameInputGroup } from '../components/InputGroups'
+import { TextInputGroup, PasswordInputGroup } from '../components/InputGroups'
 import LoginDetails from '../models/LoginDetails';
 import ApiClient from '../clients/ApiClient';
 import LoginFailedWarning from '../components/LoginFailedWarning';
@@ -26,7 +26,7 @@ class LoginPage extends React.Component<LoginProps, LoginState>  {
   render() {
     return (
       <form className="LoginPage" onSubmit={(event) => this.tryLogin(event)}>
-        <UsernameInputGroup onChange={(text: string) => this.setState({ ...this.state, userid: text })} id="username" name="Username" />
+        <TextInputGroup onChange={(text: string) => this.setState({ ...this.state, userid: text })} id="username" name="Username" format="govuk-!-width-one-quarter" />
         <PasswordInputGroup onChange={(text: string) => this.setState({ ...this.state, password: text })} />
         <LoginFailedWarning loginFailed={this.state.loginFailed} />
         <button className="govuk-button" data-module="govuk-button" >

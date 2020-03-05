@@ -1,13 +1,13 @@
 import React from 'react';
 
-export const TextInputGroup: React.FC<{onChange: (text: string) => void, name: string, id: string}> = (props) =>{
+export const TextInputGroup: React.FC<{onChange: (text: string) => void, name: string, id: string, format: string}> = (props) =>{
     return(
     <div className="govuk-form-group">
     <label className="govuk-label" htmlFor="one-half">
         <b>{props.name}</b>
     </label>
     <input 
-        className="govuk-input govuk-!-width-one-half" 
+        className={`govuk-input ${props.format}`}
         id={props.id} name={props.name} 
         type="text" 
         onChange={event => props.onChange(event.target.value)}
@@ -16,13 +16,15 @@ export const TextInputGroup: React.FC<{onChange: (text: string) => void, name: s
     );
 }
 
-export const DobInputGroup: React.FC<{onChange: (dob: string) => void}> = (props) =>{
+export const DobInputGroup: React.FC<{onChange: (dob: Date) => void}> = (props) =>{
     var day = "";
     var month = "";
     var year = "";
 
     function updateDob() {
-        props.onChange(day != "" && month != "" && year != "" ? month + "%2F" + day + "%2F" + year : "");
+        if (day !== "" && month !== "" && year !== "") {
+            props.onChange(new Date(Date.UTC(parseInt(year), parseInt(month)-1, parseInt(day))));
+        }
     }
 
     return(
@@ -70,22 +72,6 @@ export const DobInputGroup: React.FC<{onChange: (dob: string) => void}> = (props
             </div>
         </>
         );
-}
-
-export const UsernameInputGroup: React.FC<{onChange: (text: string) => void, name: string, id: string}> = (props) =>{
-    return(
-    <div className="govuk-form-group">
-    <label className="govuk-label" htmlFor="one-quarter">
-        <b>{props.name}</b>
-    </label>
-    <input 
-        className="govuk-input govuk-!-width-one-quarter" 
-        id={props.id} name={props.name} 
-        type="text" 
-        onChange={event => props.onChange(event.target.value)}
-    />
-    </div>
-    );
 }
 
 export const PasswordInputGroup: React.FC<{onChange: (text: string) => void}> = (props) => {
