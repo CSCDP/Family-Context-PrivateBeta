@@ -201,6 +201,17 @@ class ApiClient {
     };
   }
 
+  async isSearchApiSupported(search: SearchDetails): Promise<RequestResult<boolean>> {
+    let searchPath = "/search/person";
+    let response = await this.postJsonRequest(searchPath, JSON.stringify(search))
+
+    return {
+        statusCode: response.status,
+        success: response.ok || response.status === 501,
+        data: response.status === 200,
+    }
+}
+
   async isRelatedIndividualsSupported(personId: string): Promise<RequestResult<boolean>> {
     let relatedIndividualsPath = "/person/related/" + personId;
     let response = await this.headRequest(relatedIndividualsPath);
@@ -230,7 +241,7 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
     return {
       statusCode: response.status,
       success: response.ok,
-      data: await response.json()
+      data: { results: await response.json()}
     }
   }
 

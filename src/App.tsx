@@ -33,7 +33,7 @@ private updateAuthenticationStatus = (status: boolean) => {
     if (isAuthenticated) {
       return (
         <>
-        <Route exact path="/" component={SearchPage} />
+        <Route exact path="/" render={(props) => <SearchPage {...props} client={this.apiClient} key={props.location.search}/>} />
         <Route exact path="/search" render={(props) => <ResultsPage {...props} client={this.apiClient} key={props.location.search}/>} />
         <Route path="/person/:personId" render={(props) => <IndividualPage {...props} client={this.apiClient} key={props.match.params.personId} />} />
         </>
