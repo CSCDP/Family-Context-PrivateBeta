@@ -20,6 +20,11 @@
   margin-bottom: 15px;
 }
 
+.CardHeader {
+  border-top: 1px solid	#b1b4b6;
+  padding-top: 15px;
+}
+
 .govuk-accordion__section-heading strong{
   margin-left: 10px;
   background-color:	#f3f2f1;
@@ -89,6 +94,11 @@
   content: "";
   display: table;
   clear: both;
+}
+
+.ResultsPage .govuk-table__body .govuk-table__row:hover {
+  background-color: #f3f2f1;
+  cursor: pointer;
 }
 
 table {

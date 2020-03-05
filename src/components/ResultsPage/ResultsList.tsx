@@ -1,13 +1,16 @@
 import React from "react";
-import PersonDetails from "../../models/PersonDetails";
 import {ResultsListRow, ResultsListHeader} from "./ResultsListRow";
 import TableBody from "../Table/TableBody";
 import Table from "../Table/Table";
 import TableHeader from "../Table/TableHeader";
+import SearchResponse from "../../models/SearchResponse";
+import PaginationDetails from "../../models/PaginationDetails";
+import PaginationMenu from "../Pagination/PaginationMenu";
 
 type ResultsListProps = {
-    results: PersonDetails[],
-    navigate: (id: string) => void
+    response: SearchResponse,
+    navigatePage: (pagination: PaginationDetails) => void
+    navigateToPerson: (id: string) => void
 }
 
 const ResultsList: React.FC<ResultsListProps> = (props) => {
@@ -18,11 +21,16 @@ const ResultsList: React.FC<ResultsListProps> = (props) => {
                     <ResultsListHeader />
                 </TableHeader>
                 <TableBody>
-                    {props.results.map(result =>  
-                        <ResultsListRow person={result} key={result.id} onClickFunc={(event) => {event.preventDefault(); props.navigate(result.id)}} />
+                    {props.response.results.map(result =>  
+                        <ResultsListRow person={result} key={result.id} onClickFunc={(event) => {event.preventDefault(); props.navigateToPerson(result.id)}} />
                     )}
                 </TableBody>
             </Table>
+            {props.response.paginationInfo ?
+                <PaginationMenu 
+                  paginationInfo={props.response.paginationInfo} 
+                  navigatePage={(page: number) => {props.navigatePage({pageNumber: page, resultsPerPage: props.response.paginationInfo?.resultsPerPage })}} />
+            : <></>}
         </div>
     )
 }

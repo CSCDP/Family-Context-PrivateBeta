@@ -4,6 +4,7 @@ import ServiceInvolvementDetailsSummary from "../models/ServiceInvolvementDetail
 import ServiceDetail from "../models/ServiceDetail";
 import SearchDetails from "../models/SearchDetails";
 import PersonRelationshipDetails from "../models/PersonRelationshipDetails";
+import SearchResponse from "../models/SearchResponse";
 
 class ApiClient {
   private baseUrl: string
@@ -222,7 +223,7 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
     }
 }
 
-  async searchPerson(search: SearchDetails): Promise<RequestResult<PersonDetails[]>> {
+  async searchPerson(search: SearchDetails): Promise<RequestResult<SearchResponse>> {
     let searchPath = "/search/person";
     let response = await this.postJsonRequest(searchPath, JSON.stringify(search))
 
