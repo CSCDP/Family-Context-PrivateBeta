@@ -5,6 +5,7 @@ import ApiClient, { RequestResult } from '../clients/ApiClient';
 import ServiceDetail from '../models/ServiceDetail';
 import DataContent from './DataContent';
 import ServiceInvolvementDisplay from './ServiceInvolvementContent/ServiceInvolvementDisplay';
+import OpenAllButton from './Accordion/OpenAllButton';
 
 interface ServiceInvolvementProps {
     summaries: ServiceInvolvementDetailsSummary[],
@@ -13,7 +14,8 @@ interface ServiceInvolvementProps {
 }
 
 interface ServiceInvolvementState { 
-    serviceInvolvementDetailsData: { [id: string]: RequestResult<ServiceDetail> | null; } 
+    serviceInvolvementDetailsData: { [id: string]: RequestResult<ServiceDetail> | null; },
+    accordionsOpen: Boolean[]
 }
 
 class ServiceInvolvement extends React.Component<ServiceInvolvementProps, ServiceInvolvementState>  {
@@ -27,11 +29,16 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
         });
 
         this.state = {
-            serviceInvolvementDetailsData: emptyData
+            serviceInvolvementDetailsData: emptyData,
+            accordionsOpen: new Array(props.summaries.length).fill(false)
         };
     }
 
-    click(serviceId: string): void {
+    click(serviceId: string, index: number): void {
+      var amountOpen = this.state.accordionsOpen
+      amountOpen[index] = !this.state.accordionsOpen[index];
+      this.setState({...this.state, accordionsOpen: amountOpen})
+
       if (this.state.serviceInvolvementDetailsData[serviceId] === null) {
         this.props.client.getServiceDetail(this.props.personId, serviceId).then(result => {
           let newData = { ...this.state.serviceInvolvementDetailsData };
@@ -42,18 +49,24 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
     }
 
     componentDidMount() {
+      sessionStorage.removeItem("accordion-with-summary-sections-content-key") 
+      var serviceInvolvementElements = document.getElementById("service-involvements");
+
       if(this.props.summaries.some(summary => summary.recordsAvailable)) {
-        var serviceInvolvementElements = document.getElementById("service-involvements");
         window.GOVUKFrontend.initAll({ scope: serviceInvolvementElements });
       }
+
+      var openAllButtonToRemove = serviceInvolvementElements?.getElementsByClassName("govuk-accordion__open-all")[0] || new Element();
+      openAllButtonToRemove.remove();
     }
 
     render() {
         return (
             <div id="service-involvements">
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
-                    {this.props.summaries.map(summary =>
-                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} key={summary.id} click={() => this.click(summary.id)}>
+                    <OpenAllButton containerId={"service-involvements"} amountOpen={this.state.accordionsOpen.filter(item => item).length}/>
+                    {this.props.summaries.map((summary, index) =>
+                        <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} key={summary.id} click={() => this.click(summary.id, index)}>
                           <DataContent result={this.state.serviceInvolvementDetailsData[summary.id]} loading={<ServiceDetailsLoading />} error={<ServiceDetailsNotFound />}>
                             <ServiceInvolvementDisplay details={this.state.serviceInvolvementDetailsData[summary.id]?.data as ServiceDetail} />
                           </DataContent>
