@@ -241,7 +241,7 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
     return {
       statusCode: response.status,
       success: response.ok,
-      data: { results: await response.json()}
+      data: await response.json()
     }
   }
 
