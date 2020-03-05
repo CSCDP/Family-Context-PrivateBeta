@@ -230,7 +230,7 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
     return {
       statusCode: response.status,
       success: response.ok,
-      data: await response.json()
+      data: { results: await response.json()}
     }
   }
 

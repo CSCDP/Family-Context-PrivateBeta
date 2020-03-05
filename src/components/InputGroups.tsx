@@ -1,91 +1,93 @@
 import React from 'react';
 
-export const TextInputGroup: React.FC<{onChange: (text: string) => void, name: string, id: string, format: string}> = (props) =>{
-    return(
-    <div className="govuk-form-group">
-    <label className="govuk-label" htmlFor="one-half">
-        <b>{props.name}</b>
-    </label>
-    <input 
-        className={`govuk-input ${props.format}`}
-        id={props.id} name={props.name} 
-        type="text" 
-        onChange={event => props.onChange(event.target.value)}
-    />
-    </div>
+export const TextInputGroup: React.FC<{ onChange: (text: string) => void, name: string, id: string, format: string }> = (props) => {
+    return (
+        <div className="govuk-form-group">
+            <label className="govuk-label" htmlFor={props.format}>
+                <b>{props.name}</b>
+            </label>
+            <input
+                className={`govuk-input ${props.format}`}
+                id={props.id} name={props.name}
+                type="text"
+                onChange={event => props.onChange(event.target.value)}
+            />
+        </div>
     );
 }
 
-export const DobInputGroup: React.FC<{onChange: (dob: Date) => void}> = (props) =>{
-    var day = "";
-    var month = "";
-    var year = "";
+export class DobInputGroup extends React.Component<{ onChange: (year: string, month: string, day: string) => void }, any> {
 
-    function updateDob() {
-        if (day !== "" && month !== "" && year !== "") {
-            props.onChange(new Date(Date.UTC(parseInt(year), parseInt(month)-1, parseInt(day))));
-        }
+    constructor(props: { onChange: (year: string, month: string, day: string) => void }) {
+        super(props);
+        this.state = { day: "", month: "", year: "" };
     }
 
-    return(
-        <>
-            <label className="govuk-label" htmlFor="one-quarter">
-                <b>Day of birth (optional)</b>
-            </label>
-            <div className="row">
-                <div className="column" id="Day">
-                    <input
-                        className="govuk-input govuk-date-input__input govuk-input--width-2"
-                        id="Day" name="Day"
-                        type="text"
-                        pattern="[0-9]*" 
-                        onChange={event => {
-                            day = event.target.value;
-                            updateDob();
-                        }}
-                    />
+
+    updateDob(day: string, month: string, year: string) {
+        this.props.onChange(year, month, day);
+    }
+    render() {
+        return (
+            <>
+                <label className="govuk-label" htmlFor="one-quarter">
+                    <b>Day of birth (optional)</b>
+                </label>
+                <div className="row">
+                    <div className="column" id="Day">
+                        <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="Day" name="Day"
+                            type="text"
+                            pattern="[0-9]*"
+                            onChange={event => {
+                                this.setState({ ...this.state, day: event.target.value });
+                                this.updateDob(event.target.value, this.state.month, this.state.year)
+                            }}
+                        />
+                    </div>
+                    <div className="column" id="Month">
+                        <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="Month" name="Month"
+                            type="text"
+                            pattern="[0-9]*"
+                            onChange={event => {
+                                this.setState({ ...this.state, month: event.target.value });
+                                this.updateDob(this.state.day, event.target.value, this.state.year)
+                            }}
+                        />
+                    </div>
+                    <div className="column" id="Year">
+                        <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-4"
+                            id="Year" name="Year"
+                            type="text"
+                            pattern="[0-9]*"
+                            onChange={event => {
+                                this.setState({ ...this.state, year: event.target.value });
+                                this.updateDob(this.state.day, this.state.month, event.target.value)
+                            }}
+                        />
+                    </div>
                 </div>
-                <div className="column" id="Month">
-                    <input
-                        className="govuk-input govuk-date-input__input govuk-input--width-2"
-                        id="Month" name="Month"
-                        type="text"
-                        pattern="[0-9]*" 
-                        onChange={event => {
-                            month = event.target.value;
-                            updateDob();
-                        }}
-                    />
-                </div>
-                <div className="column" id="Year">
-                    <input
-                        className="govuk-input govuk-date-input__input govuk-input--width-4"
-                        id="Year" name="Year"
-                        type="text"
-                        pattern="[0-9]*" 
-                        onChange={event => {
-                            year = event.target.value;
-                            updateDob();
-                        }}
-                    />
-                </div>
-            </div>
-        </>
+            </>
         );
+    }
 }
 
-export const PasswordInputGroup: React.FC<{onChange: (text: string) => void}> = (props) => {
-    return(
+export const PasswordInputGroup: React.FC<{ onChange: (text: string) => void }> = (props) => {
+    return (
         <div className="govuk-form-group">
-    <label className="govuk-label" htmlFor="one-quarter">
-        <b>Password</b>
-    </label>
-    <input 
-        className="govuk-input govuk-!-width-one-quarter" 
-        id="password" name="password" 
-        type="password" 
-        onChange={event => props.onChange(event.target.value)}
-    />
-    </div>
+            <label className="govuk-label" htmlFor="one-quarter">
+                <b>Password</b>
+            </label>
+            <input
+                className="govuk-input govuk-!-width-one-quarter"
+                id="password" name="password"
+                type="password"
+                onChange={event => props.onChange(event.target.value)}
+            />
+        </div>
     );
 }
