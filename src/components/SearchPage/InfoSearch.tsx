@@ -52,15 +52,13 @@ class InfoSearch extends React.Component<InfoSearchProps, any> {
     }
 
     dobCheck(){
-        if (this.state.day === null && this.state.month === null && this.state.year === null) {
+        if (this.state.day === undefined && this.state.month === undefined && this.state.year === undefined) {
             return null;
         }
-        if ((this.state.day !== null || this.state.month !== null || this.state.year !== null) && (this.state.day === null || this.state.month === null || this.state.year === null)) {
-            console.log(1)
+        if ((this.state.day !== undefined || this.state.month !== undefined || this.state.year !== undefined) && (this.state.day === undefined || this.state.month === undefined || this.state.year === undefined)) {
             return "Please enter a valid date";
         }
         if (isNaN(parseInt(this.state.day)) || isNaN(parseInt(this.state.month)) || isNaN(parseInt(this.state.year))) {
-            console.log(2)
             return "Please enter a valid date";
         }
         return new Date(Date.UTC(parseInt(this.state.year), parseInt(this.state.month)-1, parseInt(this.state.day)));
