@@ -11,7 +11,7 @@ const RelatedIndividualsInfo: React.FC<RelatedIndividualsInfoProps> = (props: Re
     return (
         <div className="ResultsInfo">
             <h1 className="govuk-heading-m">Related individuals from CMS</h1>
-            <Warning hidden={false}>Please note: once selecting an individual from the list below, you may see sensitive information about that individual.</Warning>
+            <Warning>Please note: once selecting an individual from the list below, you may see sensitive information about that individual.</Warning>
             <p className="govuk-body">{props.matches || "No"} individual{props.matches === 1 ? " is" : "s are"} linked to {props.person.firstName || "_"} {props.person.lastName || "_"} in the CMS</p>
         </div>
     )

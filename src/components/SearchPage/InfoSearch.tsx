@@ -6,11 +6,23 @@ type InfoSearchProps = {
     search: (info: { [id: string]: string }) => void
 }
 
-class InfoSearch extends React.Component<InfoSearchProps, any> {
+type InfoSearchState = {
+    warningHidden: boolean, 
+    errorText: string, 
+    searchState: {
+        firstName: string, 
+        familyName: string, 
+        year: string, 
+        month: string, 
+        day: string
+    }
+}
+
+class InfoSearch extends React.Component<InfoSearchProps, InfoSearchState> {
 
     constructor(props: InfoSearchProps ) {
         super(props);
-        this.state = {warningHidden: true, searchState: {firstName: "", familyName: ""}};
+        this.state = {warningHidden: true, errorText: "", searchState: {firstName: "", familyName: "", year: "", month: "", day: ""}};
     }
 
     search (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
@@ -19,24 +31,21 @@ class InfoSearch extends React.Component<InfoSearchProps, any> {
         let dobWarning = this.dobCheck();
         let nameWarning = this.nameCheck();
 
-        if (typeof dobWarning === 'string'){
+        if (dobWarning){
             this.setState({...this.state, warningHidden: false, errorText: dobWarning})
             return;
-        } else if (dobWarning) {
-            this.setState({...this.state, dob: dobWarning})
-            this.searchForEverything(dobWarning);
-            return;
-        }
+        } 
         if (nameWarning){
             this.setState({...this.state, warningHidden: false, errorText: nameWarning})
             return;
         }
 
-        this.searchForEverything();
+        this.searchForIndividual();
     }
 
-    searchForEverything(dob?: Date) { 
-        if (dob) {
+    searchForIndividual() { 
+        if (this.state.searchState.day !== "" && this.state.searchState.month !== "" && this.state.searchState.year !== "") {
+            var dob = new Date(Date.UTC(parseInt(this.state.searchState.year), parseInt(this.state.searchState.month)-1, parseInt(this.state.searchState.day)));
             this.props.search({ firstName: this.state.searchState.firstName, lastName: this.state.searchState.familyName, dateOfBirth: dob.toISOString() });
         } else {
             this.props.search({ firstName: this.state.searchState.firstName, lastName: this.state.searchState.familyName});
@@ -52,16 +61,14 @@ class InfoSearch extends React.Component<InfoSearchProps, any> {
     }
 
     dobCheck(){
-        if (this.state.day === undefined && this.state.month === undefined && this.state.year === undefined) {
-            return null;
-        }
-        if ((this.state.day !== undefined || this.state.month !== undefined || this.state.year !== undefined) && (this.state.day === undefined || this.state.month === undefined || this.state.year === undefined)) {
+        if ((this.state.searchState.day !== "" || this.state.searchState.month !== "" || this.state.searchState.year !== "") 
+        && (this.state.searchState.day === "" || this.state.searchState.month === "" || this.state.searchState.year === "")) {
             return "Please enter a valid date";
         }
-        if (isNaN(parseInt(this.state.day)) || isNaN(parseInt(this.state.month)) || isNaN(parseInt(this.state.year))) {
+        if (isNaN(parseInt(this.state.searchState.day)) || isNaN(parseInt(this.state.searchState.month)) || isNaN(parseInt(this.state.searchState.year))) {
             return "Please enter a valid date";
         }
-        return new Date(Date.UTC(parseInt(this.state.year), parseInt(this.state.month)-1, parseInt(this.state.day)));
+        return null;
     }
 
     render() {
@@ -71,7 +78,9 @@ class InfoSearch extends React.Component<InfoSearchProps, any> {
             <div className="govuk-grid-column-one-half">
                 <TextInputGroup onChange={(text: string) => this.state.searchState.firstName = text} id="firstName" name="First Name" format="govuk-!-width-one-half" />
                 <TextInputGroup onChange={(text: string) => this.state.searchState.familyName = text} id="familyName" name="Family Name" format="govuk-!-width-one-half" />
-                <DobInputGroup onChange={(year: string, month: string, day: string ) => {this.setState({day: day}); this.setState({month: month}); this.setState({year: year});}} />
+                <DobInputGroup onChange={(year: string, month: string, day: string ) => {
+                    var newSearchState = {firstName: this.state.searchState.firstName, familyName: this.state.searchState.familyName, year: year, month: month, day: day};
+                    this.setState({...this.state, searchState: newSearchState});}} />
                 <button className="govuk-button" data-module="govuk-button" onClick={(event) => this.search(event)}>
                     Search
                 </button>
