@@ -17,7 +17,6 @@ class App extends Component<any, any> {
     super(props);
     this.state = {isAuthenticated: false};
     this.apiClient = new ApiClient(process.env.REACT_APP_API_BASE_URL ?? "", this.updateAuthenticationStatus);
-    console.log(process.env.PUBLIC_URL + process.env.REACT_APP_LOGO_URL)
   }
 
 private updateAuthenticationStatus = (status: boolean) => {
