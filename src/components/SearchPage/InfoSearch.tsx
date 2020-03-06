@@ -61,7 +61,7 @@ class InfoSearch extends React.Component<InfoSearchProps, InfoSearchState> {
     }
 
     dobCheck(){
-        if (this.state.searchState.day !== "" && this.state.searchState.month !== "" && this.state.searchState.year !== "") {
+        if (this.state.searchState.day === "" && this.state.searchState.month === "" && this.state.searchState.year === "") {
             return null;
         }
         if ((this.state.searchState.day !== "" || this.state.searchState.month !== "" || this.state.searchState.year !== "") 
