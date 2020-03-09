@@ -201,6 +201,16 @@ class ApiClient {
     };
   }
 
+  async isSearchApiSupported(): Promise<RequestResult<boolean>> {
+    let searchPath = "/search/person";
+    let response = await this.headRequest(searchPath)
+
+    return {
+        statusCode: response.status,
+        success: response.ok
+    }
+}
+
   async isRelatedIndividualsSupported(personId: string): Promise<RequestResult<boolean>> {
     let relatedIndividualsPath = "/person/related/" + personId;
     let response = await this.headRequest(relatedIndividualsPath);
