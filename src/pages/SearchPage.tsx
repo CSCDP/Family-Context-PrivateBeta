@@ -2,20 +2,48 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import CaseIdSearch from '../components/SearchPage/CaseIdSearch';
 import InfoSearch from '../components/SearchPage/InfoSearch';
+import ApiClient from '../clients/ApiClient';
 
-const SearchPage: React.FC<RouteComponentProps> = (props) => {
+interface SearchPageProps extends RouteComponentProps {
+  client: ApiClient
+}
+
+const SearchPage: React.FC<SearchPageProps> = (props) => {
     return (
-      <div className="SearchPage">
+      <div className="SearchPage" id="SearchPage">
         <h1>Find Service Involvement</h1>
         <InfoSearch search={(info: {[id: string]: string}) => navigateToSearch(info, props)} />
-        <CaseIdSearch search={(caseId: string) => navigateToCaseId(caseId, props)} />
+        <CaseIdSearch search={(caseId: string) => searchForCaseId(caseId, props)} />
       </div>
     );
 }
 
-function navigateToCaseId(caseId: string, props: RouteComponentProps) : void {
-    if (caseId !== "") {
-        props.history.push(`person/${caseId}`)
+function searchForCaseId(caseId: string, props: SearchPageProps) : Promise<boolean> {
+    setButtonsDisabledStatus(true);
+
+    return props.client.searchCmsId(caseId).then(response => {
+      setButtonsDisabledStatus(false);
+
+      if (response.success) {
+        props.history.push({
+          pathname: `person/${response.data?.id}`,
+          state: { personDetailsResult: response }
+        })
+        return true;
+      }
+
+      return false;
+    })
+}
+
+function setButtonsDisabledStatus(status: boolean) {
+  var buttons = document.getElementById("SearchPage")?.getElementsByClassName("govuk-button") || new HTMLCollection();
+    for (var index = 0; index < buttons.length; index++) {
+      if (status) {
+        buttons[index].setAttribute('disabled', 'true')
+      } else {
+        buttons[index].removeAttribute('disabled')
+      }
     }
 }
 

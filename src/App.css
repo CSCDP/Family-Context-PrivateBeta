@@ -80,6 +80,10 @@
   background-color: #003078 
 }
 
+.SearchPage button:hover:disabled {
+  background-color: #003078 
+}
+
 .CaseIdSearch .govuk-form-group {
   margin-top: 30px;
 }

@@ -234,6 +234,17 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
     }
   }
 
+  async searchCmsId(cmsId: string): Promise<RequestResult<PersonDetails>> {
+    let searchPath = "/search/person/" + cmsId;
+    let response = await this.getRequest(searchPath)
+
+    return {
+      statusCode: response.status,
+      success: response.ok,
+      data: await response.json()
+    }
+  }
+
   async postJsonRequest(relativePath: string, body: string): Promise<Response> {
     return fetch(`${this.baseUrl}${relativePath}`, {
       method: "POST",
