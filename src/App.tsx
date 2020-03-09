@@ -8,6 +8,7 @@ import PageSpacing from './components/PageSpacing';
 import ApiClient from './clients/ApiClient';
 import SearchPage from './pages/SearchPage';
 import ResultsPage from './pages/ResultsPage';
+import PhaseBanner from './components/PhaseBanner';
 
 class App extends Component<any, any> {
   private apiClient: ApiClient;
@@ -49,6 +50,7 @@ private updateAuthenticationStatus = (status: boolean) => {
     return (
       <Router basename={process.env.REACT_APP_BASE_SUBDIRECTORY}>
         <FamilyContextHeader />
+        <PhaseBanner />
           <PageSpacing>
             {this.getRoutes(this.state.isAuthenticated)}
           </PageSpacing>
