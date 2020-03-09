@@ -14,7 +14,7 @@ interface PersonParams {
   personId?: string
 }
 
-interface IndividualPageState extends RouteComponentProps {
+interface IndividualPageState {
   personDetailsResult?: RequestResult<PersonDetails>,
   serviceSummariesResult?: RequestResult<ServiceInvolvementDetailsSummary[]>
   relatedIndividualsSupportedResult?: RequestResult<boolean>
@@ -25,7 +25,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
 
   constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
     super(props);
-    this.state = {...this.props.location.state, ...this.props}
+    this.state = {...this.props.location.state}
   }
 
 
