@@ -201,9 +201,11 @@ class ApiClient {
     };
   }
 
-  async isSearchApiSupported(search: SearchDetails): Promise<RequestResult<boolean>> {
+  async isSearchApiSupported(): Promise<RequestResult<boolean>> {
     let searchPath = "/search/person";
-    let response = await this.postJsonRequest(searchPath, JSON.stringify(search))
+    let response = await this.headRequest(searchPath)
+
+    console.log(response)
 
     return {
         statusCode: response.status,

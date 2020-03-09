@@ -2,42 +2,34 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import CaseIdSearch from '../components/SearchPage/CaseIdSearch';
 import InfoSearch from '../components/SearchPage/InfoSearch';
-import ApiClient from '../clients/ApiClient';
-import SearchDetails from '../models/SearchDetails';
+import ApiClient, { RequestResult } from '../clients/ApiClient';
+import DataContent from '../components/DataContent';
 
-class SearchPage extends React.Component<RouteComponentProps & { client: ApiClient }, {searchApiSupportedResult: boolean}> {
+class SearchPage extends React.Component<RouteComponentProps & { client: ApiClient }, {searchApiSupportedResult?: RequestResult<boolean>}> {
 
   constructor(props: RouteComponentProps & { client: ApiClient }) {
     super(props);
-    this.state = {searchApiSupportedResult: false}
+    this.state = {}
   }
 
   componentDidMount() {
-    var searchDetails: SearchDetails = { firstName: " ", lastName: " ", dateOfBirth: new Date().toISOString()};
-    this.props.client.isSearchApiSupported(searchDetails).then(result => {
+    this.props.client.isSearchApiSupported().then(result => {
       if (result.data !== undefined) {
-        this.setState({ searchApiSupportedResult: result.data });
+        this.setState({ searchApiSupportedResult: result });
       }
     })
   }
 
   render() {
-    if (this.state.searchApiSupportedResult) {
       return (
         <div className="SearchPage">
           <h1>Find Service Involvement</h1>
-          <InfoSearch search={(info: { [id: string]: string }) => navigateToSearch(info, this.props)} />
+          <DataContent result={this.state.searchApiSupportedResult} loading="Loading search" error="An error occurred showing search by names and date of birth.">
+            <InfoSearch search={(info: { [id: string]: string }) => navigateToSearch(info, this.props)} />
+          </DataContent>
           <CaseIdSearch search={(caseId: string) => navigateToCaseId(caseId, this.props)} />
         </div>
       );
-    } else {
-      return (
-        <div className="SearchPage">
-          <h1>Find Service Involvement</h1>
-          <CaseIdSearch search={(caseId: string) => navigateToCaseId(caseId, this.props)} />
-        </div>
-      );
-    }
   }
 }
 
