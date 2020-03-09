@@ -49,7 +49,7 @@ private updateAuthenticationStatus = (status: boolean) => {
   render() {
     return (
       <Router basename={process.env.REACT_APP_BASE_SUBDIRECTORY}>
-        <FamilyContextHeader />
+        <Route render={(props) => <FamilyContextHeader {...props} client={this.apiClient} authenticated={this.state.isAuthenticated} />} />
         <PhaseBanner />
           <PageSpacing>
             {this.getRoutes(this.state.isAuthenticated)}
