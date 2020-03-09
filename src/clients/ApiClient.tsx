@@ -207,8 +207,7 @@ class ApiClient {
 
     return {
         statusCode: response.status,
-        success: response.ok || response.status === 501,
-        data: response.status === 200,
+        success: response.ok
     }
 }
 
