@@ -45,7 +45,7 @@
   align-items: center;
 }
 
-.SensitiveInformationWarning .govuk-warning-text__text{
+.Warning .govuk-warning-text__text{
   color: #d53880;
 }
 
@@ -67,19 +67,32 @@
 }
 
 .CaseIdSearch button,
-.LoginPage button {
+.LoginPage button, 
+.InfoSearch button {
   margin-top: 15px;
   background-color: #1d70b8 
 }
 
 .NavigationButtons button:hover,
 .CaseIdSearch button:hover,
-.LoginPage button:hover {
+.LoginPage button:hover, 
+.InfoSearch button:hover {
   background-color: #003078 
 }
 
 .CaseIdSearch .govuk-form-group {
   margin-top: 30px;
+}
+
+.InfoSearch .column {
+  float: left;
+  padding-right: 15px;
+}
+
+.InfoSearch .row {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .ResultsPage .govuk-table__body .govuk-table__row:hover {
