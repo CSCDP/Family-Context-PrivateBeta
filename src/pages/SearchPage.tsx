@@ -24,7 +24,7 @@ class SearchPage extends React.Component<RouteComponentProps & { client: ApiClie
       return (
         <div className="SearchPage">
           <h1>Find Service Involvement</h1>
-          <DataContent result={this.state.searchApiSupportedResult} loading="Loading search" error="An error occurred showing search by names and date of birth.">
+          <DataContent result={this.state.searchApiSupportedResult}>
             <InfoSearch search={(info: { [id: string]: string }) => navigateToSearch(info, this.props)} />
           </DataContent>
           <CaseIdSearch search={(caseId: string) => navigateToCaseId(caseId, this.props)} />

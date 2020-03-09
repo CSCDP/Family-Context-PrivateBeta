@@ -205,8 +205,6 @@ class ApiClient {
     let searchPath = "/search/person";
     let response = await this.headRequest(searchPath)
 
-    console.log(response)
-
     return {
         statusCode: response.status,
         success: response.ok || response.status === 501,
