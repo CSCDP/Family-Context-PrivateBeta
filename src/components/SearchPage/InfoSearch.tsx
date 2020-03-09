@@ -1,14 +1,19 @@
 import React from "react";
 import { TextInputGroup, DobInputGroup } from "../InputGroups";
-import Warning from "../Warning";
+import ErrorMessage from "../ErrorMessage";
 
 type InfoSearchProps = {
     search: (info: { [id: string]: string }) => void
 }
 
+enum ErrorType {
+    Name = "Enter the first name and last name",
+    Date = "Enter a valid date"
+}
+
 type InfoSearchState = {
     warningHidden: boolean, 
-    errorText: string, 
+    errorType: ErrorType | null,
     searchState: {
         firstName: string, 
         familyName: string, 
@@ -22,7 +27,7 @@ class InfoSearch extends React.Component<InfoSearchProps, InfoSearchState> {
 
     constructor(props: InfoSearchProps ) {
         super(props);
-        this.state = {warningHidden: true, errorText: "", searchState: {firstName: "", familyName: "", year: "", month: "", day: ""}};
+        this.state = {warningHidden: true, errorType: null, searchState: {firstName: "", familyName: "", year: "", month: "", day: ""}};
     }
 
     search (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
@@ -32,11 +37,12 @@ class InfoSearch extends React.Component<InfoSearchProps, InfoSearchState> {
         let nameWarning = this.nameCheck();
 
         if (dobWarning){
-            this.setState({...this.state, warningHidden: false, errorText: dobWarning})
+            this.setState({...this.state, warningHidden: false, errorType: dobWarning})
             return;
-        } 
+        }
+
         if (nameWarning){
-            this.setState({...this.state, warningHidden: false, errorText: nameWarning})
+            this.setState({...this.state, warningHidden: false, errorType: nameWarning})
             return;
         }
 
@@ -56,7 +62,7 @@ class InfoSearch extends React.Component<InfoSearchProps, InfoSearchState> {
         if (this.state.searchState.firstName !== "" && this.state.searchState.familyName != "") {
             return null;
         } else {
-            return "Please include both first name and family name.";
+            return ErrorType.Name;
         }
     }
 
@@ -66,24 +72,38 @@ class InfoSearch extends React.Component<InfoSearchProps, InfoSearchState> {
         }
         if ((this.state.searchState.day !== "" || this.state.searchState.month !== "" || this.state.searchState.year !== "") 
         && (this.state.searchState.day === "" || this.state.searchState.month === "" || this.state.searchState.year === "")) {
-            return "Please enter a valid date";
+            return ErrorType.Date;
         }
         if (isNaN(parseInt(this.state.searchState.day)) || isNaN(parseInt(this.state.searchState.month)) || isNaN(parseInt(this.state.searchState.year))) {
-            return "Please enter a valid date";
+            return ErrorType.Date;
         }
         return null;
     }
 
     render() {
+    var isNameError = this.state.errorType === ErrorType.Name;
+    var isDateError = this.state.errorType === ErrorType.Date;
+
     return (
         <div className="InfoSearch">
-            <Warning hidden={this.state.warningHidden}>{this.state.errorText}</Warning>
-            <div className="govuk-grid-column-one-half">
-                <TextInputGroup onChange={(text: string) => this.state.searchState.firstName = text} id="firstName" name="First Name" format="govuk-!-width-one-half" />
-                <TextInputGroup onChange={(text: string) => this.state.searchState.familyName = text} id="familyName" name="Family Name" format="govuk-!-width-one-half" />
-                <DobInputGroup onChange={(year: string, month: string, day: string ) => {
-                    var newSearchState = {firstName: this.state.searchState.firstName, familyName: this.state.searchState.familyName, year: year, month: month, day: day};
-                    this.setState({...this.state, searchState: newSearchState});}} />
+            <div className={"govuk-grid-column-one-half govuk-form-group " + (isNameError || isDateError ? "govuk-form-group--error" : "")}>
+                <ErrorMessage hidden={this.state.warningHidden}>{this.state.errorType?.toString() || ""}</ErrorMessage>
+                <TextInputGroup 
+                    onChange={(text: string) => this.state.searchState.firstName = text} 
+                    id="firstName" 
+                    name="First Name" 
+                    format={"govuk-!-width-one-half " + (isNameError ? "govuk-input--error" : "")} />
+                <TextInputGroup 
+                    onChange={(text: string) => this.state.searchState.familyName = text} 
+                    id="familyName" 
+                    name="Family Name" 
+                    format={"govuk-!-width-one-half " + (isNameError ? "govuk-input--error" : "")} />
+                <DobInputGroup 
+                    onChange={(year: string, month: string, day: string ) => {
+                        var newSearchState = {firstName: this.state.searchState.firstName, familyName: this.state.searchState.familyName, year: year, month: month, day: day};
+                        this.setState({...this.state, searchState: newSearchState});}}
+                    format={(isDateError ? "govuk-input--error" : "")}
+                />
                 <button className="govuk-button" data-module="govuk-button" onClick={(event) => this.search(event)}>
                     Search
                 </button>
