@@ -21,9 +21,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
 
   componentDidMount() {
     this.props.client.isSearchApiSupported().then(result => {
-      if (result.data !== undefined) {
-        this.setState({ searchApiSupportedResult: result });
-      }
+      this.setState({ searchApiSupportedResult: result });
     })
   }
 
