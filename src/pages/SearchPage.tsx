@@ -22,6 +22,9 @@ class SearchPage extends React.Component<RouteComponentProps & { client: ApiClie
       return (
         <div className="SearchPage">
           <h1>Find Service Involvement</h1>
+          <div className="govuk-hint">
+                    Search for a child by name or in known cases, their case ID
+            </div>
           <DataContent result={this.state.searchApiSupportedResult}>
             <InfoSearch search={(info: { [id: string]: string }) => navigateToSearch(info, this.props)} />
           </DataContent>
