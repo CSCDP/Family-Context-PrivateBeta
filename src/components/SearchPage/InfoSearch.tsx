@@ -8,7 +8,7 @@ type InfoSearchProps = {
 
 enum ErrorType {
     Name = "Enter the first name and last name",
-    Date = "Enter a valid date"
+    Date = "Enter a real date of birth or leave it empty"
 }
 
 type InfoSearchState = {
