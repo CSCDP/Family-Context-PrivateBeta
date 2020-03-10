@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'path';
 
 export const TextInputGroup: React.FC<{ onChange: (text: string) => void, name: string, id: string, format: string }> = (props) => {
     return (
@@ -16,9 +17,9 @@ export const TextInputGroup: React.FC<{ onChange: (text: string) => void, name: 
     );
 }
 
-export class DobInputGroup extends React.Component<{ onChange: (year: string, month: string, day: string) => void }, any> {
+export class DobInputGroup extends React.Component<{ onChange: (year: string, month: string, day: string) => void, format?: string }, any> {
 
-    constructor(props: { onChange: (year: string, month: string, day: string) => void }) {
+    constructor(props: { onChange: (year: string, month: string, day: string) => void, format?: string }) {
         super(props);
         this.state = { day: "", month: "", year: "" };
     }
@@ -31,12 +32,12 @@ export class DobInputGroup extends React.Component<{ onChange: (year: string, mo
         return (
             <>
                 <label className="govuk-label" htmlFor="one-quarter">
-                    <b>Day of birth (optional)</b>
+                    <b>Date of birth (optional)</b>
                 </label>
                 <div className="row">
                     <div className="column" id="Day">
                         <input
-                            className="govuk-input govuk-date-input__input govuk-input--width-2"
+                            className={"govuk-input govuk-date-input__input govuk-input--width-2 " + this.props.format}
                             id="Day" name="Day"
                             type="text"
                             pattern="[0-9]*"
@@ -48,7 +49,7 @@ export class DobInputGroup extends React.Component<{ onChange: (year: string, mo
                     </div>
                     <div className="column" id="Month">
                         <input
-                            className="govuk-input govuk-date-input__input govuk-input--width-2"
+                            className={"govuk-input govuk-date-input__input govuk-input--width-2 " + this.props.format}
                             id="Month" name="Month"
                             type="text"
                             pattern="[0-9]*"
@@ -60,7 +61,7 @@ export class DobInputGroup extends React.Component<{ onChange: (year: string, mo
                     </div>
                     <div className="column" id="Year">
                         <input
-                            className="govuk-input govuk-date-input__input govuk-input--width-4"
+                            className={"govuk-input govuk-date-input__input govuk-input--width-4 " + this.props.format}
                             id="Year" name="Year"
                             type="text"
                             pattern="[0-9]*"

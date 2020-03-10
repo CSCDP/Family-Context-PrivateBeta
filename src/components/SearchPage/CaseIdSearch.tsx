@@ -42,9 +42,6 @@ class CaseIdSearch extends React.Component<CaseIdSearchProps, CaseIdSearchState>
         return (
             <div className="CaseIdSearch">
                 <div className={"govuk-grid-column-one-half govuk-form-group " + (isError ? "govuk-form-group--error" : "")} id="caseIdSearchFormGroup">
-                    <div className="govuk-hint">
-                        To view a child with a known case, enter case ID below:
-                    </div>
                     {isError ? 
                         <span id="caseIdSearchError" className="govuk-error-message">
                             <span className="govuk-visually-hidden">Error:</span> {this.state.errorMessage}

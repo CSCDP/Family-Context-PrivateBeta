@@ -49,6 +49,13 @@ class ApiClient {
     })
   }
 
+  async logout(): Promise<boolean> {
+    var logoutPath = "/auth/logout"
+    var response = await this.postJsonRequest(logoutPath, "");
+
+    return response.ok || response.status === 401;
+  }
+
   async isLoggedIn(): Promise<boolean> {
     var statusPath = "/auth/status"
     try {
