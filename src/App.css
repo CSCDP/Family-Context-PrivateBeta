@@ -74,6 +74,10 @@
   padding-top: 30px;
 }
 
+.LoginPage .govuk-button {
+  margin-bottom: 0px;
+}
+
 .NavigationButtons button{
   background-color: #1d70b8;
   float: right;

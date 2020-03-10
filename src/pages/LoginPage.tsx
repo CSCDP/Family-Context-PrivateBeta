@@ -32,6 +32,13 @@ class LoginPage extends React.Component<LoginProps, LoginState>  {
         <button className="govuk-button" data-module="govuk-button" >
           Start session
         </button>
+        <p>
+        {process.env.REACT_APP_LOGIN_HELP_LINK ?
+          <a href={process.env.REACT_APP_LOGIN_HELP_LINK} rel="noopener noreferrer" target="_blank">I need help signing in</a>
+          : <></>
+        }
+        </p>
+        
       </form>
     );
   }
