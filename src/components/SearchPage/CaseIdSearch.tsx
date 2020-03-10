@@ -18,7 +18,7 @@ class CaseIdSearch extends React.Component<CaseIdSearchProps, CaseIdSearchState>
     }
 
     search(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-        event.preventDefault();   
+        event.preventDefault();
         this.setState({...this.state, searching: true})
 
         if (this.state.caseId === "") {

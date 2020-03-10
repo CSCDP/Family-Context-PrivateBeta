@@ -27,7 +27,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
 
   render() {
       return (
-        <div className="SearchPage">
+        <div id="SearchPage" className="SearchPage">
           <h1>Find Service Involvement</h1>
           <div className="govuk-hint">
                     Search for a child by name or in known cases, their case ID
