@@ -36,28 +36,26 @@ class ApiClient {
       request.setRequestHeader('Content-Type', 'application/json');
 
       request.onload = (event) => {
-        if (request.status === 200) {
-          var response = JSON.parse(request.response);
-          var wasAuthenticationSuccessful = response && response.status === "authenticated";
-
-          if (wasAuthenticationSuccessful) {
+        switch (request.status) {
+          case 200:
             this.authenticationCallback(LoginStatus.Authenticated);
             resolve(LoginStatus.Authenticated);
-          }
-        }
+            break;
+          
+          case 401:
+            this.authenticationCallback(LoginStatus.Unauthorized);
+            resolve(LoginStatus.Unauthorized);
+            break;
 
-        if (request.status === 401) {
-          this.authenticationCallback(LoginStatus.Unauthorized);
-          resolve(LoginStatus.Unauthorized);
+          case 403:
+            this.authenticationCallback(LoginStatus.Forbidden);
+            resolve(LoginStatus.Forbidden);
+            break;
+          
+          default:
+            this.authenticationCallback(LoginStatus.Unknown);
+            resolve(LoginStatus.Unknown);
         }
-
-        if (request.status === 403) {
-          this.authenticationCallback(LoginStatus.Forbidden);
-          resolve(LoginStatus.Forbidden);
-        }
-
-        this.authenticationCallback(LoginStatus.Unknown);
-        resolve(LoginStatus.Unknown);
       }
 
       request.onerror = () => {
