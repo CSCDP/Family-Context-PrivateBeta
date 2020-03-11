@@ -3,7 +3,7 @@
   margin: 15px;
 }
 
-.LoginFailureWarning .govuk-warning-text__text{
+.LoginWarning .govuk-warning-text__text{
   color: #d53880;
   padding-left: 0px;
 }

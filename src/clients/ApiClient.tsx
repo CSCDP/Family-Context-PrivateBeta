@@ -5,12 +5,13 @@ import ServiceDetail from "../models/ServiceDetail";
 import SearchDetails from "../models/SearchDetails";
 import PersonRelationshipDetails from "../models/PersonRelationshipDetails";
 import SearchResponse from "../models/SearchResponse";
+import LoginStatus from "../models/LoginStatus";
 
 class ApiClient {
   private baseUrl: string
-  private authenticationCallback: (newStatus: boolean) => void
+  private authenticationCallback: (newStatus: LoginStatus) => void
 
-  constructor(baseUrl: string, authenticationCallback: (newStatus: boolean) => void) {
+  constructor(baseUrl: string, authenticationCallback: (newStatus: LoginStatus) => void) {
     this.baseUrl = baseUrl;
     this.authenticationCallback = authenticationCallback;
   }
@@ -23,7 +24,7 @@ class ApiClient {
    * The login method cannot use the 'fetch' api because it does not allow cross origin requests to set
    * cookies. We use the XMLHttpRequest for logging in to get round this limitation.
    */
-  async login(loginDetails: LoginDetails): Promise<boolean> {
+  async login(loginDetails: LoginDetails): Promise<LoginStatus> {
     var loginPath = "/auth/login"
 
     return new Promise((resolve, reject) => {
@@ -35,10 +36,28 @@ class ApiClient {
       request.setRequestHeader('Content-Type', 'application/json');
 
       request.onload = (event) => {
-        var response = JSON.parse(request.response);
-        var wasAuthenticationSuccessful = response && response.status === "authenticated";
-        this.authenticationCallback(wasAuthenticationSuccessful);
-        resolve(wasAuthenticationSuccessful);
+        if (request.status === 200) {
+          var response = JSON.parse(request.response);
+          var wasAuthenticationSuccessful = response && response.status === "authenticated";
+
+          if (wasAuthenticationSuccessful) {
+            this.authenticationCallback(LoginStatus.Authenticated);
+            resolve(LoginStatus.Authenticated);
+          }
+        }
+
+        if (request.status === 401) {
+          this.authenticationCallback(LoginStatus.Unauthorized);
+          resolve(LoginStatus.Unauthorized);
+        }
+
+        if (request.status === 403) {
+          this.authenticationCallback(LoginStatus.Forbidden);
+          resolve(LoginStatus.Forbidden);
+        }
+
+        this.authenticationCallback(LoginStatus.Unknown);
+        resolve(LoginStatus.Unknown);
       }
 
       request.onerror = () => {
@@ -56,7 +75,7 @@ class ApiClient {
     return response.ok || response.status === 401;
   }
 
-  async isLoggedIn(): Promise<boolean> {
+  async isAuthenticated(): Promise<boolean> {
     var statusPath = "/auth/status"
     try {
       var response = await this.getRequest(statusPath)
@@ -272,7 +291,9 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
       }
     }).then(response => {
       if (response.status === 401) {
-        this.authenticationCallback(false);
+        this.authenticationCallback(LoginStatus.Unauthorized);
+      } else if (response.status === 403) {
+        this.authenticationCallback(LoginStatus.Forbidden);
       }
       return response;
     });
@@ -283,7 +304,9 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
       credentials: 'include'
     }).then(response => {
       if (response.status === 401) {
-        this.authenticationCallback(false);
+        this.authenticationCallback(LoginStatus.Unauthorized);
+      } else if (response.status === 403) {
+        this.authenticationCallback(LoginStatus.Forbidden);
       }
       return response;
     });
@@ -297,7 +320,9 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
             {
                 if (response.status === 401)
                 {
-                    this.authenticationCallback(false);
+                  this.authenticationCallback(LoginStatus.Unauthorized);
+                } else if (response.status === 403) {
+                  this.authenticationCallback(LoginStatus.Forbidden);
                 }
                 return response;
             });
