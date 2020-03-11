@@ -9,29 +9,33 @@ import ApiClient from './clients/ApiClient';
 import SearchPage from './pages/SearchPage';
 import ResultsPage from './pages/ResultsPage';
 import PhaseBanner from './components/PhaseBanner';
+import LoginStatus from './models/LoginStatus';
 
 class App extends Component<any, any> {
   private apiClient: ApiClient;
 
   constructor(props: any){
     super(props);
-    this.state = {isAuthenticated: false};
+    this.state = {loginStatus: LoginStatus.Unknown};
     this.apiClient = new ApiClient(process.env.REACT_APP_API_BASE_URL ?? "", this.updateAuthenticationStatus);
   }
 
-private updateAuthenticationStatus = (status: boolean) => {
-    if (status !== this.state.isAuthenticated) {
-      this.setState({...this.state, isAuthenticated: status})
+private updateAuthenticationStatus = (status: LoginStatus) => {
+    if (status !== this.state.loginStatus) {
+      this.setState({...this.state, loginStatus: status})
     }
   }
 
   componentDidMount() {
-    this.apiClient.isLoggedIn()
-    .then(result => this.setState({...this.state, isAuthenticated: result}))
+    this.apiClient.isAuthenticated()
+    .then(result => {
+      if (result) 
+        this.setState({...this.state, loginStatus: LoginStatus.Authorized})
+    })
   }
 
-  getRoutes(isAuthenticated: boolean) {
-    if (isAuthenticated) {
+  getRoutes(loginStatus: LoginStatus) {
+    if (loginStatus === LoginStatus.Authorized) {
       return (
         <>
         <Route exact path="/" render={(props) => <SearchPage {...props} client={this.apiClient}/>} />
@@ -49,10 +53,10 @@ private updateAuthenticationStatus = (status: boolean) => {
   render() {
     return (
       <Router basename={process.env.REACT_APP_BASE_SUBDIRECTORY}>
-        <Route render={(props) => <FamilyContextHeader {...props} client={this.apiClient} authenticated={this.state.isAuthenticated} />} />
+        <Route render={(props) => <FamilyContextHeader {...props} client={this.apiClient} authenticated={this.state.loginStatus === LoginStatus.Authorized} />} />
         <PhaseBanner />
           <PageSpacing>
-            {this.getRoutes(this.state.isAuthenticated)}
+            {this.getRoutes(this.state.loginStatus)}
           </PageSpacing>
       </Router>
     );
