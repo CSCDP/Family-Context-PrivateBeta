@@ -5,6 +5,7 @@ interface PersonDetails {
     firstName: string,
     gender: string,
     id: string,
+    cmsId: string,
     lastName: string
 }
 

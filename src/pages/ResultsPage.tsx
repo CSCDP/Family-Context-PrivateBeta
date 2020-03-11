@@ -8,6 +8,7 @@ import ApiClient, { RequestResult } from '../clients/ApiClient';
 import DataContent from '../components/DataContent';
 import SearchResponse from '../models/SearchResponse';
 import PaginationDetails from '../models/PaginationDetails';
+import PersonDetails from '../models/PersonDetails';
 
 interface ResultsPageProps extends RouteComponentProps {
     client: ApiClient
@@ -27,8 +28,11 @@ class ResultsPage extends React.Component<ResultsPageProps, ResultsPageState> {
         })
     }
 
-    navigateToPerson(id: string) {
-        this.props.history.push(`person/${id}`)
+    navigateToPerson(person: PersonDetails) {
+        this.props.history.push({
+            pathname: `person/${person.id}`,
+            state: { personDetailsResult: {data: person, success: true, status: 200} }
+        })
     }
 
     navigatePage(pagination: PaginationDetails) {
@@ -51,7 +55,7 @@ class ResultsPage extends React.Component<ResultsPageProps, ResultsPageState> {
                 <ResultsList 
                   response={this.state?.result?.data || {results: []}} 
                   navigatePage={(paginationDetails: PaginationDetails) => this.navigatePage(paginationDetails)} 
-                  navigateToPerson={(id: string) => this.navigateToPerson(id)}
+                  navigateToPerson={(person: PersonDetails) => this.navigateToPerson(person)}
                 />
             </DataContent>
           </div>

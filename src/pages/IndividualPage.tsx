@@ -14,7 +14,7 @@ interface PersonParams {
   personId?: string
 }
 
-type IndividualPageState = {
+interface IndividualPageState {
   personDetailsResult?: RequestResult<PersonDetails>,
   serviceSummariesResult?: RequestResult<ServiceInvolvementDetailsSummary[]>
   relatedIndividualsSupportedResult?: RequestResult<boolean>
@@ -25,16 +25,19 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
 
   constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
     super(props);
-    this.state = {}
+    this.state = {...this.props.location.state}
   }
 
 
   componentDidMount() {
     let personId = this.props.match.params.personId;
     if (personId) {
-      this.props.client.getPerson(personId).then(result => {
-        this.setState({...this.state, personDetailsResult: result});
-      });
+      if (!this.state.personDetailsResult) {
+        this.props.client.getPerson(personId).then(result => {
+          this.setState({...this.state, personDetailsResult: result});
+        });
+      }
+
       this.props.client.getServiceSummaries(personId).then(result => {
         this.setState({ ...this.state, serviceSummariesResult: result });
       })

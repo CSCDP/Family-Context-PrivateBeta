@@ -5,9 +5,16 @@ import InfoSearch from '../components/SearchPage/InfoSearch';
 import ApiClient, { RequestResult } from '../clients/ApiClient';
 import DataContent from '../components/DataContent';
 
-class SearchPage extends React.Component<RouteComponentProps & { client: ApiClient }, {searchApiSupportedResult?: RequestResult<boolean>}> {
+interface SearchPageProps extends RouteComponentProps {
+  client: ApiClient
+}
 
-  constructor(props: RouteComponentProps & { client: ApiClient }) {
+type SearchPageState = {
+  searchApiSupportedResult?: RequestResult<boolean>
+}
+
+class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
+  constructor(props: SearchPageProps) {
     super(props);
     this.state = {}
   }
@@ -20,7 +27,7 @@ class SearchPage extends React.Component<RouteComponentProps & { client: ApiClie
 
   render() {
       return (
-        <div className="SearchPage">
+        <div id="SearchPage" className="SearchPage">
           <h1>Find Service Involvement</h1>
           <div className="govuk-hint">
                     Search for a child by name or in known cases, their case ID
@@ -28,16 +35,39 @@ class SearchPage extends React.Component<RouteComponentProps & { client: ApiClie
           <DataContent result={this.state.searchApiSupportedResult}>
             <InfoSearch search={(info: { [id: string]: string }) => navigateToSearch(info, this.props)} />
           </DataContent>
-          <CaseIdSearch search={(caseId: string) => navigateToCaseId(caseId, this.props)} />
-        </div>
-      );
+        <CaseIdSearch search={(caseId: string) => searchForCaseId(caseId, this.props)} />
+      </div>
+    );
   }
 }
 
-function navigateToCaseId(caseId: string, props: RouteComponentProps): void {
-  if (caseId !== "") {
-    props.history.push(`person/${caseId}`)
-  }
+function searchForCaseId(caseId: string, props: SearchPageProps) : Promise<boolean> {
+    setButtonsDisabledStatus(true);
+
+    return props.client.searchCmsId(caseId).then(response => {
+      setButtonsDisabledStatus(false);
+
+      if (response.success) {
+        props.history.push({
+          pathname: `person/${response.data?.id}`,
+          state: { personDetailsResult: response }
+        })
+        return true;
+      }
+
+      return false;
+    })
+}
+
+function setButtonsDisabledStatus(status: boolean) {
+  var buttons = document.getElementById("SearchPage")?.getElementsByClassName("govuk-button") || [];
+    for (var index = 0; index < buttons.length; index++) {
+      if (status) {
+        buttons[index].setAttribute('disabled', 'true')
+      } else {
+        buttons[index].removeAttribute('disabled')
+      }
+    }
 }
 
 function navigateToSearch(info: { [id: string]: string }, props: RouteComponentProps): void {

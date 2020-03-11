@@ -10,7 +10,7 @@ type ResultsListRowProps = {
 
 const ResultsListRow: React.FC<ResultsListRowProps> = (props) => {
     var values = [
-        props.person.id.toString(),
+        props.person.cmsId,
         props.person.firstName,
         props.person.lastName,
         formatShortDateOrString(props.person.dateOfBirth),
@@ -25,7 +25,7 @@ const ResultsListRow: React.FC<ResultsListRowProps> = (props) => {
 
 const ResultsListHeader: React.FC = () => {
     var values = [
-        "ID",
+        "CMS ID",
         "First name",
         "Family name",
         "Date of Birth",
