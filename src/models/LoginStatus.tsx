@@ -1,8 +1,8 @@
 enum LoginStatus {
     Unknown,
-    Unauthorized,
+    Unauthenticated,
     Forbidden,
-    Authenticated,
+    Authorized,
 }
 
 export default LoginStatus

@@ -38,13 +38,13 @@ class ApiClient {
       request.onload = (event) => {
         switch (request.status) {
           case 200:
-            this.authenticationCallback(LoginStatus.Authenticated);
-            resolve(LoginStatus.Authenticated);
+            this.authenticationCallback(LoginStatus.Authorized);
+            resolve(LoginStatus.Authorized);
             break;
           
           case 401:
-            this.authenticationCallback(LoginStatus.Unauthorized);
-            resolve(LoginStatus.Unauthorized);
+            this.authenticationCallback(LoginStatus.Unauthenticated);
+            resolve(LoginStatus.Unauthenticated);
             break;
 
           case 403:
@@ -289,7 +289,7 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
       }
     }).then(response => {
       if (response.status === 401) {
-        this.authenticationCallback(LoginStatus.Unauthorized);
+        this.authenticationCallback(LoginStatus.Unauthenticated);
       } else if (response.status === 403) {
         this.authenticationCallback(LoginStatus.Forbidden);
       }
@@ -302,7 +302,7 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
       credentials: 'include'
     }).then(response => {
       if (response.status === 401) {
-        this.authenticationCallback(LoginStatus.Unauthorized);
+        this.authenticationCallback(LoginStatus.Unauthenticated);
       } else if (response.status === 403) {
         this.authenticationCallback(LoginStatus.Forbidden);
       }
@@ -318,7 +318,7 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
             {
                 if (response.status === 401)
                 {
-                  this.authenticationCallback(LoginStatus.Unauthorized);
+                  this.authenticationCallback(LoginStatus.Unauthenticated);
                 } else if (response.status === 403) {
                   this.authenticationCallback(LoginStatus.Forbidden);
                 }

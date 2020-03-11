@@ -27,7 +27,7 @@ class LoginPage extends React.Component<LoginProps, LoginState>  {
       <form className="LoginPage" onSubmit={(event) => this.tryLogin(event)}>
         <TextInputGroup onChange={(text: string) => this.setState({ ...this.state, userid: text })} id="username" name="Username" format="govuk-!-width-one-quarter" />
         <PasswordInputGroup onChange={(text: string) => this.setState({ ...this.state, password: text })} />
-        <LoginWarning show={this.state.loginStatus === LoginStatus.Unauthorized}>Username or password is incorrect</LoginWarning>
+        <LoginWarning show={this.state.loginStatus === LoginStatus.Unauthenticated}>Username or password is incorrect</LoginWarning>
         <LoginWarning show={this.state.loginStatus === LoginStatus.Forbidden}>You’re not permitted to login. Please talk to an administrator</LoginWarning>
         <button className="govuk-button" data-module="govuk-button" >
           Start session

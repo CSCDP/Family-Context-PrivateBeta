@@ -30,12 +30,12 @@ private updateAuthenticationStatus = (status: LoginStatus) => {
     this.apiClient.isAuthenticated()
     .then(result => {
       if (result) 
-        this.setState({...this.state, loginStatus: LoginStatus.Authenticated})
+        this.setState({...this.state, loginStatus: LoginStatus.Authorized})
     })
   }
 
   getRoutes(loginStatus: LoginStatus) {
-    if (loginStatus === LoginStatus.Authenticated) {
+    if (loginStatus === LoginStatus.Authorized) {
       return (
         <>
         <Route exact path="/" render={(props) => <SearchPage {...props} client={this.apiClient}/>} />
@@ -53,7 +53,7 @@ private updateAuthenticationStatus = (status: LoginStatus) => {
   render() {
     return (
       <Router basename={process.env.REACT_APP_BASE_SUBDIRECTORY}>
-        <Route render={(props) => <FamilyContextHeader {...props} client={this.apiClient} authenticated={this.state.loginStatus === LoginStatus.Authenticated} />} />
+        <Route render={(props) => <FamilyContextHeader {...props} client={this.apiClient} authenticated={this.state.loginStatus === LoginStatus.Authorized} />} />
         <PhaseBanner />
           <PageSpacing>
             {this.getRoutes(this.state.loginStatus)}
