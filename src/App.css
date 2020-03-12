@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: row;
   height: 10vh;
+  min-height: 50px;
   align-items: center;
 }
 
@@ -35,6 +36,7 @@
   justify-content: center; 
   flex-direction: column;
   height: 10vh; 
+  min-height: 50px;
 }
 
 .header .LogoutButton .govuk-button {
@@ -94,14 +96,17 @@
 .NavigationButtons button{
   background-color: #1d70b8;
   float: right;
+  margin-right: 10px;
+  width: auto;
 }
 
 .NavigationButtons a{
   margin: 0;
 }
 
-.NavigationButtons {
-  padding-bottom: 30px;
+.NavigationButtons .govuk-back-link {
+  margin-left: 10px;
+  margin-bottom: 40px;
 }
 
 .CaseIdSearch button,
