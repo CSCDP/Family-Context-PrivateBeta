@@ -4,23 +4,9 @@ import six
 from swagger_server.models.person import Person  # noqa: E501
 from swagger_server.models.person_query import PersonQuery  # noqa: E501
 from swagger_server.models.person_with_relationship import PersonWithRelationship  # noqa: E501
-from swagger_server.models.search_results import SearchResults  # noqa: E501
 from swagger_server.models.service_detail import ServiceDetail  # noqa: E501
 from swagger_server.models.service_summary import ServiceSummary  # noqa: E501
 from swagger_server import util
-
-
-def get_person_by_cms_id(cms_id):  # noqa: E501
-    """Search for a person by cms ID
-
-    Returns a single person # noqa: E501
-
-    :param cms_id: Cms ID of person to return
-    :type cms_id: str
-
-    :rtype: Person
-    """
-    return 'do some magic!'
 
 
 def get_person_by_id(person_id):  # noqa: E501
@@ -98,7 +84,7 @@ def search_person(body):  # noqa: E501
     :param body: 
     :type body: dict | bytes
 
-    :rtype: SearchResults
+    :rtype: List[Person]
     """
     if connexion.request.is_json:
         body = PersonQuery.from_dict(connexion.request.get_json())  # noqa: E501

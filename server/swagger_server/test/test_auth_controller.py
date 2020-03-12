@@ -38,17 +38,6 @@ class TestAuthController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_post_auth_logout(self):
-        """Test case for post_auth_logout
-
-        Logout of the service
-        """
-        response = self.client.open(
-            '/api/auth/logout',
-            method='POST')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
 
 if __name__ == '__main__':
     import unittest

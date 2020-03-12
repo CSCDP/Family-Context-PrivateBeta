@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getAuthStatus**](AuthApi.md#getAuthStatus) | **GET** /api/auth/status | Get authentication status
 [**postAuthLogin**](AuthApi.md#postAuthLogin) | **POST** /api/auth/login | Submit authentication details
-[**postAuthLogout**](AuthApi.md#postAuthLogout) | **POST** /api/auth/logout | Logout of the service
 
 <a name="getAuthStatus"></a>
 # **getAuthStatus**
@@ -91,49 +90,5 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
-
-<a name="postAuthLogout"></a>
-# **postAuthLogout**
-> postAuthLogout()
-
-Logout of the service
-
-TODO: 
-
-### Example
-```javascript
-import FamilyContext from 'family_context';
-let defaultClient = FamilyContext.ApiClient.instance;
-
-// Configure API key authorization: cookieAuth
-let cookieAuth = defaultClient.authentications['cookieAuth'];
-cookieAuth.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cookieAuth.apiKeyPrefix = 'Token';
-
-let apiInstance = new FamilyContext.AuthApi();
-apiInstance.postAuthLogout().then(() => {
-  console.log('API called successfully.');
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
  - **Accept**: Not defined
 

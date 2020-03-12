@@ -23,7 +23,7 @@ paths:
         - auth
       responses:
         200:
-          description: authorized credentials present - details in message
+          description: authenticated credentials present - details in message
           content:
             application/json:
               schema:
@@ -38,10 +38,8 @@ paths:
                     pattern: "[authenticated]"
                 required:
                   - status
-        403:
-          description: authenticated credentials were present, but were not valid for this application
         401:
-          description: no authenticated credentials present
+          description: no authenticated credentials present or credentials not valid for this application
           content: {}
 
   /api/auth/login:
@@ -74,19 +72,6 @@ paths:
           description: no authenticated credentials present or credentials not valid for this application
           content: {}
 
-  /api/auth/logout:
-    post:
-      summary: Logout of the service
-      description: >
-        TODO:
-      operationId: postAuthLogout
-      tags:
-        - auth
-      responses:
-        302:
-          description: logout successful, redirect to status
-          content: {}
-
   /api/search/person:
     post:
       summary: Search for a person
@@ -106,7 +91,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResults'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
         501:
           description: Person search is not supported by this application
     head:
@@ -124,30 +111,6 @@ paths:
         501:
           description: Person search is not supported by this application
 
-  /api/search/person/{cmsId}:
-    get:
-      summary: Search for a person by cms ID
-      description: Returns a single person
-      operationId: getPersonByCmsId
-      tags:
-        - person
-      parameters:
-        - name: cmsId
-          in: path
-          description: Cms ID of person to return
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Person'
-        404:
-          description: Person not found
-          content: {}
 
   /api/person/detail/{personId}:
     get:
@@ -298,8 +261,6 @@ components:
       properties:
         id:
           type: string
-        cmsId:
-          type: string
         firstName:
           type: string
         lastName:
@@ -347,9 +308,6 @@ components:
         coverageEndDate:
           type: string
           format: date
-        dataSource:
-          type: string
-
         recordsAvailable:
           type: boolean
 
@@ -377,41 +335,9 @@ components:
         dateOfBirth:
           type: string
           format: date
-        paginationDetails:
-          $ref: '#/components/schemas/PaginationDetails'
       required:
         - firstName
         - lastName
-
-    PaginationDetails:
-      description: When making search requests this may be included to specify a subset of data to be sent.
-      type: object
-      properties:
-        resultsPerPage:
-          type: integer
-        pageNumber:
-          type: integer
-
-    SearchResults:
-      description: Results from querying a person.
-      properties:
-        paginationInfo:
-          $ref: '#/components/schemas/PaginationInfo'
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Person'
-
-    PaginationInfo:
-      description: Search results may include this to specify that a subset of data was sent.
-      type: object
-      properties:
-        totalResults:
-          type: integer
-        resultsPerPage:
-          type: integer
-        pageNumber:
-          type: integer
 
     Police:
       type: object

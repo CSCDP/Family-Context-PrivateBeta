@@ -6,7 +6,6 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
-from swagger_server.models.pagination_details import PaginationDetails  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -15,7 +14,7 @@ class PersonQuery(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, first_name: str=None, last_name: str=None, date_of_birth: date=None, pagination_details: PaginationDetails=None):  # noqa: E501
+    def __init__(self, first_name: str=None, last_name: str=None, date_of_birth: date=None):  # noqa: E501
         """PersonQuery - a model defined in Swagger
 
         :param first_name: The first_name of this PersonQuery.  # noqa: E501
@@ -24,26 +23,21 @@ class PersonQuery(Model):
         :type last_name: str
         :param date_of_birth: The date_of_birth of this PersonQuery.  # noqa: E501
         :type date_of_birth: date
-        :param pagination_details: The pagination_details of this PersonQuery.  # noqa: E501
-        :type pagination_details: PaginationDetails
         """
         self.swagger_types = {
             'first_name': str,
             'last_name': str,
-            'date_of_birth': date,
-            'pagination_details': PaginationDetails
+            'date_of_birth': date
         }
 
         self.attribute_map = {
             'first_name': 'firstName',
             'last_name': 'lastName',
-            'date_of_birth': 'dateOfBirth',
-            'pagination_details': 'paginationDetails'
+            'date_of_birth': 'dateOfBirth'
         }
         self._first_name = first_name
         self._last_name = last_name
         self._date_of_birth = date_of_birth
-        self._pagination_details = pagination_details
 
     @classmethod
     def from_dict(cls, dikt) -> 'PersonQuery':
@@ -122,24 +116,3 @@ class PersonQuery(Model):
         """
 
         self._date_of_birth = date_of_birth
-
-    @property
-    def pagination_details(self) -> PaginationDetails:
-        """Gets the pagination_details of this PersonQuery.
-
-
-        :return: The pagination_details of this PersonQuery.
-        :rtype: PaginationDetails
-        """
-        return self._pagination_details
-
-    @pagination_details.setter
-    def pagination_details(self, pagination_details: PaginationDetails):
-        """Sets the pagination_details of this PersonQuery.
-
-
-        :param pagination_details: The pagination_details of this PersonQuery.
-        :type pagination_details: PaginationDetails
-        """
-
-        self._pagination_details = pagination_details

@@ -4,7 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | 
-**cmsId** | **String** |  | [optional] 
 **firstName** | **String** |  | 
 **lastName** | **String** |  | 
 **dateOfBirth** | **Date** |  | [optional] 

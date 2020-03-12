@@ -8,5 +8,4 @@ Name | Type | Description | Notes
 **lastSynchronised** | **Date** |  | [optional] 
 **coverageStartDate** | **Date** |  | [optional] 
 **coverageEndDate** | **Date** |  | [optional] 
-**dataSource** | **String** |  | [optional] 
 **recordsAvailable** | **Boolean** |  | [optional] 

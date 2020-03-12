@@ -30,14 +30,3 @@ def post_auth_login(body=None):  # noqa: E501
     if connexion.request.is_json:
         body = Body.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
-
-
-def post_auth_logout():  # noqa: E501
-    """Logout of the service
-
-    TODO:  # noqa: E501
-
-
-    :rtype: None
-    """
-    return 'do some magic!'

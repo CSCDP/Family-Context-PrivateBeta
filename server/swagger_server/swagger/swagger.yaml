@@ -22,16 +22,14 @@ paths:
       operationId: get_auth_status
       responses:
         "200":
-          description: authorized credentials present - details in message
+          description: authenticated credentials present - details in message
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
-        "403":
-          description: authenticated credentials were present, but were not valid
-            for this application
         "401":
-          description: no authenticated credentials present
+          description: no authenticated credentials present or credentials not valid
+            for this application
           content: {}
       x-openapi-router-controller: swagger_server.controllers.auth_controller
   /api/auth/login:
@@ -57,19 +55,6 @@ paths:
           content: {}
       security: []
       x-openapi-router-controller: swagger_server.controllers.auth_controller
-  /api/auth/logout:
-    post:
-      tags:
-      - auth
-      summary: Logout of the service
-      description: |
-        TODO:
-      operationId: post_auth_logout
-      responses:
-        "302":
-          description: logout successful, redirect to status
-          content: {}
-      x-openapi-router-controller: swagger_server.controllers.auth_controller
   /api/search/person:
     post:
       tags:
@@ -89,7 +74,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResults'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+                x-content-type: application/json
         "501":
           description: Person search is not supported by this application
       x-openapi-router-controller: swagger_server.controllers.person_controller
@@ -105,33 +93,6 @@ paths:
           description: Person search supported
         "501":
           description: Person search is not supported by this application
-      x-openapi-router-controller: swagger_server.controllers.person_controller
-  /api/search/person/{cmsId}:
-    get:
-      tags:
-      - person
-      summary: Search for a person by cms ID
-      description: Returns a single person
-      operationId: get_person_by_cms_id
-      parameters:
-      - name: cmsId
-        in: path
-        description: Cms ID of person to return
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Person'
-        "404":
-          description: Person not found
-          content: {}
       x-openapi-router-controller: swagger_server.controllers.person_controller
   /api/person/detail/{personId}:
     get:
@@ -288,8 +249,6 @@ components:
       properties:
         id:
           type: string
-        cmsId:
-          type: string
         firstName:
           type: string
         lastName:
@@ -307,7 +266,6 @@ components:
       example:
         firstName: firstName
         lastName: lastName
-        cmsId: cmsId
         address: address
         gender: gender
         dateOfBirth: 2000-01-23
@@ -340,8 +298,6 @@ components:
         coverageEndDate:
           type: string
           format: date
-        dataSource:
-          type: string
         recordsAvailable:
           type: boolean
       example:
@@ -350,7 +306,6 @@ components:
         id: id
         title: title
         lastSynchronised: 2000-01-23T04:56:07.000+00:00
-        dataSource: dataSource
         coverageEndDate: 2000-01-23
     ServiceDetail:
       type: object
@@ -368,7 +323,6 @@ components:
           id: id
           title: title
           lastSynchronised: 2000-01-23T04:56:07.000+00:00
-          dataSource: dataSource
           coverageEndDate: 2000-01-23
         schema: {}
         data: {}
@@ -385,63 +339,8 @@ components:
         dateOfBirth:
           type: string
           format: date
-        paginationDetails:
-          $ref: '#/components/schemas/PaginationDetails'
       description: |
         Used for querying a person. TODO: As long as this the fields are a subset of the Person object this could be the same, however we may want more flexibility around the search criteria, such as min/max values for dob.
-    PaginationDetails:
-      type: object
-      properties:
-        resultsPerPage:
-          type: integer
-        pageNumber:
-          type: integer
-      description: When making search requests this may be included to specify a subset
-        of data to be sent.
-    SearchResults:
-      properties:
-        paginationInfo:
-          $ref: '#/components/schemas/PaginationInfo'
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Person'
-      description: Results from querying a person.
-      example:
-        paginationInfo:
-          totalResults: 0
-          resultsPerPage: 6
-          pageNumber: 1
-        results:
-        - firstName: firstName
-          lastName: lastName
-          cmsId: cmsId
-          address: address
-          gender: gender
-          dateOfBirth: 2000-01-23
-          id: id
-        - firstName: firstName
-          lastName: lastName
-          cmsId: cmsId
-          address: address
-          gender: gender
-          dateOfBirth: 2000-01-23
-          id: id
-    PaginationInfo:
-      type: object
-      properties:
-        totalResults:
-          type: integer
-        resultsPerPage:
-          type: integer
-        pageNumber:
-          type: integer
-      description: Search results may include this to specify that a subset of data
-        was sent.
-      example:
-        totalResults: 0
-        resultsPerPage: 6
-        pageNumber: 1
     Police:
       type: object
       properties:

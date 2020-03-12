@@ -15,13 +15,11 @@ class Person(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: str=None, cms_id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None):  # noqa: E501
+    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None):  # noqa: E501
         """Person - a model defined in Swagger
 
         :param id: The id of this Person.  # noqa: E501
         :type id: str
-        :param cms_id: The cms_id of this Person.  # noqa: E501
-        :type cms_id: str
         :param first_name: The first_name of this Person.  # noqa: E501
         :type first_name: str
         :param last_name: The last_name of this Person.  # noqa: E501
@@ -35,7 +33,6 @@ class Person(Model):
         """
         self.swagger_types = {
             'id': str,
-            'cms_id': str,
             'first_name': str,
             'last_name': str,
             'date_of_birth': date,
@@ -45,7 +42,6 @@ class Person(Model):
 
         self.attribute_map = {
             'id': 'id',
-            'cms_id': 'cmsId',
             'first_name': 'firstName',
             'last_name': 'lastName',
             'date_of_birth': 'dateOfBirth',
@@ -53,7 +49,6 @@ class Person(Model):
             'address': 'address'
         }
         self._id = id
-        self._cms_id = cms_id
         self._first_name = first_name
         self._last_name = last_name
         self._date_of_birth = date_of_birth
@@ -93,27 +88,6 @@ class Person(Model):
             raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
 
         self._id = id
-
-    @property
-    def cms_id(self) -> str:
-        """Gets the cms_id of this Person.
-
-
-        :return: The cms_id of this Person.
-        :rtype: str
-        """
-        return self._cms_id
-
-    @cms_id.setter
-    def cms_id(self, cms_id: str):
-        """Sets the cms_id of this Person.
-
-
-        :param cms_id: The cms_id of this Person.
-        :type cms_id: str
-        """
-
-        self._cms_id = cms_id
 
     @property
     def first_name(self) -> str:
