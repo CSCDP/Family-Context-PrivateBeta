@@ -54,6 +54,9 @@ export default class ServiceSummary {
             if (data.hasOwnProperty('coverageEndDate')) {
                 obj['coverageEndDate'] = ApiClient.convertToType(data['coverageEndDate'], 'Date');
             }
+            if (data.hasOwnProperty('dataSource')) {
+                obj['dataSource'] = ApiClient.convertToType(data['dataSource'], 'String');
+            }
             if (data.hasOwnProperty('recordsAvailable')) {
                 obj['recordsAvailable'] = ApiClient.convertToType(data['recordsAvailable'], 'Boolean');
             }
@@ -81,6 +84,10 @@ export default class ServiceSummary {
     * @member {Date} coverageEndDate
     */
     coverageEndDate = undefined;
+    /**
+    * @member {String} dataSource
+    */
+    dataSource = undefined;
     /**
     * @member {Boolean} recordsAvailable
     */

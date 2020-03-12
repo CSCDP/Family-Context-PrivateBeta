@@ -14,7 +14,7 @@ class ServiceSummary(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: str=None, title: str=None, last_synchronised: datetime=None, coverage_start_date: date=None, coverage_end_date: date=None, records_available: bool=None):  # noqa: E501
+    def __init__(self, id: str=None, title: str=None, last_synchronised: datetime=None, coverage_start_date: date=None, coverage_end_date: date=None, data_source: str=None, records_available: bool=None):  # noqa: E501
         """ServiceSummary - a model defined in Swagger
 
         :param id: The id of this ServiceSummary.  # noqa: E501
@@ -27,6 +27,8 @@ class ServiceSummary(Model):
         :type coverage_start_date: date
         :param coverage_end_date: The coverage_end_date of this ServiceSummary.  # noqa: E501
         :type coverage_end_date: date
+        :param data_source: The data_source of this ServiceSummary.  # noqa: E501
+        :type data_source: str
         :param records_available: The records_available of this ServiceSummary.  # noqa: E501
         :type records_available: bool
         """
@@ -36,6 +38,7 @@ class ServiceSummary(Model):
             'last_synchronised': datetime,
             'coverage_start_date': date,
             'coverage_end_date': date,
+            'data_source': str,
             'records_available': bool
         }
 
@@ -45,6 +48,7 @@ class ServiceSummary(Model):
             'last_synchronised': 'lastSynchronised',
             'coverage_start_date': 'coverageStartDate',
             'coverage_end_date': 'coverageEndDate',
+            'data_source': 'dataSource',
             'records_available': 'recordsAvailable'
         }
         self._id = id
@@ -52,6 +56,7 @@ class ServiceSummary(Model):
         self._last_synchronised = last_synchronised
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
+        self._data_source = data_source
         self._records_available = records_available
 
     @classmethod
@@ -169,6 +174,27 @@ class ServiceSummary(Model):
         """
 
         self._coverage_end_date = coverage_end_date
+
+    @property
+    def data_source(self) -> str:
+        """Gets the data_source of this ServiceSummary.
+
+
+        :return: The data_source of this ServiceSummary.
+        :rtype: str
+        """
+        return self._data_source
+
+    @data_source.setter
+    def data_source(self, data_source: str):
+        """Sets the data_source of this ServiceSummary.
+
+
+        :param data_source: The data_source of this ServiceSummary.
+        :type data_source: str
+        """
+
+        self._data_source = data_source
 
     @property
     def records_available(self) -> bool:

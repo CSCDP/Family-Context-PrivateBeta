@@ -15,6 +15,7 @@ import ApiClient from "../ApiClient";
 import Person from '../model/Person';
 import PersonQuery from '../model/PersonQuery';
 import PersonWithRelationship from '../model/PersonWithRelationship';
+import SearchResults from '../model/SearchResults';
 import ServiceDetail from '../model/ServiceDetail';
 import ServiceSummary from '../model/ServiceSummary';
 
@@ -36,6 +37,49 @@ export default class PersonApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+
+    /**
+     * Search for a person by cms ID
+     * Returns a single person
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Person} and HTTP response
+     */
+    getPersonByCmsIdWithHttpInfo(cmsId) {
+      let postBody = null;
+
+      let pathParams = {
+        'cmsId': cmsId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cookieAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = Person;
+
+      return this.apiClient.callApi(
+        '/api/search/person/{cmsId}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Search for a person by cms ID
+     * Returns a single person
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Person}
+     */
+    getPersonByCmsId(cmsId) {
+      return this.getPersonByCmsIdWithHttpInfo(cmsId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
 
 
     /**
@@ -255,7 +299,7 @@ export default class PersonApi {
     /**
      * Search for a person
      * Returns a list of individuals matching the criteria
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Person>} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/SearchResults} and HTTP response
      */
     searchPersonWithHttpInfo(body) {
       let postBody = body;
@@ -272,7 +316,7 @@ export default class PersonApi {
       let authNames = ['cookieAuth'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
-      let returnType = [Person];
+      let returnType = SearchResults;
 
       return this.apiClient.callApi(
         '/api/search/person', 'POST',
@@ -284,7 +328,7 @@ export default class PersonApi {
     /**
      * Search for a person
      * Returns a list of individuals matching the criteria
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Person>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/SearchResults}
      */
     searchPerson(body) {
       return this.searchPersonWithHttpInfo(body)
