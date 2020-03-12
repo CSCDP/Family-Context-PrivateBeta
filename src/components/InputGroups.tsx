@@ -77,14 +77,14 @@ export class DobInputGroup extends React.Component<{ onChange: (year: string, mo
     }
 }
 
-export const PasswordInputGroup: React.FC<{ onChange: (text: string) => void }> = (props) => {
+export const PasswordInputGroup: React.FC<{ onChange: (text: string) => void, format?: string }> = (props) => {
     return (
         <div className="govuk-form-group">
             <label className="govuk-label" htmlFor="one-quarter">
                 <b>Password</b>
             </label>
             <input
-                className="govuk-input govuk-!-width-one-quarter"
+                className={"govuk-input govuk-!-width-one-quarter " + props.format}
                 id="password" name="password"
                 type="password"
                 onChange={event => props.onChange(event.target.value)}

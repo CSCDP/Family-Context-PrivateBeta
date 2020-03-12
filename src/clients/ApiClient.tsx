@@ -34,6 +34,7 @@ class ApiClient {
 
       request.withCredentials = true;
       request.setRequestHeader('Content-Type', 'application/json');
+      request.setRequestHeader('Cache-Control', 'no-cache')
 
       request.onload = (event) => {
         switch (request.status) {
@@ -70,7 +71,13 @@ class ApiClient {
     var logoutPath = "/auth/logout"
     var response = await this.postJsonRequest(logoutPath, "");
 
-    return response.ok || response.status === 401;
+    var success = response.ok || response.status === 401;
+
+    if (success) {
+      this.authenticationCallback(LoginStatus.Unauthenticated)
+    }
+
+    return success
   }
 
   async isAuthenticated(): Promise<boolean> {

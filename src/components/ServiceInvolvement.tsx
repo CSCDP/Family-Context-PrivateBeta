@@ -54,17 +54,24 @@ class ServiceInvolvement extends React.Component<ServiceInvolvementProps, Servic
 
       if(this.props.summaries.some(summary => summary.recordsAvailable)) {
         window.GOVUKFrontend.initAll({ scope: serviceInvolvementElements });
-      }
 
-      var openAllButtonToRemove = serviceInvolvementElements?.getElementsByClassName("govuk-accordion__open-all")[0] || new Element();
-      openAllButtonToRemove.remove();
+        var openAllButtonToRemove = serviceInvolvementElements?.getElementsByClassName("govuk-accordion__controls")[0];
+        var accordion = document.getElementById("accordion-with-summary-sections");
+
+        if (openAllButtonToRemove) {
+          accordion?.removeChild(openAllButtonToRemove);
+        }
+      }
     }
 
     render() {
         return (
             <div id="service-involvements">
                 <div className="govuk-accordion js-enabled" data-module="govuk-accordion" id="accordion-with-summary-sections">
-                    <OpenAllButton containerId={"service-involvements"} amountOpen={this.state.accordionsOpen.filter(item => item).length}/>
+                    {this.props.summaries.some(summary => summary.recordsAvailable) 
+                    ? <OpenAllButton containerId={"service-involvements"} amountOpen={this.state.accordionsOpen.filter(item => item).length}/>
+                    : <></>
+                    }
                     {this.props.summaries.map((summary, index) =>
                         <ServiceInvolvementAccordion serviceInvolvementDetailsSummary={summary} key={summary.id} click={() => this.click(summary.id, index)}>
                           <DataContent result={this.state.serviceInvolvementDetailsData[summary.id]} loading={<ServiceDetailsLoading />} error={<ServiceDetailsNotFound />}>
