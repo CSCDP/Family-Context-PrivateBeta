@@ -133,7 +133,7 @@ class ApiClient {
             "typeOfOffence": "Possession of drugs"
           },
           {
-            "dateOfOffence": "2017-10-01",
+            "dateOfOffence": "2017-10-23",
             "natureOfInvolvement": "Offender",
             "typeOfOffence": "AntiSocial Behaviour"
           }
@@ -188,7 +188,7 @@ class ApiClient {
               "type": "object",
               "x-ref": "http://www.sfdl.org.uk/schemas/fc/0.0.1#OffenceSummary"
             },
-            "title": "Recent offence",
+            "title": "Recent offence (a maximum of some amount will be listed: records from a period of time, and other records from another period of time)",
             "type": "array",
             "x-item-seq": 4
           },
@@ -215,7 +215,7 @@ class ApiClient {
         "title": "Police"
       }
     }
-    let stringy = JSON.stringify(responseObject);
+    let stringy = JSON.stringify(responseObject).replace(/x-ref/g, "xRef").replace(/x-item-seq/g, "xItemSeq");
     let jsonString = (await response.text()).replace(/x-ref/g, "xRef").replace(/x-item-seq/g, "xItemSeq");
 
     return {

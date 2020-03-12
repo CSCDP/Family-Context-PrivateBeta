@@ -16,10 +16,11 @@ export interface ObjectSchema {
     properties: {[id: string]: Schema}
 }
 
-export interface StringSchema{
+export interface StringSchema {
     type: string,
     title?: string,
     xItemSeq?: number,
+    format?: string,
     pattern? : string
 }
 
