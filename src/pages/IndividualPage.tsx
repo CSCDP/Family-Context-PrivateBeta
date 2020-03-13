@@ -9,6 +9,7 @@ import NavigationButtons from '../components/NavigationButtons';
 import DataContent from '../components/DataContent';
 import RelatedIndividuals from '../components/RelatedIndividuals/RelatedIndividuals';
 import PersonRelationshipDetails from '../models/PersonRelationshipDetails';
+import { getHash } from '../tools/Obfuscation';
 
 interface PersonParams {
   personId?: string
@@ -19,19 +20,28 @@ interface IndividualPageState {
   serviceSummariesResult?: RequestResult<ServiceInvolvementDetailsSummary[]>
   relatedIndividualsSupportedResult?: RequestResult<boolean>
   relatedIndividualsResult?: RequestResult<PersonRelationshipDetails[]>
+  validHash: boolean
 }
 
 class IndividualPage extends React.Component<RouteComponentProps<PersonParams> & { client: ApiClient }, IndividualPageState> {
 
   constructor(props: RouteComponentProps<PersonParams> & { client: ApiClient }) {
     super(props);
-    this.state = {...this.props.location.state}
+
+    let personId = this.props.match.params.personId;
+
+    if (personId) {
+      var validHash = this.props.location.hash === getHash({personId})
+      this.state = {...this.props.location.state, validHash}
+    } else {
+      this.state = {...this.props.location.state, validHash: false}
+    }
   }
 
 
   componentDidMount() {
     let personId = this.props.match.params.personId;
-    if (personId) {
+    if (personId && this.state.validHash) {
       if (!this.state.personDetailsResult) {
         this.props.client.getPerson(personId).then(result => {
           this.setState({...this.state, personDetailsResult: result});
@@ -57,6 +67,8 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
     return (
       <div className="IndividualPage">
         <NavigationButtons {...this.props} />
+        {
+        this.state.validHash ?
         <DataContent result={this.state.personDetailsResult} loading={<PersonLoading />} error={<PersonNotFound />}>
           <BasicDetails personDetails={this.state.personDetailsResult?.data as PersonDetails}></BasicDetails>
           <DataContent 
@@ -82,9 +94,19 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
             </DataContent>
           </DataContent>
         </DataContent>
+        : <ErrorFound />
+        }
       </div>
-    );
+    )
   }
+}
+
+const ErrorFound: React.FC = () => {
+  return (
+    <div className="govuk-heading-m">
+      An error has occured, please try again
+    </div>
+  );
 }
 
 const PersonLoading: React.FC = () => {

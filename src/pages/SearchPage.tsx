@@ -4,6 +4,7 @@ import CaseIdSearch from '../components/SearchPage/CaseIdSearch';
 import InfoSearch from '../components/SearchPage/InfoSearch';
 import ApiClient, { RequestResult } from '../clients/ApiClient';
 import DataContent from '../components/DataContent';
+import { getHash } from '../tools/Obfuscation';
 
 interface SearchPageProps extends RouteComponentProps {
   client: ApiClient
@@ -50,6 +51,7 @@ function searchForCaseId(caseId: string, props: SearchPageProps) : Promise<boole
       if (response.success) {
         props.history.push({
           pathname: `person/${response.data?.id}`,
+          hash: getHash({personId: response.data?.id || ""}),
           state: { personDetailsResult: response }
         })
         return true;
