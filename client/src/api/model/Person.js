@@ -49,6 +49,9 @@ export default class Person {
                                     if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'String');
             }
+            if (data.hasOwnProperty('cmsId')) {
+                obj['cmsId'] = ApiClient.convertToType(data['cmsId'], 'String');
+            }
             if (data.hasOwnProperty('firstName')) {
                 obj['firstName'] = ApiClient.convertToType(data['firstName'], 'String');
             }
@@ -72,6 +75,10 @@ export default class Person {
     * @member {String} id
     */
     id = undefined;
+    /**
+    * @member {String} cmsId
+    */
+    cmsId = undefined;
     /**
     * @member {String} firstName
     */

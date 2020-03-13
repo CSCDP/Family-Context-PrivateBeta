@@ -4,6 +4,7 @@ All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getPersonByCmsId**](PersonApi.md#getPersonByCmsId) | **GET** /api/search/person/{cmsId} | Search for a person by cms ID
 [**getPersonById**](PersonApi.md#getPersonById) | **GET** /api/person/detail/{personId} | Find person by ID
 [**getPersonRelated**](PersonApi.md#getPersonRelated) | **GET** /api/person/related/{personId}/ | Get related individuals
 [**getPersonRelatedSupported**](PersonApi.md#getPersonRelatedSupported) | **HEAD** /api/person/related/{personId}/ | Is related person supported
@@ -11,6 +12,55 @@ Method | HTTP request | Description
 [**getPersonServicesById**](PersonApi.md#getPersonServicesById) | **GET** /api/person/detail/{personId}/service | Get a summary of the services a person has interacted with
 [**searchPerson**](PersonApi.md#searchPerson) | **POST** /api/search/person | Search for a person
 [**searchPersonSupported**](PersonApi.md#searchPersonSupported) | **HEAD** /api/search/person | Is person search supported
+
+<a name="getPersonByCmsId"></a>
+# **getPersonByCmsId**
+> Person getPersonByCmsId(cmsId)
+
+Search for a person by cms ID
+
+Returns a single person
+
+### Example
+```javascript
+import FamilyContext from 'family_context';
+let defaultClient = FamilyContext.ApiClient.instance;
+
+// Configure API key authorization: cookieAuth
+let cookieAuth = defaultClient.authentications['cookieAuth'];
+cookieAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//cookieAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FamilyContext.PersonApi();
+let cmsId = "cmsId_example"; // String | Cms ID of person to return
+
+apiInstance.getPersonByCmsId(cmsId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cmsId** | **String**| Cms ID of person to return | 
+
+### Return type
+
+[**Person**](Person.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a name="getPersonById"></a>
 # **getPersonById**
@@ -259,7 +309,7 @@ Name | Type | Description  | Notes
 
 <a name="searchPerson"></a>
 # **searchPerson**
-> [Person] searchPerson(body)
+> SearchResults searchPerson(body)
 
 Search for a person
 
@@ -295,7 +345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[Person]**](Person.md)
+[**SearchResults**](SearchResults.md)
 
 ### Authorization
 

@@ -18,11 +18,14 @@ import Contact from './model/Contact';
 import Housing from './model/Housing';
 import InlineResponse200 from './model/InlineResponse200';
 import OffenceSummary from './model/OffenceSummary';
+import PaginationDetails from './model/PaginationDetails';
+import PaginationInfo from './model/PaginationInfo';
 import Person from './model/Person';
 import PersonQuery from './model/PersonQuery';
 import PersonWithRelationship from './model/PersonWithRelationship';
 import Police from './model/Police';
 import School from './model/School';
+import SearchResults from './model/SearchResults';
 import ServiceDetail from './model/ServiceDetail';
 import ServiceSummary from './model/ServiceSummary';
 import AuthApi from './api/AuthApi';
@@ -103,6 +106,18 @@ export {
     OffenceSummary,
 
     /**
+     * The PaginationDetails model constructor.
+     * @property {module:model/PaginationDetails}
+     */
+    PaginationDetails,
+
+    /**
+     * The PaginationInfo model constructor.
+     * @property {module:model/PaginationInfo}
+     */
+    PaginationInfo,
+
+    /**
      * The Person model constructor.
      * @property {module:model/Person}
      */
@@ -131,6 +146,12 @@ export {
      * @property {module:model/School}
      */
     School,
+
+    /**
+     * The SearchResults model constructor.
+     * @property {module:model/SearchResults}
+     */
+    SearchResults,
 
     /**
      * The ServiceDetail model constructor.
