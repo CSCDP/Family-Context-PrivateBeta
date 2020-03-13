@@ -44,7 +44,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
 function searchForCaseId(caseId: string, props: SearchPageProps) : Promise<boolean> {
     setButtonsDisabledStatus(true);
 
-    return props.client.searchCmsId(caseId).then(response => {
+    return props.client.getPerson(caseId, "cms").then(response => {
       setButtonsDisabledStatus(false);
 
       if (response.success) {
