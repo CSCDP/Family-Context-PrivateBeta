@@ -9,6 +9,7 @@ import DataContent from '../components/DataContent';
 import SearchResponse from '../models/SearchResponse';
 import PaginationDetails from '../models/PaginationDetails';
 import PersonDetails from '../models/PersonDetails';
+import { getHash } from '../tools/Obfuscation';
 
 interface ResultsPageProps extends RouteComponentProps {
     client: ApiClient
@@ -31,6 +32,7 @@ class ResultsPage extends React.Component<ResultsPageProps, ResultsPageState> {
     navigateToPerson(person: PersonDetails) {
         this.props.history.push({
             pathname: `person/${person.id}`,
+            hash: getHash({personId: person.id || ""}),
             state: { personDetailsResult: {data: person, success: true, status: 200} }
         })
     }
