@@ -2,6 +2,7 @@ import React from 'react';
 import LogoutButton from './LogoutButton';
 import ApiClient from '../clients/ApiClient';
 import { RouteComponentProps } from 'react-router-dom';
+import { Text } from '../tools/TextContent';
 
 interface HeaderProps extends RouteComponentProps {
   client: ApiClient,
@@ -22,10 +23,10 @@ const FamilyContextHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
               e.currentTarget.setAttribute("aria-hidden", "true");
             }}
           />
-          <div className="title-subtitle">
-            <p className="family-context-header govuk-heading-m">Signpost 2.0 Family Context</p>
-            <p>This is a subtitle</p>
-          </div>
+          {Text.Header.Title ?
+            <h2 className="family-context-header govuk-heading-m">{Text.Header.Title}</h2>
+            : <></>
+          }
         </div>
         {props.authenticated ? 
         <LogoutButton logout={() => props.client.logout().then(isLoggedOut => {
