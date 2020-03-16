@@ -12,9 +12,11 @@ function getHash(properties: {[id: string]: string}): string {
 }
 
 function xorArrays(array1: string[], array2: string[]): string[] {
+    var keyLength = array1.length
+
     for (let index2 = 0; index2 < array2.length; index2++) {
-        for (let base = 0; base < 5; base++) {
-            var index = (index2 + base*7) % array1.length;
+        for (let base = 0; base < keyLength + 1; base++) {
+            var index = (index2 + base*(keyLength - 1)) % keyLength;
             array1[index] = String.fromCharCode(array1[index].charCodeAt(0) ^ array2[index2].charCodeAt(0))
         }
     }
