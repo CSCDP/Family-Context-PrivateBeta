@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInputGroup } from "../InputGroups";
+import { Error } from '../../tools/TextContent';
 
 type CaseIdSearchProps = {
     search: (caseId: string) => Promise<boolean>
@@ -22,11 +23,11 @@ class CaseIdSearch extends React.Component<CaseIdSearchProps, CaseIdSearchState>
         this.setState({...this.state, searching: true})
 
         if (this.state.caseId === "") {
-            this.displayError("Enter the Case ID")
+            this.displayError(Error.Search.NoCaseIdEntered)
         } else {
             this.props.search(this.state.caseId).then(isFound => {
                 if (!isFound) {
-                    this.displayError("Child not found")
+                    this.displayError(Error.Search.CaseIdNotFound)
                 }
             })
         }
@@ -62,7 +63,7 @@ class CaseIdSearch extends React.Component<CaseIdSearchProps, CaseIdSearchState>
                         disabled={this.state.searching} 
                         onClick={(event) => this.search(event)}
                     >
-                        View child details
+                        Search
                 </button>
                 </div>
             </div>

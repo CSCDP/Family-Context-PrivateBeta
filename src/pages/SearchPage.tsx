@@ -4,6 +4,7 @@ import CaseIdSearch from '../components/SearchPage/CaseIdSearch';
 import InfoSearch from '../components/SearchPage/InfoSearch';
 import ApiClient, { RequestResult } from '../clients/ApiClient';
 import DataContent from '../components/DataContent';
+import { Text } from '../tools/TextContent';
 import { getHash } from '../tools/Obfuscation';
 
 interface SearchPageProps extends RouteComponentProps {
@@ -31,7 +32,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
         <div id="SearchPage" className="SearchPage">
           <h1>Find Service Involvement</h1>
           <div className="govuk-hint">
-                    Search for a child by name or in known cases, their case ID
+                    {Text.Search.Introduction}
             </div>
           <DataContent result={this.state.searchApiSupportedResult}>
             <InfoSearch search={(info: { [id: string]: string }) => navigateToSearch(info, this.props)} />
@@ -45,7 +46,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
 function searchForCaseId(caseId: string, props: SearchPageProps) : Promise<boolean> {
     setButtonsDisabledStatus(true);
 
-    return props.client.searchCmsId(caseId).then(response => {
+    return props.client.getPerson(caseId, "cms").then(response => {
       setButtonsDisabledStatus(false);
 
       if (response.success) {
