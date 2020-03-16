@@ -1,9 +1,7 @@
 export class Text {
     static Search = {
-        Heading: process.env.REACT_APP_SEARCH_HEADING ?? 
-            "Find Service Involvement",
         Introduction: process.env.REACT_APP_SEARCH_INTRODUCTION ??
-            "Please search for an child by name or date of birth, or by cms id."
+            "Search for a child by name or in known cases their case ID"
     }
 
     static Header = {

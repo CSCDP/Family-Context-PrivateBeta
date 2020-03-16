@@ -29,7 +29,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
   render() {
       return (
         <div id="SearchPage" className="SearchPage">
-          <h1>{Text.Search.Heading}</h1>
+          <h1>Find Service Involvement</h1>
           <div className="govuk-hint">
                     {Text.Search.Introduction}
             </div>
