@@ -4,6 +4,7 @@ import CaseIdSearch from '../components/SearchPage/CaseIdSearch';
 import InfoSearch from '../components/SearchPage/InfoSearch';
 import ApiClient, { RequestResult } from '../clients/ApiClient';
 import DataContent from '../components/DataContent';
+import { Text } from '../tools/TextContent';
 
 interface SearchPageProps extends RouteComponentProps {
   client: ApiClient
@@ -28,9 +29,9 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
   render() {
       return (
         <div id="SearchPage" className="SearchPage">
-          <h1>Find Service Involvement</h1>
+          <h1>{Text.Search.Heading}</h1>
           <div className="govuk-hint">
-                    Search for a child by name or in known cases, their case ID
+                    {Text.Search.Introduction}
             </div>
           <DataContent result={this.state.searchApiSupportedResult}>
             <InfoSearch search={(info: { [id: string]: string }) => navigateToSearch(info, this.props)} />
