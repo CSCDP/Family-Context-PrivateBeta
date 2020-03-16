@@ -103,8 +103,13 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
 
 const ErrorFound: React.FC = () => {
   return (
-    <div className="govuk-heading-m">
-      An error has occured, please try again
+    <div className="govuk-grid-column-two-thirds">
+      <div className="govuk-heading-l">
+        Sorry, there is a problem with the service
+      </div>
+      <p className="govuk-heading-s">
+        Try a new search again.
+      </p>
     </div>
   );
 }
