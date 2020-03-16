@@ -51,7 +51,7 @@ function searchForCaseId(caseId: string, props: SearchPageProps) : Promise<boole
 
       if (response.success) {
         props.history.push({
-          pathname: `person/${response.data?.id}`,
+          pathname: `/person/${response.data?.id}`,
           hash: getHash({personId: response.data?.id || ""}),
           state: { personDetailsResult: response }
         })

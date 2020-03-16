@@ -31,7 +31,7 @@ class ResultsPage extends React.Component<ResultsPageProps, ResultsPageState> {
 
     navigateToPerson(person: PersonDetails) {
         this.props.history.push({
-            pathname: `person/${person.id}`,
+            pathname: `/person/${person.id}`,
             hash: getHash({personId: person.id || ""}),
             state: { personDetailsResult: {data: person, success: true, status: 200} }
         })

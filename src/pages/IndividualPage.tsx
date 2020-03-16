@@ -90,7 +90,7 @@ class IndividualPage extends React.Component<RouteComponentProps<PersonParams> &
                 person={this.state.personDetailsResult?.data as PersonDetails} 
                 related={this.state.relatedIndividualsResult?.data as PersonRelationshipDetails[]}
                 onView={(personId: string) => this.props.history.push({
-                  pathname: `person/${personId}`,
+                  pathname: `/person/${personId}`,
                   hash: getHash({personId: personId || ""})
                 })}
               />
