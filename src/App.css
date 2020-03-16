@@ -12,30 +12,83 @@
   border-bottom: 2px solid #1d70b8;
 }
 
+@media (max-width: 1000px) {
+  .header {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .header .LogoutButton {
+    float: left;
+    padding-left: 15px;
+    padding-top: 10px;
+  }
+
+  .header-logo-title {
+    flex-direction: column;
+    max-height: 15vh;
+    align-items: flex-start;
+  }
+
+  .header-logo-title img {
+    flex-direction: row;
+    height: 50%;
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    max-width: calc(100% - 50px);
+  }
+}
+
+@media (max-width: 640px) {
+  .header-logo-title {
+    max-height: 16vh;
+  }
+}
+
+@media (min-width: 1000px) {
+  .header .LogoutButton {
+    float: right;
+    height: 10vh;
+  }
+
+  .header-logo-title {
+    flex-direction: row;
+    height: 10vh;
+    align-items: center;
+  }
+
+  .header-logo-title img {
+    flex-direction: row;
+    height: 60%;
+  }
+
+  .header-logo-title .title-subtitle {
+    margin-left: 30px;
+  }
+} 
+
 .header-logo-title {
   display: flex;
-  flex-direction: row;
-  height: 10vh;
   min-height: 50px;
-  align-items: center;
+  width: calc(100% - 140px);
 }
 
-.header-logo-title img {
-  height: 60%;
+.header-logo-title .title-subtitle {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.header-logo-title p {
+.header-logo-title .title-subtitle p {
   margin: 0;
-  margin-left: 5%
 }
 
 .header .LogoutButton {
-  float: right;
   display: flex;
   align-items: center; 
   justify-content: center; 
   flex-direction: column;
-  height: 10vh; 
   min-height: 50px;
 }
 

@@ -13,12 +13,19 @@ const FamilyContextHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
     <header className="header">
       <div className="govuk-grid-row govuk-width-container">
         <div className="header-contents">
-        <div className="govuk-grid-column-full header-logo-title govuk-!-width-two-thirds">
+        <div className="govuk-grid-column-full header-logo-title govuk-!-width-three-quarters">
           <img
             src={process.env.PUBLIC_URL + "/" + process.env.REACT_APP_LOGO_URL} 
             alt={"Council Logo"}
+            onError={(e) => {
+              e.currentTarget.setAttribute("hidden", "true");
+              e.currentTarget.setAttribute("aria-hidden", "true");
+            }}
           />
-          <p className="family-context-header govuk-heading-m">Family Context</p>
+          <div className="title-subtitle">
+            <p className="family-context-header govuk-heading-m">Signpost 2.0 Family Context</p>
+            <p>This is a subtitle</p>
+          </div>
         </div>
         {props.authenticated ? 
         <LogoutButton logout={() => props.client.logout().then(isLoggedOut => {
