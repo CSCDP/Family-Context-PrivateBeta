@@ -26,7 +26,7 @@
 
   .header-logo-title {
     flex-direction: column;
-    max-height: 15vh;
+    max-height: 110px;
     align-items: flex-start;
   }
 
@@ -69,7 +69,6 @@
 
 .header-logo-title {
   display: flex;
-  min-height: 50px;
   width: calc(100% - 140px);
 }
 
@@ -98,6 +97,11 @@
 
 .header .LogoutButton .govuk-button {
   margin: 0
+}
+
+.header-contents {
+  display: flex;
+  align-items: center;
 }
 
 .PhaseBanner {
