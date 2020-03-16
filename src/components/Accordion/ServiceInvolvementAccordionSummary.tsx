@@ -18,6 +18,7 @@ const ServiceInvolvementAccordionSummary: React.FC<{ serviceInvolvement: Service
                 <b>{'unknown'/*props.serviceInvolvement.syncedWith*/}</b> 
                 {shouldShowDate ? " for the duration of " : <></>}
                 {shouldShowDate ? <b>{startCoverageDate}-{endCoverageDate}</b> : <></>}
+                {props.serviceInvolvement.coverageExplanation ? `and ${props.serviceInvolvement.coverageExplanation}` : <></>}
                 </p>
         </div>
     )

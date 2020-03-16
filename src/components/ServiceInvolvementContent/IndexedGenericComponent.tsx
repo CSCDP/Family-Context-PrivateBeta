@@ -3,13 +3,13 @@ import { ObjectSchema } from '../../models/Schema';
 import GetResultsOrder from './GetResultsOrder';
 import GenericComponent from './GenericComponent';
 
-type GenericComponentGroupProps = { 
+type IndexedGenericComponentProps = { 
     schema: ObjectSchema, 
     data: any,
     arrayIndex?: string
 }
 
-const GenericComponentGroup: React.FC<GenericComponentGroupProps> = (props: GenericComponentGroupProps) => {
+const IndexedGenericComponent: React.FC<IndexedGenericComponentProps> = (props: IndexedGenericComponentProps) => {
     let results = GetResultsOrder(props.schema);
 
     return (
@@ -31,4 +31,4 @@ const GenericComponentGroup: React.FC<GenericComponentGroupProps> = (props: Gene
     )
 }
 
-export default GenericComponentGroup;
+export default IndexedGenericComponent;

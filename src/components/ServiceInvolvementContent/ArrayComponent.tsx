@@ -1,7 +1,7 @@
 import React from 'react'
 import { ArraySchema, ObjectSchema } from '../../models/Schema';
 import GenericComponent from './GenericComponent';
-import GenericComponentGroup from './GenericComponentGroup';
+import IndexedGenericComponent from './IndexedGenericComponent';
 
 const ArrayComponent: React.FC<{ data: any[], schema: ArraySchema, keyId: string }> = (props: { data: any[], schema: ArraySchema, keyId: string }) => {
 
@@ -14,7 +14,7 @@ const ArrayComponent: React.FC<{ data: any[], schema: ArraySchema, keyId: string
         {
             if (props.schema.items.type === "object") {  
                 return (
-                    <GenericComponentGroup 
+                    <IndexedGenericComponent 
                         schema={props.schema.items as ObjectSchema} 
                         data={props.data[index]} 
                         key={index} 
