@@ -33,8 +33,8 @@
   .header-logo-title img {
     flex-direction: row;
     height: 50%;
-    margin-top: 1.5vh;
-    margin-bottom: 1.5vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
     max-width: calc(100% - 50px);
   }
 }
@@ -78,6 +78,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.header-logo-title .title-subtitle h2 {
+  margin: 0;
 }
 
 .header-logo-title .title-subtitle p {

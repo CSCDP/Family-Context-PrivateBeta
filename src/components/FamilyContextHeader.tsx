@@ -23,10 +23,13 @@ const FamilyContextHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
               e.currentTarget.setAttribute("aria-hidden", "true");
             }}
           />
-          {Text.Header.Title ?
+          <div className="title-subtitle">
             <h2 className="family-context-header govuk-heading-m">{Text.Header.Title}</h2>
+            {Text.Header.SubHeading ?
+            <p>{Text.Header.SubHeading}</p>
             : <></>
           }
+          </div>
         </div>
         {props.authenticated ? 
         <LogoutButton logout={() => props.client.logout().then(isLoggedOut => {
