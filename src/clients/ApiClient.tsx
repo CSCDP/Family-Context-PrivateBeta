@@ -90,8 +90,8 @@ class ApiClient {
     }
   }
 
-  async getPerson(personId: string): Promise<RequestResult<PersonDetails>> {
-    let personDetailsPath = "/person/detail/" + personId;
+  async getPerson(personId: string, idType: string = "fc"): Promise<RequestResult<PersonDetails>> {
+    let personDetailsPath = `/person/detail/${idType}:${personId}`;
     let response = await this.getRequest(personDetailsPath);
 
     let result: RequestResult<PersonDetails> = {
@@ -267,17 +267,6 @@ async getRelatedIndividuals(personId: string): Promise<RequestResult<PersonRelat
   async searchPerson(search: SearchDetails): Promise<RequestResult<SearchResponse>> {
     let searchPath = "/search/person";
     let response = await this.postJsonRequest(searchPath, JSON.stringify(search))
-
-    return {
-      statusCode: response.status,
-      success: response.ok,
-      data: await response.json()
-    }
-  }
-
-  async searchCmsId(cmsId: string): Promise<RequestResult<PersonDetails>> {
-    let searchPath = "/search/person/" + cmsId;
-    let response = await this.getRequest(searchPath)
 
     return {
       statusCode: response.status,
