@@ -170,6 +170,7 @@ class ApiClient {
                 "x-item-seq": 4
               }
             },
+            "title": "Contact",
             "type": "object",
             "x-item-seq": 2,
             "x-ref": "http://www.sfdl.org.uk/schemas/fc/0.0.1#Contact"
@@ -180,18 +181,20 @@ class ApiClient {
                 "dateOfOffence": {
                   "format": "date",
                   "type": "string",
+                  "title": "Date of offence",
                   "x-item-seq": 1
                 },
                 "natureOfInvolvement": {
                   "type": "string",
+                  "title": "Nature of involvement",
                   "x-item-seq": 3
                 },
                 "typeOfOffence": {
                   "type": "string",
+                  "title": "Type of offence",
                   "x-item-seq": 2
                 }
               },
-              "title": "Offence",
               "type": "object",
               "x-ref": "http://www.sfdl.org.uk/schemas/fc/0.0.1#OffenceSummary"
             },

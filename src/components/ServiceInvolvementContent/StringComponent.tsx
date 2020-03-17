@@ -19,10 +19,10 @@ const StringComponent: React.FC<StringComponentProps> = (props: StringComponentP
     }
 
     let title = props.schema.title ? props.schema.title : props.keyId;
-    let result = props.data ?? null
+    let result = props.data ?? null;
 
     if (result && props.schema.format === "date") {
-        result = formatShortDateOrString(result)
+        result = formatShortDateOrString(result);
     }
 
     return (
