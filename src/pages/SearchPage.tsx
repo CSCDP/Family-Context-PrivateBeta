@@ -4,7 +4,7 @@ import CaseIdSearch from '../components/SearchPage/CaseIdSearch';
 import InfoSearch from '../components/SearchPage/InfoSearch';
 import ApiClient, { RequestResult } from '../clients/ApiClient';
 import DataContent from '../components/DataContent';
-import { Text } from '../tools/TextContent';
+import { Text } from '../tools/ConfigurableContent';
 import { getHash } from '../tools/Obfuscation';
 
 interface SearchPageProps extends RouteComponentProps {

@@ -10,6 +10,7 @@ import SearchPage from './pages/SearchPage';
 import ResultsPage from './pages/ResultsPage';
 import PhaseBanner from './components/PhaseBanner';
 import LoginStatus from './models/LoginStatus';
+import { Urls } from './tools/ConfigurableContent';
 
 class App extends Component<any, any> {
   private apiClient: ApiClient;
@@ -17,7 +18,7 @@ class App extends Component<any, any> {
   constructor(props: any){
     super(props);
     this.state = {loginStatus: LoginStatus.Unknown};
-    this.apiClient = new ApiClient(process.env.REACT_APP_API_BASE_URL ?? "", this.updateAuthenticationStatus);
+    this.apiClient = new ApiClient(Urls.App.ApiUrl, this.updateAuthenticationStatus);
   }
 
 private updateAuthenticationStatus = (status: LoginStatus) => {
@@ -52,7 +53,7 @@ private updateAuthenticationStatus = (status: LoginStatus) => {
 
   render() {
     return (
-      <Router basename={process.env.REACT_APP_BASE_SUBDIRECTORY}>
+      <Router basename={Urls.App.Subdirectory}>
         <Route render={(props) => <FamilyContextHeader {...props} client={this.apiClient} authenticated={this.state.loginStatus === LoginStatus.Authorized} />} />
         <PhaseBanner />
           <PageSpacing>

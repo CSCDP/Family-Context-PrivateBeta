@@ -2,7 +2,7 @@ import React from 'react';
 import LogoutButton from './LogoutButton';
 import ApiClient from '../clients/ApiClient';
 import { RouteComponentProps } from 'react-router-dom';
-import { Text } from '../tools/TextContent';
+import { Text, Urls } from '../tools/ConfigurableContent';
 
 interface HeaderProps extends RouteComponentProps {
   client: ApiClient,
@@ -16,7 +16,7 @@ const FamilyContextHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
         <div className="header-contents">
         <div className="govuk-grid-column-full header-logo-title govuk-!-width-three-quarters">
           <img
-            src={process.env.PUBLIC_URL + "/" + process.env.REACT_APP_LOGO_URL} 
+            src={Urls.Images.Logo} 
             alt={"Council Logo"}
             onError={(e) => {
               e.currentTarget.setAttribute("hidden", "true");
