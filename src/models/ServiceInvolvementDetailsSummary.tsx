@@ -4,6 +4,7 @@ interface ServiceInvolvementDetailsSummary {
     recordsAvailable: boolean,
     coverageStartDate: string,
     coverageEndDate: string,
+    dataSource: string,
     id: string
 }
 

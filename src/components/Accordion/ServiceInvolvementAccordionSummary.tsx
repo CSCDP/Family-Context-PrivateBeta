@@ -11,7 +11,7 @@ const ServiceInvolvementAccordionSummary: React.FC<{ serviceInvolvement: Service
             </p>
             <p className="govuk-body govuk-!-font-size-14 govuk-!-margin-0">
                 {"Information is synced with "}
-                <b>{/*props.serviceInvolvement.syncedWith*/}</b> 
+                <b>{props.serviceInvolvement.dataSource}</b>
                 {" for the duration of "}
                 <b>{formatShortDateOrString(props.serviceInvolvement.coverageStartDate)}-{formatShortDateOrString(props.serviceInvolvement.coverageEndDate)}</b>
                 </p>
