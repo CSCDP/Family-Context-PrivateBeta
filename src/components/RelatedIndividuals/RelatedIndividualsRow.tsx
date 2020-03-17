@@ -12,7 +12,7 @@ type RelatedIndividualsRowProps = {
 const RelatedIndividualsRow: React.FC<RelatedIndividualsRowProps> = (props: RelatedIndividualsRowProps) => {
     var values = [
         props.relation.relationship,
-        props.relation.id,
+        props.relation.cmsId,
         props.relation.firstName,
         props.relation.lastName,
         formatShortDateOrString(props.relation.dateOfBirth),

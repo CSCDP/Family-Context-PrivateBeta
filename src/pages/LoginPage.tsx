@@ -6,6 +6,7 @@ import ApiClient from '../clients/ApiClient';
 import LoginWarning from '../components/LoginWarning';
 import LoginStatus from '../models/LoginStatus';
 import ErrorMessage from '../components/ErrorMessage';
+import { Urls } from '../tools/ConfigurableContent';
 
 interface LoginProps extends RouteComponentProps {
   client: ApiClient
@@ -46,8 +47,8 @@ class LoginPage extends React.Component<LoginProps, LoginState>  {
           Start session
         </button>
         <p>
-        {process.env.REACT_APP_LOGIN_HELP_LINK ?
-          <a href={process.env.REACT_APP_LOGIN_HELP_LINK} rel="noopener noreferrer" target="_blank">I need help signing in</a>
+        {Urls.Links.LoginHelp ?
+          <a href={Urls.Links.LoginHelp} rel="noopener noreferrer" target="_blank">I need help signing in</a>
           : <></>
         }
         </p>

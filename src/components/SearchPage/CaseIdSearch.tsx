@@ -1,6 +1,6 @@
 import React from "react";
 import { TextInputGroup } from "../InputGroups";
-import { Error } from '../../tools/TextContent';
+import { Error } from '../../tools/ConfigurableContent';
 
 type CaseIdSearchProps = {
     search: (caseId: string) => Promise<boolean>
