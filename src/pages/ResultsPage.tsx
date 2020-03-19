@@ -85,7 +85,7 @@ function getSearchDetails(props: RouteComponentProps): SearchDetails {
     var params = new URLSearchParams(props.location.search)
 
     var dateParam = params.get('dateOfBirth')
-    var dateOfBirth = (dateParam == null) ? "" : dateParam
+    var dateOfBirth = (dateParam === null) ? "" : dateParam
 
     var pageNumber = Number(params.get('pageNumber'))
     var resultsPerPage = Number(params.get('resultsPerPage')) || undefined
