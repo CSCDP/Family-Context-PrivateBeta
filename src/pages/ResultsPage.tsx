@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import SearchDetails from '../models/SearchDetails';
 import ResultsInfo from '../components/ResultsPage/ResultsInfo';
 import ResultsList from '../components/ResultsPage/ResultsList';
-import NavigationButtons from '../components/NavigationButtons';
+import NavigationButtons from '../components/Buttons/NavigationButtons';
 import ApiClient, { RequestResult } from '../clients/ApiClient';
 import DataContent from '../components/DataContent';
 import SearchResponse from '../models/SearchResponse';
