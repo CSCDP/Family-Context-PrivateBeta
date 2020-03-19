@@ -33,3 +33,10 @@ export class Error {
             "Enter the Case ID",
     }
 }
+
+export class Feedback {
+    static Email = {
+        CaseIdNotFound: process.env.FEEDBACK_EMAIL ??
+            ""
+    }
+}
