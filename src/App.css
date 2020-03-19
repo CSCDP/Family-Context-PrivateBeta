@@ -19,7 +19,9 @@
   }
 
   .header .LogoutButton {
-    float: left;
+    float: right;
+    margin-right: 10px;
+    width: auto;
     padding-left: 15px;
     padding-top: 10px;
   }
@@ -48,6 +50,8 @@
 @media (min-width: 1000px) {
   .header .LogoutButton {
     float: right;
+    margin-right: 10px;
+    width: auto;
     height: 10vh;
   }
 
@@ -88,6 +92,9 @@
 }
 
 .header .LogoutButton {
+  float: right;
+  margin-right: 10px;
+  width: auto;
   display: flex;
   align-items: center; 
   justify-content: center; 
@@ -100,7 +107,6 @@
 }
 
 .header-contents {
-  display: flex;
   align-items: center;
 }
 
