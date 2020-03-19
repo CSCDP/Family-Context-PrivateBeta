@@ -195,7 +195,11 @@
 }
 
 .CaseIdSearch .govuk-form-group {
-  margin-top: 30px;
+  margin-top: 10px;
+}
+
+.InfoSearch .govuk-form-group {
+  margin-top: 10px;
 }
 
 .InfoSearch .column {
