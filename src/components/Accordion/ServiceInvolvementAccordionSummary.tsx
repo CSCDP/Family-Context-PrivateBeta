@@ -14,8 +14,8 @@ const ServiceInvolvementAccordionSummary: React.FC<{ serviceInvolvement: Service
                 <b>{formatLongDateOrString(props.serviceInvolvement.lastSynchronised)}</b>
             </p>
             <p className="govuk-body govuk-!-font-size-14 govuk-!-margin-0">
-                {"Information comes from "}
-                <b>{'unknown'/*props.serviceInvolvement.syncedWith*/}</b> 
+                {"Information is synced with "}
+                <b>{props.serviceInvolvement.dataSource}</b>
                 {shouldShowDate ? " for the duration of " : <></>}
                 {shouldShowDate ? <b>{startCoverageDate}-{endCoverageDate}</b> : <></>}
                 {props.serviceInvolvement.coverageExplanation ? `and ${props.serviceInvolvement.coverageExplanation}` : <></>}

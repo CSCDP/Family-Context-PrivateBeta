@@ -5,6 +5,7 @@ interface ServiceInvolvementDetailsSummary {
     coverageStartDate: string,
     coverageEndDate: string,
     coverageExplanation?: string,
+    dataSource: string,
     id: string
 }
 
