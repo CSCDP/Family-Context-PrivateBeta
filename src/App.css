@@ -28,22 +28,14 @@
 
   .header-logo-title {
     flex-direction: column;
-    max-height: 110px;
     align-items: flex-start;
   }
 
   .header-logo-title img {
     flex-direction: row;
-    height: 50%;
     margin-top: 10px;
     margin-bottom: 10px;
     max-width: calc(100% - 50px);
-  }
-}
-
-@media (max-width: 640px) {
-  .header-logo-title {
-    max-height: 16vh;
   }
 }
 
