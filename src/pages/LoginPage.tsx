@@ -59,7 +59,7 @@ class LoginPage extends React.Component<LoginProps, LoginState>  {
 
   tryLogin(formEvent: React.FormEvent<HTMLFormElement>): void {
     formEvent.preventDefault()
-    if (this.state.userid == "" || this.state.password == "") {
+    if (this.state.userid === "" || this.state.password === "") {
       this.setState({...this.state, validationError: true})
     } else {
       this.setState({...this.state, validationError: false})

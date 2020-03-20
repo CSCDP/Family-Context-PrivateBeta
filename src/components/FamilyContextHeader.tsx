@@ -1,5 +1,5 @@
 import React from 'react';
-import LogoutButton from './LogoutButton';
+import LogoutButton from './Buttons/LogoutButton';
 import ApiClient from '../clients/ApiClient';
 import { RouteComponentProps } from 'react-router-dom';
 import { Text, Urls } from '../tools/ConfigurableContent';

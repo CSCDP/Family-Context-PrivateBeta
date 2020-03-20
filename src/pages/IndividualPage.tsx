@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import ApiClient, { RequestResult } from '../clients/ApiClient';
 import ServiceInvolvement from '../components/ServiceInvolvement';
 import ServiceInvolvementDetailsSummary from '../models/ServiceInvolvementDetailsSummary';
-import NavigationButtons from '../components/NavigationButtons';
+import NavigationButtons from '../components/Buttons/NavigationButtons';
 import DataContent from '../components/DataContent';
 import RelatedIndividuals from '../components/RelatedIndividuals/RelatedIndividuals';
 import PersonRelationshipDetails from '../models/PersonRelationshipDetails';

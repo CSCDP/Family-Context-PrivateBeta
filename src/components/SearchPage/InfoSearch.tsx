@@ -59,7 +59,7 @@ class InfoSearch extends React.Component<InfoSearchProps, InfoSearchState> {
     }
 
     nameCheck(){
-        if (this.state.searchState.firstName !== "" && this.state.searchState.familyName != "") {
+        if (this.state.searchState.firstName !== "" && this.state.searchState.familyName !== "") {
             return null;
         } else {
             return ErrorType.Name;
@@ -89,18 +89,37 @@ class InfoSearch extends React.Component<InfoSearchProps, InfoSearchState> {
             <div className={"govuk-grid-column-one-half govuk-form-group " + (isNameError || isDateError ? "govuk-form-group--error" : "")}>
                 <ErrorMessage hidden={this.state.warningHidden}>{this.state.errorType?.toString() || ""}</ErrorMessage>
                 <TextInputGroup 
-                    onChange={(text: string) => this.state.searchState.firstName = text} 
+                    onChange={(text: string) => {
+                        var newSearchState = {
+                            firstName: text, 
+                            familyName: this.state.searchState.familyName, 
+                            year: this.state.searchState.year, 
+                            month: this.state.searchState.month, 
+                            day: this.state.searchState.day};
+                        this.setState({...this.state, searchState: newSearchState});}} 
                     id="firstName" 
                     name="First Name" 
                     format={"govuk-!-width-one-half " + (isNameError ? "govuk-input--error" : "")} />
                 <TextInputGroup 
-                    onChange={(text: string) => this.state.searchState.familyName = text} 
+                    onChange={(text: string) => {
+                        var newSearchState = {
+                            firstName: this.state.searchState.firstName,
+                            familyName: text, 
+                            year: this.state.searchState.year, 
+                            month: this.state.searchState.month, 
+                            day: this.state.searchState.day};
+                        this.setState({...this.state, searchState: newSearchState});}} 
                     id="familyName" 
                     name="Family Name" 
                     format={"govuk-!-width-one-half " + (isNameError ? "govuk-input--error" : "")} />
                 <DobInputGroup 
                     onChange={(year: string, month: string, day: string ) => {
-                        var newSearchState = {firstName: this.state.searchState.firstName, familyName: this.state.searchState.familyName, year: year, month: month, day: day};
+                        var newSearchState = {
+                            firstName: this.state.searchState.firstName, 
+                            familyName: this.state.searchState.familyName, 
+                            year: year, 
+                            month: month, 
+                            day: day};
                         this.setState({...this.state, searchState: newSearchState});}}
                     format={(isDateError ? "govuk-input--error" : "")}
                 />
