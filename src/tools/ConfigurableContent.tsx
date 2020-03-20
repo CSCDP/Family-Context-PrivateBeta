@@ -4,7 +4,8 @@ export class Urls {
     }
 
     static Links = {
-        LoginHelp: process.env.REACT_APP_LOGIN_HELP_LINK ?? ""
+        LoginHelp: process.env.REACT_APP_LOGIN_HELP_LINK ?? "",
+        FeedbackEmail: process.env.FEEDBACK_EMAIL ?? ""
     }
 
     static App = {
@@ -31,12 +32,5 @@ export class Error {
             "Child not found",
         NoCaseIdEntered: process.env.REACT_APP_CASE_ID_MISSING ??
             "Enter the Case ID",
-    }
-}
-
-export class Feedback {
-    static Email = {
-        CaseIdNotFound: process.env.FEEDBACK_EMAIL ??
-            ""
     }
 }
