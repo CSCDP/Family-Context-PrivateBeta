@@ -2,16 +2,11 @@ import React from 'react';
 import { Urls } from '../tools/ConfigurableContent';
 
 const PhaseBanner: React.FC = () => {
-    var text;
-    var url;
-    console.log(Urls.Links.FeedbackEmail)
-    if (Urls.Links.FeedbackEmail !== "") {
-        text = "";
-        url = <a href={`mailto:${Urls.Links.FeedbackEmail}`}>your feedback</a>
-    } else {
-        url = "";
-        text = "your feedback";
-    }
+
+    const feedbackNode = Urls.Links.FeedbackEmail ?
+        (<a href={`mailto:${Urls.Links.FeedbackEmail}`}>your feedback</a>) :
+        (<>your feedback</>)
+
     return (
         <div className="PhaseBanner">
             <div className="govuk-phase-banner govuk-width-container">
@@ -20,7 +15,7 @@ const PhaseBanner: React.FC = () => {
                         beta
                     </strong>
                     <span className="govuk-phase-banner__text">
-                        {`This is a new service - ${text}`}{url}{` will help us to improve it.`}
+                        This is a new service - {feedbackNode} will help us to improve it.
                     </span>
                 </p>
             </div>
