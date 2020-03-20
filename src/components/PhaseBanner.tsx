@@ -1,6 +1,12 @@
 import React from 'react';
+import { Urls } from '../tools/ConfigurableContent';
 
 const PhaseBanner: React.FC = () => {
+
+    const feedbackNode = Urls.Links.FeedbackEmail ?
+        (<a href={`mailto:${Urls.Links.FeedbackEmail}`}>your feedback</a>) :
+        (<>your feedback</>)
+
     return (
         <div className="PhaseBanner">
             <div className="govuk-phase-banner govuk-width-container">
@@ -9,8 +15,7 @@ const PhaseBanner: React.FC = () => {
                         beta
                     </strong>
                     <span className="govuk-phase-banner__text">
-                        {"This is a new tool to provide the service involvement for any child in your case load and the relevant individuals to them.\n"}
-                        {"Your feedback will help us to improve it."}
+                        This is a new service - {feedbackNode} will help us to improve it.
                     </span>
                 </p>
             </div>
