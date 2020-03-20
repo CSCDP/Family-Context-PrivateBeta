@@ -5,7 +5,7 @@ export class Urls {
 
     static Links = {
         LoginHelp: process.env.REACT_APP_LOGIN_HELP_LINK ?? "",
-        FeedbackEmail: process.env.FEEDBACK_EMAIL ?? ""
+        FeedbackEmail: process.env.REACT_APP_FEEDBACK_EMAIL ?? ""
     }
 
     static App = {

@@ -3,9 +3,13 @@ import { Urls } from '../tools/ConfigurableContent';
 
 const PhaseBanner: React.FC = () => {
     var text;
+    var url;
+    console.log(Urls.Links.FeedbackEmail)
     if (Urls.Links.FeedbackEmail !== "") {
-        text = <a href={`mailto:${Urls.Links.FeedbackEmail}`}>your feedback</a>
+        text = "";
+        url = <a href={`mailto:${Urls.Links.FeedbackEmail}`}>your feedback</a>
     } else {
+        url = "";
         text = "your feedback";
     }
     return (
@@ -16,7 +20,7 @@ const PhaseBanner: React.FC = () => {
                         beta
                     </strong>
                     <span className="govuk-phase-banner__text">
-                        {`This is a new service - ${text} will help us to improve it.`}
+                        {`This is a new service - ${text}`}{url}{` will help us to improve it.`}
                     </span>
                 </p>
             </div>
