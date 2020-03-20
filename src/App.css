@@ -106,7 +106,7 @@
 
 .PhaseBanner {
   white-space: pre-wrap;
-  background-color:#f3f2f1;
+  background-color: white;
 }
 
 .CardHeader .govuk-heading-m {
@@ -118,7 +118,6 @@
 }
 
 .CardHeader {
-  border-top: 1px solid	#b1b4b6;
   padding-top: 15px;
 }
 

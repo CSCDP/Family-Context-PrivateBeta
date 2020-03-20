@@ -10,8 +10,7 @@ const PhaseBanner: React.FC = () => {
                         beta
                     </strong>
                     <span className="govuk-phase-banner__text">
-                        {"This is a new tool to provide service involvement information for any child in your caseload.\n"}
-                        {"Your "}<a href={`mailto:${Feedback.Email}`}>feedback</a>{" will help us to improve it."}
+                        {"This is a new service - "}<a href={`mailto:${Feedback.Email}`}>your feedback</a>{" will help us to improve it."}
                     </span>
                 </p>
             </div>
