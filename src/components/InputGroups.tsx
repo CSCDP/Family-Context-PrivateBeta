@@ -1,5 +1,4 @@
 import React from 'react';
-import { format } from 'path';
 
 export const TextInputGroup: React.FC<{ onChange: (text: string) => void, name: string, id: string, format: string }> = (props) => {
     return (

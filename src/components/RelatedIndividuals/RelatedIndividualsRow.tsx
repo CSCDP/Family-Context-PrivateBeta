@@ -2,7 +2,7 @@ import React from 'react';
 import PersonRelationshipDetails from '../../models/PersonRelationshipDetails';
 import RowValues from '../Table/RowValues';
 import { formatShortDateOrString } from '../../tools/FormattingTools';
-import ViewButton from '../ViewButton';
+import ViewButton from '../Buttons/ViewButton';
 
 type RelatedIndividualsRowProps = {
     relation: PersonRelationshipDetails,
