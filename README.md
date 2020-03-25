@@ -69,6 +69,18 @@ We use Swagger Codegen to implement Python and JavaScript versions of the API. T
 this is to use the dockerised version of Swagger Codegen. Make sure you have Swagger running, then
 run `make clean` followed by `make`. 
 
+Alternatively, you can run the docker commands in the Makefile individually.  For example, you can re-generate the server by running 
+
+```
+server/swagger_server/swagger/swagger.yaml: schema/family-context-api.yaml
+	rm -rf build/python
+	docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli-v3:3.0.15 generate \
+		-i /local/schema/family-context-api.yaml \
+		-l python-flask \
+		-o /local/build/python/
+	rsync -avP --delete build/python/swagger_server server/.
+ ```
+
 ## Build 
 
 The simplest way to build and run the entire application is using Docker. Simply run
