@@ -349,9 +349,10 @@ components:
           format: date
         dataSource:
           type: string
-
         recordsAvailable:
           type: boolean
+        coverageExplanation:
+          type: string
 
     ServiceDetail:
       type: object
@@ -416,21 +417,22 @@ components:
     Police:
       type: object
       properties:
-        serviceInvolvement:
-          title: Service involvement
+        policeArea:
+          title: Police Area
           type: string
-          pattern: "[yes|no]"
         contact:
           title: Contact
           $ref: '#/components/schemas/Contact'
-        policeStation:
-          title: Police station
-          type: string
-        offences:
-          title: Recent offence
+        safeGuardingOffences:
+          title: Safeguarding Offences (a maximum of 3 will be listed)
           type: array
           items:
             $ref: '#/components/schemas/OffenceSummary'
+        nonSafeGuardingOffences:
+          title: Non-safeguarding Offences
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceRecordsFound'
 
     OffenceSummary:
       type: object
@@ -438,10 +440,20 @@ components:
         dateOfOffence:
           type: string
           format: date
+          title: Date of Offence
         typeOfOffence:
           type: string
+          title: Type of Offence
         natureOfInvolvement:
           type: string
+          title: Nature of Involvement
+
+    OffenceRecordsFound:
+      type: object
+      properties:
+        recordsFound:
+          type: string
+          title: Records Found
 
     School:
       type: object
@@ -454,7 +466,7 @@ components:
           title: Contact
           $ref: '#/components/schemas/Contact'
         schoolName:
-          title: School
+          title: School name
           type: string
         admissionType:
           title: Admission type
@@ -467,6 +479,9 @@ components:
           title: Service involvement
           type: string
           pattern: "[current|historic]"
+        localAuthorityOrganisation:
+          title: Local Authority Organisation
+          type: string
         contact:
           title: Contact
           $ref: '#/components/schemas/Contact'
@@ -486,9 +501,16 @@ components:
           title: Service involvement
           type: string
           pattern: "[current|historic]"
+        housingAssociation:
+          title: Housing Association
+          type: string
         contact:
           title: Contact
           $ref: '#/components/schemas/Contact'
+        tenancyStart:
+          title: Tenancy Start
+          type: string
+          format: date
         antiSocialBehaviour:
           title: Anti social behaviour
           type: string

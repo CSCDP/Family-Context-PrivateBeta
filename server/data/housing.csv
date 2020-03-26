@@ -1,2 +1,2 @@
-personId,serviceInvolvement,contactName,contactPhone,contactEmail,contactRole,antiSocialBehaviour,rentArrears,noticeSeekingPossession,eviction
-2,current,Mr A Aaaaa,0151 7777 7777,someone@somewhere.com,Housing Officer,closed,closed,open,
+personId,serviceInvolvement,housingAssociation,contactName,contactPhone,contactEmail,contactRole,tenancyStart,antiSocialBehaviour,rentArrears,noticeSeekingPossession,eviction
+2,current,Local Housing,Mr A Aaaaa,0151 7777 7777,someone@somewhere.com,Housing Officer,03/02/2016,closed,closed,open,

@@ -1,2 +1,2 @@
-personId,serviceInvolvement,contactName,contactPhone,contactEmail, startDateOfLastInvolvement, dateOfMostRecentInteraction
-2,current,A S Worker,020 7777 7777,sworker@la.uk,2019-04-15,2019-05-20
+personId,serviceInvolvement,localAuthorityOrganisation,contactName,contactPhone,contactEmail, startDateOfLastInvolvement, dateOfMostRecentInteraction
+2,current,Area Social Service,A S Worker,020 7777 7777,sworker@la.uk,2019-04-15,2019-05-20

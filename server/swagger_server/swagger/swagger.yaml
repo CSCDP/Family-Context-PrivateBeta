@@ -106,33 +106,6 @@ paths:
         "501":
           description: Person search is not supported by this application
       x-openapi-router-controller: swagger_server.controllers.person_controller
-  /api/search/person/{cmsId}:
-    get:
-      tags:
-      - person
-      summary: Search for a person by cms ID
-      description: Returns a single person
-      operationId: get_person_by_cms_id
-      parameters:
-      - name: cmsId
-        in: path
-        description: Cms ID of person to return
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Person'
-        "404":
-          description: Person not found
-          content: {}
-      x-openapi-router-controller: swagger_server.controllers.person_controller
   /api/person/detail/{personId}:
     get:
       tags:
@@ -445,29 +418,39 @@ components:
     Police:
       type: object
       properties:
-        serviceInvolvement:
-          title: Service involvement
-          pattern: '[yes|no]'
+        policeArea:
+          title: Police Area
           type: string
         contact:
           $ref: '#/components/schemas/Contact'
-        policeStation:
-          title: Police station
-          type: string
-        offences:
-          title: Recent offence
+        safeGuardingOffences:
+          title: Safeguarding Offences (a maximum of 3 will be listed)
           type: array
           items:
             $ref: '#/components/schemas/OffenceSummary'
+        nonSafeGuardingOffences:
+          title: Non-safeguarding Offences
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceRecordsFound'
     OffenceSummary:
       type: object
       properties:
         dateOfOffence:
+          title: Date of Offence
           type: string
           format: date
         typeOfOffence:
+          title: Type of Offence
           type: string
         natureOfInvolvement:
+          title: Nature of Involvement
+          type: string
+    OffenceRecordsFound:
+      type: object
+      properties:
+        recordsFound:
+          title: Records Found
           type: string
     School:
       type: object
@@ -479,7 +462,7 @@ components:
         contact:
           $ref: '#/components/schemas/Contact'
         schoolName:
-          title: School
+          title: School name
           type: string
         admissionType:
           title: Admission type
@@ -490,6 +473,9 @@ components:
         serviceInvolvement:
           title: Service involvement
           pattern: '[current|historic]'
+          type: string
+        localAuthorityOrganisation:
+          title: Local Authority Organisation
           type: string
         contact:
           $ref: '#/components/schemas/Contact'
@@ -508,8 +494,15 @@ components:
           title: Service involvement
           pattern: '[current|historic]'
           type: string
+        housingAssociation:
+          title: Housing Association
+          type: string
         contact:
           $ref: '#/components/schemas/Contact'
+        tenancyStart:
+          title: Tenancy Start
+          type: string
+          format: date
         antiSocialBehaviour:
           title: Anti social behaviour
           pattern: '[open|closed]'

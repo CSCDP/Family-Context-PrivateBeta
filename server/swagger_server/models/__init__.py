@@ -8,6 +8,7 @@ from swagger_server.models.body import Body
 from swagger_server.models.contact import Contact
 from swagger_server.models.housing import Housing
 from swagger_server.models.inline_response200 import InlineResponse200
+from swagger_server.models.offence_records_found import OffenceRecordsFound
 from swagger_server.models.offence_summary import OffenceSummary
 from swagger_server.models.pagination_details import PaginationDetails
 from swagger_server.models.pagination_info import PaginationInfo

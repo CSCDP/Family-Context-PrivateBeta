@@ -1,2 +1,2 @@
-personId, serviceInvolvement, policeStation, contactName, contactEmail, contactPhone
-2,yes,Area A,P C Jones,officer@police.uk,999
+personId, policeArea, contactName, contactPhone
+2, Area A, Police Hub,01134960303

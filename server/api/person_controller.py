@@ -57,7 +57,7 @@ def search_person(body):  # noqa: E501
     """
     if connexion.request.is_json:
         body = PersonQuery.from_dict(connexion.request.get_json())  # noqa: E501
-    return data_access.search_persons()
+    return data_access.search_persons(body)
 
 
 def search_person_supported():  # noqa: E501

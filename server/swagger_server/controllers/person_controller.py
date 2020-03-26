@@ -10,19 +10,6 @@ from swagger_server.models.service_summary import ServiceSummary  # noqa: E501
 from swagger_server import util
 
 
-def get_person_by_cms_id(cms_id):  # noqa: E501
-    """Search for a person by cms ID
-
-    Returns a single person # noqa: E501
-
-    :param cms_id: Cms ID of person to return
-    :type cms_id: str
-
-    :rtype: Person
-    """
-    return 'do some magic!'
-
-
 def get_person_by_id(person_id):  # noqa: E501
     """Find person by ID
 

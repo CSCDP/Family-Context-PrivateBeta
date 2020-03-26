@@ -17,17 +17,6 @@ from swagger_server.test import BaseTestCase
 class TestPersonController(BaseTestCase):
     """PersonController integration test stubs"""
 
-    def test_get_person_by_cms_id(self):
-        """Test case for get_person_by_cms_id
-
-        Search for a person by cms ID
-        """
-        response = self.client.open(
-            '/api/search/person/{cmsId}'.format(cms_id='cms_id_example'),
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
     def test_get_person_by_id(self):
         """Test case for get_person_by_id
 

@@ -16,13 +16,17 @@ class Housing(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, service_involvement: str=None, contact: Contact=None, anti_social_behaviour: str=None, rent_arrears: str=None, notice_seeking_possession: str=None, eviction: str=None):  # noqa: E501
+    def __init__(self, service_involvement: str=None, housing_association: str=None, contact: Contact=None, tenancy_start: date=None, anti_social_behaviour: str=None, rent_arrears: str=None, notice_seeking_possession: str=None, eviction: str=None):  # noqa: E501
         """Housing - a model defined in Swagger
 
         :param service_involvement: The service_involvement of this Housing.  # noqa: E501
         :type service_involvement: str
+        :param housing_association: The housing_association of this Housing.  # noqa: E501
+        :type housing_association: str
         :param contact: The contact of this Housing.  # noqa: E501
         :type contact: Contact
+        :param tenancy_start: The tenancy_start of this Housing.  # noqa: E501
+        :type tenancy_start: date
         :param anti_social_behaviour: The anti_social_behaviour of this Housing.  # noqa: E501
         :type anti_social_behaviour: str
         :param rent_arrears: The rent_arrears of this Housing.  # noqa: E501
@@ -34,7 +38,9 @@ class Housing(Model):
         """
         self.swagger_types = {
             'service_involvement': str,
+            'housing_association': str,
             'contact': Contact,
+            'tenancy_start': date,
             'anti_social_behaviour': str,
             'rent_arrears': str,
             'notice_seeking_possession': str,
@@ -43,14 +49,18 @@ class Housing(Model):
 
         self.attribute_map = {
             'service_involvement': 'serviceInvolvement',
+            'housing_association': 'housingAssociation',
             'contact': 'contact',
+            'tenancy_start': 'tenancyStart',
             'anti_social_behaviour': 'antiSocialBehaviour',
             'rent_arrears': 'rentArrears',
             'notice_seeking_possession': 'noticeSeekingPossession',
             'eviction': 'eviction'
         }
         self._service_involvement = service_involvement
+        self._housing_association = housing_association
         self._contact = contact
+        self._tenancy_start = tenancy_start
         self._anti_social_behaviour = anti_social_behaviour
         self._rent_arrears = rent_arrears
         self._notice_seeking_possession = notice_seeking_possession
@@ -89,6 +99,27 @@ class Housing(Model):
         self._service_involvement = service_involvement
 
     @property
+    def housing_association(self) -> str:
+        """Gets the housing_association of this Housing.
+
+
+        :return: The housing_association of this Housing.
+        :rtype: str
+        """
+        return self._housing_association
+
+    @housing_association.setter
+    def housing_association(self, housing_association: str):
+        """Sets the housing_association of this Housing.
+
+
+        :param housing_association: The housing_association of this Housing.
+        :type housing_association: str
+        """
+
+        self._housing_association = housing_association
+
+    @property
     def contact(self) -> Contact:
         """Gets the contact of this Housing.
 
@@ -108,6 +139,27 @@ class Housing(Model):
         """
 
         self._contact = contact
+
+    @property
+    def tenancy_start(self) -> date:
+        """Gets the tenancy_start of this Housing.
+
+
+        :return: The tenancy_start of this Housing.
+        :rtype: date
+        """
+        return self._tenancy_start
+
+    @tenancy_start.setter
+    def tenancy_start(self, tenancy_start: date):
+        """Sets the tenancy_start of this Housing.
+
+
+        :param tenancy_start: The tenancy_start of this Housing.
+        :type tenancy_start: date
+        """
+
+        self._tenancy_start = tenancy_start
 
     @property
     def anti_social_behaviour(self) -> str:
