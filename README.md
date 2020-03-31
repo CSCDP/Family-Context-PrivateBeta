@@ -27,4 +27,4 @@ All outputs from the private beta phase of the Family Context project are availa
  * [Video demo of Family Context](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Video%20demo%20of%20Family%20Context)
  
  
-[test](./Video%20demo%20of%20Family%20Context/Video Demonstration of Family Context.mp4)
+[test](./Video%20demo%20of%20Family%20Context/Video%20Demonstration%20of%20Family%20Context.mp4)
