@@ -1,0 +1,589 @@
+openapi: 3.0.1
+info:
+  title: Family Context
+  description: |
+    This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context. This document is currently undergoing rapid change and should not be used as basis for implementation without discussing with the project team.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.1
+servers:
+- url: /
+security:
+- cookieAuth: []
+paths:
+  /api/auth/status:
+    get:
+      tags:
+      - auth
+      summary: Get authentication status
+      description: |
+        Checks to see if there is currently an active authentication session. Returns the name of the current credentials if known.
+      operationId: get_auth_status
+      responses:
+        "200":
+          description: authorized credentials present - details in message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "403":
+          description: authenticated credentials were present, but were not valid
+            for this application
+        "401":
+          description: no authenticated credentials present
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.auth_controller
+  /api/auth/login:
+    post:
+      tags:
+      - auth
+      summary: Submit authentication details
+      description: |
+        TODO:
+      operationId: post_auth_login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body'
+      responses:
+        "302":
+          description: authenticated credentials present - details in message
+          content: {}
+        "401":
+          description: no authenticated credentials present or credentials not valid
+            for this application
+          content: {}
+      security: []
+      x-openapi-router-controller: swagger_server.controllers.auth_controller
+  /api/auth/logout:
+    post:
+      tags:
+      - auth
+      summary: Logout of the service
+      description: |
+        TODO:
+      operationId: post_auth_logout
+      responses:
+        "302":
+          description: logout successful, redirect to status
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.auth_controller
+  /api/search/person:
+    post:
+      tags:
+      - person
+      summary: Search for a person
+      description: Returns a list of individuals matching the criteria
+      operationId: search_person
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonQuery'
+        required: true
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+<<<<<<< HEAD
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+                x-content-type: application/json
+        "501":
+          description: Person search is not supported by this application
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+    head:
+      tags:
+      - person
+      summary: Is person search supported
+      description: |
+        Tests whether the person search API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the search functionality.
+      operationId: search_person_supported
+      responses:
+        "200":
+          description: Person search supported
+        "501":
+          description: Person search is not supported by this application
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+=======
+                $ref: '#/components/schemas/SearchResults'
+        "501":
+          description: Person search is not supported by this application
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+    head:
+      tags:
+      - person
+      summary: Is person search supported
+      description: |
+        Tests whether the person search API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the search functionality.
+      operationId: search_person_supported
+      responses:
+        "200":
+          description: Person search supported
+        "501":
+          description: Person search is not supported by this application
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+>>>>>>> upstream/master
+  /api/person/detail/{personId}:
+    get:
+      tags:
+      - person
+      summary: Find person by ID
+      description: Returns a single person
+      operationId: get_person_by_id
+      parameters:
+      - name: personId
+        in: path
+        description: ID of person to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        "404":
+          description: Person not found
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+  /api/person/detail/{personId}/service:
+    get:
+      tags:
+      - person
+      summary: Get a summary of the services a person has interacted with
+      operationId: get_person_services_by_id
+      parameters:
+      - name: personId
+        in: path
+        description: ID of person to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceSummary'
+                x-content-type: application/json
+        "404":
+          description: Person not found
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+  /api/person/detail/{personId}/service/{serviceType}:
+    get:
+      tags:
+      - person
+      summary: Find person by ID
+      description: Returns a single person
+      operationId: get_person_service_by_type_and_id
+      parameters:
+      - name: personId
+        in: path
+        description: ID of person to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: serviceType
+        in: path
+        description: Servic type to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDetail'
+        "404":
+          description: Person or service not found
+          content: {}
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+  /api/person/related/{personId}/:
+    get:
+      tags:
+      - person
+      summary: Get related individuals
+      description: Returns individuals related to the person
+      operationId: get_person_related
+      parameters:
+      - name: personId
+        in: path
+        description: ID of person
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonWithRelationship'
+                x-content-type: application/json
+        "404":
+          description: Person not found
+        "501":
+          description: Related individuals is not supported by this application
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+    head:
+      tags:
+      - person
+      summary: Is related person supported
+      description: |
+        Tests whether the related person API is supported by this implementation. A return value of 200 indicates that the operation is supported. A 501 indicates that it is not supported, and any front-end applications should suppress the functionality.
+      operationId: get_person_related_supported
+      parameters:
+      - name: personId
+        in: path
+        description: ID of person
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+        "501":
+          description: Related individuals is not supported by this application
+      x-openapi-router-controller: swagger_server.controllers.person_controller
+components:
+  schemas:
+    Person:
+      required:
+      - firstName
+      - id
+      - lastName
+      type: object
+      properties:
+        id:
+          type: string
+        cmsId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        gender:
+          pattern: '[male|female|other]'
+          type: string
+          description: The person's gender. Leave blank for 'unknown'.
+        address:
+          type: string
+      description: this is a person
+      example:
+        firstName: firstName
+        lastName: lastName
+        cmsId: cmsId
+        address: address
+        gender: gender
+        dateOfBirth: 2000-01-23
+        id: id
+    PersonWithRelationship:
+      description: A related person - describes the relationship to an individual
+      allOf:
+      - $ref: '#/components/schemas/Person'
+      - type: object
+        properties:
+          relationship:
+            type: string
+            description: A description of the relationship.
+          relationshipToId:
+            type: string
+            description: The ID of the individual this relationship refers to
+    ServiceSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        lastSynchronised:
+          type: string
+          format: date-time
+        coverageStartDate:
+          type: string
+          format: date
+        coverageEndDate:
+          type: string
+          format: date
+        dataSource:
+          type: string
+        recordsAvailable:
+          type: boolean
+      example:
+        coverageStartDate: 2000-01-23
+        recordsAvailable: true
+        id: id
+        title: title
+        lastSynchronised: 2000-01-23T04:56:07.000+00:00
+        dataSource: dataSource
+        coverageEndDate: 2000-01-23
+    ServiceDetail:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/ServiceSummary'
+        schema:
+          type: object
+        data:
+          type: object
+      example:
+        summary:
+          coverageStartDate: 2000-01-23
+          recordsAvailable: true
+          id: id
+          title: title
+          lastSynchronised: 2000-01-23T04:56:07.000+00:00
+          dataSource: dataSource
+          coverageEndDate: 2000-01-23
+        schema: {}
+        data: {}
+    PersonQuery:
+      required:
+      - firstName
+      - lastName
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        paginationDetails:
+          $ref: '#/components/schemas/PaginationDetails'
+      description: |
+        Used for querying a person. TODO: As long as this the fields are a subset of the Person object this could be the same, however we may want more flexibility around the search criteria, such as min/max values for dob.
+    PaginationDetails:
+      type: object
+      properties:
+        resultsPerPage:
+          type: integer
+        pageNumber:
+          type: integer
+      description: When making search requests this may be included to specify a subset
+        of data to be sent.
+    SearchResults:
+      properties:
+        paginationInfo:
+          $ref: '#/components/schemas/PaginationInfo'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+      description: Results from querying a person.
+      example:
+        paginationInfo:
+          totalResults: 0
+          resultsPerPage: 6
+          pageNumber: 1
+        results:
+        - firstName: firstName
+          lastName: lastName
+          cmsId: cmsId
+          address: address
+          gender: gender
+          dateOfBirth: 2000-01-23
+          id: id
+        - firstName: firstName
+          lastName: lastName
+          cmsId: cmsId
+          address: address
+          gender: gender
+          dateOfBirth: 2000-01-23
+          id: id
+    PaginationInfo:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+        resultsPerPage:
+          type: integer
+        pageNumber:
+          type: integer
+      description: Search results may include this to specify that a subset of data
+        was sent.
+      example:
+        totalResults: 0
+        resultsPerPage: 6
+        pageNumber: 1
+    Police:
+      type: object
+      properties:
+        policeArea:
+          title: Police Area
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        safeGuardingOffences:
+          title: Safeguarding Offences (a maximum of 3 will be listed)
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceSummary'
+        nonSafeGuardingOffences:
+          title: Non-safeguarding Offences
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceRecordsFound'
+    OffenceSummary:
+      type: object
+      properties:
+        dateOfOffence:
+          title: Date of Offence
+          type: string
+          format: date
+        typeOfOffence:
+          title: Type of Offence
+          type: string
+        natureOfInvolvement:
+          title: Nature of Involvement
+          type: string
+    OffenceRecordsFound:
+      type: object
+      properties:
+        recordsFound:
+          title: Records Found
+          type: string
+    School:
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          pattern: '[current|historic]'
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        schoolName:
+          title: School name
+          type: string
+        admissionType:
+          title: Admission type
+          type: string
+    AdultSocialCare:
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          pattern: '[current|historic]'
+          type: string
+        localAuthorityOrganisation:
+          title: Local Authority Organisation
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        startDateOfLastInvolvement:
+          title: Start of last involvement
+          type: string
+          format: date
+        dateOfMostRecentInteraction:
+          title: Date of most recent interaction
+          type: string
+          format: date
+    Housing:
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          pattern: '[current|historic]'
+          type: string
+        housingAssociation:
+          title: Housing Association
+          type: string
+        contact:
+          $ref: '#/components/schemas/Contact'
+        tenancyStart:
+          title: Tenancy Start
+          type: string
+          format: date
+        antiSocialBehaviour:
+          title: Anti social behaviour
+          pattern: '[open|closed]'
+          type: string
+        rentArrears:
+          title: Rent arrears
+          pattern: '[open|closed]'
+          type: string
+        noticeSeekingPossession:
+          title: Notice seeking possession
+          pattern: '[open|closed]'
+          type: string
+        eviction:
+          title: Eviction
+          pattern: '[open|closed]'
+          type: string
+    Contact:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        role:
+          type: string
+      description: Generic object describing the contact information
+    inline_response_200:
+      required:
+      - status
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          pattern: '[authenticated]'
+          type: string
+      example:
+        name: name
+        id: id
+        status: status
+    body:
+      required:
+      - password
+      - userid
+      type: object
+      properties:
+        userid:
+          type: string
+        password:
+          type: string
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      name: FCSESSIONID
+      in: cookie
+      x-apikeyInfoFunc: swagger_server.controllers.authorization_controller.check_cookieAuth
+

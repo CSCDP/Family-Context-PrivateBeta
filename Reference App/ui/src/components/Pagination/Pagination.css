@@ -1,0 +1,51 @@
+/* 
+Taken from the GOV.UK Design System WIP for pagination 
+https://home-office-digital-patterns.herokuapp.com/components/pagination
+min-width has been adjusted for addition of First and Last buttons
+Date: 04/03/2020
+*/
+
+.pagination {
+  padding: 0;
+}
+
+.pagination__item {
+  display: inline-block;
+  list-style: none;
+}
+
+.pagination__link {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.pagination__link:hover, .pagination__link:focus {
+  background: #F8F8F8;
+  outline: 3px solid #FFBF47;
+}
+
+.pagination__link.current {
+  color: #0B0C0C;
+  font-weight: 700;
+  border: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+.pagination__link.current:hover, .pagination__link.current:focus {
+  color: #0B0C0C;
+  background: none;
+}
+
+.pagination__summary {
+  font-family: "Inter UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 8px 0;
+}
+
+@media (min-width: 920px) {
+  .pagination__summary {
+    float: right;
+  }
+}

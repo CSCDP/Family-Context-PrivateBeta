@@ -1,0 +1,551 @@
+openapi: 3.0.1
+
+info:
+  title: Family Context
+  description: >
+    This is the *DRAFT / WORK IN PROGRESS* API definition for Family Context.
+    This document is currently undergoing rapid change and should not be used as basis for implementation
+    without discussing with the project team.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.1
+
+paths:
+  /api/auth/status:
+    get:
+      summary: Get authentication status
+      description: >
+        Checks to see if there is currently an active authentication session. Returns the name of the
+        current credentials if known.
+      operationId: getAuthStatus
+      tags:
+        - auth
+      responses:
+        200:
+          description: authorized credentials present - details in message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    pattern: "[authenticated]"
+                required:
+                  - status
+        403:
+          description: authenticated credentials were present, but were not valid for this application
+        401:
+          description: no authenticated credentials present
+          content: {}
+
+  /api/auth/login:
+    post:
+      summary: Submit authentication details
+      description: >
+        TODO:
+      security: []
+      operationId: postAuthLogin
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userid:
+                  type: string
+                password:
+                  type: string
+              required:
+                - userid
+                - password
+      responses:
+        302:
+          description: authenticated credentials present - details in message
+          content: {}
+        401:
+          description: no authenticated credentials present or credentials not valid for this application
+          content: {}
+
+  /api/auth/logout:
+    post:
+      summary: Logout of the service
+      description: >
+        TODO:
+      operationId: postAuthLogout
+      tags:
+        - auth
+      responses:
+        302:
+          description: logout successful, redirect to status
+          content: {}
+
+  /api/search/person:
+    post:
+      summary: Search for a person
+      description: Returns a list of individuals matching the criteria
+      operationId: searchPerson
+      tags:
+        - person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonQuery'
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+<<<<<<< HEAD
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+=======
+                $ref: '#/components/schemas/SearchResults'
+>>>>>>> upstream/master
+        501:
+          description: Person search is not supported by this application
+    head:
+      summary: Is person search supported
+      description: >
+        Tests whether the person search API is supported by this implementation. A return value of 200 indicates
+        that the operation is supported. A 501 indicates that it is not supported, and any front-end applications
+        should suppress the search functionality.
+      operationId: searchPersonSupported
+      tags:
+        - person
+      responses:
+        200:
+          description: Person search supported
+        501:
+          description: Person search is not supported by this application
+
+<<<<<<< HEAD
+=======
+  #/api/search/person/{cmsId}:
+  #  get:
+  #    summary: Search for a person by cms ID
+  #    description: Returns a single person
+  #    operationId: getPersonByCmsId
+  #    tags:
+  #      - person
+  #    parameters:
+  #      - name: cmsId
+  #        in: path
+  #        description: Cms ID of person to return
+  #        required: true
+  #        schema:
+  #          type: string
+  #    responses:
+  #      200:
+  #        description: successful operation
+  #        content:
+  #          application/json:
+  #            schema:
+  #              $ref: '#/components/schemas/Person'
+  #      404:
+  #        description: Person not found
+  #        content: {}
+>>>>>>> upstream/master
+
+  /api/person/detail/{personId}:
+    get:
+      summary: Find person by ID
+      description: Returns a single person
+      operationId: getPersonById
+      tags:
+        - person
+      parameters:
+        - name: personId
+          in: path
+          description: ID of person to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        404:
+          description: Person not found
+          content: {}
+
+  /api/person/detail/{personId}/service:
+    get:
+      summary: Get a summary of the services a person has interacted with
+      operationId: getPersonServicesById
+      tags:
+        - person
+      parameters:
+        - name: personId
+          in: path
+          description: ID of person to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceSummary'
+        404:
+          description: Person not found
+          content: {}
+
+  /api/person/detail/{personId}/service/{serviceType}:
+    get:
+      summary: Find person by ID
+      description: Returns a single person
+      operationId: getPersonServiceByTypeAndId
+      tags:
+        - person
+      parameters:
+        - name: personId
+          in: path
+          description: ID of person to return
+          required: true
+          schema:
+            type: string
+        - name: serviceType
+          in: path
+          description: Servic type to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDetail'
+        404:
+          description: Person or service not found
+          content: {}
+
+  /api/person/related/{personId}/:
+    get:
+      summary: Get related individuals
+      description: Returns individuals related to the person
+      operationId: getPersonRelated
+      tags:
+        - person
+      parameters:
+        - name: personId
+          in: path
+          description: ID of person
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonWithRelationship'
+        404:
+          description: Person not found
+        501:
+          description: Related individuals is not supported by this application
+    head:
+      summary: Is related person supported
+      description: >
+        Tests whether the related person API is supported by this implementation. A return value of 200 indicates
+        that the operation is supported. A 501 indicates that it is not supported, and any front-end applications
+        should suppress the functionality.
+      operationId: getPersonRelatedSupported
+      tags:
+        - person
+      parameters:
+        - name: personId
+          in: path
+          description: ID of person
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+        501:
+          description: Related individuals is not supported by this application
+
+security:
+  - cookieAuth: []
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: FCSESSIONID
+
+  schemas:
+
+    Person:
+      description: this is a person
+      type: object
+      properties:
+        id:
+          type: string
+        cmsId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        gender:
+          type: string
+          description: The person's gender. Leave blank for 'unknown'.
+          pattern: "[male|female|other]"
+        address:
+          type: string
+      required:
+        - id
+        - firstName
+        - lastName
+
+    PersonWithRelationship:
+      description: A related person - describes the relationship to an individual
+      allOf:
+        - $ref: '#/components/schemas/Person'
+        - type: object
+          properties:
+            relationship:
+              type: string
+              description: A description of the relationship.
+            relationshipToId:
+              type: string
+              description: The ID of the individual this relationship refers to
+
+    ServiceSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        lastSynchronised:
+          type: string
+          format: date-time
+        coverageStartDate:
+          type: string
+          format: date
+        coverageEndDate:
+          type: string
+          format: date
+        dataSource:
+          type: string
+        recordsAvailable:
+          type: boolean
+        coverageExplanation:
+          type: string
+
+    ServiceDetail:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/ServiceSummary'
+        schema:
+          type: object
+        data:
+          type: object
+
+    PersonQuery:
+      description: >
+        Used for querying a person.
+        TODO: As long as this the fields are a subset of the Person object this could be the same, however
+        we may want more flexibility around the search criteria, such as min/max values for dob.
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        paginationDetails:
+          $ref: '#/components/schemas/PaginationDetails'
+      required:
+        - firstName
+        - lastName
+
+    PaginationDetails:
+      description: When making search requests this may be included to specify a subset of data to be sent.
+      type: object
+      properties:
+        resultsPerPage:
+          type: integer
+        pageNumber:
+          type: integer
+
+    SearchResults:
+      description: Results from querying a person.
+      properties:
+        paginationInfo:
+          $ref: '#/components/schemas/PaginationInfo'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+
+    PaginationInfo:
+      description: Search results may include this to specify that a subset of data was sent.
+      type: object
+      properties:
+        totalResults:
+          type: integer
+        resultsPerPage:
+          type: integer
+        pageNumber:
+          type: integer
+
+    Police:
+      type: object
+      properties:
+        policeArea:
+          title: Police Area
+          type: string
+        contact:
+          title: Contact
+          $ref: '#/components/schemas/Contact'
+        safeGuardingOffences:
+          title: Safeguarding Offences (a maximum of 3 will be listed)
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceSummary'
+        nonSafeGuardingOffences:
+          title: Non-safeguarding Offences
+          type: array
+          items:
+            $ref: '#/components/schemas/OffenceRecordsFound'
+
+    OffenceSummary:
+      type: object
+      properties:
+        dateOfOffence:
+          type: string
+          format: date
+          title: Date of Offence
+        typeOfOffence:
+          type: string
+          title: Type of Offence
+        natureOfInvolvement:
+          type: string
+          title: Nature of Involvement
+
+    OffenceRecordsFound:
+      type: object
+      properties:
+        recordsFound:
+          type: string
+          title: Records Found
+
+    School:
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          type: string
+          pattern: "[current|historic]"
+        contact:
+          title: Contact
+          $ref: '#/components/schemas/Contact'
+        schoolName:
+          title: School name
+          type: string
+        admissionType:
+          title: Admission type
+          type: string
+
+    AdultSocialCare:
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          type: string
+          pattern: "[current|historic]"
+        localAuthorityOrganisation:
+          title: Local Authority Organisation
+          type: string
+        contact:
+          title: Contact
+          $ref: '#/components/schemas/Contact'
+        startDateOfLastInvolvement:
+          title: Start of last involvement
+          type: string
+          format: date
+        dateOfMostRecentInteraction:
+          title: Date of most recent interaction
+          type: string
+          format: date
+
+    Housing:
+      type: object
+      properties:
+        serviceInvolvement:
+          title: Service involvement
+          type: string
+          pattern: "[current|historic]"
+        housingAssociation:
+          title: Housing Association
+          type: string
+        contact:
+          title: Contact
+          $ref: '#/components/schemas/Contact'
+        tenancyStart:
+          title: Tenancy Start
+          type: string
+          format: date
+        antiSocialBehaviour:
+          title: Anti social behaviour
+          type: string
+          pattern: "[open|closed]"
+        rentArrears:
+          title: Rent arrears
+          type: string
+          pattern: "[open|closed]"
+        noticeSeekingPossession:
+          title: Notice seeking possession
+          type: string
+          pattern: "[open|closed]"
+        eviction:
+          title: Eviction
+          type: string
+          pattern: "[open|closed]"
+
+    Contact:
+      type: object
+      description: Generic object describing the contact information
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        role:
+          type: string
