@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import PaginationDetails from './PaginationDetails';
 
 /**
 * The PersonQuery model module.
@@ -53,6 +54,9 @@ export default class PersonQuery {
             if (data.hasOwnProperty('dateOfBirth')) {
                 obj['dateOfBirth'] = ApiClient.convertToType(data['dateOfBirth'], 'Date');
             }
+            if (data.hasOwnProperty('paginationDetails')) {
+                obj['paginationDetails'] = PaginationDetails.constructFromObject(data['paginationDetails']);
+            }
         }
         return obj;
     }
@@ -69,6 +73,10 @@ export default class PersonQuery {
     * @member {Date} dateOfBirth
     */
     dateOfBirth = undefined;
+    /**
+    * @member {module:model/PaginationDetails} paginationDetails
+    */
+    paginationDetails = undefined;
 
 
 

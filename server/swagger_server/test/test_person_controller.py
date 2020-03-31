@@ -8,6 +8,10 @@ from six import BytesIO
 from swagger_server.models.person import Person  # noqa: E501
 from swagger_server.models.person_query import PersonQuery  # noqa: E501
 from swagger_server.models.person_with_relationship import PersonWithRelationship  # noqa: E501
+<<<<<<< HEAD
+=======
+from swagger_server.models.search_results import SearchResults  # noqa: E501
+>>>>>>> upstream/master
 from swagger_server.models.service_detail import ServiceDetail  # noqa: E501
 from swagger_server.models.service_summary import ServiceSummary  # noqa: E501
 from swagger_server.test import BaseTestCase

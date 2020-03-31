@@ -3,10 +3,11 @@ import csv
 import json
 import os
 import inflection
+from datetime import datetime
 from connexion.spec import OpenAPISpecification
 
 from swagger_server.models import ServiceSummary, Person, Police, OffenceSummary, School, AdultSocialCare, Housing, \
-    Contact, ServiceDetail
+    Contact, ServiceDetail, OffenceRecordsFound
 
 SCHEMA_ROOT = "http://www.sfdl.org.uk/schemas/fc/0.0.1#"
 SCHEMA_LOCAL_PREFIX = "#/components/schemas/"
@@ -28,8 +29,8 @@ class CsvSampleDataAccess:
             values = func()
             self.__service_data.update(values)
 
-    def search_persons(self):
-        return list(self.__persons.values())
+    def search_persons(self, person_query):
+        return list(filter(lambda p: self.__search_filter(p, person_query), self.__persons.values()))
 
     def get_person_by_id(self, person_id):
         return self.__persons[person_id]
@@ -38,6 +39,10 @@ class CsvSampleDataAccess:
         # Make sure person exists
         person = self.__persons[person_id]
 
+        today = datetime.today()
+        born = datetime.strptime(person.date_of_birth, '%d/%m/%Y').date()
+        person_age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
         services = []
         # Loop over each service
         for service_id, service in self.__services.items():
@@ -45,7 +50,9 @@ class CsvSampleDataAccess:
             service_data = self.__service_data.get((person_id, service_id))
 
             service.records_available = True if service_data else False
-            services.append(service)
+
+            if self.__should_show_service_for_age(service.id, person_age):
+                services.append(service)
 
         return services
 
@@ -62,6 +69,23 @@ class CsvSampleDataAccess:
         details.data = service_data
 
         return details
+
+    def __should_show_service_for_age(self, service_name, age):
+        if service_name == 'AdultSocialCare':
+            return age >= 15
+        if service_name == 'Housing':
+            return age >= 16
+        if service_name == 'School':
+            return age >= 4 and age <= 20
+        if service_name == 'Police':
+            return age >= 18
+
+    def __search_filter(self, person, person_query):
+        if (person.first_name == person_query.first_name and person.last_name == person_query.last_name):
+            if (person_query.date_of_birth is None \
+            or person_query.date_of_birth == datetime.strptime(person.date_of_birth, '%d/%m/%Y').date()):
+                return True
+        return False
 
     def __read_persons(self, filename="person.csv"):
         data = self.__parse_csv(filename)
@@ -105,10 +129,12 @@ class CsvSampleDataAccess:
             offence = OffenceSummary(**item)
 
             police = values[(person_id, service_id)]
-            if not police.offences:
-                police.offences = []
-            police.offences.append(offence)
+            if not police.safe_guarding_offences:
+                police.safe_guarding_offences = []
+            police.safe_guarding_offences.append(offence)
 
+            records = OffenceRecordsFound("Yes")
+            police.non_safe_guarding_offences = [records]
         return values
 
     def __read_service_school(self, filename="school.csv"):

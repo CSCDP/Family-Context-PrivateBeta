@@ -7,8 +7,8 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.contact import Contact  # noqa: F401,E501
+from swagger_server.models.offence_records_found import OffenceRecordsFound  # noqa: F401,E501
 from swagger_server.models.offence_summary import OffenceSummary  # noqa: F401,E501
-import re  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -17,35 +17,35 @@ class Police(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, service_involvement: str=None, contact: Contact=None, police_station: str=None, offences: List[OffenceSummary]=None):  # noqa: E501
+    def __init__(self, police_area: str=None, contact: Contact=None, safe_guarding_offences: List[OffenceSummary]=None, non_safe_guarding_offences: List[OffenceRecordsFound]=None):  # noqa: E501
         """Police - a model defined in Swagger
 
-        :param service_involvement: The service_involvement of this Police.  # noqa: E501
-        :type service_involvement: str
+        :param police_area: The police_area of this Police.  # noqa: E501
+        :type police_area: str
         :param contact: The contact of this Police.  # noqa: E501
         :type contact: Contact
-        :param police_station: The police_station of this Police.  # noqa: E501
-        :type police_station: str
-        :param offences: The offences of this Police.  # noqa: E501
-        :type offences: List[OffenceSummary]
+        :param safe_guarding_offences: The safe_guarding_offences of this Police.  # noqa: E501
+        :type safe_guarding_offences: List[OffenceSummary]
+        :param non_safe_guarding_offences: The non_safe_guarding_offences of this Police.  # noqa: E501
+        :type non_safe_guarding_offences: List[OffenceRecordsFound]
         """
         self.swagger_types = {
-            'service_involvement': str,
+            'police_area': str,
             'contact': Contact,
-            'police_station': str,
-            'offences': List[OffenceSummary]
+            'safe_guarding_offences': List[OffenceSummary],
+            'non_safe_guarding_offences': List[OffenceRecordsFound]
         }
 
         self.attribute_map = {
-            'service_involvement': 'serviceInvolvement',
+            'police_area': 'policeArea',
             'contact': 'contact',
-            'police_station': 'policeStation',
-            'offences': 'offences'
+            'safe_guarding_offences': 'safeGuardingOffences',
+            'non_safe_guarding_offences': 'nonSafeGuardingOffences'
         }
-        self._service_involvement = service_involvement
+        self._police_area = police_area
         self._contact = contact
-        self._police_station = police_station
-        self._offences = offences
+        self._safe_guarding_offences = safe_guarding_offences
+        self._non_safe_guarding_offences = non_safe_guarding_offences
 
     @classmethod
     def from_dict(cls, dikt) -> 'Police':
@@ -59,25 +59,25 @@ class Police(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def service_involvement(self) -> str:
-        """Gets the service_involvement of this Police.
+    def police_area(self) -> str:
+        """Gets the police_area of this Police.
 
 
-        :return: The service_involvement of this Police.
+        :return: The police_area of this Police.
         :rtype: str
         """
-        return self._service_involvement
+        return self._police_area
 
-    @service_involvement.setter
-    def service_involvement(self, service_involvement: str):
-        """Sets the service_involvement of this Police.
+    @police_area.setter
+    def police_area(self, police_area: str):
+        """Sets the police_area of this Police.
 
 
-        :param service_involvement: The service_involvement of this Police.
-        :type service_involvement: str
+        :param police_area: The police_area of this Police.
+        :type police_area: str
         """
 
-        self._service_involvement = service_involvement
+        self._police_area = police_area
 
     @property
     def contact(self) -> Contact:
@@ -101,43 +101,43 @@ class Police(Model):
         self._contact = contact
 
     @property
-    def police_station(self) -> str:
-        """Gets the police_station of this Police.
+    def safe_guarding_offences(self) -> List[OffenceSummary]:
+        """Gets the safe_guarding_offences of this Police.
 
 
-        :return: The police_station of this Police.
-        :rtype: str
-        """
-        return self._police_station
-
-    @police_station.setter
-    def police_station(self, police_station: str):
-        """Sets the police_station of this Police.
-
-
-        :param police_station: The police_station of this Police.
-        :type police_station: str
-        """
-
-        self._police_station = police_station
-
-    @property
-    def offences(self) -> List[OffenceSummary]:
-        """Gets the offences of this Police.
-
-
-        :return: The offences of this Police.
+        :return: The safe_guarding_offences of this Police.
         :rtype: List[OffenceSummary]
         """
-        return self._offences
+        return self._safe_guarding_offences
 
-    @offences.setter
-    def offences(self, offences: List[OffenceSummary]):
-        """Sets the offences of this Police.
+    @safe_guarding_offences.setter
+    def safe_guarding_offences(self, safe_guarding_offences: List[OffenceSummary]):
+        """Sets the safe_guarding_offences of this Police.
 
 
-        :param offences: The offences of this Police.
-        :type offences: List[OffenceSummary]
+        :param safe_guarding_offences: The safe_guarding_offences of this Police.
+        :type safe_guarding_offences: List[OffenceSummary]
         """
 
-        self._offences = offences
+        self._safe_guarding_offences = safe_guarding_offences
+
+    @property
+    def non_safe_guarding_offences(self) -> List[OffenceRecordsFound]:
+        """Gets the non_safe_guarding_offences of this Police.
+
+
+        :return: The non_safe_guarding_offences of this Police.
+        :rtype: List[OffenceRecordsFound]
+        """
+        return self._non_safe_guarding_offences
+
+    @non_safe_guarding_offences.setter
+    def non_safe_guarding_offences(self, non_safe_guarding_offences: List[OffenceRecordsFound]):
+        """Sets the non_safe_guarding_offences of this Police.
+
+
+        :param non_safe_guarding_offences: The non_safe_guarding_offences of this Police.
+        :type non_safe_guarding_offences: List[OffenceRecordsFound]
+        """
+
+        self._non_safe_guarding_offences = non_safe_guarding_offences

@@ -60,6 +60,10 @@ def post_auth_login(body=None):
     response.set_cookie('FCSESSIONID', token)
     return response
 
-
 def get_auth_status(user):
     return dict(user=user, status="authenticated")
+
+def post_auth_logout():
+    response = make_response(redirect('/api/auth/status'))
+    response.set_cookie('FCSESSIONID', 'noop')
+    return response, 302

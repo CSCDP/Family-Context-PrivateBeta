@@ -112,7 +112,4 @@ export default class PersonWithRelationship {
     */
     relationshipToId = undefined;
 
-
-
-
 }

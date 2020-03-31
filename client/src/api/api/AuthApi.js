@@ -118,4 +118,46 @@ export default class AuthApi {
         });
     }
 
+
+    /**
+     * Logout of the service
+     * TODO: 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    postAuthLogoutWithHttpInfo() {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cookieAuth'];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/api/auth/logout', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Logout of the service
+     * TODO: 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    postAuthLogout() {
+      return this.postAuthLogoutWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 }
