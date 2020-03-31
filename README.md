@@ -15,9 +15,9 @@ The consequences are that social workers...
   …**waste time** chasing information, which they would prefer to spend with the family on working out a plan.
 
 
-## Alpha Learnings and Outputs
+## Private Beta Outputs
 
-All outputs from the alpha phase of the Family Context project are available here:
+All outputs from the private beta phase of the Family Context project are available here:
 
  * [Business Case](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Business%20Case)
  * [Common Data Model](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Common%20Data%20Model)
