@@ -22,7 +22,6 @@ All outputs from the private beta phase of the Family Context project are availa
  * [Business Case](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Business%20Case)
  * [Common Data Model](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Common%20Data%20Model)
  * [Implementation guide](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Implementation%20guide)
- * [Reference API](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Reference%20API)
- * [Reference User Interface](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Reference%20User%20Interface)
+ * [Reference App](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Reference%20App)
  * [User Research Report](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/User%20Research%20Report)
  * [Video demo of Family Context](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Video%20demo%20of%20Family%20Context)
