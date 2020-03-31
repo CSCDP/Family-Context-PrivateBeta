@@ -20,5 +20,9 @@ The consequences are that social workers...
 All outputs from the alpha phase of the Family Context project are available here:
 
  * [Business Case](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Business%20Case)
- * [Y](https://github.com/CSCDP/Family-Context-Alpha/blob/master/Detailed%20Review%20of%20Data%20Sources%20for%20the%20MVP.pdf)
- * [Z](https://github.com/CSCDP/Family-Context-Alpha/tree/master/Prototypes/Current%20MVP%20and%20Final%20Prototype)
+ * [Common Data Model](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Common%20Data%20Model)
+ * [Implementation guide](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Implementation%20guide)
+ * [Reference API](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Reference%20API)
+ * [Reference User Interface](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Reference%20User%20Interface)
+ * [User Research Report](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/User%20Research%20Report)
+ * [Video demo of Family Context](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Video%20demo%20of%20Family%20Context)
