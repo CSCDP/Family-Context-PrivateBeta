@@ -25,6 +25,4 @@ All outputs from the private beta phase of the Family Context project are availa
  * [Reference App](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Reference%20App)
  * [User Research Report](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/User%20Research%20Report)
  * [Video demo of Family Context](https://github.com/CSCDP/Family-Context-PrivateBeta/tree/master/Video%20demo%20of%20Family%20Context)
- 
-<video src="Video%20demo%20of%20Family%20Context/Video Demonstration of Family Context.mp4" width="320" height="200" controls preload></video>
-
+[test](./Video%20demo%20of%20Family%20Context/Video Demonstration of Family Context.mp4)
