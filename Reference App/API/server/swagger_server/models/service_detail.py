@@ -15,7 +15,10 @@ class ServiceDetail(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, summary: ServiceSummary=None, schema: object=None, data: object=None):  # noqa: E501
+
+    def __init__(
+        self, summary: ServiceSummary = None, schema: object = None, data: object = None
+    ):  # noqa: E501
         """ServiceDetail - a model defined in Swagger
 
         :param summary: The summary of this ServiceDetail.  # noqa: E501
@@ -26,22 +29,18 @@ class ServiceDetail(Model):
         :type data: object
         """
         self.swagger_types = {
-            'summary': ServiceSummary,
-            'schema': object,
-            'data': object
+            "summary": ServiceSummary,
+            "schema": object,
+            "data": object,
         }
 
-        self.attribute_map = {
-            'summary': 'summary',
-            'schema': 'schema',
-            'data': 'data'
-        }
+        self.attribute_map = {"summary": "summary", "schema": "schema", "data": "data"}
         self._summary = summary
         self._schema = schema
         self._data = data
 
     @classmethod
-    def from_dict(cls, dikt) -> 'ServiceDetail':
+    def from_dict(cls, dikt) -> "ServiceDetail":
         """Returns the dict as a model
 
         :param dikt: A dict.

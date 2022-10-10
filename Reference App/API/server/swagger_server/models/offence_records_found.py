@@ -14,23 +14,20 @@ class OffenceRecordsFound(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, records_found: str=None):  # noqa: E501
+
+    def __init__(self, records_found: str = None):  # noqa: E501
         """OffenceRecordsFound - a model defined in Swagger
 
         :param records_found: The records_found of this OffenceRecordsFound.  # noqa: E501
         :type records_found: str
         """
-        self.swagger_types = {
-            'records_found': str
-        }
+        self.swagger_types = {"records_found": str}
 
-        self.attribute_map = {
-            'records_found': 'recordsFound'
-        }
+        self.attribute_map = {"records_found": "recordsFound"}
         self._records_found = records_found
 
     @classmethod
-    def from_dict(cls, dikt) -> 'OffenceRecordsFound':
+    def from_dict(cls, dikt) -> "OffenceRecordsFound":
         """Returns the dict as a model
 
         :param dikt: A dict.

@@ -7,7 +7,9 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.contact import Contact  # noqa: F401,E501
-from swagger_server.models.offence_records_found import OffenceRecordsFound  # noqa: F401,E501
+from swagger_server.models.offence_records_found import (
+    OffenceRecordsFound,
+)  # noqa: F401,E501
 from swagger_server.models.offence_summary import OffenceSummary  # noqa: F401,E501
 from swagger_server import util
 
@@ -17,7 +19,14 @@ class Police(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, police_area: str=None, contact: Contact=None, safe_guarding_offences: List[OffenceSummary]=None, non_safe_guarding_offences: List[OffenceRecordsFound]=None):  # noqa: E501
+
+    def __init__(
+        self,
+        police_area: str = None,
+        contact: Contact = None,
+        safe_guarding_offences: List[OffenceSummary] = None,
+        non_safe_guarding_offences: List[OffenceRecordsFound] = None,
+    ):  # noqa: E501
         """Police - a model defined in Swagger
 
         :param police_area: The police_area of this Police.  # noqa: E501
@@ -30,17 +39,17 @@ class Police(Model):
         :type non_safe_guarding_offences: List[OffenceRecordsFound]
         """
         self.swagger_types = {
-            'police_area': str,
-            'contact': Contact,
-            'safe_guarding_offences': List[OffenceSummary],
-            'non_safe_guarding_offences': List[OffenceRecordsFound]
+            "police_area": str,
+            "contact": Contact,
+            "safe_guarding_offences": List[OffenceSummary],
+            "non_safe_guarding_offences": List[OffenceRecordsFound],
         }
 
         self.attribute_map = {
-            'police_area': 'policeArea',
-            'contact': 'contact',
-            'safe_guarding_offences': 'safeGuardingOffences',
-            'non_safe_guarding_offences': 'nonSafeGuardingOffences'
+            "police_area": "policeArea",
+            "contact": "contact",
+            "safe_guarding_offences": "safeGuardingOffences",
+            "non_safe_guarding_offences": "nonSafeGuardingOffences",
         }
         self._police_area = police_area
         self._contact = contact
@@ -48,7 +57,7 @@ class Police(Model):
         self._non_safe_guarding_offences = non_safe_guarding_offences
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Police':
+    def from_dict(cls, dikt) -> "Police":
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -132,7 +141,9 @@ class Police(Model):
         return self._non_safe_guarding_offences
 
     @non_safe_guarding_offences.setter
-    def non_safe_guarding_offences(self, non_safe_guarding_offences: List[OffenceRecordsFound]):
+    def non_safe_guarding_offences(
+        self, non_safe_guarding_offences: List[OffenceRecordsFound]
+    ):
         """Sets the non_safe_guarding_offences of this Police.
 
 

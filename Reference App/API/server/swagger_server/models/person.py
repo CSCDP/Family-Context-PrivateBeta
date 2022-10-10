@@ -15,11 +15,17 @@ class Person(Model):
 
     Do not edit the class manually.
     """
-<<<<<<< HEAD
-    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None):  # noqa: E501
-=======
-    def __init__(self, id: str=None, cms_id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None):  # noqa: E501
->>>>>>> upstream/master
+
+    def __init__(
+        self,
+        id: str = None,
+        cms_id: str = None,
+        first_name: str = None,
+        last_name: str = None,
+        date_of_birth: date = None,
+        gender: str = None,
+        address: str = None,
+    ):  # noqa: E501
         """Person - a model defined in Swagger
 
         :param id: The id of this Person.  # noqa: E501
@@ -38,23 +44,23 @@ class Person(Model):
         :type address: str
         """
         self.swagger_types = {
-            'id': str,
-            'cms_id': str,
-            'first_name': str,
-            'last_name': str,
-            'date_of_birth': date,
-            'gender': str,
-            'address': str
+            "id": str,
+            "cms_id": str,
+            "first_name": str,
+            "last_name": str,
+            "date_of_birth": date,
+            "gender": str,
+            "address": str,
         }
 
         self.attribute_map = {
-            'id': 'id',
-            'cms_id': 'cmsId',
-            'first_name': 'firstName',
-            'last_name': 'lastName',
-            'date_of_birth': 'dateOfBirth',
-            'gender': 'gender',
-            'address': 'address'
+            "id": "id",
+            "cms_id": "cmsId",
+            "first_name": "firstName",
+            "last_name": "lastName",
+            "date_of_birth": "dateOfBirth",
+            "gender": "gender",
+            "address": "address",
         }
         self._id = id
         self._cms_id = cms_id
@@ -65,7 +71,7 @@ class Person(Model):
         self._address = address
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Person':
+    def from_dict(cls, dikt) -> "Person":
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -138,7 +144,9 @@ class Person(Model):
         :type first_name: str
         """
         if first_name is None:
-            raise ValueError("Invalid value for `first_name`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `first_name`, must not be `None`"
+            )  # noqa: E501
 
         self._first_name = first_name
 
@@ -161,7 +169,9 @@ class Person(Model):
         :type last_name: str
         """
         if last_name is None:
-            raise ValueError("Invalid value for `last_name`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `last_name`, must not be `None`"
+            )  # noqa: E501
 
         self._last_name = last_name
 

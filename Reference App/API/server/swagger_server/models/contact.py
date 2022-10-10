@@ -14,7 +14,10 @@ class Contact(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, name: str=None, email: str=None, phone: str=None, role: str=None):  # noqa: E501
+
+    def __init__(
+        self, name: str = None, email: str = None, phone: str = None, role: str = None
+    ):  # noqa: E501
         """Contact - a model defined in Swagger
 
         :param name: The name of this Contact.  # noqa: E501
@@ -26,18 +29,13 @@ class Contact(Model):
         :param role: The role of this Contact.  # noqa: E501
         :type role: str
         """
-        self.swagger_types = {
-            'name': str,
-            'email': str,
-            'phone': str,
-            'role': str
-        }
+        self.swagger_types = {"name": str, "email": str, "phone": str, "role": str}
 
         self.attribute_map = {
-            'name': 'name',
-            'email': 'email',
-            'phone': 'phone',
-            'role': 'role'
+            "name": "name",
+            "email": "email",
+            "phone": "phone",
+            "role": "role",
         }
         self._name = name
         self._email = email
@@ -45,7 +43,7 @@ class Contact(Model):
         self._role = role
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Contact':
+    def from_dict(cls, dikt) -> "Contact":
         """Returns the dict as a model
 
         :param dikt: A dict.

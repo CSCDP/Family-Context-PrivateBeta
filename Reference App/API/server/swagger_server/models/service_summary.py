@@ -14,7 +14,17 @@ class ServiceSummary(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: str=None, title: str=None, last_synchronised: datetime=None, coverage_start_date: date=None, coverage_end_date: date=None, data_source: str=None, records_available: bool=None):  # noqa: E501
+
+    def __init__(
+        self,
+        id: str = None,
+        title: str = None,
+        last_synchronised: datetime = None,
+        coverage_start_date: date = None,
+        coverage_end_date: date = None,
+        data_source: str = None,
+        records_available: bool = None,
+    ):  # noqa: E501
         """ServiceSummary - a model defined in Swagger
 
         :param id: The id of this ServiceSummary.  # noqa: E501
@@ -33,23 +43,23 @@ class ServiceSummary(Model):
         :type records_available: bool
         """
         self.swagger_types = {
-            'id': str,
-            'title': str,
-            'last_synchronised': datetime,
-            'coverage_start_date': date,
-            'coverage_end_date': date,
-            'data_source': str,
-            'records_available': bool
+            "id": str,
+            "title": str,
+            "last_synchronised": datetime,
+            "coverage_start_date": date,
+            "coverage_end_date": date,
+            "data_source": str,
+            "records_available": bool,
         }
 
         self.attribute_map = {
-            'id': 'id',
-            'title': 'title',
-            'last_synchronised': 'lastSynchronised',
-            'coverage_start_date': 'coverageStartDate',
-            'coverage_end_date': 'coverageEndDate',
-            'data_source': 'dataSource',
-            'records_available': 'recordsAvailable'
+            "id": "id",
+            "title": "title",
+            "last_synchronised": "lastSynchronised",
+            "coverage_start_date": "coverageStartDate",
+            "coverage_end_date": "coverageEndDate",
+            "data_source": "dataSource",
+            "records_available": "recordsAvailable",
         }
         self._id = id
         self._title = title
@@ -60,7 +70,7 @@ class ServiceSummary(Model):
         self._records_available = records_available
 
     @classmethod
-    def from_dict(cls, dikt) -> 'ServiceSummary':
+    def from_dict(cls, dikt) -> "ServiceSummary":
         """Returns the dict as a model
 
         :param dikt: A dict.

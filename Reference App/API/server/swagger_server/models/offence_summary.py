@@ -14,7 +14,13 @@ class OffenceSummary(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, date_of_offence: date=None, type_of_offence: str=None, nature_of_involvement: str=None):  # noqa: E501
+
+    def __init__(
+        self,
+        date_of_offence: date = None,
+        type_of_offence: str = None,
+        nature_of_involvement: str = None,
+    ):  # noqa: E501
         """OffenceSummary - a model defined in Swagger
 
         :param date_of_offence: The date_of_offence of this OffenceSummary.  # noqa: E501
@@ -25,22 +31,22 @@ class OffenceSummary(Model):
         :type nature_of_involvement: str
         """
         self.swagger_types = {
-            'date_of_offence': date,
-            'type_of_offence': str,
-            'nature_of_involvement': str
+            "date_of_offence": date,
+            "type_of_offence": str,
+            "nature_of_involvement": str,
         }
 
         self.attribute_map = {
-            'date_of_offence': 'dateOfOffence',
-            'type_of_offence': 'typeOfOffence',
-            'nature_of_involvement': 'natureOfInvolvement'
+            "date_of_offence": "dateOfOffence",
+            "type_of_offence": "typeOfOffence",
+            "nature_of_involvement": "natureOfInvolvement",
         }
         self._date_of_offence = date_of_offence
         self._type_of_offence = type_of_offence
         self._nature_of_involvement = nature_of_involvement
 
     @classmethod
-    def from_dict(cls, dikt) -> 'OffenceSummary':
+    def from_dict(cls, dikt) -> "OffenceSummary":
         """Returns the dict as a model
 
         :param dikt: A dict.

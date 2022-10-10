@@ -16,7 +16,15 @@ class AdultSocialCare(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, service_involvement: str=None, local_authority_organisation: str=None, contact: Contact=None, start_date_of_last_involvement: date=None, date_of_most_recent_interaction: date=None):  # noqa: E501
+
+    def __init__(
+        self,
+        service_involvement: str = None,
+        local_authority_organisation: str = None,
+        contact: Contact = None,
+        start_date_of_last_involvement: date = None,
+        date_of_most_recent_interaction: date = None,
+    ):  # noqa: E501
         """AdultSocialCare - a model defined in Swagger
 
         :param service_involvement: The service_involvement of this AdultSocialCare.  # noqa: E501
@@ -31,19 +39,19 @@ class AdultSocialCare(Model):
         :type date_of_most_recent_interaction: date
         """
         self.swagger_types = {
-            'service_involvement': str,
-            'local_authority_organisation': str,
-            'contact': Contact,
-            'start_date_of_last_involvement': date,
-            'date_of_most_recent_interaction': date
+            "service_involvement": str,
+            "local_authority_organisation": str,
+            "contact": Contact,
+            "start_date_of_last_involvement": date,
+            "date_of_most_recent_interaction": date,
         }
 
         self.attribute_map = {
-            'service_involvement': 'serviceInvolvement',
-            'local_authority_organisation': 'localAuthorityOrganisation',
-            'contact': 'contact',
-            'start_date_of_last_involvement': 'startDateOfLastInvolvement',
-            'date_of_most_recent_interaction': 'dateOfMostRecentInteraction'
+            "service_involvement": "serviceInvolvement",
+            "local_authority_organisation": "localAuthorityOrganisation",
+            "contact": "contact",
+            "start_date_of_last_involvement": "startDateOfLastInvolvement",
+            "date_of_most_recent_interaction": "dateOfMostRecentInteraction",
         }
         self._service_involvement = service_involvement
         self._local_authority_organisation = local_authority_organisation
@@ -52,7 +60,7 @@ class AdultSocialCare(Model):
         self._date_of_most_recent_interaction = date_of_most_recent_interaction
 
     @classmethod
-    def from_dict(cls, dikt) -> 'AdultSocialCare':
+    def from_dict(cls, dikt) -> "AdultSocialCare":
         """Returns the dict as a model
 
         :param dikt: A dict.

@@ -14,7 +14,8 @@ class Body(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, userid: str=None, password: str=None):  # noqa: E501
+
+    def __init__(self, userid: str = None, password: str = None):  # noqa: E501
         """Body - a model defined in Swagger
 
         :param userid: The userid of this Body.  # noqa: E501
@@ -22,20 +23,14 @@ class Body(Model):
         :param password: The password of this Body.  # noqa: E501
         :type password: str
         """
-        self.swagger_types = {
-            'userid': str,
-            'password': str
-        }
+        self.swagger_types = {"userid": str, "password": str}
 
-        self.attribute_map = {
-            'userid': 'userid',
-            'password': 'password'
-        }
+        self.attribute_map = {"userid": "userid", "password": "password"}
         self._userid = userid
         self._password = password
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Body':
+    def from_dict(cls, dikt) -> "Body":
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -64,7 +59,9 @@ class Body(Model):
         :type userid: str
         """
         if userid is None:
-            raise ValueError("Invalid value for `userid`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `userid`, must not be `None`"
+            )  # noqa: E501
 
         self._userid = userid
 
@@ -87,6 +84,8 @@ class Body(Model):
         :type password: str
         """
         if password is None:
-            raise ValueError("Invalid value for `password`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `password`, must not be `None`"
+            )  # noqa: E501
 
         self._password = password

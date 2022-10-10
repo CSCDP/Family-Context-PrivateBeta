@@ -14,7 +14,10 @@ class PaginationDetails(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, results_per_page: int=None, page_number: int=None):  # noqa: E501
+
+    def __init__(
+        self, results_per_page: int = None, page_number: int = None
+    ):  # noqa: E501
         """PaginationDetails - a model defined in Swagger
 
         :param results_per_page: The results_per_page of this PaginationDetails.  # noqa: E501
@@ -22,20 +25,17 @@ class PaginationDetails(Model):
         :param page_number: The page_number of this PaginationDetails.  # noqa: E501
         :type page_number: int
         """
-        self.swagger_types = {
-            'results_per_page': int,
-            'page_number': int
-        }
+        self.swagger_types = {"results_per_page": int, "page_number": int}
 
         self.attribute_map = {
-            'results_per_page': 'resultsPerPage',
-            'page_number': 'pageNumber'
+            "results_per_page": "resultsPerPage",
+            "page_number": "pageNumber",
         }
         self._results_per_page = results_per_page
         self._page_number = page_number
 
     @classmethod
-    def from_dict(cls, dikt) -> 'PaginationDetails':
+    def from_dict(cls, dikt) -> "PaginationDetails":
         """Returns the dict as a model
 
         :param dikt: A dict.
