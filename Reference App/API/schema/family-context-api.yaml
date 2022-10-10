@@ -106,13 +106,7 @@ paths:
           content:
             application/json:
               schema:
-<<<<<<< HEAD
-                type: array
-                items:
-                  $ref: '#/components/schemas/Person'
-=======
                 $ref: '#/components/schemas/SearchResults'
->>>>>>> upstream/master
         501:
           description: Person search is not supported by this application
     head:
@@ -130,8 +124,6 @@ paths:
         501:
           description: Person search is not supported by this application
 
-<<<<<<< HEAD
-=======
   #/api/search/person/{cmsId}:
   #  get:
   #    summary: Search for a person by cms ID
@@ -156,7 +148,6 @@ paths:
   #      404:
   #        description: Person not found
   #        content: {}
->>>>>>> upstream/master
 
   /api/person/detail/{personId}:
     get:

@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "Family Context Reference API"
+version = "0.2.0"
+description = "API to be used with the Family Context Project"
+authors = ["Matthew Pugh <matthew.pugh@socialfinance.org.uk>, Kaj Siebert <Kaj.Siebert@socialfinance.org.uk>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+connexion = "^2.14.1"
+swagger-ui-bundle = "^0.0.9"
+python-dateutil = "^2.8.2"
+setuptools = "^65.4.1"
+PyJWT = "^2.5.0"
+gunicorn = "^20.1.0"
+Flask-Cors = "^3.0.10"
+openpyxl = "^3.0.10"
+pandas = "^1.5.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
