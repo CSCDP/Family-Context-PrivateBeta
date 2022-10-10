@@ -22,6 +22,7 @@ class ServiceSummary(Model):
         last_synchronised: datetime = None,
         coverage_start_date: date = None,
         coverage_end_date: date = None,
+        coverage_explanation: str = None,
         data_source: str = None,
         records_available: bool = None,
     ):  # noqa: E501
@@ -37,6 +38,8 @@ class ServiceSummary(Model):
         :type coverage_start_date: date
         :param coverage_end_date: The coverage_end_date of this ServiceSummary.  # noqa: E501
         :type coverage_end_date: date
+        :param coverage_explanation:    # noqa: E501
+        :type coverage_explanation: str
         :param data_source: The data_source of this ServiceSummary.  # noqa: E501
         :type data_source: str
         :param records_available: The records_available of this ServiceSummary.  # noqa: E501
@@ -48,6 +51,7 @@ class ServiceSummary(Model):
             "last_synchronised": datetime,
             "coverage_start_date": date,
             "coverage_end_date": date,
+            "coverage_explanation": str,
             "data_source": str,
             "records_available": bool,
         }
@@ -58,6 +62,7 @@ class ServiceSummary(Model):
             "last_synchronised": "lastSynchronised",
             "coverage_start_date": "coverageStartDate",
             "coverage_end_date": "coverageEndDate",
+            "coverage_explanation": "coverageExplanation",
             "data_source": "dataSource",
             "records_available": "recordsAvailable",
         }
@@ -66,6 +71,7 @@ class ServiceSummary(Model):
         self._last_synchronised = last_synchronised
         self._coverage_start_date = coverage_start_date
         self._coverage_end_date = coverage_end_date
+        self._coverage_explanation = coverage_explanation
         self._data_source = data_source
         self._records_available = records_available
 
@@ -184,6 +190,27 @@ class ServiceSummary(Model):
         """
 
         self._coverage_end_date = coverage_end_date
+
+    @property
+    def coverage_explanation(self) -> str:
+        """Gets the coverage_explanation
+
+
+        :return: The coverage_explanation of this ServiceSummary
+        :rtype: date
+        """
+        return self._coverage_explanation
+
+    @coverage_explanation.setter
+    def coverage_explanation(self, coverage_explanation: str):
+        """Sets the coverage_explanation of this ServiceSummary.
+
+
+        :param coverage_explanation: The coverage_explanation of this ServiceSummary.
+        :type coverage_explanation: date
+        """
+
+        self._coverage_explanation = coverage_explanation
 
     @property
     def data_source(self) -> str:
