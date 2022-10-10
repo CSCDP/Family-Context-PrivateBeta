@@ -15,7 +15,7 @@ os.environ["APIKEYINFO_FUNC"] = "api.check_cookie_auth"
 
 
 class MyResolver(RestyResolver):
-    def __init__(self, default_module_name, collection_endpoint_name='search'):
+    def __init__(self, default_module_name, collection_endpoint_name="search"):
         """
         :param default_module_name: Default module name for operations
         :type default_module_name: str
@@ -37,17 +37,17 @@ class MyResolver(RestyResolver):
 
         operation_id = inflection.underscore(operation.operation_id)
 
-        return '{}.{}_controller.{}'.format("api", tags[0], operation_id)
+        return "{}.{}_controller.{}".format("api", tags[0], operation_id)
 
 
 def send_static():
     return flask.send_file("static{}".format(flask.request.path))
 
 
-app = connexion.FlaskApp(__name__, specification_dir='../schema')
+app = connexion.FlaskApp(__name__, specification_dir="../schema")
 app.app.json_encoder = encoder.JSONEncoder
 CORS(app.app)
-app.app.secret_key = 'super secret key'
+app.app.secret_key = "super secret key"
 
 
 # Add explicit rules for each file in the static directory
@@ -56,26 +56,30 @@ for f in [f for f in glob.glob("static/**/*.*", recursive=True)]:
     app.app.add_url_rule(f, f, send_static)
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
 def get_default_page(path):
-    return flask.send_file('static/index.html')
+    return flask.send_file("static/index.html")
 
 
-@app.route('/test/toggle-person-search')
+@app.route("/test/toggle-person-search")
 def toggle_person_search():
-    value = request.args.get('value')
+    value = request.args.get("value")
     if value is not None:
-        session['person_search'] = value.lower() == "true"
+        session["person_search"] = value.lower() == "true"
     else:
-        session['person_search'] = not session.get('person_search', False)
+        session["person_search"] = not session.get("person_search", False)
 
     return f"OK {session['person_search']}"
 
 
-app.add_api('family-context-api.yaml', arguments={'title': 'Family Context'}, pythonic_params=True,
-            resolver=MyResolver('api'))
+app.add_api(
+    "family-context-api.yaml",
+    arguments={"title": "Family Context"},
+    pythonic_params=True,
+    resolver=MyResolver("api"),
+)
 
 
-if __name__ == '__main__':
-    app.run(port=int(os.getenv('PORT', 8080)))
+if __name__ == "__main__":
+    app.run(port=int(os.getenv("PORT", 8080)))

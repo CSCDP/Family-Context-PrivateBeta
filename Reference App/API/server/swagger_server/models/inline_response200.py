@@ -15,7 +15,10 @@ class InlineResponse200(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: str=None, name: str=None, status: str=None):  # noqa: E501
+
+    def __init__(
+        self, id: str = None, name: str = None, status: str = None
+    ):  # noqa: E501
         """InlineResponse200 - a model defined in Swagger
 
         :param id: The id of this InlineResponse200.  # noqa: E501
@@ -25,23 +28,15 @@ class InlineResponse200(Model):
         :param status: The status of this InlineResponse200.  # noqa: E501
         :type status: str
         """
-        self.swagger_types = {
-            'id': str,
-            'name': str,
-            'status': str
-        }
+        self.swagger_types = {"id": str, "name": str, "status": str}
 
-        self.attribute_map = {
-            'id': 'id',
-            'name': 'name',
-            'status': 'status'
-        }
+        self.attribute_map = {"id": "id", "name": "name", "status": "status"}
         self._id = id
         self._name = name
         self._status = status
 
     @classmethod
-    def from_dict(cls, dikt) -> 'InlineResponse200':
+    def from_dict(cls, dikt) -> "InlineResponse200":
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -112,6 +107,8 @@ class InlineResponse200(Model):
         :type status: str
         """
         if status is None:
-            raise ValueError("Invalid value for `status`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `status`, must not be `None`"
+            )  # noqa: E501
 
         self._status = status

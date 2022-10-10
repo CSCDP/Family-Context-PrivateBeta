@@ -21,7 +21,7 @@ def get_person_related(person_id):  # noqa: E501
 
     :rtype: List[PersonWithRelationship]
     """
-    return 'do some magic!'
+    return "do some magic!"
 
 
 def get_person_related_supported(person_id):  # noqa: E501
@@ -34,7 +34,7 @@ def get_person_related_supported(person_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'Not Implemented', 501
+    return "Not Implemented", 501
 
 
 def get_person_services_by_id(person_id):
@@ -60,10 +60,6 @@ def search_person(body):  # noqa: E501
     return data_access.search_persons(body)
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
 def search_person_supported():  # noqa: E501
     """Is person search supported
 
@@ -76,4 +72,4 @@ def search_person_supported():  # noqa: E501
     if session.get("person_search", True):
         return "OK", 200
     else:
-        return 'Not Implemented', 501
+        return "Not Implemented", 501

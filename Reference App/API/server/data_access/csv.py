@@ -6,31 +6,46 @@ import inflection
 from datetime import datetime
 from connexion.spec import OpenAPISpecification
 
-from swagger_server.models import ServiceSummary, Person, Police, OffenceSummary, School, AdultSocialCare, Housing, \
-    Contact, ServiceDetail, OffenceRecordsFound
+from swagger_server.models import (
+    ServiceSummary,
+    Person,
+    Police,
+    OffenceSummary,
+    School,
+    AdultSocialCare,
+    Housing,
+    Contact,
+    ServiceDetail,
+    OffenceRecordsFound,
+)
 
 SCHEMA_ROOT = "http://www.sfdl.org.uk/schemas/fc/0.0.1#"
 SCHEMA_LOCAL_PREFIX = "#/components/schemas/"
-SCHEMA = OpenAPISpecification.from_file('../schema/family-context-api.yaml')
+SCHEMA = OpenAPISpecification.from_file("../schema/family-context-api.yaml")
 SCHEMA_MAP = {k: v for k, v in SCHEMA.raw["components"]["schemas"].items()}
 
 
 class CsvSampleDataAccess:
-
     def __init__(self, data_dir="../data"):
         self.__data_dir = os.path.join(os.path.dirname(__file__), data_dir)
         self.__persons = self.__read_persons()
         self.__services, self.__schemas = self.__read_services()
         self.__service_data = dict()
-        for func in [self.__read_service_police,
-                     self.__read_service_school,
-                     self.__read_service_housing,
-                     self.__read_service_asc]:
+        for func in [
+            self.__read_service_police,
+            self.__read_service_school,
+            self.__read_service_housing,
+            self.__read_service_asc,
+        ]:
             values = func()
             self.__service_data.update(values)
 
     def search_persons(self, person_query):
-        return list(filter(lambda p: self.__search_filter(p, person_query), self.__persons.values()))
+        return list(
+            filter(
+                lambda p: self.__search_filter(p, person_query), self.__persons.values()
+            )
+        )
 
     def get_person_by_id(self, person_id):
         return self.__persons[person_id]
@@ -40,8 +55,10 @@ class CsvSampleDataAccess:
         person = self.__persons[person_id]
 
         today = datetime.today()
-        born = datetime.strptime(person.date_of_birth, '%d/%m/%Y').date()
-        person_age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        born = datetime.strptime(person.date_of_birth, "%d/%m/%Y").date()
+        person_age = (
+            today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        )
 
         services = []
         # Loop over each service
@@ -71,19 +88,25 @@ class CsvSampleDataAccess:
         return details
 
     def __should_show_service_for_age(self, service_name, age):
-        if service_name == 'AdultSocialCare':
+        if service_name == "AdultSocialCare":
             return age >= 15
-        if service_name == 'Housing':
+        if service_name == "Housing":
             return age >= 16
-        if service_name == 'School':
+        if service_name == "School":
             return age >= 4 and age <= 20
-        if service_name == 'Police':
+        if service_name == "Police":
             return age >= 18
 
     def __search_filter(self, person, person_query):
-        if (person.first_name == person_query.first_name and person.last_name == person_query.last_name):
-            if (person_query.date_of_birth is None \
-            or person_query.date_of_birth == datetime.strptime(person.date_of_birth, '%d/%m/%Y').date()):
+        if (
+            person.first_name == person_query.first_name
+            and person.last_name == person_query.last_name
+        ):
+            if (
+                person_query.date_of_birth is None
+                or person_query.date_of_birth
+                == datetime.strptime(person.date_of_birth, "%d/%m/%Y").date()
+            ):
                 return True
         return False
 
@@ -91,7 +114,7 @@ class CsvSampleDataAccess:
         data = self.__parse_csv(filename)
         persons = dict()
         for person in data:
-            persons[person['id']] = Person(**person)
+            persons[person["id"]] = Person(**person)
         return persons
 
     def __read_services(self, filename="datasources.csv"):
@@ -99,8 +122,6 @@ class CsvSampleDataAccess:
 
         summaries = dict()
         schemas = dict()
-
-
 
         for item in data:
             id = item["id"]
@@ -117,9 +138,9 @@ class CsvSampleDataAccess:
 
         return summaries, schemas
 
-
-
-    def __read_service_police(self, filename="police.csv", offencefilename="police_offence.csv"):
+    def __read_service_police(
+        self, filename="police.csv", offencefilename="police_offence.csv"
+    ):
         service_id = "Police"
         values = self.__read_data(filename, service_id, Police)
         data = self.__parse_csv(offencefilename)
@@ -144,7 +165,9 @@ class CsvSampleDataAccess:
         return self.__read_data(filename, "Housing", Housing)
 
     def __read_service_asc(self, filename="adult_social_care.csv"):
-        return self.__read_data(filename, "Adult Social Care", AdultSocialCare, "AdultSocialCare")
+        return self.__read_data(
+            filename, "Adult Social Care", AdultSocialCare, "AdultSocialCare"
+        )
 
     def __read_data(self, filename, service_name, service_type, service_id=None):
         if not service_id:
@@ -183,7 +206,12 @@ class CsvSampleDataAccess:
 
     @staticmethod
     def __parse_contact(row, field="contact"):
-        mapping = dict(name="contact_name", email="contact_email", phone="contact_phone", role="contact_role")
+        mapping = dict(
+            name="contact_name",
+            email="contact_email",
+            phone="contact_phone",
+            role="contact_role",
+        )
         new_obj = dict()
         for new_key, old_key in mapping.items():
             if old_key in row:
@@ -193,11 +221,15 @@ class CsvSampleDataAccess:
 
     def __load_schema(self, schema_ref):
         if schema_ref.startswith(SCHEMA_LOCAL_PREFIX):
-            schema_key = schema_ref[len(SCHEMA_LOCAL_PREFIX):]
+            schema_key = schema_ref[len(SCHEMA_LOCAL_PREFIX) :]
         elif schema_ref.startswith(SCHEMA_ROOT):
-            schema_key = schema_ref[len(SCHEMA_ROOT):]
+            schema_key = schema_ref[len(SCHEMA_ROOT) :]
         else:
-            raise ValueError("Only built-in schema reference supported for now. {} not supported.".format(schema_ref))
+            raise ValueError(
+                "Only built-in schema reference supported for now. {} not supported.".format(
+                    schema_ref
+                )
+            )
 
         item = SCHEMA_MAP[schema_key]
         prop_seq = 0
@@ -223,7 +255,3 @@ class CsvSampleDataAccess:
 
             item["x-ref"] = SCHEMA_ROOT + schema_key
             return item
-
-
-
-

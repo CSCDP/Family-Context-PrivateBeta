@@ -16,7 +16,10 @@ class SearchResults(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, pagination_info: PaginationInfo=None, results: List[Person]=None):  # noqa: E501
+
+    def __init__(
+        self, pagination_info: PaginationInfo = None, results: List[Person] = None
+    ):  # noqa: E501
         """SearchResults - a model defined in Swagger
 
         :param pagination_info: The pagination_info of this SearchResults.  # noqa: E501
@@ -25,19 +28,16 @@ class SearchResults(Model):
         :type results: List[Person]
         """
         self.swagger_types = {
-            'pagination_info': PaginationInfo,
-            'results': List[Person]
+            "pagination_info": PaginationInfo,
+            "results": List[Person],
         }
 
-        self.attribute_map = {
-            'pagination_info': 'paginationInfo',
-            'results': 'results'
-        }
+        self.attribute_map = {"pagination_info": "paginationInfo", "results": "results"}
         self._pagination_info = pagination_info
         self._results = results
 
     @classmethod
-    def from_dict(cls, dikt) -> 'SearchResults':
+    def from_dict(cls, dikt) -> "SearchResults":
         """Returns the dict as a model
 
         :param dikt: A dict.

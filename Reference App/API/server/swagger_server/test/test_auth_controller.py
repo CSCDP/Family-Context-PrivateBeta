@@ -18,11 +18,8 @@ class TestAuthController(BaseTestCase):
 
         Get authentication status
         """
-        response = self.client.open(
-            '/api/auth/status',
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        response = self.client.open("/api/auth/status", method="GET")
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_post_auth_login(self):
         """Test case for post_auth_login
@@ -31,25 +28,23 @@ class TestAuthController(BaseTestCase):
         """
         body = Body()
         response = self.client.open(
-            '/api/auth/login',
-            method='POST',
+            "/api/auth/login",
+            method="POST",
             data=json.dumps(body),
-            content_type='application/json')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            content_type="application/json",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_post_auth_logout(self):
         """Test case for post_auth_logout
 
         Logout of the service
         """
-        response = self.client.open(
-            '/api/auth/logout',
-            method='POST')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        response = self.client.open("/api/auth/logout", method="POST")
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import unittest
+
     unittest.main()

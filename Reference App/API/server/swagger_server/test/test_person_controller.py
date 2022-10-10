@@ -7,11 +7,10 @@ from six import BytesIO
 
 from swagger_server.models.person import Person  # noqa: E501
 from swagger_server.models.person_query import PersonQuery  # noqa: E501
-from swagger_server.models.person_with_relationship import PersonWithRelationship  # noqa: E501
-<<<<<<< HEAD
-=======
+from swagger_server.models.person_with_relationship import (
+    PersonWithRelationship,
+)  # noqa: E501
 from swagger_server.models.search_results import SearchResults  # noqa: E501
->>>>>>> upstream/master
 from swagger_server.models.service_detail import ServiceDetail  # noqa: E501
 from swagger_server.models.service_summary import ServiceSummary  # noqa: E501
 from swagger_server.test import BaseTestCase
@@ -26,10 +25,10 @@ class TestPersonController(BaseTestCase):
         Find person by ID
         """
         response = self.client.open(
-            '/api/person/detail/{personId}'.format(person_id='person_id_example'),
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            "/api/person/detail/{personId}".format(person_id="person_id_example"),
+            method="GET",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_get_person_related(self):
         """Test case for get_person_related
@@ -37,10 +36,10 @@ class TestPersonController(BaseTestCase):
         Get related individuals
         """
         response = self.client.open(
-            '/api/person/related/{personId}/'.format(person_id='person_id_example'),
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            "/api/person/related/{personId}/".format(person_id="person_id_example"),
+            method="GET",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_get_person_related_supported(self):
         """Test case for get_person_related_supported
@@ -48,10 +47,10 @@ class TestPersonController(BaseTestCase):
         Is related person supported
         """
         response = self.client.open(
-            '/api/person/related/{personId}/'.format(person_id='person_id_example'),
-            method='HEAD')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            "/api/person/related/{personId}/".format(person_id="person_id_example"),
+            method="HEAD",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_get_person_service_by_type_and_id(self):
         """Test case for get_person_service_by_type_and_id
@@ -59,10 +58,12 @@ class TestPersonController(BaseTestCase):
         Find person by ID
         """
         response = self.client.open(
-            '/api/person/detail/{personId}/service/{serviceType}'.format(person_id='person_id_example', service_type='service_type_example'),
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            "/api/person/detail/{personId}/service/{serviceType}".format(
+                person_id="person_id_example", service_type="service_type_example"
+            ),
+            method="GET",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_get_person_services_by_id(self):
         """Test case for get_person_services_by_id
@@ -70,10 +71,12 @@ class TestPersonController(BaseTestCase):
         Get a summary of the services a person has interacted with
         """
         response = self.client.open(
-            '/api/person/detail/{personId}/service'.format(person_id='person_id_example'),
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            "/api/person/detail/{personId}/service".format(
+                person_id="person_id_example"
+            ),
+            method="GET",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_search_person(self):
         """Test case for search_person
@@ -82,25 +85,23 @@ class TestPersonController(BaseTestCase):
         """
         body = PersonQuery()
         response = self.client.open(
-            '/api/search/person',
-            method='POST',
+            "/api/search/person",
+            method="POST",
             data=json.dumps(body),
-            content_type='application/json')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+            content_type="application/json",
+        )
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
     def test_search_person_supported(self):
         """Test case for search_person_supported
 
         Is person search supported
         """
-        response = self.client.open(
-            '/api/search/person',
-            method='HEAD')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        response = self.client.open("/api/search/person", method="HEAD")
+        self.assert200(response, "Response body is : " + response.data.decode("utf-8"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import unittest
+
     unittest.main()

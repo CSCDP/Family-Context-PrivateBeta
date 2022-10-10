@@ -16,7 +16,18 @@ class Housing(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, service_involvement: str=None, housing_association: str=None, contact: Contact=None, tenancy_start: date=None, anti_social_behaviour: str=None, rent_arrears: str=None, notice_seeking_possession: str=None, eviction: str=None):  # noqa: E501
+
+    def __init__(
+        self,
+        service_involvement: str = None,
+        housing_association: str = None,
+        contact: Contact = None,
+        tenancy_start: date = None,
+        anti_social_behaviour: str = None,
+        rent_arrears: str = None,
+        notice_seeking_possession: str = None,
+        eviction: str = None,
+    ):  # noqa: E501
         """Housing - a model defined in Swagger
 
         :param service_involvement: The service_involvement of this Housing.  # noqa: E501
@@ -37,25 +48,25 @@ class Housing(Model):
         :type eviction: str
         """
         self.swagger_types = {
-            'service_involvement': str,
-            'housing_association': str,
-            'contact': Contact,
-            'tenancy_start': date,
-            'anti_social_behaviour': str,
-            'rent_arrears': str,
-            'notice_seeking_possession': str,
-            'eviction': str
+            "service_involvement": str,
+            "housing_association": str,
+            "contact": Contact,
+            "tenancy_start": date,
+            "anti_social_behaviour": str,
+            "rent_arrears": str,
+            "notice_seeking_possession": str,
+            "eviction": str,
         }
 
         self.attribute_map = {
-            'service_involvement': 'serviceInvolvement',
-            'housing_association': 'housingAssociation',
-            'contact': 'contact',
-            'tenancy_start': 'tenancyStart',
-            'anti_social_behaviour': 'antiSocialBehaviour',
-            'rent_arrears': 'rentArrears',
-            'notice_seeking_possession': 'noticeSeekingPossession',
-            'eviction': 'eviction'
+            "service_involvement": "serviceInvolvement",
+            "housing_association": "housingAssociation",
+            "contact": "contact",
+            "tenancy_start": "tenancyStart",
+            "anti_social_behaviour": "antiSocialBehaviour",
+            "rent_arrears": "rentArrears",
+            "notice_seeking_possession": "noticeSeekingPossession",
+            "eviction": "eviction",
         }
         self._service_involvement = service_involvement
         self._housing_association = housing_association
@@ -67,7 +78,7 @@ class Housing(Model):
         self._eviction = eviction
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Housing':
+    def from_dict(cls, dikt) -> "Housing":
         """Returns the dict as a model
 
         :param dikt: A dict.

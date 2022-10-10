@@ -14,7 +14,7 @@ def get_auth_status():  # noqa: E501
 
     :rtype: InlineResponse200
     """
-    return 'do some magic!'
+    return "do some magic!"
 
 
 def post_auth_login(body=None):  # noqa: E501
@@ -22,14 +22,14 @@ def post_auth_login(body=None):  # noqa: E501
 
     TODO:  # noqa: E501
 
-    :param body: 
+    :param body:
     :type body: dict | bytes
 
     :rtype: None
     """
     if connexion.request.is_json:
         body = Body.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return "do some magic!"
 
 
 def post_auth_logout():  # noqa: E501
@@ -40,4 +40,4 @@ def post_auth_logout():  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return "do some magic!"

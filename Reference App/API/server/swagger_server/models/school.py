@@ -16,7 +16,14 @@ class School(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, service_involvement: str=None, contact: Contact=None, school_name: str=None, admission_type: str=None):  # noqa: E501
+
+    def __init__(
+        self,
+        service_involvement: str = None,
+        contact: Contact = None,
+        school_name: str = None,
+        admission_type: str = None,
+    ):  # noqa: E501
         """School - a model defined in Swagger
 
         :param service_involvement: The service_involvement of this School.  # noqa: E501
@@ -29,17 +36,17 @@ class School(Model):
         :type admission_type: str
         """
         self.swagger_types = {
-            'service_involvement': str,
-            'contact': Contact,
-            'school_name': str,
-            'admission_type': str
+            "service_involvement": str,
+            "contact": Contact,
+            "school_name": str,
+            "admission_type": str,
         }
 
         self.attribute_map = {
-            'service_involvement': 'serviceInvolvement',
-            'contact': 'contact',
-            'school_name': 'schoolName',
-            'admission_type': 'admissionType'
+            "service_involvement": "serviceInvolvement",
+            "contact": "contact",
+            "school_name": "schoolName",
+            "admission_type": "admissionType",
         }
         self._service_involvement = service_involvement
         self._contact = contact
@@ -47,7 +54,7 @@ class School(Model):
         self._admission_type = admission_type
 
     @classmethod
-    def from_dict(cls, dikt) -> 'School':
+    def from_dict(cls, dikt) -> "School":
         """Returns the dict as a model
 
         :param dikt: A dict.

@@ -16,20 +16,25 @@ class PersonWithRelationship(Model):
 
     Do not edit the class manually.
     """
-<<<<<<< HEAD
-    def __init__(self, id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None, relationship: str=None, relationship_to_id: str=None):  # noqa: E501
-=======
-    def __init__(self, id: str=None, cms_id: str=None, first_name: str=None, last_name: str=None, date_of_birth: date=None, gender: str=None, address: str=None, relationship: str=None, relationship_to_id: str=None):  # noqa: E501
->>>>>>> upstream/master
+
+    def __init__(
+        self,
+        id: str = None,
+        cms_id: str = None,
+        first_name: str = None,
+        last_name: str = None,
+        date_of_birth: date = None,
+        gender: str = None,
+        address: str = None,
+        relationship: str = None,
+        relationship_to_id: str = None,
+    ):  # noqa: E501
         """PersonWithRelationship - a model defined in Swagger
 
         :param id: The id of this PersonWithRelationship.  # noqa: E501
         :type id: str
-<<<<<<< HEAD
-=======
         :param cms_id: The cms_id of this PersonWithRelationship.  # noqa: E501
         :type cms_id: str
->>>>>>> upstream/master
         :param first_name: The first_name of this PersonWithRelationship.  # noqa: E501
         :type first_name: str
         :param last_name: The last_name of this PersonWithRelationship.  # noqa: E501
@@ -46,39 +51,30 @@ class PersonWithRelationship(Model):
         :type relationship_to_id: str
         """
         self.swagger_types = {
-            'id': str,
-<<<<<<< HEAD
-=======
-            'cms_id': str,
->>>>>>> upstream/master
-            'first_name': str,
-            'last_name': str,
-            'date_of_birth': date,
-            'gender': str,
-            'address': str,
-            'relationship': str,
-            'relationship_to_id': str
+            "id": str,
+            "cms_id": str,
+            "first_name": str,
+            "last_name": str,
+            "date_of_birth": date,
+            "gender": str,
+            "address": str,
+            "relationship": str,
+            "relationship_to_id": str,
         }
 
         self.attribute_map = {
-            'id': 'id',
-<<<<<<< HEAD
-=======
-            'cms_id': 'cmsId',
->>>>>>> upstream/master
-            'first_name': 'firstName',
-            'last_name': 'lastName',
-            'date_of_birth': 'dateOfBirth',
-            'gender': 'gender',
-            'address': 'address',
-            'relationship': 'relationship',
-            'relationship_to_id': 'relationshipToId'
+            "id": "id",
+            "cms_id": "cmsId",
+            "first_name": "firstName",
+            "last_name": "lastName",
+            "date_of_birth": "dateOfBirth",
+            "gender": "gender",
+            "address": "address",
+            "relationship": "relationship",
+            "relationship_to_id": "relationshipToId",
         }
         self._id = id
-<<<<<<< HEAD
-=======
         self._cms_id = cms_id
->>>>>>> upstream/master
         self._first_name = first_name
         self._last_name = last_name
         self._date_of_birth = date_of_birth
@@ -88,7 +84,7 @@ class PersonWithRelationship(Model):
         self._relationship_to_id = relationship_to_id
 
     @classmethod
-    def from_dict(cls, dikt) -> 'PersonWithRelationship':
+    def from_dict(cls, dikt) -> "PersonWithRelationship":
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -122,8 +118,6 @@ class PersonWithRelationship(Model):
         self._id = id
 
     @property
-<<<<<<< HEAD
-=======
     def cms_id(self) -> str:
         """Gets the cms_id of this PersonWithRelationship.
 
@@ -145,7 +139,6 @@ class PersonWithRelationship(Model):
         self._cms_id = cms_id
 
     @property
->>>>>>> upstream/master
     def first_name(self) -> str:
         """Gets the first_name of this PersonWithRelationship.
 
@@ -164,7 +157,9 @@ class PersonWithRelationship(Model):
         :type first_name: str
         """
         if first_name is None:
-            raise ValueError("Invalid value for `first_name`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `first_name`, must not be `None`"
+            )  # noqa: E501
 
         self._first_name = first_name
 
@@ -187,7 +182,9 @@ class PersonWithRelationship(Model):
         :type last_name: str
         """
         if last_name is None:
-            raise ValueError("Invalid value for `last_name`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `last_name`, must not be `None`"
+            )  # noqa: E501
 
         self._last_name = last_name
 
